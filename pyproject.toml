@@ -1,0 +1,37 @@
+[project]
+name = "lantern"
+version = "0.3.0"
+description = "Research and forecasting workspace: AI-bubble monitor, filings Q&A, research desk"
+requires-python = ">=3.12"
+dependencies = [
+  "pandas",
+  "numpy",
+  "scipy",
+  "requests",
+  "yfinance",
+  "pyarrow",
+  "fastapi",
+  "uvicorn",
+  "httpx",
+  "openpyxl",
+  "xlrd",
+]
+
+[project.scripts]
+lantern = "lantern.cli:main"
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["lantern", "lantern.sources"]
+
+[tool.pytest.ini_options]
+markers = ["network: hits the internet"]
+addopts = "-m 'not network'"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"

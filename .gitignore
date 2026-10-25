@@ -1,0 +1,11 @@
+data/
+.venv/
+node_modules/
+.superpowers/
+.gstack/
+.env
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.DS_Store

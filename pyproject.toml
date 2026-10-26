@@ -24,13 +24,14 @@ lantern = "lantern.cli:main"
 requires = ["setuptools>=69"]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools]
-packages = ["lantern", "lantern.sources"]
+[tool.setuptools.packages.find]
+include = ["lantern*"]
 
 [tool.pytest.ini_options]
 markers = ["network: hits the internet"]
 addopts = "-m 'not network'"
 testpaths = ["tests"]
+pythonpath = ["."]
 
 [tool.ruff]
 line-length = 100

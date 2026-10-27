@@ -1,0 +1,42 @@
+{
+ "NVDA": {
+  "forwardPE": 11.727595,
+  "marketCap": 4506795900928,
+  "trailingEps": 7.91
+ },
+ "MSFT": {
+  "forwardPE": 21.944775,
+  "marketCap": 3940412817408,
+  "trailingEps": 18.97
+ },
+ "GOOGL": {
+  "forwardPE": 18.450144,
+  "marketCap": 3501085163520,
+  "trailingEps": 19.15
+ },
+ "AMZN": {
+  "forwardPE": 23.781048,
+  "marketCap": 2803846610944,
+  "trailingEps": 12.33
+ },
+ "META": {
+  "forwardPE": 17.144897,
+  "marketCap": 1560051712000,
+  "trailingEps": 29.31
+ },
+ "AVGO": {
+  "forwardPE": 15.088052,
+  "marketCap": 1401967345664,
+  "trailingEps": 7.89
+ },
+ "TSM": {
+  "forwardPE": 16.054537,
+  "marketCap": 1947209826304,
+  "trailingEps": 15.43
+ },
+ "ORCL": {
+  "forwardPE": 10.502585,
+  "marketCap": 361965912064,
+  "trailingEps": 6.38
+ }
+}

@@ -15,6 +15,7 @@ dependencies = [
   "httpx",
   "openpyxl",
   "xlrd",
+  "python-calamine",
 ]
 
 [project.scripts]

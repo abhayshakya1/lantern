@@ -67,6 +67,36 @@ def fake_yahoo():
 
 
 @pytest.fixture
+def seeded_prices_and_shares(tmp_store):
+    """Synthetic monthly prices for the basket, the large caps and the indices, plus EDGAR share counts."""
+    import numpy as np
+
+    from lantern import config
+
+    months = pd.period_range("2023-01", "2026-10", freq="M").to_timestamp("M")
+    rng = np.random.default_rng(1)
+    for i, t in enumerate(config.BASKET + config.LARGE_CAPS):
+        level = 100 + 20 * i
+        path = level * np.cumprod(1 + rng.normal(0.01, 0.04, len(months)))
+        tmp_store.save_series(f"prices.{t}", pd.DataFrame({"date": months, "value": path}))
+        shares = 1e9 + 2e8 * (i % 5)
+        tmp_store.save_series(
+            f"edgar.{t}.shares",
+            pd.DataFrame(
+                {
+                    "date": pd.to_datetime(["2023-02-01", "2025-02-01"]),
+                    "period_end": pd.to_datetime(["2023-01-15", "2025-01-15"]),
+                    "value": [shares, shares * 0.98],
+                    "kind": ["instant", "instant"],
+                }
+            ),
+        )
+    tmp_store.save_series("prices.^GSPC", pd.DataFrame({"date": months, "value": np.linspace(4000, 6500, len(months))}))
+    tmp_store.save_series("prices.^NDX", pd.DataFrame({"date": months, "value": np.linspace(12000, 24000, len(months))}))
+    return {"months": months, "last_month_end": months[-1]}
+
+
+@pytest.fixture
 def fake_yahoo_missing_msft():
     class Missing(FakeYahoo):
         def history(self, ticker, start):

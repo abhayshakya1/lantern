@@ -32,6 +32,7 @@ FRED = {
     "fed_funds": "DFF",
     "hy_spread": "BAMLH0A0HYM2",
     "fed_assets": "WALCL",
+    "twd_usd": "DEXTAUS",  # Taiwan dollars per US dollar, converts TSM's TWD facts
 }
 
 # Fixed, disclosed composite weights (spec: The model, item 2).

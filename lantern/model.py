@@ -92,3 +92,68 @@ def trigger_effects(
             }
         )
     return out
+
+
+# --- fair value, forecast fan and scenarios -------------------------------------------------
+
+
+def fair_value(
+    ttm_earnings: float,
+    median_pe: float,
+    real_yield: float,
+    median_real_yield: float,
+    k: float = config.REAL_YIELD_PE_SENSITIVITY,
+) -> float:
+    """Trailing earnings times the 10-year median multiple, trimmed k per point of real yield above its median."""
+    adjusted = median_pe * (1.0 - k * (real_yield - median_real_yield))
+    return ttm_earnings * max(adjusted, 0.5 * median_pe)
+
+
+def fv_gap(price: float, fv: float) -> float:
+    return price / fv - 1.0
+
+
+def fv_range(price: float, fv: float, band: float = config.FV_BAND) -> tuple[float, float]:
+    return price / (fv * (1.0 + band)) - 1.0, price / (fv * (1.0 - band)) - 1.0
+
+
+def conditional_returns(
+    history: pd.DataFrame,
+    c_today: float,
+    band: float = config.CONDITIONAL_BAND,
+    min_obs: int = config.CONDITIONAL_MIN_OBS,
+) -> tuple[pd.Series, float]:
+    """12-month forward returns from months whose composite sat within `band` of today's; widens until min_obs."""
+    while True:
+        sel = history.loc[(history["composite"] - c_today).abs() <= band, "fwd_12m_return"].dropna()
+        if len(sel) >= min_obs or band >= 10.0:
+            return sel.reset_index(drop=True), float(band)
+        band += 1.0
+
+
+def fan(price: float, returns: pd.Series, months: int = config.HORIZON_MONTHS) -> dict[str, list[float]]:
+    out = {}
+    for name, q in (("p10", 0.10), ("p25", 0.25), ("p50", 0.50), ("p75", 0.75), ("p90", 0.90)):
+        r = float(returns.quantile(q))
+        out[name] = [price * (1.0 + r) ** (m / months) for m in range(months + 1)]
+    return out
+
+
+def scenario_paths(price: float, p50: list[float]) -> dict[str, list[float]]:
+    months = len(p50) - 1
+    return {
+        "base": list(p50),
+        "derating": [price * (1.0 - config.DRAWDOWN) ** (m / months) for m in range(months + 1)],
+        "meltup": [price * (1.0 + config.MELTUP) ** (m / months) for m in range(months + 1)],
+    }
+
+
+def scenario_probs(p_derating: float, returns: pd.Series) -> dict[str, float]:
+    meltup = float((returns >= config.MELTUP).mean()) if len(returns) else 0.0
+    base = max(0.0, 1.0 - p_derating - meltup)
+    total = p_derating + meltup + base
+    return {"base": base / total, "derating": p_derating / total, "meltup": meltup / total}
+
+
+def conditional_drawdown_share(returns: pd.Series) -> float:
+    return float((returns <= -config.DRAWDOWN).mean()) if len(returns) else 0.0

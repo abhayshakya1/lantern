@@ -52,3 +52,34 @@ def test_trigger_effect_sign_and_distance():
     rates = next(e for e in eff if e["id"] == "rates")
     assert rates["effect_pts"] > 0 and 0 <= rates["distance"] <= 1 and rates["level"] == 2.5
     assert rates["distance"] == pytest.approx((2.06 - 1.0) / (2.5 - 1.0))
+
+
+def test_fair_value_adjusts_for_real_yield():
+    assert model.fair_value(10, 20, 2.0, 2.0) == pytest.approx(200)
+    assert model.fair_value(10, 20, 3.0, 2.0) == pytest.approx(180)
+    assert model.fair_value(10, 20, 30.0, 2.0) == pytest.approx(100)  # floored at half the median multiple
+    assert model.fv_gap(168.0, 137.0) == pytest.approx(168 / 137 - 1)
+    lo, hi = model.fv_range(168.0, 137.0)
+    assert lo < model.fv_gap(168.0, 137.0) < hi
+
+
+def test_conditional_window_widens_when_sparse():
+    hist = pd.DataFrame({"composite": np.linspace(-2, 2, 100), "fwd_12m_return": np.linspace(-0.4, 0.4, 100)})
+    r, band = model.conditional_returns(hist, c_today=5.0)
+    assert len(r) >= 24 and band > 1.0
+    r2, band2 = model.conditional_returns(hist, c_today=0.0)
+    assert band2 == 1.0 and (hist["composite"].between(-1, 1).sum()) == len(r2)
+
+
+def test_fan_and_scenarios_are_consistent():
+    returns = pd.Series(np.linspace(-0.5, 0.5, 101))
+    f = model.fan(168.0, returns)
+    assert f["p50"][0] == 168.0 and len(f["p50"]) == 13
+    assert f["p10"][-1] < f["p25"][-1] < f["p50"][-1] < f["p75"][-1] < f["p90"][-1]
+    paths = model.scenario_paths(168.0, f["p50"])
+    assert paths["derating"][-1] == pytest.approx(126.0) and paths["meltup"][-1] == pytest.approx(201.6)
+    assert paths["base"] == f["p50"]
+    probs = model.scenario_probs(0.41, returns)
+    assert abs(sum(probs.values()) - 1) < 1e-9 and probs["derating"] == pytest.approx(0.41)
+    assert probs["meltup"] == pytest.approx(float((returns >= 0.20).mean()) / (0.41 + float((returns >= 0.20).mean()) + max(0.0, 1 - 0.41 - float((returns >= 0.20).mean()))))
+    assert model.conditional_drawdown_share(returns) == pytest.approx(float((returns <= -0.25).mean()))

@@ -30,7 +30,12 @@ def pull_shiller(store: Store) -> dict[str, pd.DataFrame]:
     dates = pd.to_datetime(pd.DataFrame({"year": year, "month": month, "day": 1})) + pd.offsets.MonthEnd(0)
     pe = pd.DataFrame({"date": dates.to_numpy(), "value": (price[keep] / earnings[keep]).to_numpy()}).dropna()
     rate = pd.DataFrame({"date": dates.to_numpy(), "value": gs10[keep].to_numpy()}).dropna()
-    out = {"shiller.pe": pe.reset_index(drop=True), "shiller.long_rate": rate.reset_index(drop=True)}
+    earn = pd.DataFrame({"date": dates.to_numpy(), "value": earnings[keep].to_numpy()}).dropna()
+    out = {
+        "shiller.pe": pe.reset_index(drop=True),
+        "shiller.long_rate": rate.reset_index(drop=True),
+        "shiller.earnings": earn.reset_index(drop=True),
+    }
     for name, df in out.items():
         store.save_series(name, df)
     return out

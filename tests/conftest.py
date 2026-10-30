@@ -96,6 +96,101 @@ def seeded_prices_and_shares(tmp_store):
     return {"months": months, "last_month_end": months[-1]}
 
 
+def _flows(quarter_ends, values, lag_days):
+    """Quarterly flow frame keyed by filing date = period end + lag."""
+    return pd.DataFrame(
+        {
+            "date": quarter_ends + pd.Timedelta(days=lag_days),
+            "period_end": quarter_ends,
+            "value": values,
+            "kind": "quarter",
+        }
+    )
+
+
+def _instants(quarter_ends, values, lag_days):
+    return pd.DataFrame(
+        {
+            "date": quarter_ends + pd.Timedelta(days=lag_days),
+            "period_end": quarter_ends,
+            "value": values,
+            "kind": "instant",
+        }
+    )
+
+
+@pytest.fixture
+def seeded_all_series(tmp_store):
+    """Synthetic but structurally faithful versions of every series the drivers read, 2008 onward."""
+    import numpy as np
+
+    from lantern import config
+
+    rng = np.random.default_rng(7)
+    months = pd.period_range("2008-01", "2026-10", freq="M").to_timestamp("M")
+    days = pd.bdate_range("2008-01-01", "2026-10-31")
+    weeks = pd.date_range("2008-01-03", "2026-10-29", freq="W-THU")
+    quarter_ends = pd.date_range("2007-12-31", "2026-09-30", freq="QE")
+    nq = len(quarter_ends)
+    out = {"months": months, "last_month_end": months[-1]}
+
+    # prices: basket, large caps, indices
+    for i, t in enumerate(config.BASKET + config.LARGE_CAPS):
+        path = (50 + 10 * i) * np.cumprod(1 + rng.normal(0.012, 0.06, len(months)))
+        tmp_store.save_series(f"prices.{t}", pd.DataFrame({"date": months, "value": path}))
+    tmp_store.save_series("prices.^GSPC", pd.DataFrame({"date": months, "value": 1400 * np.cumprod(1 + rng.normal(0.007, 0.04, len(months)))}))
+    tmp_store.save_series("prices.^NDX", pd.DataFrame({"date": months, "value": 2000 * np.cumprod(1 + rng.normal(0.01, 0.05, len(months)))}))
+
+    # EDGAR: all basket names report net income and shares; hyperscalers also capex, ocf, cash, debt
+    capex_frames, ocf_frames = {}, {}
+    for i, t in enumerate(config.BASKET + config.LARGE_CAPS):
+        base = 2e9 * (1 + i / 4)
+        ni = base * np.cumprod(1 + rng.normal(0.02, 0.05, nq))
+        tmp_store.save_series(f"edgar.{t}.net_income", _flows(quarter_ends, ni, 35))
+        shares = np.full(nq, 4e9 - 1e8 * (i % 7))
+        tmp_store.save_series(f"edgar.{t}.shares", _instants(quarter_ends, shares, 35))
+        if t in config.HYPERSCALERS:
+            ocf = base * 2.5 * np.cumprod(1 + rng.normal(0.02, 0.04, nq))
+            capex = ocf * np.clip(0.3 + 0.02 * np.arange(nq) / 4 + rng.normal(0, 0.03, nq), 0.1, 0.9)
+            tmp_store.save_series(f"edgar.{t}.capex", _flows(quarter_ends, capex, 35))
+            tmp_store.save_series(f"edgar.{t}.ocf", _flows(quarter_ends, ocf, 35))
+            tmp_store.save_series(f"edgar.{t}.cash", _instants(quarter_ends, base * 6 + rng.normal(0, base, nq), 35))
+            tmp_store.save_series(f"edgar.{t}.debt", _instants(quarter_ends, base * 4 * np.cumprod(1 + rng.normal(0.01, 0.03, nq)), 35))
+            capex_frames[t], ocf_frames[t] = capex, ocf
+    # expected capex intensity as of 31 Jul 2025: quarters ending Jun 2024 to Mar 2025 (Jun 2025 is filed 4 Aug)
+    q_idx = [k for k, q in enumerate(quarter_ends) if pd.Timestamp("2024-06-30") <= q <= pd.Timestamp("2025-03-31")]
+    out["capex_through_1q25"] = sum(capex_frames[t][q_idx].sum() for t in capex_frames) / sum(
+        ocf_frames[t][q_idx].sum() for t in ocf_frames
+    )
+
+    # FRED daily and weekly
+    tmp_store.save_series("fred.DFII10", pd.DataFrame({"date": days, "value": 1.0 + np.cumsum(rng.normal(0, 0.01, len(days)))}))
+    tmp_store.save_series("fred.BAMLH0A0HYM2", pd.DataFrame({"date": days, "value": np.clip(4 + np.cumsum(rng.normal(0, 0.02, len(days))), 2, 12)}))
+    tmp_store.save_series("fred.DFF", pd.DataFrame({"date": days, "value": np.clip(2 + np.cumsum(rng.normal(0, 0.005, len(days))), 0, 6)}))
+    tmp_store.save_series("fred.DEXTAUS", pd.DataFrame({"date": days, "value": 31 + np.cumsum(rng.normal(0, 0.02, len(days)))}))
+    tmp_store.save_series("fred.WALCL", pd.DataFrame({"date": weeks, "value": 2e6 + np.cumsum(rng.normal(2000, 5000, len(weeks)))}))
+    out["fred.DFII10"] = tmp_store.load_series("fred.DFII10")
+
+    # AAII weekly spread, Shiller monthly from 1985
+    tmp_store.save_series("aaii.bull_bear", pd.DataFrame({"date": weeks, "value": np.clip(rng.normal(0.05, 0.15, len(weeks)), -0.6, 0.6)}))
+    long_months = pd.period_range("1985-01", "2026-10", freq="M").to_timestamp("M")
+    earnings = 15 * np.cumprod(1 + rng.normal(0.004, 0.02, len(long_months)))
+    tmp_store.save_series("shiller.earnings", pd.DataFrame({"date": long_months, "value": earnings}))
+    tmp_store.save_series("shiller.pe", pd.DataFrame({"date": long_months, "value": np.clip(18 + np.cumsum(rng.normal(0, 0.4, len(long_months))), 8, 45)}))
+    tmp_store.save_series("shiller.long_rate", pd.DataFrame({"date": long_months, "value": np.clip(5 + np.cumsum(rng.normal(0, 0.05, len(long_months))), 0.5, 12)}))
+
+    # today's snapshots
+    today = months[-1]
+    tmp_store.save_series("spy.top10_weight", pd.DataFrame({"date": [today], "value": [0.389]}))
+    for t in config.BASKET:
+        tmp_store.save_series(f"yahoo.forward_pe.{t}", pd.DataFrame({"date": [today], "value": [30.0]}))
+        tmp_store.save_series(f"yahoo.market_cap.{t}", pd.DataFrame({"date": [today], "value": [1.5e12]}))
+        tmp_store.save_series(f"yahoo.trailing_eps.{t}", pd.DataFrame({"date": [today], "value": [5.0]}))
+        acts = pd.DataFrame({"date": pd.to_datetime(["2026-09-10", "2026-10-02", "2026-10-20"]), "value": [1.0, 1.0, -1.0]})
+        tmp_store.save_series(f"yahoo.actions.{t}", acts)
+    return out
+
+
 @pytest.fixture
 def fake_yahoo_missing_msft():
     class Missing(FakeYahoo):

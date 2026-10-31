@@ -1,0 +1,60 @@
+"""lantern pull | model | backtest | status | serve"""
+
+import argparse
+import sys
+
+from lantern import backtest, config, pull
+from lantern.store import Store
+
+
+def _print_status(store: Store) -> None:
+    rec = store.get_meta("last_pull_attempt") or {}
+    print(f"{'source':<22} {'status':<7} {'series':>6}  detail")
+    for item in rec.get("items", []):
+        print(f"{item['source']:<22} {item['status']:<7} {item['series']:>6}  {item['detail'][:70]}")
+    b = pull.badge(store)
+    print(f"badge: {b['label']}")
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(prog="lantern", description="AI-bubble monitor data and model commands")
+    sub = parser.add_subparsers(dest="cmd", required=True)
+    sub.add_parser("pull", help="pull every public series into the cache")
+    sub.add_parser("model", help="compute the monitor payload from the cache")
+    sub.add_parser("backtest", help="refit the calibration on the stored history")
+    sub.add_parser("status", help="show the last pull and the data badge")
+    serve = sub.add_parser("serve", help="serve the API and the front end")
+    serve.add_argument("--port", type=int, default=8787)
+    serve.add_argument("--host", default="127.0.0.1")
+    args = parser.parse_args(argv)
+    store = Store(config.DATA_DIR)
+
+    if args.cmd == "pull":
+        st = pull.run_pull(store)
+        _print_status(store)
+        return 0 if all(i["status"] == "ok" for i in st.items) else 1
+    if args.cmd == "backtest":
+        res = backtest.run_backtest(store)
+        print(f"calibration {res.start} to {res.end}: a={res.a:.3f} b={res.b:.3f} n={res.n_months} hit rate {res.hit_rate:.2f} brier {res.brier:.3f}")
+        print(f"2000 analogue: {res.analogue_2000}")
+        return 0
+    if args.cmd == "model":
+        run = pull.run_model(store)
+        t = run["tiles"]["probability"]
+        print(f"probability {t['value']:.0%} ({t['status']}), fair-value gap {run['tiles']['fv_gap']['value']:+.0%}, run {run['model']['run_at']}")
+        return 0
+    if args.cmd == "status":
+        _print_status(store)
+        return 0
+    if args.cmd == "serve":
+        import uvicorn
+
+        from lantern import api
+
+        uvicorn.run(api.create_app(store), host=args.host, port=args.port)
+        return 0
+    return 2
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,6 +1,7 @@
 """One fetch path for every source: raw bytes to disk, SHA-256, provenance row."""
 
 import hashlib
+import time
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -17,6 +18,7 @@ _EXT = {
     "application/vnd.ms-excel": ".xls",
 }
 _DEFAULT_HEADERS = {"User-Agent": "Lantern/0.3 (research tool)"}
+RETRY_WAIT = 2.0
 
 
 class SourceError(Exception):
@@ -39,17 +41,22 @@ def fetch_raw(
     url: str,
     *,
     headers: dict | None = None,
-    timeout: int = 20,
+    timeout: int = 30,
     params: dict | None = None,
 ) -> RawFetch:
     fetched_at = datetime.now(UTC)
-    try:
-        resp = requests.get(
-            url, headers={**_DEFAULT_HEADERS, **(headers or {})}, params=params, timeout=timeout
-        )
-    except requests.RequestException as exc:
-        store.record_fetch(name, url, "", "", "error", fetched_at)
-        raise SourceError(name, str(exc)) from exc
+    resp = None
+    for attempt in range(2):  # one retry: public feeds drop connections now and then
+        try:
+            resp = requests.get(
+                url, headers={**_DEFAULT_HEADERS, **(headers or {})}, params=params, timeout=timeout
+            )
+            break
+        except requests.RequestException as exc:
+            if attempt == 1:
+                store.record_fetch(name, url, "", "", "error", fetched_at)
+                raise SourceError(name, str(exc)) from exc
+            time.sleep(RETRY_WAIT)
     if resp.status_code != 200 or not resp.content:
         store.record_fetch(name, url, "", "", "error", fetched_at)
         raise SourceError(name, f"HTTP {resp.status_code}" if resp.content else "empty body")

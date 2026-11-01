@@ -15,6 +15,7 @@ from lantern.sources.edgar import latest_value, trailing_4q
 from lantern.store import Store
 
 DRIVER_IDS = list(config.WEIGHTS)
+MIN_BASKET_NAMES = 6  # the basket P/E and earnings need at least six of the eight names
 
 
 @dataclass(frozen=True)
@@ -50,9 +51,9 @@ DRIVERS = [
                1, True, None),
     DriverMeta("positioning", "Positioning and sentiment", "fraction", "AAII sentiment survey",
                "Bull minus bear share, monthly mean (CBOE put/call dropped: no free history)", 1, False, None),
-    DriverMeta("revisions", "Earnings revisions", "growth", "Shiller S&P trailing earnings; Yahoo analyst actions shown as context",
-               "Three-month change in trailing S&P earnings, inverted", 1, False,
-               Trigger(0.0, "above", "Trailing earnings turning down adds to the probability"), True),
+    DriverMeta("revisions", "Earnings momentum", "growth", "EDGAR net income for the basket; Shiller S&P earnings before the basket history; Yahoo analyst actions as context",
+               "Three-month change in the basket's trailing four-quarter net income, inverted", 1, False,
+               Trigger(0.0, "above", "Basket earnings turning down adds to the probability"), True),
     DriverMeta("rates", "Rates and liquidity", "%", "FRED DFII10", "US 10-year real yield, monthly mean", 1, False,
                Trigger(2.50, "above", "Above 2.50% the real yield adds to the probability"), True),
 ]
@@ -80,44 +81,51 @@ def _rolling_z(x: pd.Series, window: int, min_months: int) -> pd.Series:
     return (x - mu) / sd.replace(0, np.nan)
 
 
-def _valuation(store: Store, months: pd.DatetimeIndex, splices: dict) -> pd.Series:
+def _basket(store: Store, months: pd.DatetimeIndex, notes: dict) -> tuple[pd.Series, pd.Series]:
+    """Per month: the basket's market cap and trailing four-quarter net income (USD), both from filings known by then."""
     prices = {t: _monthly(store, f"prices.{t}", months, "last") for t in config.BASKET}
     facts = {t: (store.load_series(f"edgar.{t}.net_income"), store.load_series(f"edgar.{t}.shares")) for t in config.BASKET}
     fx = _monthly(store, "fred.DEXTAUS", months)
     units = {t: store.get_meta(f"edgar.{t}.unit") for t in config.BASKET}
-    out = []
+    caps, earns, skipped = [], [], set()
     for m in months:
-        caps, ni, ok = 0.0, 0.0, True
+        cap, ni, n_cap, n_earn = 0.0, 0.0, 0, 0
         for t in config.BASKET:
             inc, sh = facts[t]
-            price = prices[t].get(m)
-            if inc is None or sh is None or inc.empty or sh.empty or pd.isna(price):
-                ok = False
-                break
+            if inc is None or sh is None or inc.empty or sh.empty:
+                continue
             earn, shares = trailing_4q(inc, m.date()), latest_value(sh, m.date())
             if earn is None or shares is None:
-                ok = False
-                break
-            if units[t] == "TWD":
+                continue
+            if units[t] and units[t] != "USD":
                 rate = fx.get(m)
                 if pd.isna(rate):
-                    ok = False
-                    break
+                    skipped.add(t)
+                    continue
                 earn = earn / rate
-            caps += price * shares
-            ni += earn
-        out.append(caps / ni if ok and ni > 0 else np.nan)
-    pe = pd.Series(out, index=months, dtype=float)
-    proxy = _monthly(store, "shiller.pe", months)
-    first = pe.first_valid_index()
-    if first is not None and pd.notna(proxy.get(first)) and proxy.get(first) != 0:
-        ratio = pe[first] / proxy[first]
-        pe[pe.index < first] = proxy[proxy.index < first] * ratio
-        splices["valuation"] = first.date().isoformat()
-    elif first is None:
-        pe = proxy
-        splices["valuation"] = "proxy only"
-    return pe
+            ni, n_earn = ni + earn, n_earn + 1
+            price = prices[t].get(m)
+            if pd.notna(price):
+                cap, n_cap = cap + price * shares, n_cap + 1
+        earns.append(ni if n_earn >= MIN_BASKET_NAMES and ni > 0 else np.nan)
+        caps.append(cap if n_cap >= MIN_BASKET_NAMES and n_cap == n_earn else np.nan)
+    if skipped:
+        notes["basket_skipped"] = sorted(skipped) + ["no FX series for the currency conversion"]
+    return pd.Series(caps, index=months, dtype=float), pd.Series(earns, index=months, dtype=float)
+
+
+def _splice(series: pd.Series, proxy: pd.Series, splices: dict, key: str) -> pd.Series:
+    """Scale the proxy to the series at its first valid month and use it before that month."""
+    first = series.first_valid_index()
+    if first is None:
+        splices[key] = "proxy only"
+        return proxy
+    if pd.notna(proxy.get(first)) and proxy.get(first) != 0:
+        ratio = series[first] / proxy[first]
+        series = series.copy()
+        series[series.index < first] = proxy[proxy.index < first] * ratio
+        splices[key] = first.date().isoformat()
+    return series
 
 
 def _hyperscaler_ratio(store: Store, months: pd.DatetimeIndex, num: str, den: str, min_names: int = 3) -> pd.Series:
@@ -155,28 +163,39 @@ def _net_debt(store: Store, months: pd.DatetimeIndex, min_names: int = 3) -> pd.
 def monthly_readings(store: Store, start: str = config.CALIBRATION_START, end: date | None = None) -> pd.DataFrame:
     months = _month_ends(start, end)
     splices: dict[str, str] = {}
+    notes: dict = {}
     readings = pd.DataFrame(index=months, columns=DRIVER_IDS, dtype=float)
-    readings["valuation"] = _valuation(store, months, splices)
+
+    caps, earns = _basket(store, months, notes)
+    readings["valuation"] = _splice(caps / earns, _monthly(store, "shiller.pe", months), splices, "valuation")
+    shiller_earn = _monthly(store, "shiller.earnings", months)
+    momentum = -(earns / earns.shift(3) - 1.0)
+    proxy_momentum = -(shiller_earn / shiller_earn.shift(3) - 1.0)
+    readings["revisions"] = _splice(momentum, proxy_momentum, splices, "revisions") if momentum.notna().any() else proxy_momentum
+    if not momentum.notna().any():
+        splices["revisions"] = "proxy only"
+
     readings["capex"] = _hyperscaler_ratio(store, months, "capex", "ocf")
     try:
         conc = spy.concentration_history(store, start)
         readings["concentration"] = conc.set_index("date")["value"].reindex(months)
-    except Exception:
+    except Exception as exc:
+        notes["concentration_error"] = str(exc)
         readings["concentration"] = np.nan
     nd = _net_debt(store, months)
     dnd = nd - nd.shift(12)
     hy = _monthly(store, "fred.BAMLH0A0HYM2", months)
     readings["leverage"] = 0.5 * _rolling_z(dnd, config.Z_WINDOW_MONTHS, config.Z_MIN_MONTHS) - 0.5 * _rolling_z(hy, config.Z_WINDOW_MONTHS, config.Z_MIN_MONTHS)
     readings["positioning"] = _monthly(store, "aaii.bull_bear", months)
-    earn = _monthly(store, "shiller.earnings", months)
-    readings["revisions"] = -(earn / earn.shift(3) - 1)
     readings["rates"] = _monthly(store, "fred.DFII10", months)
+
     # each driver's last published value carries forward into the current month (at most 3 months),
     # and the driver panel discloses the as-of date of the data behind it
     asof = {c: (readings[c].last_valid_index().date().isoformat() if readings[c].last_valid_index() is not None else None) for c in DRIVER_IDS}
     readings = readings.ffill(limit=3)
     readings.attrs["splices"] = splices
     readings.attrs["asof"] = asof
+    readings.attrs["notes"] = notes
     readings.attrs["gaps"] = {c: int(readings[c].isna().sum()) for c in DRIVER_IDS}
     return readings
 

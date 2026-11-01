@@ -37,8 +37,9 @@ def pull_spy(store: Store) -> dict[str, pd.DataFrame]:
 
 def _shares_by_month(sh: pd.DataFrame, months: pd.DatetimeIndex) -> pd.Series:
     """Latest share count filed by each month end (no look-ahead)."""
-    known = sh.sort_values("date")[["date", "value"]]
-    probe = pd.DataFrame({"date": months})
+    known = sh.sort_values("date")[["date", "value"]].copy()
+    known["date"] = pd.to_datetime(known["date"]).astype("datetime64[ns]")
+    probe = pd.DataFrame({"date": pd.DatetimeIndex(months).astype("datetime64[ns]")})
     merged = pd.merge_asof(probe, known, on="date")
     return pd.Series(merged["value"].to_numpy(), index=months)
 

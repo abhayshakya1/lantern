@@ -40,7 +40,9 @@ def test_proxy_splice_recorded_and_no_nan_on_latest(tmp_store, seeded_all_series
     assert "valuation" in r.attrs["splices"]
     assert list(r.columns) == list(config.WEIGHTS)
     assert r.iloc[-1].notna().all()  # the current month carries each driver's last published value
-    assert r.attrs["asof"]["revisions"] == "2026-10-31"  # ... and says how old that value is
+    assert r.attrs["asof"]["positioning"] == "2026-10-31"  # ... and says how old that value is
+    assert r.attrs["asof"]["revisions"] == "2026-11-30"  # basket earnings: the 3Q26 filings land in November
+    assert "revisions" in r.attrs["splices"]  # Shiller earnings fill the months before the basket history
     z = drivers.zscores(r)
     assert z.iloc[-1].notna().all()
     readings_row, z_row = drivers.latest(tmp_store)

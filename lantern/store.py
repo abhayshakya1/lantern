@@ -50,8 +50,8 @@ class Store:
     def save_series(self, name: str, df: pd.DataFrame) -> None:
         out = df.copy()
         for col in ("date", "period_end"):
-            if col in out.columns:
-                out[col] = pd.to_datetime(out[col])
+            if col in out.columns:  # one dtype for every stored date, so merge keys always match
+                out[col] = pd.to_datetime(out[col]).astype("datetime64[ns]")
         out.to_parquet(self._series_path(name), index=False)
 
     def load_series(self, name: str) -> pd.DataFrame | None:

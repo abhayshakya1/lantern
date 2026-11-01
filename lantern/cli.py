@@ -41,7 +41,9 @@ def main(argv: list[str] | None = None) -> int:
     if args.cmd == "model":
         run = pull.run_model(store)
         t = run["tiles"]["probability"]
-        print(f"probability {t['value']:.0%} ({t['status']}), fair-value gap {run['tiles']['fv_gap']['value']:+.0%}, run {run['model']['run_at']}")
+        gap = run["tiles"]["fv_gap"]["value"]
+        gap_text = f"{gap:+.0%}" if gap is not None else "n/a"
+        print(f"probability {t['value']:.0%} ({t['status']}), fair-value gap {gap_text}, run {run['model']['run_at']}")
         return 0
     if args.cmd == "status":
         _print_status(store)

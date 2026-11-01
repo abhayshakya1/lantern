@@ -15,9 +15,20 @@ def test_one_failing_source_keeps_cache_and_marks_cached(tmp_store, seeded_all_s
     st = pull.run_pull(tmp_store, [good, bad])
     assert [i["status"] for i in st.items] == ["ok", "error"]
     assert st.items[1]["detail"].startswith("spy")
-    assert tmp_store.get_meta("last_pull")["at"] == "2026-11-06T22:40:00+00:00"  # the old pull stands
-    assert tmp_store.get_meta("last_pull_attempt")["ok"] is False
+    rec = tmp_store.get_meta("last_pull")
+    assert rec["at"] != "2026-11-06T22:40:00+00:00" and rec["ok"] is False and rec["missing"] == ["bad"]
     assert tmp_store.load_series("fred.DFII10") is not None
+    b = pull.badge(tmp_store, now=datetime.now(UTC))
+    assert b["state"] == "live" and b["label"].endswith("· 1 feed missing") and b["missing"] == ["bad"]
+
+
+def test_all_sources_failing_leaves_previous_pull(tmp_store):
+    def bad(store):
+        raise SourceError("spy", "boom")
+
+    tmp_store.set_meta("last_pull", {"at": "2026-11-06T22:40:00+00:00", "ok": True, "missing": []})
+    pull.run_pull(tmp_store, [bad])
+    assert tmp_store.get_meta("last_pull")["at"] == "2026-11-06T22:40:00+00:00"  # the old pull stands
     b = pull.badge(tmp_store, now=datetime(2026, 11, 8, 1, 0, tzinfo=UTC))  # 09:00 SGT on 8 Nov
     assert b["state"] == "cached" and b["label"] == "Cached data · pulled 07 Nov"
 

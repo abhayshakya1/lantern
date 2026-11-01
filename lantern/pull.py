@@ -43,10 +43,10 @@ def run_pull(store: Store, sources: list | None = None) -> PullStatus:
         except Exception as exc:  # one dead feed must not blank the screen
             items.append({"source": name, "status": "error", "series": 0, "detail": str(exc)})
     finished = datetime.now(UTC)
-    ok = all(i["status"] == "ok" for i in items)
-    record = {"at": finished.isoformat(), "ok": ok, "items": items}
+    missing = [i["source"] for i in items if i["status"] != "ok"]
+    record = {"at": finished.isoformat(), "ok": not missing, "missing": missing, "items": items}
     store.set_meta("last_pull_attempt", record)
-    if ok:
+    if len(missing) < len(items):  # at least one feed refreshed: the data's age moved
         store.set_meta("last_pull", record)
     return PullStatus(items=items, started_at=started, finished_at=finished)
 
@@ -57,9 +57,11 @@ def badge(store: Store, now: datetime | None = None) -> dict:
         return {"state": "none", "pulled_at": None, "label": "No data pulled yet"}
     at = datetime.fromisoformat(rec["at"]).astimezone(config.SGT)
     now_sgt = (now or datetime.now(UTC)).astimezone(config.SGT)
+    missing = rec.get("missing") or []
+    suffix = f" · {len(missing)} feed{'s' if len(missing) > 1 else ''} missing" if missing else ""
     if at.date() == now_sgt.date():
-        return {"state": "live", "pulled_at": at.isoformat(), "label": f"Live data · pulled {at:%H:%M} SGT"}
-    return {"state": "cached", "pulled_at": at.isoformat(), "label": f"Cached data · pulled {at:%d %b}"}
+        return {"state": "live", "pulled_at": at.isoformat(), "label": f"Live data · pulled {at:%H:%M} SGT{suffix}", "missing": missing}
+    return {"state": "cached", "pulled_at": at.isoformat(), "label": f"Cached data · pulled {at:%d %b}{suffix}", "missing": missing}
 
 
 # --- model run ------------------------------------------------------------------------------
@@ -128,8 +130,10 @@ def run_model(store: Store, now: datetime | None = None) -> dict:
     window = config.Z_WINDOW_MONTHS
     pe_med = readings["valuation"].rolling(window, min_periods=config.Z_MIN_MONTHS).median()
     ry_med = readings["rates"].rolling(window, min_periods=config.Z_MIN_MONTHS).median()
+    # without a real-yield reading (FRED missing) the multiple is the plain 10-year median, disclosed in the model block
+    rates_known = readings["rates"].notna().any()
     adj = pd.Series(
-        [model.fair_value(1.0, m, r, rm) if not (pd.isna(m) or pd.isna(r) or pd.isna(rm)) else np.nan
+        [model.fair_value(1.0, m, r if rates_known and pd.notna(r) else rm if pd.notna(rm) else 0.0, rm if pd.notna(rm) else 0.0) if pd.notna(m) else np.nan
          for m, r, rm in zip(pe_med, readings["rates"], ry_med)],
         index=readings.index,
     )
@@ -196,6 +200,7 @@ def run_model(store: Store, now: datetime | None = None) -> dict:
             "conditional_obs": int(len(sel)),
             "conditional_drawdown_share": model.conditional_drawdown_share(sel),
             "splices": readings.attrs.get("splices", {}),
+            "fair_value_note": "real-yield adjustment applied" if rates_known else "no real-yield data: multiple is the plain 10-year median",
         },
         "basket": {"tickers": config.BASKET, "index_base": hist_months[0].strftime("%b %Y")},
         "tiles": {

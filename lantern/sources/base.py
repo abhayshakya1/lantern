@@ -21,6 +21,10 @@ _DEFAULT_HEADERS = {"User-Agent": "Lantern/0.3 (research tool)"}
 RETRY_WAIT = 2.0
 
 
+def _http_get(url: str, headers: dict, params: dict | None, timeout: int):
+    return requests.get(url, headers=headers, params=params, timeout=timeout)
+
+
 class SourceError(Exception):
     def __init__(self, name: str, reason: str):
         super().__init__(f"{name}: {reason}")
@@ -48,11 +52,9 @@ def fetch_raw(
     resp = None
     for attempt in range(2):  # one retry: public feeds drop connections now and then
         try:
-            resp = requests.get(
-                url, headers={**_DEFAULT_HEADERS, **(headers or {})}, params=params, timeout=timeout
-            )
+            resp = _http_get(url, {**_DEFAULT_HEADERS, **(headers or {})}, params, timeout)
             break
-        except requests.RequestException as exc:
+        except Exception as exc:  # curl_cffi raises its own RequestsError family
             if attempt == 1:
                 store.record_fetch(name, url, "", "", "error", fetched_at)
                 raise SourceError(name, str(exc)) from exc

@@ -12,19 +12,17 @@ def test_fetch_raw_writes_file_hash_and_provenance(tmp_store, fixture_server):
 
 
 def test_fetch_raw_retries_once_on_connection_error(tmp_store, fixture_server, monkeypatch):
-    import requests
-
     from lantern.sources import base
 
-    real_get, calls = requests.get, []
+    real_get, calls = base._http_get, []
 
-    def flaky(url, **kw):
+    def flaky(url, headers, params, timeout):
         calls.append(url)
         if len(calls) == 1:
-            raise requests.ConnectionError("reset by peer")
-        return real_get(url, **kw)
+            raise ConnectionError("reset by peer")
+        return real_get(url, headers, params, timeout)
 
-    monkeypatch.setattr(base.requests, "get", flaky)
+    monkeypatch.setattr(base, "_http_get", flaky)
     monkeypatch.setattr(base, "RETRY_WAIT", 0.0)
     r = fetch_raw(tmp_store, "fred.DFII10", fixture_server + "/fred_DFII10.csv")
     assert len(calls) == 2 and r.content.startswith(b"observation_date")

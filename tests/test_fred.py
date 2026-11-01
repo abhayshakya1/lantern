@@ -14,3 +14,12 @@ def test_pull_fred_parses_and_drops_missing(tmp_store, fixture_server, monkeypat
 
 def test_fred_url():
     assert fred.fred_url("DFII10") == "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DFII10"
+
+
+def test_pull_fred_uses_api_when_key_set_and_keeps_key_out_of_provenance(tmp_store, fixture_server, monkeypatch):
+    monkeypatch.setenv("FRED_API_KEY", "secret-key")
+    monkeypatch.setattr(fred, "api_url", lambda: f"{fixture_server}/fred_api_DFII10.json")
+    out = fred.pull_fred(tmp_store, {"real_yield": "DFII10"})
+    df = out["fred.DFII10"]
+    assert df["value"].tolist() == [2.06, 2.08]  # the "." observation is dropped
+    assert "secret-key" not in tmp_store.provenance()[0]["url"]

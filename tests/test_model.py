@@ -36,6 +36,23 @@ def test_fit_logistic_recovers_parameters():
     assert abs(a + 1.0) < 0.2 and abs(b - 1.5) < 0.25
 
 
+def test_fit_logistic_never_returns_a_negative_slope():
+    """Two episodes cannot be allowed to invert the model: more risk must never mean a lower probability."""
+    rng = np.random.default_rng(1)
+    c = pd.Series(rng.normal(0, 1, 400))
+    p = 1 / (1 + np.exp(-(-2.0 - 1.5 * c)))  # the data say the opposite of the model's premise
+    labels = pd.Series((rng.random(400) < p).astype(int))
+    a, b = model.fit_logistic(c, labels)
+    assert b == 0.0 and abs(a - np.log(labels.mean() / (1 - labels.mean()))) < 0.3
+
+
+def test_fit_logistic_prior_pulls_a_weak_slope_toward_one():
+    c = pd.Series(np.linspace(-1, 1, 50))
+    labels = pd.Series([0] * 25 + [1] * 25)  # perfectly separable: an unpenalised fit would run off to infinity
+    a, b = model.fit_logistic(c, labels)
+    assert 0.5 < b < 5.0
+
+
 def test_status_bands_and_clamp():
     assert model.status(0.1) == "calm" and model.status(0.41) == "elevated" and model.status(0.7) == "high"
     assert model.probability(50, 0, 1) == 0.99 and model.probability(-50, 0, 1) == 0.01

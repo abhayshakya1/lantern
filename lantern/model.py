@@ -27,16 +27,23 @@ def probability(c: float, a: float, b: float) -> float:
 
 
 def fit_logistic(c: pd.Series, labels: pd.Series) -> tuple[float, float]:
-    """Maximum-likelihood fit of P = 1 / (1 + exp(-(a + b*c))); rows with a NaN on either side are dropped."""
+    """Penalised maximum-likelihood fit of P = 1 / (1 + exp(-(a + b*c))).
+
+    The slope is floored at zero (more risk can never lower the probability) and carries a weak
+    normal prior around one, so two historical episodes can neither invert the model nor send
+    the slope to infinity on separable data. Rows with a NaN on either side are dropped.
+    """
     df = pd.DataFrame({"c": c.to_numpy(dtype=float), "y": labels.to_numpy(dtype=float)}).dropna()
     x, y = df["c"].to_numpy(), df["y"].to_numpy()
+    prior_mean, prior_sd = config.SLOPE_PRIOR
 
-    def nll(params):
+    def objective(params):
         a, b = params
         logit = a + b * x
-        return float(np.sum(np.logaddexp(0.0, -logit) * y + np.logaddexp(0.0, logit) * (1 - y)))
+        nll = float(np.sum(np.logaddexp(0.0, -logit) * y + np.logaddexp(0.0, logit) * (1 - y)))
+        return nll + 0.5 * ((b - prior_mean) / prior_sd) ** 2
 
-    res = minimize(nll, x0=np.array([0.0, 1.0]), method="L-BFGS-B")
+    res = minimize(objective, x0=np.array([0.0, 1.0]), method="L-BFGS-B", bounds=[(None, None), (0.0, None)])
     return float(res.x[0]), float(res.x[1])
 
 

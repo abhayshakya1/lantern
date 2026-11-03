@@ -56,6 +56,7 @@ REAL_YIELD_PE_SENSITIVITY = 0.10  # P/E falls 10% per percentage point of real y
 CALIBRATION_START = "2003-01"     # every driver has a free history from here
 STATUS_BANDS = [(0.25, "calm"), (0.50, "elevated"), (1.0, "high")]
 PROB_CLAMP = (0.01, 0.99)
+SLOPE_PRIOR = (1.0, 1.0)   # weak normal prior (mean, sd) on the logistic slope; the slope is floored at 0
 CONDITIONAL_BAND = 1.0     # composite points either side of today for the conditional window
 CONDITIONAL_MIN_OBS = 24
 TOP10_PEAK_2000 = 0.27     # context on the concentration tile

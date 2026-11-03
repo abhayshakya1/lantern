@@ -227,5 +227,10 @@ def run_model(store: Store, now: datetime | None = None) -> dict:
         "notes": notes[:3],
     }
     payload = _clean(payload)
+    history = pd.DataFrame({"date": readings.index})
+    for d in drivers.DRIVER_IDS:
+        history[f"{d}_reading"] = readings[d].to_numpy()
+        history[f"{d}_z"] = z[d].to_numpy()
+    store.save_series("drivers.history", history)  # the driver detail panel reads this, not a recompute
     store.save_run(payload)
     return payload

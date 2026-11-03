@@ -1,3 +1,5 @@
+import pytest
+
 from lantern.sources import spy
 
 
@@ -20,6 +22,9 @@ def test_concentration_history_uses_todays_ssga_value_when_present(tmp_store, se
     import pandas as pd
 
     last = seeded_prices_and_shares["last_month_end"]
+    raw = spy.concentration_history(tmp_store, "2024-01")  # reconstruction alone, on its own level
     tmp_store.save_series("spy.top10_weight", pd.DataFrame({"date": [last], "value": [0.389]}))
     hist = spy.concentration_history(tmp_store, "2024-01")
     assert abs(hist["value"].iloc[-1] - 0.389) < 1e-9
+    # the history is rescaled onto the SSGA level, so its shape survives and the last two months compare
+    assert hist["value"].iloc[-2] / hist["value"].iloc[-1] == pytest.approx(raw["value"].iloc[-2] / raw["value"].iloc[-1], rel=1e-9)

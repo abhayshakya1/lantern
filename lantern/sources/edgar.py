@@ -10,10 +10,19 @@ from lantern.sources.base import SourceError, fetch_raw
 from lantern.store import Store
 
 FORMS = {"10-K", "10-Q", "10-K/A", "10-Q/A", "20-F", "20-F/A", "6-K"}
-# series -> candidate (taxonomy, tag, preferred unit); the first tag present wins
+# series -> candidate (taxonomy, tag, preferred unit); the candidate with the latest period wins
 TAGS = {
-    "net_income": [("us-gaap", "NetIncomeLoss", "USD"), ("ifrs-full", "ProfitLoss", None)],
-    "shares": [("dei", "EntityCommonStockSharesOutstanding", "shares")],
+    "net_income": [
+        ("us-gaap", "NetIncomeLoss", "USD"),
+        ("us-gaap", "NetIncomeLossAvailableToCommonStockholdersBasic", "USD"),
+        ("us-gaap", "ProfitLoss", "USD"),
+        ("ifrs-full", "ProfitLoss", None),
+    ],
+    "shares": [
+        ("dei", "EntityCommonStockSharesOutstanding", "shares"),
+        ("us-gaap", "CommonStockSharesOutstanding", "shares"),
+        ("us-gaap", "WeightedAverageNumberOfDilutedSharesOutstanding", "shares"),
+    ],
     "capex": [
         ("us-gaap", "PaymentsToAcquirePropertyPlantAndEquipment", "USD"),
         ("ifrs-full", "PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities", None),
@@ -82,10 +91,33 @@ def _flows(rows: list[dict]) -> pd.DataFrame:
 
 def _instants(rows: list[dict]) -> pd.DataFrame:
     df = _frame(rows, need_start=False)
-    if df.empty:
-        return _empty()
+    if df.empty:  # a duration fact (a weighted average share count) stands in as the instant at its period end
+        df = _frame(rows, need_start=True)
+        if df.empty:
+            return _empty()
+        df = df[(df["end"] - df["start"]).dt.days.between(80, 100)]
+        if df.empty:
+            return _empty()
     res = pd.DataFrame({"date": df["filed"], "period_end": df["end"], "value": df["val"], "kind": "instant"})
-    return res.sort_values("period_end").reset_index(drop=True)[COLUMNS]
+    return res.sort_values("period_end").drop_duplicates("period_end", keep="first").reset_index(drop=True)[COLUMNS]
+
+
+def _series_frame(facts: dict, series: str) -> tuple[pd.DataFrame, str | None]:
+    """Build every candidate tag's frame and keep the one whose data reaches furthest in time."""
+    best, best_unit, best_end = _empty(), None, None
+    for tax, tag, pref in TAGS[series]:
+        node = facts.get(tax, {}).get(tag)
+        if not node or not node.get("units"):
+            continue
+        units = node["units"]
+        unit = pref if pref in units else next(iter(units))
+        df = _flows(units[unit]) if series in FLOWS else _instants(units[unit])
+        if df.empty:
+            continue
+        end = df["period_end"].max()
+        if best_end is None or end > best_end:
+            best, best_unit, best_end = df, unit, end
+    return best, best_unit
 
 
 def pull_edgar(store: Store, tickers: list[str] = config.BASKET) -> dict[str, pd.DataFrame]:
@@ -97,16 +129,8 @@ def pull_edgar(store: Store, tickers: list[str] = config.BASKET) -> dict[str, pd
             continue
         facts = json.loads(raw.content).get("facts", {})
         notes = []
-        for series, candidates in TAGS.items():
-            df, unit = _empty(), None
-            for tax, tag, pref in candidates:
-                node = facts.get(tax, {}).get(tag)
-                if not node:
-                    continue
-                units = node["units"]
-                unit = pref if pref in units else next(iter(units))
-                df = _flows(units[unit]) if series in FLOWS else _instants(units[unit])
-                break
+        for series in TAGS:
+            df, unit = _series_frame(facts, series)
             name = f"edgar.{t}.{series}"
             store.save_series(name, df)
             out[name] = df

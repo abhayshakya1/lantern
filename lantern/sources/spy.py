@@ -66,7 +66,12 @@ def concentration_history(store: Store, start: str = config.CALIBRATION_START) -
         d = pd.Timestamp(today["date"].iloc[0])
         last = hist["date"].iloc[-1]
         if (d.year, d.month) == (last.year, last.month):
-            hist.loc[hist.index[-1], "value"] = float(today["value"].iloc[0])
+            # the reconstruction uses an approximate index share count, so it sits on its own level:
+            # rescale the whole history onto the SSGA level, keeping its shape, then pin today's value
+            ssga, recon = float(today["value"].iloc[0]), float(hist["value"].iloc[-1])
+            if recon > 0:
+                hist["value"] = hist["value"] * (ssga / recon)
+            hist.loc[hist.index[-1], "value"] = ssga
     store.set_meta(
         "concentration.note",
         f"history reconstructed from {len(caps)} large caps against an approximate S&P 500 share "

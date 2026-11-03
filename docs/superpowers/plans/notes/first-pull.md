@@ -51,3 +51,10 @@ calibration 2003-01 to 2026-11: a=-2.467 b=-0.639 n=275 hit rate 0.93 brier 0.06
 2000 analogue: {'drivers': ['valuation', 'rates'], 'probability_peak': 0.06883537367200747, 'date_peak': '2001-03-31', 'note': 'valuation and the long rate only, weights renormalised; out of sample'}
 probability 5% (calm), fair-value gap n/a, run 2026-11-07T13:32:43.827564+08:00
 ```
+
+## After EDGAR fallbacks and concentration rescale, 2026-11-07T05:36Z
+```
+calibration 2003-01 to 2026-11: a=-2.651 b=-3.166 n=275 hit rate 0.93 brier 0.061
+2000 analogue: {'drivers': ['valuation', 'rates'], 'probability_peak': 0.03442538662617283, 'date_peak': '2001-03-31', 'note': 'valuation and the long rate only, weights renormalised; out of sample'}
+probability 1% (calm), fair-value gap -1%, run 2026-11-07T13:36:57.941102+08:00
+```

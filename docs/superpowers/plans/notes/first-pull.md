@@ -44,3 +44,10 @@ badge: No data pulled yet
 ```
 probability 7% (calm), fair-value gap n/a, run 2026-11-07T13:28:19.337941+08:00
 ```
+
+## Backtest and model after the dtype and revisions fixes, 2026-11-07T05:32Z
+```
+calibration 2003-01 to 2026-11: a=-2.467 b=-0.639 n=275 hit rate 0.93 brier 0.064
+2000 analogue: {'drivers': ['valuation', 'rates'], 'probability_peak': 0.06883537367200747, 'date_peak': '2001-03-31', 'note': 'valuation and the long rate only, weights renormalised; out of sample'}
+probability 5% (calm), fair-value gap n/a, run 2026-11-07T13:32:43.827564+08:00
+```

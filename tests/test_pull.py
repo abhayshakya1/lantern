@@ -58,3 +58,13 @@ def test_run_model_builds_payload(tmp_store, seeded_all_series):
     assert tmp_store.latest_run()["model"]["run_at"] == run["model"]["run_at"]
     assert all(len(d["spark"]) == 24 for d in run["drivers"]) and len(tiles["probability"]["spark"]) == 24
     assert tiles["top10"]["peak_2000"] == 0.27 and tiles["forward_pe"]["value"] == 30.0
+
+
+def test_source_returning_no_series_counts_as_error(tmp_store):
+    def empty(store):  # a dead network makes the per-ticker pulls swallow every failure and return nothing
+        return {}
+
+    tmp_store.set_meta("last_pull", {"at": "2026-11-06T22:40:00+00:00", "ok": True, "missing": []})
+    st = pull.run_pull(tmp_store, [empty])
+    assert st.items[0]["status"] == "error" and "no series" in st.items[0]["detail"]
+    assert tmp_store.get_meta("last_pull")["at"] == "2026-11-06T22:40:00+00:00"  # nothing refreshed: the old pull stands

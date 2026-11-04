@@ -9,6 +9,7 @@ import pandas as pd
 
 from lantern import backtest, config, drivers, model
 from lantern.sources import edgar, fred, sentiment, shiller, spy, yahoo
+from lantern.sources.base import SourceError
 from lantern.store import Store
 
 
@@ -39,6 +40,8 @@ def run_pull(store: Store, sources: list | None = None) -> PullStatus:
         name = getattr(fn, "__name__", str(fn))
         try:
             out = fn(store)
+            if not out:  # per-ticker pulls swallow their failures; a dead network looks like an empty result
+                raise SourceError(name, "no series")
             items.append({"source": name, "status": "ok", "series": len(out), "detail": ""})
         except Exception as exc:  # one dead feed must not blank the screen
             items.append({"source": name, "status": "error", "series": 0, "detail": str(exc)})

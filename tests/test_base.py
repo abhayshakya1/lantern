@@ -33,3 +33,15 @@ def test_fetch_raw_404_records_error_and_raises(tmp_store, fixture_server):
     with pytest.raises(SourceError):
         fetch_raw(tmp_store, "nothing", fixture_server + "/missing.csv")
     assert tmp_store.provenance()[0]["status"] == "error"
+
+
+def test_fetch_raw_redacts_query_params_from_errors(tmp_store, monkeypatch):
+    import pytest
+
+    from lantern.sources import base
+
+    monkeypatch.setattr(base, "RETRY_WAIT", 0)
+    with pytest.raises(SourceError) as e:
+        fetch_raw(tmp_store, "fred.DFII10", "http://127.0.0.1:9/fred/series/observations", params={"series_id": "DFII10", "api_key": "SECRETKEY123"})
+    assert "SECRETKEY123" not in str(e.value) and e.value.__cause__ is None
+    assert all("SECRETKEY123" not in p["url"] for p in tmp_store.provenance())

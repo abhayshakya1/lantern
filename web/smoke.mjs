@@ -34,6 +34,9 @@ try {
   const panel = await page.$eval('#driver-panel', (el) => el.textContent).catch(() => '');
   if (!/weight/i.test(panel)) fail('driver panel did not open with its weight');
 
+  const text = await page.$eval('#main', (el) => el.textContent).catch(() => '');
+  if (/\b(null|NaN|undefined)\b/.test(text)) fail('main shows null, NaN or undefined');
+  if (!/Brier/.test(text)) fail('calibration footer missing');
   if (errors.length) fail('console errors: ' + errors.join(' | '));
 } finally {
   await browser.close();

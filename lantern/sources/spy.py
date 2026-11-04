@@ -6,6 +6,7 @@ import re
 import pandas as pd
 
 from lantern import config
+from lantern.sources import edgar
 from lantern.sources.base import SourceError, fetch_raw
 from lantern.store import Store
 
@@ -36,11 +37,11 @@ def pull_spy(store: Store) -> dict[str, pd.DataFrame]:
 
 
 def _shares_by_month(sh: pd.DataFrame, months: pd.DatetimeIndex) -> pd.Series:
-    """Latest share count filed by each month end (no look-ahead)."""
+    """Latest share count filed by each month end (no look-ahead), none once it is older than SHARES_MAX_AGE_DAYS."""
     known = sh.sort_values("date")[["date", "value"]].copy()
     known["date"] = pd.to_datetime(known["date"]).astype("datetime64[ns]")
     probe = pd.DataFrame({"date": pd.DatetimeIndex(months).astype("datetime64[ns]")})
-    merged = pd.merge_asof(probe, known, on="date")
+    merged = pd.merge_asof(probe, known, on="date", tolerance=pd.Timedelta(days=config.SHARES_MAX_AGE_DAYS))
     return pd.Series(merged["value"].to_numpy(), index=months)
 
 
@@ -51,14 +52,17 @@ def concentration_history(store: Store, start: str = config.CALIBRATION_START) -
     months = pd.DatetimeIndex(gspc["date"])
     caps = {}
     for t in config.BASKET + config.LARGE_CAPS:
-        p, sh = store.load_series(f"prices.{t}"), store.load_series(f"edgar.{t}.shares")
-        if p is None or sh is None or sh.empty:
+        if t in config.NOT_IN_SP500:
+            continue
+        p, sh = store.load_series(f"prices.{t}"), edgar.shares_history(store, t)
+        if p is None or sh is None:
             continue
         price = p.set_index("date")["value"].reindex(months)
         caps[t] = price * _shares_by_month(sh, months)
     wide = pd.DataFrame(caps, index=months)
     total = pd.Series(gspc["value"].to_numpy(), index=months) * config.SP500_DIVISOR_SHARES
-    top10 = wide.apply(lambda row: row.dropna().nlargest(10).sum(), axis=1) / total
+    enough = wide.notna().sum(axis=1) >= config.CONCENTRATION_MIN_NAMES  # too few names: no reading, never a 0% weight
+    top10 = wide.apply(lambda row: row.dropna().nlargest(10).sum(), axis=1).where(enough) / total
     hist = pd.DataFrame({"date": months, "value": top10.to_numpy()})
     hist = hist[hist["date"] >= pd.Timestamp(start)].dropna().reset_index(drop=True)
     today = store.load_series("spy.top10_weight")
@@ -74,7 +78,8 @@ def concentration_history(store: Store, start: str = config.CALIBRATION_START) -
             hist.loc[hist.index[-1], "value"] = ssga
     store.set_meta(
         "concentration.note",
-        f"history reconstructed from {len(caps)} large caps against an approximate S&P 500 share "
-        "count; today's value from the SSGA holdings file",
+        f"history reconstructed from {len(caps)} large caps (split-adjusted EDGAR share counts, TSM excluded as a non-constituent) "
+        f"against an approximate S&P 500 share count, no reading in months with fewer than {config.CONCENTRATION_MIN_NAMES} names; "
+        "today's value from the SSGA holdings file",
     )
     return hist

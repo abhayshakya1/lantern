@@ -144,6 +144,21 @@ def pull_edgar(store: Store, tickers: list[str] = config.BASKET) -> dict[str, pd
     return out
 
 
+def shares_history(store: Store, ticker: str) -> pd.DataFrame | None:
+    """Filed share counts in today's share units: later splits applied to earlier counts, scale errors dropped."""
+    sh = store.load_series(f"edgar.{ticker}.shares")
+    if sh is None or sh.empty:
+        return None
+    sh = sh.sort_values("period_end").reset_index(drop=True)
+    splits = store.load_series(f"yahoo.splits.{ticker}")
+    if splits is not None and not splits.empty:
+        split_dates = pd.to_datetime(splits["date"])
+        sh["value"] = sh["value"] * [float(splits.loc[split_dates > d, "value"].prod()) for d in pd.to_datetime(sh["period_end"])]
+    # ponytail: rolling-median screen catches the 10^6x cover-page scale errors; blind for a series of two rows
+    ratio = sh["value"] / sh["value"].rolling(5, center=True, min_periods=1).median()
+    return sh[(ratio > 0.1) & (ratio < 10)].reset_index(drop=True)[COLUMNS]
+
+
 def trailing_4q(df: pd.DataFrame, as_of: date) -> float | None:
     """Sum of the four latest quarters filed by `as_of`; the latest annual figure when only annuals exist."""
     known = df[df["date"] <= pd.Timestamp(as_of)]

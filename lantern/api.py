@@ -58,6 +58,7 @@ def create_app(store: Store) -> FastAPI:
             "proxy_before": model_block.get("splices", {}).get(driver_id),
             "asof": current.get("asof"),
             "reading_text": current.get("reading_text"),
+            "note": current.get("note"),
             "z": current.get("z"),
             "contribution_pts": current.get("contribution_pts"),
             "trigger": asdict(meta.trigger) if meta.trigger else None,

@@ -68,3 +68,41 @@ def test_source_returning_no_series_counts_as_error(tmp_store):
     st = pull.run_pull(tmp_store, [empty])
     assert st.items[0]["status"] == "error" and "no series" in st.items[0]["detail"]
     assert tmp_store.get_meta("last_pull")["at"] == "2026-11-06T22:40:00+00:00"  # nothing refreshed: the old pull stands
+
+
+def test_payload_is_honest_when_fred_is_missing_and_the_slope_is_floored(tmp_store, seeded_all_series):
+    import re
+
+    import pandas as pd
+
+    for s in ("fred.DFII10", "fred.BAMLH0A0HYM2"):
+        tmp_store.save_series(s, pd.DataFrame({"date": pd.to_datetime([]), "value": []}))
+    backtest.run_backtest(tmp_store, "2010-01")
+    tmp_store.set_meta("calibration", {**tmp_store.get_meta("calibration"), "b": 0.0})
+    run = pull.run_model(tmp_store, now=datetime(2026, 11, 7, 1, 0, tzinfo=UTC))
+    rates = next(d for d in run["drivers"] if d["id"] == "rates")
+    assert rates["reading"] is None and rates["z"] is None and rates["change_1m_z"] is None and rates["reading_text"] == "no reading"
+    assert "neutral" in rates["note"]
+    assert "floor" in run["notes"][0]["text"] and "largest contributors" not in run["notes"][0]["text"]
+    zs = [abs(d["z"]) if d["z"] is not None else -1 for d in run["drivers"]]
+    assert zs == sorted(zs, reverse=True)  # with every contribution at zero the table ranks by |z|
+    cal = run["model"]["calibration"]
+    assert cal["brier_base"] is not None and cal["in_sample"] is True
+    assert "FRED" not in run["chart"]["source_line"] and "no real-yield" in run["model"]["fair_value_note"]
+    to = re.search(r"prices to (\d{2} \w{3} \d{4})", run["chart"]["source_line"]).group(1)
+    assert datetime.strptime(to, "%d %b %Y").date() <= datetime(2026, 11, 7).date()
+    assert all(d["asof"] is None or d["asof"] <= "2026-11-07" for d in run["drivers"])
+    assert "TSM" in next(d for d in run["drivers"] if d["id"] == "valuation")["note"]
+    assert next(d for d in run["drivers"] if d["id"] == "concentration")["note"] == tmp_store.get_meta("concentration.note")
+
+
+def test_partial_source_is_flagged_in_status_and_badge(tmp_store, seeded_all_series):
+    def partial(store):
+        store.record_fetch("prices.MSFT", "https://finance.yahoo.com/quote/MSFT", "", "", "error", datetime.now(UTC))
+        return {"prices.NVDA": seeded_all_series["fred.DFII10"]}
+
+    st = pull.run_pull(tmp_store, [partial])
+    assert st.items[0]["status"] == "partial" and "prices.MSFT" in st.items[0]["detail"]
+    rec = tmp_store.get_meta("last_pull")
+    assert rec["partial"] == ["partial"] and rec["missing"] == []
+    assert pull.badge(tmp_store, now=datetime.now(UTC))["label"].endswith("· 1 feed partial")

@@ -93,6 +93,7 @@ def run_backtest(store: Store, start: str = config.CALIBRATION_START) -> Backtes
     scored = history.dropna(subset=["label"])
     hit_rate = float(((scored["probability"] >= 0.5).astype(float) == scored["label"]).mean())
     brier = float(((scored["probability"] - scored["label"]) ** 2).mean())
+    brier_base = float(((scored["label"].mean() - scored["label"]) ** 2).mean())  # what always predicting the base rate scores
     res = BacktestResult(
         a=a,
         b=b,
@@ -112,7 +113,8 @@ def run_backtest(store: Store, start: str = config.CALIBRATION_START) -> Backtes
     store.save_series("backtest.history", out)
     store.set_meta(
         "calibration",
-        {"a": a, "b": b, "hit_rate": hit_rate, "brier": brier, "n_months": res.n_months, "start": start, "end": res.end,
+        {"a": a, "b": b, "hit_rate": hit_rate, "brier": brier, "brier_base": brier_base, "in_sample": True,
+         "n_months": res.n_months, "start": start, "end": res.end,
          "calibration": res.calibration, "analogue_2000": res.analogue_2000},
     )
     return res

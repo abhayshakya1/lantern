@@ -5,6 +5,8 @@ window.Lantern = window.Lantern || {};
   const pct = (x, d = 0) => (x == null ? '—' : (x * 100).toFixed(d) + '%');
   const signedPct = (x, d = 0) => (x == null ? '—' : (x >= 0 ? '+' : '−') + Math.abs(x * 100).toFixed(d) + '%');
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const num = (x, d = 0) => (x == null ? '—' : x.toFixed(d));
+  const signed = (x, d = 1, unit = '') => (x == null ? '—' : (x >= 0 ? '+' : '') + x.toFixed(d) + unit);
   const STATUS = { calm: 'Calm', elevated: 'Elevated', high: 'High' };
   const SCENARIO_TEXT = {
     base: (s, m) => `Base case: the basket ends near ${Math.round(s.path[12])} by ${m} (${C().fmtPct(s.end_return)}), probability ${Math.round(s.prob * 100)}%.`,
@@ -35,15 +37,15 @@ window.Lantern = window.Lantern || {};
         </div>
       </div>
       <section class="kpis">
-        ${tile('probability', '12-month de-rating probability', Math.round(prob.value * 100), '%',
+        ${tile('probability', '12-month de-rating probability', prob.value == null ? '—' : Math.round(prob.value * 100), '%',
           `<span class="pill ${prob.status}"><i></i>${STATUS[prob.status] || prob.status}</span><span class="d ${deltaClass(prob.delta_1m)}">${signedPct(prob.delta_1m)} pts</span>`)}
         ${tile('fv_gap', 'Price vs model fair value', t.fv_gap.value == null ? '—' : signedPct(t.fv_gap.value), t.fv_gap.value == null ? '' : '',
-          `<span class="ctx">${t.fv_gap.value == null ? 'needs the real-yield feed' : `80% range ${signedPct(t.fv_gap.low)} to ${signedPct(t.fv_gap.high)}`}</span>`)}
+          `<span class="ctx">${t.fv_gap.value == null ? 'no fair value this month' : /^no real-yield/.test(p.model.fair_value_note || '') ? 'plain 10-yr median multiple: no real-yield feed' : `80% range ${signedPct(t.fv_gap.low)} to ${signedPct(t.fv_gap.high)}`}</span>`)}
         ${tile('forward_pe', 'Basket trailing P/E', t.forward_pe.trailing_pe == null ? '—' : t.forward_pe.trailing_pe.toFixed(1), 'x',
           `<span class="ctx">10-yr median ${t.forward_pe.median_10y == null ? '—' : t.forward_pe.median_10y.toFixed(1)}x${t.forward_pe.value == null ? '' : ` · forward ${t.forward_pe.value.toFixed(1)}x`}</span>`)}
-        ${tile('capex_ocf', 'Hyperscaler capex to cash flow', Math.round(t.capex_ocf.value * 100), '%',
+        ${tile('capex_ocf', 'Hyperscaler capex to cash flow', t.capex_ocf.value == null ? '—' : Math.round(t.capex_ocf.value * 100), '%',
           t.capex_ocf.delta_vs_2024 == null ? '<span class="ctx">trailing four quarters</span>' : `<span class="d ${deltaClass(t.capex_ocf.delta_vs_2024)}">${signedPct(t.capex_ocf.delta_vs_2024)} pts vs 2024</span>`)}
-        ${tile('top10', 'Top-10 weight in S&P 500', (t.top10.value * 100).toFixed(1), '%', `<span class="ctx">2000 peak ${pct(t.top10.peak_2000, 1)}</span>`)}
+        ${tile('top10', 'Top-10 weight in S&P 500', t.top10.value == null ? '—' : (t.top10.value * 100).toFixed(1), '%', `<span class="ctx">2000 peak ${pct(t.top10.peak_2000, 1)} (published figure)</span>`)}
       </section>
       <section class="grid">
         <div class="card ch">
@@ -62,7 +64,7 @@ window.Lantern = window.Lantern || {};
           <div>${p.triggers.map((tr) => `
             <div class="trig"><span class="n">${esc(tr.label)}</span><span class="m">${tr.current == null ? 'no reading' : fmtReading(tr)} · trigger ${fmtLevel(tr)}</span>
               <div class="bar"><b style="width:${tr.distance == null ? 0 : Math.round(tr.distance * 100)}%"></b><i style="left:100%"></i></div>
-              <span class="k">${esc(tr.text)} (${tr.effect_pts >= 0 ? '+' : ''}${tr.effect_pts.toFixed(0)} pts)</span></div>`).join('')}</div>
+              <span class="k">${esc(tr.text)} (${signed(tr.effect_pts, 0, ' pts')})</span></div>`).join('')}</div>
           <div><h3>Scenario probabilities, 12 months</h3><div id="scenario-bar"></div></div>
         </div>
       </section>
@@ -73,10 +75,10 @@ window.Lantern = window.Lantern || {};
           <thead><tr><th>Driver</th><th>Current reading</th><th>Versus 10-year history</th><th class="num">Contribution</th><th>24-month trend</th><th class="num">Change, 1 month</th></tr></thead>
           <tbody>${p.drivers.map((d) => `
             <tr data-driver="${d.id}"><td><div class="name">${esc(d.label)}</div></td><td><div class="desc">${esc(d.reading_text)}</div></td>
-              <td data-z="${d.id}"></td><td class="num">${d.contribution_pts >= 0 ? '+' : ''}${d.contribution_pts.toFixed(0)} pts</td>
-              <td><svg data-spark="d-${d.id}"></svg></td><td class="num"><span class="delta ${deltaClass(d.change_1m_z)}">${d.change_1m_z >= 0 ? '+' : ''}${d.change_1m_z.toFixed(1)}σ</span></td></tr>`).join('')}</tbody>
+              <td data-z="${d.id}"></td><td class="num">${signed(d.contribution_pts, 0, ' pts')}</td>
+              <td><svg data-spark="d-${d.id}"></svg></td><td class="num"><span class="delta ${deltaClass(d.change_1m_z)}">${signed(d.change_1m_z, 1, 'σ')}</span></td></tr>`).join('')}</tbody>
         </table></div>
-        <div class="tfoot"><span>Penalised logistic model on monthly data, ${esc(p.model.calibration.start)} to ${esc(p.model.calibration.end)}: hit rate ${pct(p.model.calibration.hit_rate)}, Brier ${p.model.calibration.brier == null ? '—' : p.model.calibration.brier.toFixed(3)}, ${p.model.calibration.n_months} months.</span><span>Model v${esc(p.model.version)}</span></div>
+        <div class="tfoot"><span>${calibrationText(p.model.calibration)}</span><span>Model v${esc(p.model.version)}</span></div>
       </section>
       <section class="notes">${p.notes.map((n) => `<div class="card note"><div class="d">${esc(fmtDate(n.date))}</div><div class="h">${esc(n.title)}</div><p>${esc(n.text)}</p></div>`).join('')}</section>`;
 
@@ -106,7 +108,15 @@ window.Lantern = window.Lantern || {};
     });
   }
 
+  function calibrationText(c) {
+    const fit = c.in_sample === false ? 'out-of-sample' : 'in-sample';
+    let s = `Penalised logistic model, ${fit} fit on monthly data ${esc(c.start)} to ${esc(c.end)} (${c.n_months} months): Brier ${num(c.brier, 3)} against ${num(c.brier_base, 3)} for always predicting the base rate.`;
+    if (c.b != null && c.b <= 0) s += ' The slope is at its floor (0.00): no driver moves the probability this month, and the table ranks by z-score.';
+    return s;
+  }
+
   function fmtReading(tr) {
+    if (tr.current == null) return 'no reading';
     if (tr.unit === '%') return tr.current.toFixed(2) + '%';
     if (tr.unit === 'ratio' || tr.unit === 'share') return (tr.current * 100).toFixed(1) + '%';
     if (tr.unit === 'growth') return (tr.current >= 0 ? '−' : '+') + Math.abs(tr.current * 100).toFixed(1) + '% earnings';
@@ -138,8 +148,9 @@ window.Lantern = window.Lantern || {};
       <svg id="driver-history" width="100%" style="display:block;margin:8px 0"></svg>
       <dl>
         <dt>Weight</dt><dd>${(d.weight * 100).toFixed(0)}% of the composite</dd>
-        <dt>Current z</dt><dd class="mono">${d.z == null ? '—' : (d.z >= 0 ? '+' : '') + d.z.toFixed(2)}σ, contributing ${d.contribution_pts == null ? '—' : (d.contribution_pts >= 0 ? '+' : '') + d.contribution_pts.toFixed(1)} pts</dd>
+        <dt>Current z</dt><dd class="mono">${d.z == null ? 'no reading' : signed(d.z, 2, 'σ')}, contributing ${signed(d.contribution_pts, 1, ' pts')}</dd>
         <dt>Data as of</dt><dd>${esc(d.asof || '—')}</dd>
+        ${d.note ? `<dt>Note</dt><dd>${esc(d.note)}</dd>` : ''}
         <dt>Source</dt><dd>${esc(d.source)}</dd>
         <dt>Transform</dt><dd>${esc(d.transform)}</dd>
         <dt>Proxy</dt><dd>${d.proxy_before ? `Proxy used before ${esc(d.proxy_before)}` : 'None'}</dd>
@@ -147,7 +158,9 @@ window.Lantern = window.Lantern || {};
         <dt>Conditional drawdown share</dt><dd>${pct(d.conditional_drawdown_share)} of months with a composite near today's saw a 25% drawdown within 12 months</dd>
       </dl>`;
     panel.querySelector('.close').addEventListener('click', () => { panel.hidden = true; });
-    C().line(panel.querySelector('#driver-history'), d.history.map((h) => ({ date: h.date, value: h.reading })));
+    const pts = d.history.filter((h) => h.reading != null);
+    panel.querySelector('#driver-history').hidden = pts.length < 2;
+    C().line(panel.querySelector('#driver-history'), pts.map((h) => ({ date: h.date, value: h.reading })));
   }
 
   window.Lantern.monitor = { render, openDriver };

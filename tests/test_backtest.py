@@ -25,3 +25,13 @@ def test_run_backtest_fits_and_scores(tmp_store, seeded_all_series):
     rows = backtest.ledger_rows(res)
     assert rows and rows[0]["kind"] == "backtest" and isinstance(rows[0]["inside_fan"], bool)
     assert rows[0]["horizon_months"] == 12 and set(rows[0]) >= {"date", "probability", "realised_return"}
+
+
+def test_calibration_records_base_rate_brier_and_in_sample(tmp_store, seeded_all_series):
+    import pytest
+
+    backtest.run_backtest(tmp_store, "2010-01")
+    cal = tmp_store.get_meta("calibration")
+    y = tmp_store.load_series("backtest.history")["label"].dropna()
+    assert cal["brier_base"] == pytest.approx(float(((y.mean() - y) ** 2).mean()))
+    assert cal["in_sample"] is True

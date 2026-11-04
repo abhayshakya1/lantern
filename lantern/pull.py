@@ -38,20 +38,28 @@ def run_pull(store: Store, sources: list | None = None) -> PullStatus:
     items = []
     for fn in sources or default_sources():
         name = getattr(fn, "__name__", str(fn))
+        last_id = max((r["id"] for r in store.provenance(1)), default=0)
         try:
             out = fn(store)
             if not out:  # per-ticker pulls swallow their failures; a dead network looks like an empty result
                 raise SourceError(name, "no series")
-            items.append({"source": name, "status": "ok", "series": len(out), "detail": ""})
+            lost = _errors_after(store, last_id)  # per-ticker pulls keep going past a dead ticker: say which ones
+            detail = f"{len(lost)} series failed: {', '.join(lost)}" if lost else ""
+            items.append({"source": name, "status": "partial" if lost else "ok", "series": len(out), "detail": detail})
         except Exception as exc:  # one dead feed must not blank the screen
             items.append({"source": name, "status": "error", "series": 0, "detail": str(exc)})
     finished = datetime.now(UTC)
-    missing = [i["source"] for i in items if i["status"] != "ok"]
-    record = {"at": finished.isoformat(), "ok": not missing, "missing": missing, "items": items}
+    missing = [i["source"] for i in items if i["status"] == "error"]
+    partial = [i["source"] for i in items if i["status"] == "partial"]
+    record = {"at": finished.isoformat(), "ok": not missing and not partial, "missing": missing, "partial": partial, "items": items}
     store.set_meta("last_pull_attempt", record)
     if len(missing) < len(items):  # at least one feed refreshed: the data's age moved
         store.set_meta("last_pull", record)
     return PullStatus(items=items, started_at=started, finished_at=finished)
+
+
+def _errors_after(store: Store, min_id: int) -> list[str]:
+    return sorted({r["name"] for r in store.provenance(5000) if r["id"] > min_id and r["status"] != "ok"})
 
 
 def badge(store: Store, now: datetime | None = None) -> dict:
@@ -60,11 +68,11 @@ def badge(store: Store, now: datetime | None = None) -> dict:
         return {"state": "none", "pulled_at": None, "label": "No data pulled yet"}
     at = datetime.fromisoformat(rec["at"]).astimezone(config.SGT)
     now_sgt = (now or datetime.now(UTC)).astimezone(config.SGT)
-    missing = rec.get("missing") or []
-    suffix = f" · {len(missing)} feed{'s' if len(missing) > 1 else ''} missing" if missing else ""
+    missing, partial = rec.get("missing") or [], rec.get("partial") or []
+    suffix = "".join(f" · {len(v)} feed{'s' if len(v) > 1 else ''} {w}" for v, w in ((missing, "missing"), (partial, "partial")) if v)
     if at.date() == now_sgt.date():
-        return {"state": "live", "pulled_at": at.isoformat(), "label": f"Live data · pulled {at:%H:%M} SGT{suffix}", "missing": missing}
-    return {"state": "cached", "pulled_at": at.isoformat(), "label": f"Cached data · pulled {at:%d %b}{suffix}", "missing": missing}
+        return {"state": "live", "pulled_at": at.isoformat(), "label": f"Live data · pulled {at:%H:%M} SGT{suffix}", "missing": missing, "partial": partial}
+    return {"state": "cached", "pulled_at": at.isoformat(), "label": f"Cached data · pulled {at:%d %b}{suffix}", "missing": missing, "partial": partial}
 
 
 # --- model run ------------------------------------------------------------------------------
@@ -98,7 +106,7 @@ def _reading_text(did: str, value: float, median_pe: float) -> str:
         "concentration": f"Top-10 weight {value:.1%} of the S&P 500",
         "leverage": f"Net-debt and credit-spread composite {value:+.1f}σ",
         "positioning": f"AAII bull-bear spread {value:+.0%}",
-        "revisions": f"Trailing S&P earnings {-value:+.1%} over three months",
+        "revisions": f"Basket trailing earnings {-value:+.1%} over three months",
         "rates": f"US 10-year real yield {value:.2f}%",
     }[did]
 
@@ -120,7 +128,7 @@ def run_model(store: Store, now: datetime | None = None) -> dict:
         cal = store.get_meta("calibration")
     a, b = float(cal["a"]), float(cal["b"])
 
-    readings = drivers.monthly_readings(store)
+    readings = drivers.monthly_readings(store, end=now_sgt.date())
     z = drivers.zscores(readings)
     comp = model.composite(z)
     probs = comp.apply(lambda v: model.probability(float(v), a, b))
@@ -172,33 +180,42 @@ def run_model(store: Store, now: datetime | None = None) -> dict:
                 "weight": config.WEIGHTS[d.id],
                 "reading": float(r_row[d.id]) if pd.notna(r_row[d.id]) else None,
                 "reading_text": _reading_text(d.id, r_row[d.id], float(pe_med.iloc[-1])),
-                "z": float(z_row[d.id]) if pd.notna(z_row[d.id]) else 0.0,
+                "z": float(z_row[d.id]) if pd.notna(z_row[d.id]) else None,
                 "contribution_pts": float(contrib[d.id] * 100.0),
                 "spark": _tail(z[d.id]),
-                "change_1m_z": float(z_row[d.id] - z[d.id].iloc[-2]) if pd.notna(z_row[d.id]) and pd.notna(z[d.id].iloc[-2]) else 0.0,
+                "change_1m_z": float(z_row[d.id] - z[d.id].iloc[-2]) if pd.notna(z_row[d.id]) and pd.notna(z[d.id].iloc[-2]) else None,
                 "asof": readings.attrs["asof"].get(d.id),
+                "note": readings.attrs.get("driver_notes", {}).get(d.id),
                 "source": d.source,
                 "transform": d.transform,
             }
         )
-    drivers_out.sort(key=lambda x: -x["contribution_pts"])
+    drivers_out.sort(key=lambda x: (-x["contribution_pts"], -abs(x["z"] or 0.0)))  # equal contributions (a floored slope) rank by |z|
     top = [x["label"].lower() for x in drivers_out[:2]]
+    if b <= 0:
+        tail = "The calibrated slope is at its floor, so no driver moves the probability this month; the table ranks drivers by z-score."
+    else:
+        tail = f"{top[0].capitalize()} and {top[1]} are the largest contributors."
 
     note = {
         "date": now_sgt.isoformat(),
         "title": "Model run complete",
-        "text": f"12-month de-rating probability {p:.0%}, from {p_prev:.0%} last month. {top[0].capitalize()} and {top[1]} are the largest contributors.",
+        "text": f"12-month de-rating probability {p:.0%}, from {p_prev:.0%} last month (recomputed with today's fit). {tail}",
     }
     notes = [note] + (store.get_meta("notes") or [])[:9]
     store.set_meta("notes", notes)
 
     capex_2024 = readings["capex"].get(pd.Timestamp("2024-12-31"))
+    fred_present = any((s := store.load_series(n)) is not None and not s.empty for n in ("fred.DFII10", "fred.BAMLH0A0HYM2"))  # the FRED series the drivers read
+    last_px = store.get_meta("yahoo.last_date")
+    px_to = pd.Timestamp(last_px) if last_px else min(hist_months[-1], pd.Timestamp(now_sgt.date()))
+    contributing = ["SEC EDGAR filings"] + (["FRED"] if fred_present else []) + ["SSGA", "AAII", "Shiller"]
     payload = {
         "as_of": now_sgt.isoformat(),
         "model": {
             "version": config.MODEL_VERSION,
             "run_at": now_sgt.isoformat(),
-            "calibration": {k: cal.get(k) for k in ("a", "b", "hit_rate", "brier", "n_months", "start", "end")},
+            "calibration": {k: cal.get(k) for k in ("a", "b", "hit_rate", "brier", "brier_base", "in_sample", "n_months", "start", "end")},
             "window_band": band,
             "conditional_obs": int(len(sel)),
             "conditional_drawdown_share": model.conditional_drawdown_share(sel),
@@ -223,7 +240,7 @@ def run_model(store: Store, now: datetime | None = None) -> dict:
             "fan": fan,
             "scenarios": {k: {"path": paths[k], "end_return": paths[k][-1] / price_today - 1.0, "prob": sp[k]} for k in ("base", "derating", "meltup")},
             "window_band": band,
-            "source_line": f"Source: Yahoo Finance prices to {hist_months[-1]:%d %b %Y}, SEC EDGAR filings, FRED, SSGA, AAII, Shiller · model run {now_sgt:%d %b %Y %H:%M} SGT",
+            "source_line": f"Source: Yahoo Finance prices to {px_to:%d %b %Y}, {', '.join(contributing)} · model run {now_sgt:%d %b %Y %H:%M} SGT",
         },
         "triggers": model.trigger_effects(z_row, r_row, stats, a, b),
         "drivers": drivers_out,

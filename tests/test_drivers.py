@@ -41,7 +41,7 @@ def test_proxy_splice_recorded_and_no_nan_on_latest(tmp_store, seeded_all_series
     assert list(r.columns) == list(config.WEIGHTS)
     assert r.iloc[-1].notna().all()  # the current month carries each driver's last published value
     assert r.attrs["asof"]["positioning"] == "2026-10-31"  # ... and says how old that value is
-    assert r.attrs["asof"]["revisions"] == "2026-11-30"  # basket earnings: the 3Q26 filings land in November
+    assert r.attrs["asof"]["revisions"] == pd.Timestamp.today().date().isoformat()  # 3Q26 filings land in November: as of the run date, never a future month end
     assert "revisions" in r.attrs["splices"]  # Shiller earnings fill the months before the basket history
     z = drivers.zscores(r)
     assert z.iloc[-1].notna().all()
@@ -53,3 +53,14 @@ def test_window_stats_cover_every_driver(tmp_store, seeded_all_series):
     r = drivers.monthly_readings(tmp_store, "2008-01")
     stats = drivers.window_stats(r)
     assert set(stats) == set(config.WEIGHTS) and all(s[1] > 0 for s in stats.values())
+
+
+def test_basket_pe_excludes_tsm_and_asof_is_clamped_to_the_run_date(tmp_store, seeded_all_series):
+    base = drivers.monthly_readings(tmp_store, "2010-01", end=date(2026, 10, 15))
+    ni = tmp_store.load_series("edgar.TSM.net_income")
+    ni["value"] = ni["value"] * 50  # TSM files annual 20-F facts in TWD: kept out of the basket P/E, disclosed
+    tmp_store.save_series("edgar.TSM.net_income", ni)
+    again = drivers.monthly_readings(tmp_store, "2010-01", end=date(2026, 10, 15))
+    assert again["valuation"].iloc[-1] == pytest.approx(base["valuation"].iloc[-1])
+    assert all(v is None or v <= "2026-10-15" for v in again.attrs["asof"].values())
+    assert "TSM" in again.attrs["driver_notes"]["valuation"]

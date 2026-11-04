@@ -53,3 +53,20 @@ def test_record_fixtures():
     (FIXTURES / "yahoo_info.json").write_text(json.dumps(info, indent=1))
     (FIXTURES / "yahoo_actions.json").write_text(json.dumps(actions, indent=1))
     assert (FIXTURES / "yahoo_prices.parquet").stat().st_size < 400_000
+
+
+def test_pull_saves_split_history_and_last_price_date(tmp_store, fake_yahoo):
+    class WithSplits(type(fake_yahoo)):
+        def history(self, ticker, start):
+            h = super().history(ticker, start)
+            h["Stock Splits"] = 0.0
+            if ticker == "NVDA":
+                h.loc[h.index[len(h) // 2], "Stock Splits"] = 10.0
+            return h
+
+    out = yahoo.pull_yahoo(tmp_store, ["NVDA", "MSFT"], client=WithSplits())
+    splits = tmp_store.load_series("yahoo.splits.NVDA")
+    assert len(splits) == 1 and splits["value"].iloc[0] == 10.0 and "yahoo.splits.NVDA" in out
+    assert tmp_store.load_series("yahoo.splits.MSFT") is None
+    last = fake_yahoo.prices[fake_yahoo.prices["ticker"].isin(["NVDA", "MSFT"])]["date"].max()
+    assert tmp_store.get_meta("yahoo.last_date") == pd.Timestamp(last).date().isoformat()

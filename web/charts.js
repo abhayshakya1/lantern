@@ -106,6 +106,7 @@ window.Lantern = window.Lantern || {};
   }
 
   function zbar(container, z) {
+    if (z == null) { container.innerHTML = '<span class="ztext">—</span>'; return; }
     const pct = Math.min(Math.abs(z) / 3, 1) * 50;
     const color = z >= 1.5 ? '#C62828' : z >= 0.8 ? '#B7791F' : z >= 0 ? '#1F5FBF' : '#1E8E3E';
     const left = z >= 0 ? 50 : 50 - pct;

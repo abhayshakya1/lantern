@@ -16,7 +16,7 @@ class YFClient:
     def history(self, ticker: str, start: str) -> pd.DataFrame:
         import yfinance as yf
 
-        df = yf.Ticker(ticker).history(start=start, auto_adjust=False)[["Close"]]
+        df = yf.Ticker(ticker).history(start=start, auto_adjust=False)[["Close", "Stock Splits"]]
         df.index = pd.DatetimeIndex(df.index).tz_localize(None)
         return df
 
@@ -59,6 +59,7 @@ def pull_yahoo(
     now = datetime.now(UTC)
     today = pd.Timestamp(now.date())
     out: dict[str, pd.DataFrame] = {}
+    last_dates = []
     for t in tickers:
         name = f"prices.{t}"
         try:
@@ -67,12 +68,18 @@ def pull_yahoo(
                 raise SourceError(name, "no price history")
             monthly = h["Close"].resample("ME").last().dropna()
             df = pd.DataFrame({"date": monthly.index, "value": monthly.to_numpy(dtype=float)})
+            splits = h["Stock Splits"][h["Stock Splits"] > 0] if "Stock Splits" in h else pd.Series(dtype=float)
         except Exception as exc:  # one bad ticker never stops the pull
             _record(store, name, t, pd.DataFrame(), "error", now)
             continue
         store.save_series(name, df)
         _record(store, name, t, df, "ok", now)
         out[name] = df
+        last_dates.append(h.index.max())
+        if len(splits):  # share counts filed before a split are restated in today's share units (see edgar.shares_history)
+            sdf = pd.DataFrame({"date": splits.index, "value": splits.to_numpy(dtype=float)})
+            store.save_series(f"yahoo.splits.{t}", sdf)
+            out[f"yahoo.splits.{t}"] = sdf
         if t.startswith("^"):
             continue
         info = client.info(t) or {}
@@ -88,6 +95,8 @@ def pull_yahoo(
         adf = pd.DataFrame({"date": signs.index, "value": signs.to_numpy(dtype=float)})
         store.save_series(f"yahoo.actions.{t}", adf)
         out[f"yahoo.actions.{t}"] = adf
+    if last_dates:
+        store.set_meta("yahoo.last_date", pd.Timestamp(max(last_dates)).date().isoformat())
     return out
 
 

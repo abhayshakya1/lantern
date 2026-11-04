@@ -11,11 +11,11 @@ import pandas as pd
 
 from lantern import config
 from lantern.sources import spy
-from lantern.sources.edgar import latest_value, trailing_4q
+from lantern.sources.edgar import latest_value, shares_history, trailing_4q
 from lantern.store import Store
 
 DRIVER_IDS = list(config.WEIGHTS)
-MIN_BASKET_NAMES = 6  # the basket P/E and earnings need at least six of the eight names
+MIN_BASKET_NAMES = 6  # the basket P/E and earnings need at least six of the seven US filers
 
 
 @dataclass(frozen=True)
@@ -39,12 +39,12 @@ class DriverMeta:
 
 
 DRIVERS = [
-    DriverMeta("valuation", "Valuation stretch", "x", "Yahoo prices; EDGAR net income and shares; Shiller S&P P/E before the basket history",
-               "Basket trailing P/E: sum of market caps over sum of trailing four-quarter net income; TSM converted from TWD with FRED DEXTAUS",
+    DriverMeta("valuation", "Valuation stretch", "x", "Yahoo prices and splits; EDGAR net income and shares; Shiller S&P P/E before the basket history",
+               "Basket trailing P/E: sum of market caps over sum of trailing four-quarter net income, seven names (TSM excluded: annual 20-F facts only, in TWD)",
                1, False, Trigger(None, "below", "Back at the 10-year median P/E the valuation driver goes neutral")),
     DriverMeta("capex", "Capex intensity", "ratio", "EDGAR company facts", "Hyperscaler trailing four-quarter capex over operating cash flow",
                1, False, Trigger(0.55, "below", "Capex falling back under 55% of cash flow flips capex intensity to easing"), True),
-    DriverMeta("concentration", "Index concentration", "share", "SSGA SPY holdings; Yahoo prices and EDGAR shares for the history",
+    DriverMeta("concentration", "Index concentration", "share", "SSGA SPY holdings; Yahoo prices and splits with EDGAR shares for the history",
                "Top-10 weight in the S&P 500", 1, False, Trigger(0.40, "above", "Past 40% the concentration driver saturates"), True),
     DriverMeta("leverage", "Leverage and credit", "z", "EDGAR cash and debt; FRED high-yield spread",
                "Average of the standardised 12-month change in hyperscaler net debt and the standardised high-yield spread, spread inverted",
@@ -81,36 +81,27 @@ def _rolling_z(x: pd.Series, window: int, min_months: int) -> pd.Series:
     return (x - mu) / sd.replace(0, np.nan)
 
 
-def _basket(store: Store, months: pd.DatetimeIndex, notes: dict) -> tuple[pd.Series, pd.Series]:
+def _basket(store: Store, months: pd.DatetimeIndex) -> tuple[pd.Series, pd.Series]:
     """Per month: the basket's market cap and trailing four-quarter net income (USD), both from filings known by then."""
-    prices = {t: _monthly(store, f"prices.{t}", months, "last") for t in config.BASKET}
-    facts = {t: (store.load_series(f"edgar.{t}.net_income"), store.load_series(f"edgar.{t}.shares")) for t in config.BASKET}
-    fx = _monthly(store, "fred.DEXTAUS", months)
-    units = {t: store.get_meta(f"edgar.{t}.unit") for t in config.BASKET}
-    caps, earns, skipped = [], [], set()
+    names = [t for t in config.BASKET if t not in config.PE_EXCLUDED]
+    prices = {t: _monthly(store, f"prices.{t}", months, "last") for t in names}
+    facts = {t: (store.load_series(f"edgar.{t}.net_income"), shares_history(store, t)) for t in names}
+    caps, earns = [], []
     for m in months:
         cap, ni, n_cap, n_earn = 0.0, 0.0, 0, 0
-        for t in config.BASKET:
+        for t in names:
             inc, sh = facts[t]
             if inc is None or sh is None or inc.empty or sh.empty:
                 continue
             earn, shares = trailing_4q(inc, m.date()), latest_value(sh, m.date())
             if earn is None or shares is None:
                 continue
-            if units[t] and units[t] != "USD":
-                rate = fx.get(m)
-                if pd.isna(rate):
-                    skipped.add(t)
-                    continue
-                earn = earn / rate
             ni, n_earn = ni + earn, n_earn + 1
             price = prices[t].get(m)
             if pd.notna(price):
                 cap, n_cap = cap + price * shares, n_cap + 1
         earns.append(ni if n_earn >= MIN_BASKET_NAMES and ni > 0 else np.nan)
         caps.append(cap if n_cap >= MIN_BASKET_NAMES and n_cap == n_earn else np.nan)
-    if skipped:
-        notes["basket_skipped"] = sorted(skipped) + ["no FX series for the currency conversion"]
     return pd.Series(caps, index=months, dtype=float), pd.Series(earns, index=months, dtype=float)
 
 
@@ -166,7 +157,7 @@ def monthly_readings(store: Store, start: str = config.CALIBRATION_START, end: d
     notes: dict = {}
     readings = pd.DataFrame(index=months, columns=DRIVER_IDS, dtype=float)
 
-    caps, earns = _basket(store, months, notes)
+    caps, earns = _basket(store, months)
     readings["valuation"] = _splice(caps / earns, _monthly(store, "shiller.pe", months), splices, "valuation")
     shiller_earn = _monthly(store, "shiller.earnings", months)
     momentum = -(earns / earns.shift(3) - 1.0)
@@ -191,11 +182,23 @@ def monthly_readings(store: Store, start: str = config.CALIBRATION_START, end: d
 
     # each driver's last published value carries forward into the current month (at most 3 months),
     # and the driver panel discloses the as-of date of the data behind it
-    asof = {c: (readings[c].last_valid_index().date().isoformat() if readings[c].last_valid_index() is not None else None) for c in DRIVER_IDS}
+    today = pd.Timestamp(end) if end else pd.Timestamp.today().normalize()  # a month in progress is as of the run date, not its month end
+    asof = {c: (min(readings[c].last_valid_index(), today).date().isoformat() if readings[c].last_valid_index() is not None else None) for c in DRIVER_IDS}
     readings = readings.ffill(limit=3)
+    driver_notes = {
+        "valuation": f"{len(config.BASKET) - len(config.PE_EXCLUDED)} of {len(config.BASKET)} names; {', '.join(config.PE_EXCLUDED)} excluded: annual 20-F facts only, reported in TWD",
+        "concentration": store.get_meta("concentration.note"),
+    }
+    fred_for = {"rates": "fred.DFII10", "leverage": "fred.BAMLH0A0HYM2"}
+    for c in DRIVER_IDS:
+        if pd.isna(readings[c].iloc[-1]):
+            s = store.load_series(fred_for[c]) if c in fred_for else None
+            why = "FRED series missing: pull with FRED_API_KEY set" if c in fred_for and (s is None or s.empty) else "no data for this month"
+            driver_notes[c] = f"no reading: neutral (0σ) in the composite; {why}"
     readings.attrs["splices"] = splices
     readings.attrs["asof"] = asof
     readings.attrs["notes"] = notes
+    readings.attrs["driver_notes"] = driver_notes
     readings.attrs["gaps"] = {c: int(readings[c].isna().sum()) for c in DRIVER_IDS}
     return readings
 

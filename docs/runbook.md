@@ -31,7 +31,7 @@ If the laptop was never pulled on this machine, the badge reads `No data pulled 
 
 ## Troubleshooting
 
-- **FRED `error`**: the public CSV endpoint times out from Python on some networks. Set `FRED_API_KEY` (free) and re-run `lantern pull`. Without FRED the rates and leverage drivers show "no reading", fair value uses the plain median multiple and TSM drops out of the basket; the notes on screen say so.
+- **FRED `error`**: the public CSV endpoint times out from Python on some networks. Set `FRED_API_KEY` (free) and re-run `lantern pull`. Without FRED the rates and leverage drivers show "no reading" and fair value uses the plain median multiple; the driver panel and the fair-value tile say so.
 - **Yahoo `error` or empty series**: yfinance is rate-limited and sometimes blocked on hotel networks. Switch to the hotspot and re-run; the previous prices serve meanwhile.
 - **SSGA or AAII `error`**: the files move or change layout a few times a year. The previous top-10 weight or sentiment reading serves; the Data sources page shows the failed URL.
 - **Port in use**: `scripts/demo_morning.sh --port 8788` and open that port instead.
@@ -45,4 +45,5 @@ Recorded here after each rehearsal, newest first.
 
 - **Live run.** `scripts/demo_morning.sh --port 8788` was serving after 160 seconds. Status table: five feeds `ok`, FRED `error` (no API key; the CSV endpoint times out from Python). Badge `Live data · pulled 13:56 SGT · 1 feed missing`. Probability 7%, fair-value gap −1%, every tile filled, driver panel opens, browser smoke test passed against the live server.
 - **Fallback.** Wifi was not switched off (shared machine); `lantern pull` ran through a dead proxy instead, so every fetch failed, which is the same code path. The first attempt found a defect: the Yahoo and EDGAR pulls swallow per-ticker failures and reported `ok` with zero series, so the badge claimed a live pull that had fetched nothing. Fixed: a source that returns no series now counts as an error (`test_source_returning_no_series_counts_as_error`). After the fix, six `error` rows, the previous pull stands, the screen is unchanged and the smoke test passes.
-- **Open before the next rehearsal.** Set `FRED_API_KEY`; until then the rates and leverage drivers read "no reading" and TSM is out of the basket.
+- **Open before the next rehearsal.** Set `FRED_API_KEY`; until then the rates and leverage drivers read "no reading".
+- **After the whole-branch review (same day).** The review found the share counts behind the valuation and concentration histories unadjusted for splits, so the backtest had been fitted on a corrupted history; fixed, re-pulled and re-run (see `docs/superpowers/plans/notes/first-pull.md` for the before and after).

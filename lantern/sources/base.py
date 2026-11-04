@@ -25,6 +25,14 @@ def _http_get(url: str, headers: dict, params: dict | None, timeout: int):
     return requests.get(url, headers=headers, params=params, timeout=timeout)
 
 
+def _redact(msg: str, params: dict | None) -> str:
+    """requests quotes the full query string in connection errors; secrets must not reach the log or the store."""
+    for k, v in (params or {}).items():
+        if any(s in k.lower() for s in ("key", "token", "secret", "pass")):
+            msg = msg.replace(str(v), "***")
+    return msg
+
+
 class SourceError(Exception):
     def __init__(self, name: str, reason: str):
         super().__init__(f"{name}: {reason}")
@@ -57,7 +65,7 @@ def fetch_raw(
         except Exception as exc:  # curl_cffi raises its own RequestsError family
             if attempt == 1:
                 store.record_fetch(name, url, "", "", "error", fetched_at)
-                raise SourceError(name, str(exc)) from exc
+                raise SourceError(name, _redact(f"{type(exc).__name__}: {exc}", params)) from None
             time.sleep(RETRY_WAIT)
     if resp.status_code != 200 or not resp.content:
         store.record_fetch(name, url, "", "", "error", fetched_at)

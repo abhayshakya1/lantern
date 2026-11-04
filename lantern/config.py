@@ -32,7 +32,6 @@ FRED = {
     "fed_funds": "DFF",
     "hy_spread": "BAMLH0A0HYM2",
     "fed_assets": "WALCL",
-    "twd_usd": "DEXTAUS",  # Taiwan dollars per US dollar, converts TSM's TWD facts
 }
 
 # Fixed, disclosed composite weights (spec: The model, item 2).
@@ -61,6 +60,10 @@ CONDITIONAL_BAND = 1.0     # composite points either side of today for the condi
 CONDITIONAL_MIN_OBS = 24
 TOP10_PEAK_2000 = 0.27     # context on the concentration tile
 SP500_DIVISOR_SHARES = 8.4e9  # approximate S&P 500 index shares, used for the concentration history
+NOT_IN_SP500 = ["TSM"]          # in the basket but not an index constituent: out of the concentration history
+PE_EXCLUDED = ["TSM"]           # files annual 20-F facts only, in TWD: out of the basket P/E, disclosed on the panel
+SHARES_MAX_AGE_DAYS = 730       # a filed share count older than this no longer stands in for a month
+CONCENTRATION_MIN_NAMES = 20    # months with fewer names carrying a market cap have no reconstructed reading
 
 DATA_DIR = Path(os.environ.get("LANTERN_DATA", "./data"))
 SGT = ZoneInfo("Asia/Singapore")

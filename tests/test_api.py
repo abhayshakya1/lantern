@@ -50,3 +50,8 @@ def test_static_index_served(tmp_store, seeded_run):
     client = TestClient(api.create_app(tmp_store))
     r = client.get("/")
     assert r.status_code == 200 and "AI-bubble monitor" in r.text
+
+
+def test_driver_detail_carries_the_note(tmp_store, seeded_run):
+    client = TestClient(api.create_app(tmp_store))
+    assert "TSM" in client.get("/api/drivers/valuation").json()["note"]

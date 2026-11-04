@@ -94,3 +94,27 @@ def test_annual_only_series_trailing_4q_is_the_latest_annual():
     )
     assert edgar.trailing_4q(df, date(2025, 6, 1)) == 900.0
     assert edgar.trailing_4q(df, date(2025, 1, 1)) == 800.0
+
+
+def test_shares_history_adjusts_for_splits_and_drops_scale_errors(tmp_store):
+    """NVDA's 10:1 split of 2024-06-10: the May 10-Q count is pre-split, the August one post-split;
+    ORCL once filed a 4.8e15 cover-page count (a scale error) that must not survive."""
+    import pandas as pd
+    import pytest
+
+    from lantern.sources import edgar
+
+    sh = pd.DataFrame(
+        {
+            "date": pd.to_datetime(["2024-02-21", "2024-05-29", "2024-08-28", "2024-11-20"]),
+            "period_end": pd.to_datetime(["2024-02-16", "2024-05-24", "2024-08-23", "2024-11-15"]),
+            "value": [2.47e9, 2.46e9, 24.5e9, 4.8e15],
+            "kind": "instant",
+        }
+    )
+    tmp_store.save_series("edgar.NVDA.shares", sh)
+    tmp_store.save_series("yahoo.splits.NVDA", pd.DataFrame({"date": pd.to_datetime(["2024-06-10"]), "value": [10.0]}))
+    adj = edgar.shares_history(tmp_store, "NVDA")
+    assert adj["value"].tolist() == pytest.approx([24.7e9, 24.6e9, 24.5e9])  # pre-split counts in post-split units
+    assert list(adj.columns) == ["date", "period_end", "value", "kind"]
+    assert edgar.shares_history(tmp_store, "MSFT") is None

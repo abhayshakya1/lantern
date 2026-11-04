@@ -2,9 +2,47 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lantern · AI-bubble monitor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<p>AI-bubble monitor: front end arrives with the next task.</p>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><span class="mark"></span>Lantern</div>
+    <div class="crumbs">OCBC Group Research <span>/</span> <b id="crumb-title">AI-bubble monitor</b></div>
+    <div class="search">Search tickers, drivers, notes <kbd>⌘K</kbd></div>
+    <span class="chip" id="chip-range">Last 24 months</span>
+    <span class="chip" id="chip-asof"><span class="dot"></span><span id="asof-text">As of …</span></span>
+    <span class="chip" id="chip-model">Model …</span>
+    <span class="chip" id="chip-badge">No data yet</span>
+    <span class="avatar">AB</span>
+  </header>
+
+  <nav class="nav">
+    <div class="group">Workspace</div>
+    <a href="#overview" data-route="overview"><span class="ic"></span>Overview</a>
+    <a href="#monitor" data-route="monitor"><span class="ic"></span>AI-bubble monitor</a>
+    <a href="#research" data-route="research"><span class="ic"></span>Research desk</a>
+    <a href="#filings" data-route="filings"><span class="ic"></span>Filings Q&amp;A</a>
+    <a href="#rates" data-route="rates"><span class="ic"></span>Rates and macro</a>
+    <a href="#modelrisk" data-route="modelrisk"><span class="ic"></span>Model risk</a>
+    <div class="group">Admin</div>
+    <a href="#sources" data-route="sources"><span class="ic"></span>Data sources</a>
+    <a href="#settings" data-route="settings"><span class="ic"></span>Settings</a>
+    <div class="foot">Data: Yahoo Finance, SEC EDGAR, FRED, SSGA, AAII, Shiller. Model outputs are research inputs, not advice.</div>
+  </nav>
+
+  <main id="main"><p class="loading">Loading the monitor…</p></main>
+  <aside id="driver-panel" class="panel" hidden></aside>
+</div>
+<script src="charts.js"></script>
+<script src="monitor.js"></script>
+<script src="placeholders.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

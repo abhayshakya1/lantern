@@ -32,7 +32,7 @@ class PullStatus:
 
 
 def run_pull(store: Store, sources: list | None = None) -> PullStatus:
-    """Runs every source in its own try; the previous good pull stands unless all sources succeed."""
+    """Runs every source in its own try; last_pull moves whenever at least one source refreshed; the rest keep their previous data."""
     started = datetime.now(UTC)
     items = []
     for fn in sources or default_sources():

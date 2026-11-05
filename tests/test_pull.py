@@ -75,7 +75,7 @@ def test_payload_is_honest_when_fred_is_missing_and_the_slope_is_floored(tmp_sto
 
     import pandas as pd
 
-    for s in ("fred.DFII10", "fred.BAMLH0A0HYM2"):
+    for s in ("fred.DFII10", "fred.BAA10Y"):
         tmp_store.save_series(s, pd.DataFrame({"date": pd.to_datetime([]), "value": []}))
     backtest.run_backtest(tmp_store, "2010-01")
     tmp_store.set_meta("calibration", {**tmp_store.get_meta("calibration"), "b": 0.0})

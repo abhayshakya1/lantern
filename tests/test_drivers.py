@@ -64,3 +64,10 @@ def test_basket_pe_excludes_tsm_and_asof_is_clamped_to_the_run_date(tmp_store, s
     assert again["valuation"].iloc[-1] == pytest.approx(base["valuation"].iloc[-1])
     assert all(v is None or v <= "2026-10-15" for v in again.attrs["asof"].values())
     assert "TSM" in again.attrs["driver_notes"]["valuation"]
+
+
+def test_leverage_uses_the_baa_spread_with_its_full_history(tmp_store, seeded_all_series):
+    """FRED serves the ICE BofA high-yield spread only from November 2023; the Baa spread runs from 1986."""
+    assert config.FRED["credit_spread"] == "BAA10Y"
+    lev = drivers.monthly_readings(tmp_store, "2003-01")["leverage"]
+    assert lev.first_valid_index() <= pd.Timestamp("2012-12-31") and int(lev.notna().sum()) >= 150

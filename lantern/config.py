@@ -30,7 +30,7 @@ CIK = {
 FRED = {
     "real_yield": "DFII10",
     "fed_funds": "DFF",
-    "hy_spread": "BAMLH0A0HYM2",
+    "credit_spread": "BAA10Y",  # Moody's Baa yield over the 10-year Treasury, daily from 1986; FRED serves the ICE BofA high-yield spread only from Nov 2023
     "fed_assets": "WALCL",
 }
 

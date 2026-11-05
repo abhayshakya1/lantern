@@ -35,7 +35,7 @@ TAGS = {
         ("us-gaap", "CashAndCashEquivalentsAtCarryingValue", "USD"),
         ("ifrs-full", "CashAndCashEquivalents", None),
     ],
-    "debt": [("us-gaap", "LongTermDebt", "USD"), ("us-gaap", "LongTermDebtNoncurrent", "USD")],
+    "debt": [("us-gaap", "LongTermDebt", "USD"), ("us-gaap", "LongTermDebtNoncurrent", "USD"), ("us-gaap", "LongTermNotesPayable", "USD")],  # Oracle files notes payable
 }
 FLOWS = {"net_income", "capex", "ocf"}
 COLUMNS = ["date", "period_end", "value", "kind"]
@@ -171,8 +171,12 @@ def trailing_4q(df: pd.DataFrame, as_of: date) -> float | None:
     return float(annual["value"].iloc[-1]) if not annual.empty else None
 
 
-def latest_value(df: pd.DataFrame, as_of: date) -> float | None:
+def latest_value(df: pd.DataFrame, as_of: date, max_age_days: int = config.SHARES_MAX_AGE_DAYS) -> float | None:
+    """The latest instant filed by `as_of`, unless that filing is older than `max_age_days` (a stale value never stands in)."""
     known = df[df["date"] <= pd.Timestamp(as_of)]
     if known.empty:
         return None
-    return float(known.sort_values("period_end")["value"].iloc[-1])
+    latest = known.sort_values("period_end").iloc[-1]
+    if (pd.Timestamp(as_of) - pd.Timestamp(latest["date"])).days > max_age_days:
+        return None
+    return float(latest["value"])

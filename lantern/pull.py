@@ -206,7 +206,7 @@ def run_model(store: Store, now: datetime | None = None) -> dict:
     store.set_meta("notes", notes)
 
     capex_2024 = readings["capex"].get(pd.Timestamp("2024-12-31"))
-    fred_present = any((s := store.load_series(n)) is not None and not s.empty for n in ("fred.DFII10", "fred.BAMLH0A0HYM2"))  # the FRED series the drivers read
+    fred_present = any((s := store.load_series(n)) is not None and not s.empty for n in ("fred.DFII10", "fred.BAA10Y"))  # the FRED series the drivers read
     last_px = store.get_meta("yahoo.last_date")
     px_to = pd.Timestamp(last_px) if last_px else min(hist_months[-1], pd.Timestamp(now_sgt.date()))
     contributing = ["SEC EDGAR filings"] + (["FRED"] if fred_present else []) + ["SSGA", "AAII", "Shiller"]

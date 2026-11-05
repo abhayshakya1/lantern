@@ -118,3 +118,16 @@ def test_shares_history_adjusts_for_splits_and_drops_scale_errors(tmp_store):
     assert adj["value"].tolist() == pytest.approx([24.7e9, 24.6e9, 24.5e9])  # pre-split counts in post-split units
     assert list(adj.columns) == ["date", "period_end", "value", "kind"]
     assert edgar.shares_history(tmp_store, "MSFT") is None
+
+
+def test_debt_falls_back_to_long_term_notes_payable():
+    """Oracle files LongTermNotesPayable rather than LongTermDebt; its one LongTermDebt row is a zero."""
+    rows = [_fact(None, "2026-05-31", "2026-06-20", 9.0e10, form="10-K"), _fact(None, "2026-02-28", "2026-03-12", 9.4e10)]
+    df, unit = edgar._series_frame({"us-gaap": {"LongTermNotesPayable": {"units": {"USD": rows}}}}, "debt")
+    assert unit == "USD" and df["value"].tolist() == [9.4e10, 9.0e10]
+
+
+def test_latest_value_ignores_a_value_filed_more_than_two_years_ago():
+    df = pd.DataFrame({"date": pd.to_datetime(["2022-06-20"]), "period_end": pd.to_datetime(["2022-05-31"]), "value": [0.0], "kind": ["instant"]})
+    assert edgar.latest_value(df, date(2026, 11, 7)) is None  # a stale instant must not stand in for today
+    assert edgar.latest_value(df, date(2023, 11, 7)) == 0.0

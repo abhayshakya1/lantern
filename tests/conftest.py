@@ -165,7 +165,7 @@ def seeded_all_series(tmp_store):
 
     # FRED daily and weekly
     tmp_store.save_series("fred.DFII10", pd.DataFrame({"date": days, "value": 1.0 + np.cumsum(rng.normal(0, 0.01, len(days)))}))
-    tmp_store.save_series("fred.BAMLH0A0HYM2", pd.DataFrame({"date": days, "value": np.clip(4 + np.cumsum(rng.normal(0, 0.02, len(days))), 2, 12)}))
+    tmp_store.save_series("fred.BAA10Y", pd.DataFrame({"date": days, "value": np.clip(4 + np.cumsum(rng.normal(0, 0.02, len(days))), 2, 12)}))
     tmp_store.save_series("fred.DFF", pd.DataFrame({"date": days, "value": np.clip(2 + np.cumsum(rng.normal(0, 0.005, len(days))), 0, 6)}))
     tmp_store.save_series("fred.DEXTAUS", pd.DataFrame({"date": days, "value": 31 + np.cumsum(rng.normal(0, 0.02, len(days)))}))
     tmp_store.save_series("fred.WALCL", pd.DataFrame({"date": weeks, "value": 2e6 + np.cumsum(rng.normal(2000, 5000, len(weeks)))}))

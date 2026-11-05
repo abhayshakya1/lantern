@@ -46,8 +46,8 @@ DRIVERS = [
                1, False, Trigger(0.55, "below", "Capex falling back under 55% of cash flow flips capex intensity to easing"), True),
     DriverMeta("concentration", "Index concentration", "share", "SSGA SPY holdings; Yahoo prices and splits with EDGAR shares for the history",
                "Top-10 weight in the S&P 500", 1, False, Trigger(0.40, "above", "Past 40% the concentration driver saturates"), True),
-    DriverMeta("leverage", "Leverage and credit", "z", "EDGAR cash and debt; FRED high-yield spread",
-               "Average of the standardised 12-month change in hyperscaler net debt and the standardised high-yield spread, spread inverted",
+    DriverMeta("leverage", "Leverage and credit", "z", "EDGAR cash and debt; FRED BAA10Y (Moody's Baa yield over the 10-year Treasury; the ICE BofA high-yield spread has free history only from November 2023)",
+               "Average of the standardised 12-month change in hyperscaler net debt and the standardised Baa credit spread, spread inverted",
                1, True, None),
     DriverMeta("positioning", "Positioning and sentiment", "fraction", "AAII sentiment survey",
                "Bull minus bear share, monthly mean (CBOE put/call dropped: no free history)", 1, False, None),
@@ -175,7 +175,7 @@ def monthly_readings(store: Store, start: str = config.CALIBRATION_START, end: d
         readings["concentration"] = np.nan
     nd = _net_debt(store, months)
     dnd = nd - nd.shift(12)
-    hy = _monthly(store, "fred.BAMLH0A0HYM2", months)
+    hy = _monthly(store, "fred.BAA10Y", months)
     readings["leverage"] = 0.5 * _rolling_z(dnd, config.Z_WINDOW_MONTHS, config.Z_MIN_MONTHS) - 0.5 * _rolling_z(hy, config.Z_WINDOW_MONTHS, config.Z_MIN_MONTHS)
     readings["positioning"] = _monthly(store, "aaii.bull_bear", months)
     readings["rates"] = _monthly(store, "fred.DFII10", months)
@@ -189,7 +189,7 @@ def monthly_readings(store: Store, start: str = config.CALIBRATION_START, end: d
         "valuation": f"{len(config.BASKET) - len(config.PE_EXCLUDED)} of {len(config.BASKET)} names; {', '.join(config.PE_EXCLUDED)} excluded: annual 20-F facts only, reported in TWD",
         "concentration": store.get_meta("concentration.note"),
     }
-    fred_for = {"rates": "fred.DFII10", "leverage": "fred.BAMLH0A0HYM2"}
+    fred_for = {"rates": "fred.DFII10", "leverage": "fred.BAA10Y"}
     for c in DRIVER_IDS:
         if pd.isna(readings[c].iloc[-1]):
             s = store.load_series(fred_for[c]) if c in fred_for else None

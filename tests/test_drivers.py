@@ -24,7 +24,7 @@ def test_prestandardised_driver_passes_through():
 
 def test_driver_ids_match_weights_and_four_triggers_shown():
     assert [d.id for d in drivers.DRIVERS] == list(config.WEIGHTS)
-    assert drivers.SHOWN_TRIGGERS == ["rates", "revisions", "concentration", "capex"]
+    assert drivers.SHOWN_TRIGGERS == ["valuation", "concentration", "leverage", "capex"]
     assert all(drivers.META[i].trigger is not None and drivers.META[i].shown_trigger for i in drivers.SHOWN_TRIGGERS)
 
 

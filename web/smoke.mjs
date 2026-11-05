@@ -37,6 +37,7 @@ try {
   const text = await page.$eval('#main', (el) => el.textContent).catch(() => '');
   if (/\b(null|NaN|undefined)\b/.test(text)) fail('main shows null, NaN or undefined');
   if (!/Brier/.test(text)) fail('calibration footer missing');
+  if (!/watch/i.test(text)) fail('watch indicators not marked');
   if (errors.length) fail('console errors: ' + errors.join(' | '));
 } finally {
   await browser.close();

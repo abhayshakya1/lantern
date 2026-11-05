@@ -45,6 +45,11 @@ WEIGHTS = {
     "rates": 0.05,
 }
 
+# Decided 2026-11-07 after the first backtest: only the drivers that preceded the 2008 and 2022 de-ratings
+# enter the probability, with the design weights renormalised; the other four are shown as watch indicators.
+CALIBRATED = ["valuation", "concentration", "leverage"]
+COMPOSITE_WEIGHTS = {k: (WEIGHTS[k] / sum(WEIGHTS[c] for c in CALIBRATED) if k in CALIBRATED else 0.0) for k in WEIGHTS}
+
 DRAWDOWN = 0.25            # de-rating event: a 25% or larger drawdown ...
 MELTUP = 0.20              # melt-up event: a 20% or larger gain ...
 HORIZON_MONTHS = 12        # ... within 12 months

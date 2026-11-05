@@ -1,3 +1,4 @@
+import pytest
 from datetime import UTC, datetime
 
 from lantern import backtest, pull
@@ -52,7 +53,7 @@ def test_run_model_builds_payload(tmp_store, seeded_all_series):
     assert abs(sum(chart["scenarios"][k]["prob"] for k in ("base", "derating", "meltup")) - 1) < 1e-9
     assert len(chart["months"]) == 37 and len(chart["price"]) == 25 and len(chart["fair_value"]) == 37
     assert len(chart["fan"]["p50"]) == 13 and chart["fan"]["p50"][0] == chart["price"][-1]
-    assert [t["id"] for t in run["triggers"]] == ["rates", "revisions", "concentration", "capex"]
+    assert [t["id"] for t in run["triggers"]] == ["valuation", "concentration", "leverage", "capex"]
     assert run["notes"][0]["title"] == "Model run complete" and "41" not in run["model"]["version"]
     assert run["model"]["run_at"].endswith("+08:00") and run["as_of"] == run["model"]["run_at"]
     assert tmp_store.latest_run()["model"]["run_at"] == run["model"]["run_at"]
@@ -84,8 +85,9 @@ def test_payload_is_honest_when_fred_is_missing_and_the_slope_is_floored(tmp_sto
     assert rates["reading"] is None and rates["z"] is None and rates["change_1m_z"] is None and rates["reading_text"] == "no reading"
     assert "neutral" in rates["note"]
     assert "floor" in run["notes"][0]["text"] and "largest contributors" not in run["notes"][0]["text"]
-    zs = [abs(d["z"]) if d["z"] is not None else -1 for d in run["drivers"]]
-    assert zs == sorted(zs, reverse=True)  # with every contribution at zero the table ranks by |z|
+    for tier in ("calibrated", "watch"):  # with every contribution at zero each tier ranks by |z|
+        zs = [abs(d["z"]) if d["z"] is not None else -1 for d in run["drivers"] if d["tier"] == tier]
+        assert zs == sorted(zs, reverse=True)
     cal = run["model"]["calibration"]
     assert cal["brier_base"] is not None and cal["in_sample"] is True
     assert "FRED" not in run["chart"]["source_line"] and "no real-yield" in run["model"]["fair_value_note"]
@@ -106,3 +108,13 @@ def test_partial_source_is_flagged_in_status_and_badge(tmp_store, seeded_all_ser
     rec = tmp_store.get_meta("last_pull")
     assert rec["partial"] == ["partial"] and rec["missing"] == []
     assert pull.badge(tmp_store, now=datetime.now(UTC))["label"].endswith("· 1 feed partial")
+
+
+def test_payload_marks_watch_drivers_and_calibrates_on_three(tmp_store, seeded_all_series):
+    backtest.run_backtest(tmp_store, "2010-01")
+    run = pull.run_model(tmp_store, now=datetime(2026, 11, 7, 1, 0, tzinfo=UTC))
+    by = {d["id"]: d for d in run["drivers"]}
+    assert run["model"]["calibrated"] == ["valuation", "concentration", "leverage"]
+    assert all(by[k]["tier"] == "watch" and by[k]["weight"] == 0 and by[k]["contribution_pts"] == 0 for k in ("capex", "positioning", "revisions", "rates"))
+    assert sum(by[k]["weight"] for k in ("valuation", "concentration", "leverage")) == pytest.approx(1.0)
+    assert [d["tier"] for d in run["drivers"]][:3] == ["calibrated"] * 3  # calibrated rows first, watch rows after

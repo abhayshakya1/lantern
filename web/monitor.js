@@ -64,21 +64,21 @@ window.Lantern = window.Lantern || {};
           <div>${p.triggers.map((tr) => `
             <div class="trig"><span class="n">${esc(tr.label)}</span><span class="m">${tr.current == null ? 'no reading' : fmtReading(tr)} · trigger ${fmtLevel(tr)}</span>
               <div class="bar"><b style="width:${tr.distance == null ? 0 : Math.round(tr.distance * 100)}%"></b><i style="left:100%"></i></div>
-              <span class="k">${esc(tr.text)} (${signed(tr.effect_pts, 0, ' pts')})</span></div>`).join('')}</div>
+              <span class="k">${esc(tr.text)} (${tr.tier === 'watch' ? 'watch indicator: no weight in the probability' : signed(tr.effect_pts, 0, ' pts')})</span></div>`).join('')}</div>
           <div><h3>Scenario probabilities, 12 months</h3><div id="scenario-bar"></div></div>
         </div>
       </section>
       <section class="card" style="margin-bottom:12px">
         <div class="ch" style="padding-bottom:0"><div class="t"><h2>Drivers, ranked by contribution to the probability</h2></div>
-          <p class="sub">Seven inputs, each scored against its own 10-year history. Positive contributions raise the de-rating probability. Click a row for its history and sources.</p></div>
+          <p class="sub">Three calibrated inputs and four watch indicators, each scored against its own 10-year history. Positive contributions raise the de-rating probability; watch indicators are shown but carry no weight. Click a row for its history and sources.</p></div>
         <div class="tbl"><table id="driver-table">
           <thead><tr><th>Driver</th><th>Current reading</th><th>Versus 10-year history</th><th class="num">Contribution</th><th>24-month trend</th><th class="num">Change, 1 month</th></tr></thead>
           <tbody>${p.drivers.map((d) => `
-            <tr data-driver="${d.id}"><td><div class="name">${esc(d.label)}</div></td><td><div class="desc">${esc(d.reading_text)}</div></td>
-              <td data-z="${d.id}"></td><td class="num">${signed(d.contribution_pts, 0, ' pts')}</td>
+            <tr data-driver="${d.id}"><td><div class="name">${esc(d.label)}${d.tier === 'watch' ? '<span class="tag">watch</span>' : ''}</div></td><td><div class="desc">${esc(d.reading_text)}</div></td>
+              <td data-z="${d.id}"></td><td class="num">${d.tier === 'watch' ? '<span class="ctx">watch</span>' : signed(d.contribution_pts, 0, ' pts')}</td>
               <td><svg data-spark="d-${d.id}"></svg></td><td class="num"><span class="delta ${deltaClass(d.change_1m_z)}">${signed(d.change_1m_z, 1, 'σ')}</span></td></tr>`).join('')}</tbody>
         </table></div>
-        <div class="tfoot"><span>${calibrationText(p.model.calibration)}</span><span>Model v${esc(p.model.version)}</span></div>
+        <div class="tfoot"><span>${calibrationText({ ...p.model.calibration, calibrated: p.model.calibrated })}</span><span>Model v${esc(p.model.version)}</span></div>
       </section>
       <section class="notes">${p.notes.map((n) => `<div class="card note"><div class="d">${esc(fmtDate(n.date))}</div><div class="h">${esc(n.title)}</div><p>${esc(n.text)}</p></div>`).join('')}</section>`;
 
@@ -112,6 +112,7 @@ window.Lantern = window.Lantern || {};
     const fit = c.in_sample === false ? 'out-of-sample' : 'in-sample';
     let s = `Penalised logistic model, ${fit} fit on monthly data ${esc(c.start)} to ${esc(c.end)} (${c.n_months} months): Brier ${num(c.brier, 3)} against ${num(c.brier_base, 3)} for always predicting the base rate.`;
     if (c.b != null && c.b <= 0) s += ' The slope is at its floor (0.00): no driver moves the probability this month, and the table ranks by z-score.';
+    if (c.calibrated) s += ` Calibrated on ${c.calibrated.join(', ')}; the other drivers are watch indicators with no weight.`;
     return s;
   }
 
@@ -120,12 +121,16 @@ window.Lantern = window.Lantern || {};
     if (tr.unit === '%') return tr.current.toFixed(2) + '%';
     if (tr.unit === 'ratio' || tr.unit === 'share') return (tr.current * 100).toFixed(1) + '%';
     if (tr.unit === 'growth') return (tr.current >= 0 ? '−' : '+') + Math.abs(tr.current * 100).toFixed(1) + '% earnings';
+    if (tr.unit === 'x') return tr.current.toFixed(1) + 'x';
+    if (tr.unit === 'z') return signed(tr.current, 1, 'σ');
     return tr.current.toFixed(2);
   }
   function fmtLevel(tr) {
     if (tr.unit === '%') return tr.level.toFixed(2) + '%';
     if (tr.unit === 'ratio' || tr.unit === 'share') return (tr.level * 100).toFixed(0) + '%';
     if (tr.unit === 'growth') return 'earnings falling';
+    if (tr.unit === 'x') return tr.level.toFixed(1) + 'x';
+    if (tr.unit === 'z') return signed(tr.level, 1, 'σ');
     return tr.level.toFixed(2);
   }
   function fmtDate(iso) {
@@ -147,7 +152,7 @@ window.Lantern = window.Lantern || {};
       <p class="desc">${esc(d.reading_text || '')}</p>
       <svg id="driver-history" width="100%" style="display:block;margin:8px 0"></svg>
       <dl>
-        <dt>Weight</dt><dd>${(d.weight * 100).toFixed(0)}% of the composite</dd>
+        <dt>Weight</dt><dd>${d.tier === 'watch' ? 'Watch indicator: shown, no weight in the probability' : `${(d.weight * 100).toFixed(0)}% of the calibrated composite`}</dd>
         <dt>Current z</dt><dd class="mono">${d.z == null ? 'no reading' : signed(d.z, 2, 'σ')}, contributing ${signed(d.contribution_pts, 1, ' pts')}</dd>
         <dt>Data as of</dt><dd>${esc(d.asof || '—')}</dd>
         ${d.note ? `<dt>Note</dt><dd>${esc(d.note)}</dd>` : ''}

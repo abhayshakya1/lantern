@@ -41,24 +41,24 @@ class DriverMeta:
 DRIVERS = [
     DriverMeta("valuation", "Valuation stretch", "x", "Yahoo prices and splits; EDGAR net income and shares; Shiller S&P P/E before the basket history",
                "Basket trailing P/E: sum of market caps over sum of trailing four-quarter net income, seven names (TSM excluded: annual 20-F facts only, in TWD)",
-               1, False, Trigger(None, "below", "Back at the 10-year median P/E the valuation driver goes neutral")),
+               1, False, Trigger(None, "below", "Back at the 10-year median P/E the valuation driver goes neutral"), True),
     DriverMeta("capex", "Capex intensity", "ratio", "EDGAR company facts", "Hyperscaler trailing four-quarter capex over operating cash flow",
                1, False, Trigger(0.55, "below", "Capex falling back under 55% of cash flow flips capex intensity to easing"), True),
     DriverMeta("concentration", "Index concentration", "share", "SSGA SPY holdings; Yahoo prices and splits with EDGAR shares for the history",
                "Top-10 weight in the S&P 500", 1, False, Trigger(0.40, "above", "Past 40% the concentration driver saturates"), True),
     DriverMeta("leverage", "Leverage and credit", "z", "EDGAR cash and debt; FRED BAA10Y (Moody's Baa yield over the 10-year Treasury; the ICE BofA high-yield spread has free history only from November 2023)",
                "Average of the standardised 12-month change in hyperscaler net debt and the standardised Baa credit spread, spread inverted",
-               1, True, None),
+               1, True, Trigger(None, "below", "Back at its 10-year mean the leverage driver goes neutral"), True),
     DriverMeta("positioning", "Positioning and sentiment", "fraction", "AAII sentiment survey",
                "Bull minus bear share, monthly mean (CBOE put/call dropped: no free history)", 1, False, None),
     DriverMeta("revisions", "Earnings momentum", "growth", "EDGAR net income for the basket; Shiller S&P earnings before the basket history; Yahoo analyst actions as context",
                "Three-month change in the basket's trailing four-quarter net income, inverted", 1, False,
-               Trigger(0.0, "above", "Basket earnings turning down adds to the probability"), True),
+               Trigger(0.0, "above", "Basket earnings turning down adds to the probability")),
     DriverMeta("rates", "Rates and liquidity", "%", "FRED DFII10", "US 10-year real yield, monthly mean", 1, False,
-               Trigger(2.50, "above", "Above 2.50% the real yield adds to the probability"), True),
+               Trigger(2.50, "above", "Above 2.50% the real yield adds to the probability")),
 ]
 META = {d.id: d for d in DRIVERS}
-SHOWN_TRIGGERS = ["rates", "revisions", "concentration", "capex"]
+SHOWN_TRIGGERS = ["valuation", "concentration", "leverage", "capex"]  # the three calibrated drivers and the watch indicator the room will ask about
 
 
 def _month_ends(start: str, end: date | None) -> pd.DatetimeIndex:

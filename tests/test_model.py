@@ -17,7 +17,7 @@ def test_contributions_sum_to_probability_minus_baseline():
     c = model.composite(z)
     contrib = model.contributions(z, a, b)
     assert contrib.sum() == pytest.approx(model.probability(c, a, b) - model.probability(0.0, a, b), abs=1e-9)
-    assert contrib["valuation"] > contrib["capex"] > 0 > contrib["revisions"]
+    assert contrib["valuation"] > contrib["concentration"] > 0 and contrib["capex"] == 0 and contrib["revisions"] == 0  # watch drivers carry no weight
 
 
 def test_composite_on_frame_and_nan_is_neutral():
@@ -61,14 +61,21 @@ def test_status_bands_and_clamp():
 def test_trigger_effect_sign_and_distance():
     z = _z()
     readings = _z()
-    readings["rates"] = 2.06
+    readings["concentration"] = 0.36
     stats = {k: (0.0, 1.0) for k in config.WEIGHTS}
-    stats["rates"] = (1.0, 0.5)
+    stats["concentration"] = (0.25, 0.05)
     eff = model.trigger_effects(z, readings, stats, a=-1.0, b=1.0)
-    assert [e["id"] for e in eff] == ["rates", "revisions", "concentration", "capex"]
-    rates = next(e for e in eff if e["id"] == "rates")
-    assert rates["effect_pts"] > 0 and 0 <= rates["distance"] <= 1 and rates["level"] == 2.5
-    assert rates["distance"] == pytest.approx((2.06 - 1.0) / (2.5 - 1.0))
+    assert [e["id"] for e in eff] == ["valuation", "concentration", "leverage", "capex"]
+    conc = next(e for e in eff if e["id"] == "concentration")
+    assert conc["effect_pts"] > 0 and conc["level"] == 0.40 and conc["tier"] == "calibrated"
+    assert conc["distance"] == pytest.approx((0.36 - 0.25) / (0.40 - 0.25))
+    capex = next(e for e in eff if e["id"] == "capex")
+    assert capex["effect_pts"] == 0 and capex["tier"] == "watch"  # a watch indicator cannot change the call
+
+
+def test_composite_ignores_watch_drivers():
+    assert model.composite(_z(capex=4.0, rates=4.0, positioning=4.0, revisions=4.0)) == pytest.approx(0.0)
+    assert model.composite(_z(valuation=1.0, concentration=1.0, leverage=1.0)) == pytest.approx(1.0)
 
 
 def test_fair_value_adjusts_for_real_yield():

@@ -177,7 +177,8 @@ def run_model(store: Store, now: datetime | None = None) -> dict:
                 "id": d.id,
                 "label": d.label,
                 "unit": d.unit,
-                "weight": config.WEIGHTS[d.id],
+                "weight": config.COMPOSITE_WEIGHTS[d.id],
+                "tier": "calibrated" if d.id in config.CALIBRATED else "watch",
                 "reading": float(r_row[d.id]) if pd.notna(r_row[d.id]) else None,
                 "reading_text": _reading_text(d.id, r_row[d.id], float(pe_med.iloc[-1])),
                 "z": float(z_row[d.id]) if pd.notna(z_row[d.id]) else None,
@@ -190,8 +191,8 @@ def run_model(store: Store, now: datetime | None = None) -> dict:
                 "transform": d.transform,
             }
         )
-    drivers_out.sort(key=lambda x: (-x["contribution_pts"], -abs(x["z"] or 0.0)))  # equal contributions (a floored slope) rank by |z|
-    top = [x["label"].lower() for x in drivers_out[:2]]
+    drivers_out.sort(key=lambda x: (x["tier"] != "calibrated", -x["contribution_pts"], -abs(x["z"] or 0.0)))  # calibrated first; ties rank by |z|
+    top = [x["label"].lower() for x in drivers_out if x["tier"] == "calibrated"][:2]
     if b <= 0:
         tail = "The calibrated slope is at its floor, so no driver moves the probability this month; the table ranks drivers by z-score."
     else:
@@ -221,6 +222,7 @@ def run_model(store: Store, now: datetime | None = None) -> dict:
             "conditional_drawdown_share": model.conditional_drawdown_share(sel),
             "splices": readings.attrs.get("splices", {}),
             "fair_value_note": "real-yield adjustment applied" if rates_known else "no real-yield data: multiple is the plain 10-year median",
+            "calibrated": list(config.CALIBRATED),
         },
         "basket": {"tickers": config.BASKET, "index_base": hist_months[0].strftime("%b %Y")},
         "tiles": {

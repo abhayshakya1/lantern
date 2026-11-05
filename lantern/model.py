@@ -10,8 +10,8 @@ from lantern import config
 from lantern.drivers import META, SHOWN_TRIGGERS
 
 
-def composite(z, weights: dict[str, float] = config.WEIGHTS):
-    """Weighted sum of driver z-scores; a missing z counts as neutral (0)."""
+def composite(z, weights: dict[str, float] = config.COMPOSITE_WEIGHTS):
+    """Weighted sum of the calibrated drivers' z-scores; a missing z counts as neutral (0), watch drivers weigh 0."""
     if isinstance(z, pd.DataFrame):
         total = pd.Series(0.0, index=z.index)
         for k, w in weights.items():
@@ -54,7 +54,7 @@ def status(p: float) -> str:
     return config.STATUS_BANDS[-1][1]
 
 
-def contributions(z_row: pd.Series, a: float, b: float, weights: dict[str, float] = config.WEIGHTS) -> pd.Series:
+def contributions(z_row: pd.Series, a: float, b: float, weights: dict[str, float] = config.COMPOSITE_WEIGHTS) -> pd.Series:
     """Each driver's share of P(c) - P(0), allocated in proportion to its weighted z; sums exactly."""
     c = composite(z_row, weights)
     gap = probability(c, a, b) - probability(0.0, a, b)
@@ -70,9 +70,9 @@ def trigger_effects(
     stats: dict[str, tuple[float, float]],
     a: float,
     b: float,
-    weights: dict[str, float] = config.WEIGHTS,
+    weights: dict[str, float] = config.COMPOSITE_WEIGHTS,
 ) -> list[dict]:
-    """For each shown trigger: the probability change if that driver sat at its trigger level today."""
+    """For each shown trigger: the probability change if that driver sat at its trigger level today (0 for a watch driver)."""
     base_p = probability(composite(z_row, weights), a, b)
     out = []
     for did in SHOWN_TRIGGERS:
@@ -90,6 +90,7 @@ def trigger_effects(
                 "id": did,
                 "label": meta.label,
                 "unit": meta.unit,
+                "tier": "calibrated" if weights.get(did, 0.0) > 0 else "watch",
                 "current": current,
                 "level": float(level),
                 "direction": trig.direction,

@@ -26,13 +26,13 @@ def test_monitor_payload_shape(tmp_store, seeded_run):
     assert len(body["chart"]["months"]) == 37 and len(body["chart"]["fan"]["p50"]) == 13
     pts = [d["contribution_pts"] for d in body["drivers"]]
     assert pts == sorted(pts, reverse=True) and len(body["drivers"]) == 7
-    assert [t["id"] for t in body["triggers"]] == ["rates", "revisions", "concentration", "capex"]
+    assert [t["id"] for t in body["triggers"]] == ["valuation", "concentration", "leverage", "capex"]
 
 
 def test_driver_detail_and_unknown(tmp_store, seeded_run):
     client = TestClient(api.create_app(tmp_store))
     d = client.get("/api/drivers/valuation").json()
-    assert d["weight"] == 0.25 and d["label"] == "Valuation stretch" and len(d["history"]) > 100
+    assert d["weight"] == pytest.approx(0.25 / 0.55) and d["tier"] == "calibrated" and d["label"] == "Valuation stretch" and len(d["history"]) > 100
     assert set(d["history"][0]) == {"date", "reading", "z"} and d["trigger"]["direction"] == "below"
     assert 0 <= d["conditional_drawdown_share"] <= 1 and "source" in d and "transform" in d
     assert client.get("/api/drivers/nope").status_code == 404

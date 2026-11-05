@@ -11,8 +11,8 @@ The laptop runs on a phone hotspot. The venue wifi is the backup, not the other 
 1. **06:30, hotel or home wifi, then switch to the hotspot before the room.** Run the morning script:
 
    ```bash
-   cd ~/lantern && source ~/.venvs/lantern/bin/activate && export FRED_API_KEY=...
-   scripts/demo_morning.sh --port 8787
+   cd ~/lantern && source ~/.venvs/lantern/bin/activate
+   scripts/demo_morning.sh --port 8787     # reads FRED_API_KEY from ~/lantern/.env
    ```
 
    It pulls every feed, re-runs the backtest and the model, prints the status table and the badge, and serves. A feed that fails prints an `error` row and does not stop the others. Expect about three minutes.

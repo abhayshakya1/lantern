@@ -8,7 +8,7 @@ An AI-bubble monitor for OCBC Group Research: a 12-month de-rating probability f
 python3.13 -m venv ~/.venvs/lantern
 source ~/.venvs/lantern/bin/activate
 pip install -e . pytest ruff
-export FRED_API_KEY=...           # free key from https://fredaccount.stlouisfed.org/apikeys
+export FRED_API_KEY=...           # free key from https://fredaccount.stlouisfed.org/apikeys, or put FRED_API_KEY=... in ~/lantern/.env (git-ignored)
 export LANTERN_DATA=./data        # default; raw files, Parquet series and lantern.db live here
 ```
 

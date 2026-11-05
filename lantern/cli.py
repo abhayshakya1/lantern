@@ -1,7 +1,9 @@
 """lantern pull | model | backtest | status | serve"""
 
 import argparse
+import os
 import sys
+from pathlib import Path
 
 from lantern import backtest, config, pull
 from lantern.store import Store
@@ -16,7 +18,21 @@ def _print_status(store: Store) -> None:
     print(f"badge: {b['label']}")
 
 
+def load_env(path: Path) -> None:
+    """KEY=VALUE lines from a local .env (git-ignored) into the environment, never over a variable already set."""
+    if not path.is_file():
+        return
+    for line in path.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        os.environ.setdefault(key.strip(), value.strip().strip("'\""))
+
+
 def main(argv: list[str] | None = None) -> int:
+    for env in (Path(__file__).resolve().parent.parent / ".env", Path(".env")):
+        load_env(env)
     parser = argparse.ArgumentParser(prog="lantern", description="AI-bubble monitor data and model commands")
     sub = parser.add_subparsers(dest="cmd", required=True)
     sub.add_parser("pull", help="pull every public series into the cache")

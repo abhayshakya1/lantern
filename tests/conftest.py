@@ -200,3 +200,39 @@ def fake_yahoo_missing_msft():
             return super().history(ticker, start)
 
     return Missing()
+
+
+@pytest.fixture
+def retriever(tmp_path):
+    """The two fixture filings ingested, indexed with the hash embedder, and wrapped in a Retriever."""
+    import shutil
+
+    from lantern.filings import corpus, retrieve
+
+    shutil.copytree(FIXTURES / "filings", tmp_path / "filings")
+    chunks, manifest = corpus.build_corpus(tmp_path / "filings")
+    retrieve.build_index(chunks, tmp_path / "index", retrieve.HashEmbedder(), manifest)
+    return retrieve.Retriever(tmp_path / "index", retrieve.HashEmbedder())
+
+
+class FakeClaude:
+    """Stands in for anthropic.Anthropic(): returns canned JSON through client.messages.create, or raises."""
+
+    def __init__(self, payload: dict | None, stop_reason: str = "end_turn", raise_exc: Exception | None = None):
+        from types import SimpleNamespace
+
+        self.payload, self.stop_reason, self.raise_exc, self.calls = payload, stop_reason, raise_exc, []
+        self.messages = self
+        self._ns = SimpleNamespace
+
+    def create(self, **kw):
+        self.calls.append(kw)
+        if self.raise_exc:
+            raise self.raise_exc
+        text = json.dumps(self.payload) if self.payload is not None else ""
+        return self._ns(
+            stop_reason=self.stop_reason,
+            stop_details=self._ns(category="unknown", explanation="") if self.stop_reason == "refusal" else None,
+            content=[self._ns(type="text", text=text)],
+            usage=self._ns(input_tokens=1, output_tokens=1, cache_read_input_tokens=0),
+        )

@@ -3,7 +3,7 @@
 import hashlib
 import json
 import re
-from dataclasses import asdict, fields
+from dataclasses import asdict, dataclass, fields
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Protocol
@@ -15,6 +15,11 @@ from lantern import config
 from lantern.filings.corpus import Chunk
 
 _WORD = re.compile(r"[a-z0-9$%.]+")
+
+
+def _tokens(text: str) -> list[str]:
+    """Lower-cased word tokens with a crude plural strip (dividends, recommends -> dividend, recommend), applied to queries and chunks alike."""
+    return [w[:-1] if len(w) > 3 and w.endswith("s") and not w.endswith("ss") else w for w in _WORD.findall(text.lower())]
 
 
 class Embedder(Protocol):
@@ -42,7 +47,7 @@ class HashEmbedder:
     def embed(self, texts: list[str]) -> np.ndarray:
         out = np.zeros((len(texts), self.dim), dtype=np.float32)
         for i, text in enumerate(texts):
-            for word in _WORD.findall(text.lower()):
+            for word in _tokens(text):
                 out[i, int(hashlib.md5(word.encode()).hexdigest(), 16) % self.dim] += 1.0
         return _normalise(out)
 
@@ -79,3 +84,46 @@ def build_index(chunks: list[Chunk], index_dir: Path, embedder: Embedder, manife
     }
     (index_dir / "meta.json").write_text(json.dumps(meta, indent=2))
     return meta
+
+
+# --- retrieval (Task 3) --------------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class Hit:
+    chunk: Chunk
+    score: float
+    bm25_rank: int | None
+    dense_rank: int | None
+
+
+class Retriever:
+    """Hybrid search over the index: BM25 and cosine over the local embeddings, fused by reciprocal rank."""
+
+    def __init__(self, index_dir: Path, embedder: Embedder):
+        from rank_bm25 import BM25Okapi
+
+        index_dir = Path(index_dir)
+        df = pd.read_parquet(index_dir / "chunks.parquet")
+        self.chunks = [Chunk(**{k: (int(v) if k in ("year", "page") else v) for k, v in row.items()}) for row in df.to_dict("records")]
+        self.embeddings = np.load(index_dir / "embeddings.npy")
+        self.embedder = embedder
+        self.bm25 = BM25Okapi([_tokens(c.text) for c in self.chunks]) if self.chunks else None
+
+    def search(self, question: str, k: int = config.TOP_K) -> list[Hit]:
+        n = len(self.chunks)
+        if n == 0:
+            return []
+        width = min(config.CANDIDATES, n)
+        bm25_scores = np.asarray(self.bm25.get_scores(_tokens(question)), dtype=float)
+        bm25_order = [int(i) for i in np.argsort(-bm25_scores)[:width] if bm25_scores[i] > 0]
+        q = self.embedder.embed([question])
+        dense = self.embeddings @ q[0] if self.embeddings.size else np.zeros(n)
+        dense_order = [int(i) for i in np.argsort(-dense)[:width]]
+        bm25_rank = {i: r + 1 for r, i in enumerate(bm25_order)}
+        dense_rank = {i: r + 1 for r, i in enumerate(dense_order)}
+        fused = {}
+        for i in set(bm25_order) | set(dense_order):
+            fused[i] = sum(1.0 / (config.RRF_K + r) for r in (bm25_rank.get(i), dense_rank.get(i)) if r)
+        top = sorted(fused, key=lambda i: (-fused[i], i))[:k]
+        return [Hit(self.chunks[i], float(fused[i]), bm25_rank.get(i), dense_rank.get(i)) for i in top]

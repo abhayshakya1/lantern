@@ -1,0 +1,26 @@
+[
+  {
+    "ticker": "ACME",
+    "company": "ACME Holdings",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "ACME-AR2025.pdf",
+    "url": "",
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "BETA",
+    "company": "BETA Corporation",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "BETA-AR2025.pdf",
+    "url": "",
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  }
+]

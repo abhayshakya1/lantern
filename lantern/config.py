@@ -71,5 +71,18 @@ SHARES_MAX_AGE_DAYS = 730       # a filed share count older than this no longer 
 CONCENTRATION_MIN_NAMES = 20    # months with fewer names carrying a market cap have no reconstructed reading
 
 DATA_DIR = Path(os.environ.get("LANTERN_DATA", "./data"))
+
+# Filings Q&A (plan 2): corpus of SGX annual reports, local embeddings, grounded answers with abstention.
+FILINGS_DIR = Path(os.environ.get("LANTERN_FILINGS", str(DATA_DIR / "filings")))
+FILINGS_INDEX = FILINGS_DIR / "index"
+LLM_MODEL = "claude-opus-5-5"
+EMBED_MODEL = "BAAI/bge-small-en-v1.5"
+CHUNK_TOKENS = 350             # about 1,400 characters; a chunk never spans two pages
+CHUNK_OVERLAP_TOKENS = 60
+TOP_K = 8                      # spec: top eight chunks
+RRF_K = 60                     # reciprocal rank fusion constant
+CANDIDATES = 30                # per ranker, before fusion
+ABSTAIN = "The filings in this corpus do not answer this"  # spec: the exact sentence, never an answer
+GOLD_GATE = 0.90               # release gate on abstention precision over the gold set
 SGT = ZoneInfo("Asia/Singapore")
 SEC_USER_AGENT = os.environ.get("LANTERN_SEC_UA", "Lantern research (abhay@example.com)")

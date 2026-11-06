@@ -16,6 +16,7 @@ dependencies = [
   "openpyxl",
   "xlrd",
   "python-calamine",
+  "pymupdf",
 ]
 
 [project.scripts]

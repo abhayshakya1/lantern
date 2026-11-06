@@ -19,6 +19,7 @@ dependencies = [
   "pymupdf",
   "fastembed",
   "rank-bm25",
+  "anthropic",
 ]
 
 [project.scripts]

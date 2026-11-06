@@ -1,4 +1,13 @@
-data/
+data/*
+!data/filings/
+data/filings/*
+!data/filings/manifest.json
+!data/filings/prepared_questions.json
+!data/filings/prepared_questions_draft.json
+!data/filings/gold/
+data/filings/gold/*
+!data/filings/gold/*.jsonl
+!data/filings/gold/README.md
 .venv/
 node_modules/
 .superpowers/

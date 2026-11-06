@@ -30,6 +30,27 @@ def load_env(path: Path) -> None:
         os.environ.setdefault(key.strip(), value.strip().strip("'\""))
 
 
+def _filings(args, store: Store) -> int:
+    import collections
+
+    from lantern.filings import corpus, retrieve
+
+    if args.fcmd == "build":
+        chunks, manifest = corpus.build_corpus(config.FILINGS_DIR)
+        try:
+            embedder = retrieve.FastEmbedder()
+        except Exception as exc:  # offline without the cached model: index with the hash fallback and say so
+            print(f"embedding model unavailable ({type(exc).__name__}); indexing with the hash fallback")
+            embedder = retrieve.HashEmbedder()
+        meta = retrieve.build_index(chunks, config.FILINGS_INDEX, embedder, manifest)
+        per_file = collections.Counter(c.file for c in chunks)
+        for m in manifest:
+            print(f"{m['ticker']:10} {m['pages']:5} pages {m['pages_without_text']:4} without text {per_file.get(m['file'], 0):6} chunks  {m['sha256'][:12] or 'missing'}")
+        print(f"index: {meta['n_chunks']} chunks from {meta['n_files']} files, model {meta['embed_model']}, built {meta['built_at']}")
+        return 0
+    return 2
+
+
 def main(argv: list[str] | None = None) -> int:
     for env in (Path(__file__).resolve().parent.parent / ".env", Path(".env")):
         load_env(env)
@@ -40,11 +61,16 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("backtest", help="refit the calibration on the stored history")
     sub.add_parser("status", help="show the last pull and the data badge")
     serve = sub.add_parser("serve", help="serve the API and the front end")
+    filings = sub.add_parser("filings", help="filings Q&A corpus and answers")
+    fsub = filings.add_subparsers(dest="fcmd", required=True)
+    fsub.add_parser("build", help="ingest the PDFs in the manifest, chunk and embed them")
     serve.add_argument("--port", type=int, default=8787)
     serve.add_argument("--host", default="127.0.0.1")
     args = parser.parse_args(argv)
     store = Store(config.DATA_DIR)
 
+    if args.cmd == "filings":
+        return _filings(args, store)
     if args.cmd == "pull":
         st = pull.run_pull(store)
         _print_status(store)

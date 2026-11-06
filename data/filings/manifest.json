@@ -1,0 +1,98 @@
+[
+  {
+    "ticker": "OCBC",
+    "company": "Oversea-Chinese Banking Corporation",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "OCBC-AR2025.pdf",
+    "url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/investors/annual-reports/2025/2025-annual-report-en.pdf",
+    "sha256": "d10f4fc11fd5845c2e5e6c1ffbeccf0c66f33e1b71c02ae0b402f0ba104382ff",
+    "pages": 276,
+    "pages_without_text": 4,
+    "ingested_at": "2026-11-07T09:09:28.871731+00:00"
+  },
+  {
+    "ticker": "DBS",
+    "company": "DBS Group Holdings",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "DBS-AR2025.pdf",
+    "url": "",
+    "sha256": "e7952ba9dff9e339070334ec5d67a71c81a8c618be7f34abad6f3118189b38ce",
+    "pages": 107,
+    "pages_without_text": 1,
+    "ingested_at": "2026-11-07T09:09:28.871731+00:00"
+  },
+  {
+    "ticker": "UOB",
+    "company": "United Overseas Bank",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "UOB-AR2025.pdf",
+    "url": "https://links.sgx.com/1.0.0/corporate-announcements/CJ5LTSEV6VGWLF37/878788_UOB%20AR2025.pdf",
+    "sha256": "ac6461b1773f239d969919d9b7da09c90f440b3e0df532672edd2e5c0f87c680",
+    "pages": 248,
+    "pages_without_text": 4,
+    "ingested_at": "2026-11-07T09:09:28.871731+00:00"
+  },
+  {
+    "ticker": "Singtel",
+    "company": "Singapore Telecommunications",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "Singtel-AR2025.pdf",
+    "url": "",
+    "sha256": "818e7f067f21374e9f617b0c19b0e95b36714aa89728d21728aab881f461cc8b",
+    "pages": 278,
+    "pages_without_text": 5,
+    "ingested_at": "2026-11-07T09:09:28.871731+00:00"
+  },
+  {
+    "ticker": "SGX",
+    "company": "Singapore Exchange",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "SGX-AR2025.pdf",
+    "url": "",
+    "sha256": "a62d58cdc87ae007799646f2fd6a49b6ab2aab1ec2d2dd0dc729f82dc3ae620f",
+    "pages": 238,
+    "pages_without_text": 4,
+    "ingested_at": "2026-11-07T09:09:28.871731+00:00"
+  },
+  {
+    "ticker": "Keppel",
+    "company": "Keppel",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "Keppel-AR2025.pdf",
+    "url": "https://links.sgx.com/1.0.0/corporate-announcements/CMLEN559K1LSH1QR/880492_1.%20Keppel%20Ltd._Annual%20Report%202025.pdf",
+    "sha256": "681b236d23e1f5e6f043b0eb0d4d12ab5919b3fda0668c3e26fbeefcb8e520e2",
+    "pages": 245,
+    "pages_without_text": 1,
+    "ingested_at": "2026-11-07T09:09:28.871731+00:00"
+  },
+  {
+    "ticker": "CLI",
+    "company": "CapitaLand Investment",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "CLI-AR2025.pdf",
+    "url": "https://www.capitaland.com/content/dam/capitalandinvestment/investor-relations/publications/CapitaLand-Investment-Limited-Annual-Report-2025.pdf",
+    "sha256": "e48ee55cc159715865716d9fc2ed85245dde796311ca7ae6ae660a89f4dbc543",
+    "pages": 202,
+    "pages_without_text": 0,
+    "ingested_at": "2026-11-07T09:09:28.871731+00:00"
+  },
+  {
+    "ticker": "Sembcorp",
+    "company": "Sembcorp Industries",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "Sembcorp-AR2025.pdf",
+    "url": "https://media.sembcorp.com/data/cms/ar/ar2025/assets/pdf/Sembcorp_AR25.pdf",
+    "sha256": "b284229ce6d28d323974dce6a0ebb8e48c0593bc7dae57f236f881b80a5be355",
+    "pages": 135,
+    "pages_without_text": 1,
+    "ingested_at": "2026-11-07T09:09:28.871731+00:00"
+  }
+]

@@ -55,3 +55,48 @@ def test_static_index_served(tmp_store, seeded_run):
 def test_driver_detail_carries_the_note(tmp_store, seeded_run):
     client = TestClient(api.create_app(tmp_store))
     assert "TSM" in client.get("/api/drivers/valuation").json()["note"]
+
+
+# --- filings Q&A (plan 2) ---------------------------------------------------------------------------
+
+import shutil
+
+from lantern.filings import corpus, retrieve
+from tests.conftest import FIXTURES, FakeClaude
+
+
+@pytest.fixture
+def filings_app(tmp_store, tmp_path, monkeypatch):
+    shutil.copytree(FIXTURES / "filings", tmp_path / "filings")
+    monkeypatch.setattr(api.config, "FILINGS_DIR", tmp_path / "filings")
+    chunks, manifest = corpus.build_corpus(tmp_path / "filings")
+    retrieve.build_index(chunks, tmp_path / "index", retrieve.HashEmbedder(), manifest)
+    r = retrieve.Retriever(tmp_path / "index", retrieve.HashEmbedder())
+    cid = next(h.chunk.id for h in r.search("final dividend") if "42 cents" in h.chunk.text)
+    fake = FakeClaude({"answerable": True, "answer": "ACME recommended 42 cents per share. It follows a 7% profit rise.",
+                       "evidence": [{"chunk_id": cid, "quote": "The Board recommends a final dividend of 42 cents per share."}], "confidence": "high"})
+    return TestClient(api.create_app(tmp_store, retriever=r, llm_client=fake))
+
+
+def test_ask_returns_evidence_with_pdf_links_and_logs_history(filings_app):
+    body = filings_app.post("/api/filings/ask", json={"question": "What final dividend did ACME recommend?"}).json()
+    assert body["answerable"] and body["evidence"][0]["pdf_url"] == "/filings/pdf/ACME-AR2025.pdf#page=2" and body["confidence"] == "high"
+    hist = filings_app.get("/api/filings/history").json()
+    assert hist[0]["question"].startswith("What final dividend") and "response" not in hist[0]
+    assert filings_app.post("/api/filings/ask", json={"question": ""}).status_code == 400
+    assert filings_app.post("/api/filings/ask", json={"question": "x" * 501}).status_code == 400
+
+
+def test_corpus_lists_manifest_and_index_meta(filings_app):
+    body = filings_app.get("/api/filings/corpus").json()
+    assert {m["ticker"] for m in body["filings"]} == {"ACME", "BETA"} and body["filings"][0]["pages"] == 3 and body["index"]["n_chunks"] > 0
+
+
+def test_pdf_is_served_and_eval_404_before_a_run(filings_app):
+    assert filings_app.get("/filings/pdf/ACME-AR2025.pdf").status_code == 200
+    assert filings_app.get("/api/filings/eval").status_code == 404
+
+
+def test_ask_without_index_is_503(tmp_store, tmp_path, monkeypatch):
+    monkeypatch.setattr(api.config, "FILINGS_INDEX", tmp_path / "missing")
+    assert TestClient(api.create_app(tmp_store)).post("/api/filings/ask", json={"question": "x"}).status_code == 503

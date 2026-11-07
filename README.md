@@ -43,6 +43,21 @@ Every pull is idempotent: the raw file lands under `data/raw/<date>/`, the tidy 
 
 Seven drivers, each a z-score of the current reading against its own trailing ten-year monthly history (at least 24 months), signed so that positive means more bubble risk: valuation stretch (basket trailing P/E from EDGAR earnings and split-adjusted shares against Yahoo prices, seven names with TSM excluded, Shiller S&P P/E before 2016), capex intensity (hyperscaler trailing capex over operating cash flow), index concentration (top-10 weight), leverage and credit (12-month change in hyperscaler net debt against the high-yield spread), positioning (AAII spread), earnings momentum (three-month change in basket trailing earnings, inverted, Shiller before the basket history) and rates (10-year real yield). The composite is the weighted sum with fixed, displayed weights of 25/20/15/15/10/10/5. The 12-month de-rating probability is a logistic function of the composite, fitted by penalised maximum likelihood on 2003 to today against 25% drawdowns within twelve months on the Nasdaq-100, with the slope floored at zero and a weak prior; the 2000 episode is an out-of-sample analogue from the two long-history drivers. Fair value is trailing earnings times the ten-year median trailing P/E adjusted by 10% per percentage point of real yield, with a 7% band. The fan is the historical distribution of 12-month returns in months whose composite was within one point of today's; its median is the base path, the de-rating path ends at a 25% drawdown and the melt-up path at a 20% gain, and the three probabilities on the bar describe those same three paths. Triggers recompute the probability with one driver moved to its threshold. The backtest stores the Brier score against the base-rate Brier, the calibration table and the hit rate, and nothing appears on screen that it did not produce; the fit is in-sample and the footer says so. When the fitted slope sits at its floor of zero, the screen says that no driver moves the probability and ranks the table by z-score instead. Model outputs are research inputs, not advice.
 
+## Filings Q&A
+
+A question box over eight 2025 annual reports (OCBC, DBS, UOB, Singtel, SGX, Keppel, CapitaLand Investment, Sembcorp) that answers only with verbatim, page-cited evidence from the corpus, or says `The filings in this corpus do not answer this`. Every question, retrieved chunk set, prompt hash and answer is logged in `lantern.db`.
+
+```bash
+python scripts/fetch_filings.py   # downloads the PDFs named in data/filings/manifest.json (URLs from the companies' sites or SGX)
+lantern filings build             # PyMuPDF text per page, page-aware chunks, local embeddings (fastembed bge-small); about ten minutes, run once
+lantern filings ask "What was OCBC's net profit for 2025?"
+lantern filings pre-answer        # answers data/filings/prepared_questions.json into the cache; demo morning runs this
+lantern filings gold-draft        # Claude drafts 40 gold questions (30 answerable with verified quotes, 10 probes) for Abhay to verify
+lantern filings eval --gold data/filings/gold/gold.jsonl   # BharatFinQA harness plus the abstention gate; results on the Model risk page
+```
+
+Keys live in the git-ignored `.env`: `ANTHROPIC_API_KEY` for answering, drafting and evaluating; `OPENROUTER_API_KEY` for the DeepSeek-V4-Pro judge the BharatFinQA paper pinned (without it the evaluation reports the deterministic metrics only). Retrieval is hybrid BM25 and embedding search fused by reciprocal rank, top eight chunks; a quote is kept only when it is a verbatim substring of the chunk it names, and an answer with no surviving quote becomes an abstention. Release gate: no demo if abstention precision on the verified gold set is below 90%. The index directory and the PDFs are git-ignored; the manifest, the prepared questions and the gold set are committed.
+
 ## Tests
 
 ```bash

@@ -21,7 +21,9 @@ The laptop runs on a phone hotspot. The venue wifi is the backup, not the other 
 
 3. **Check the run once by eye.** Open `http://127.0.0.1:8787/#monitor`. Every tile has a number, the chart has the price, the fair-value band, the fan and three scenario paths, the four triggers read sensibly, the driver table has seven rows and a row click opens the panel. The probability and the fair-value gap should be in the neighbourhood of the previous day's; a jump of more than ten points means a feed changed shape, so read the model notes and the Data sources page before trusting it.
 
-4. **Walk the modules once** so the browser cache is warm and the fonts are loaded before the room.
+4. **Check Filings Q&A once by eye.** Open `#filings`: the corpus table shows eight filings with today's ingest date is not required (the index is built once; the SHA prefixes must match `data/filings/manifest.json`). Ask one prepared question: it should answer from the cache with evidence cards and page links. Ask one ad-hoc question: it should answer through the API, and an evidence link should open the PDF at the cited page. If the ad-hoc question shows the offline sentence, the connection or the key is the problem, not the corpus.
+
+5. **Walk the modules once** so the browser cache is warm and the fonts are loaded before the room.
 
 ## The cached fallback
 

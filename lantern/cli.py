@@ -66,6 +66,29 @@ def _filings(args, store: Store) -> int:
         counts = answer.pre_answer(store, retriever, questions)
         print(f"pre-answered {len(questions)} questions: {counts['answered']} answered, {counts['abstained']} abstained, {counts['offline']} offline")
         return 0 if counts["offline"] == 0 else 1
+    from lantern.filings import evaluate
+
+    if args.fcmd == "gold-draft":
+        import anthropic
+
+        rows = evaluate.draft_gold(retriever, anthropic.Anthropic())
+        gold_dir = config.FILINGS_DIR / "gold"
+        gold_dir.mkdir(parents=True, exist_ok=True)
+        (gold_dir / "gold_draft.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows))
+        prepared = evaluate.prepared_from_gold(rows)
+        (config.FILINGS_DIR / "prepared_questions_draft.json").write_text(json.dumps(prepared, indent=2) + "\n")
+        print(f"gold draft: {sum(not r['unanswerable'] for r in rows)} answerable, {sum(r['unanswerable'] for r in rows)} unanswerable -> {gold_dir / 'gold_draft.jsonl'}")
+        print(f"prepared questions draft: {len(prepared)} -> {config.FILINGS_DIR / 'prepared_questions_draft.json'}")
+        return 0
+    if args.fcmd == "eval":
+        from pathlib import Path as _P
+
+        res = evaluate.run_eval(store, retriever, _P(args.gold))
+        ab = res["abstention"]
+        print(f"eval: {res['n']} questions, abstention precision {ab['precision']}, recall {ab['recall']}, judge {res['judge'] or 'none'}, gate {'PASS' if res['gate']['pass'] else 'FAIL'} (threshold {res['gate']['threshold']})")
+        if res["bfq_error"]:
+            print("harness error:", res["bfq_error"][-300:])
+        return 0 if res["gate"]["pass"] else 1
     return 2
 
 
@@ -84,6 +107,8 @@ def main(argv: list[str] | None = None) -> int:
     fsub.add_parser("build", help="ingest the PDFs in the manifest, chunk and embed them")
     fsub.add_parser("ask", help="answer one question from the corpus").add_argument("question")
     fsub.add_parser("pre-answer", help="answer the prepared questions and cache them for the room")
+    fsub.add_parser("gold-draft", help="draft the 40-question gold set and the prepared questions with Claude")
+    fsub.add_parser("eval", help="score the gold set with the BharatFinQA harness and the abstention gate").add_argument("--gold", default=str(config.FILINGS_DIR / "gold" / "gold.jsonl"))
     serve.add_argument("--port", type=int, default=8787)
     serve.add_argument("--host", default="127.0.0.1")
     args = parser.parse_args(argv)

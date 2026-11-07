@@ -12,6 +12,31 @@ window.Lantern = window.Lantern || {};
   function page(root, key) {
     const [title, text] = PAGES[key];
     root.innerHTML = `<div class="page"><h1>${esc(title)}</h1><p>${esc(text)}</p></div>`;
+    if (key === 'modelrisk') evalResults(root);
+  }
+
+  const fmt = (x, d = 2) => (x == null ? '—' : typeof x === 'number' ? x.toFixed(d) : String(x));
+
+  async function evalResults(root) {
+    const r = await fetch('/api/filings/eval').catch(() => null);
+    if (!r || !r.ok) { root.insertAdjacentHTML('beforeend', '<p class="src">Filings Q&A gold-set evaluation: no run yet.</p>'); return; }
+    const d = await r.json();
+    const ab = d.abstention || {};
+    const gate = d.gate || {};
+    const rows = [
+      ['Run', new Date(d.run_at).toLocaleString('en-GB', { timeZone: 'Asia/Singapore', day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) + ' SGT'],
+      ['Model', d.model], ['Judge', d.judge || 'none (deterministic metrics only)'], ['Questions', d.n],
+      ['Abstention precision', fmt(ab.precision)], ['Abstention recall', fmt(ab.recall)],
+      ['Release gate', `<span class="pill ${gate.pass ? 'calm' : 'high'}"><i></i>${gate.pass ? 'pass' : 'fail'}</span> precision ≥ ${fmt(gate.threshold)}`],
+    ];
+    let bfq = '';
+    if (d.bfq && d.bfq.models) {
+      for (const [model, m] of Object.entries(d.bfq.models)) {
+        bfq += `<tr><th colspan="2">BharatFinQA harness · ${esc(model)}</th></tr>`;
+        for (const [k, v] of Object.entries(m)) bfq += `<tr><td>${esc(k)}</td><td class="mono">${esc(typeof v === 'object' ? JSON.stringify(v) : fmt(v))}</td></tr>`;
+      }
+    }
+    root.insertAdjacentHTML('beforeend', `<div class="card" style="margin-top:12px;max-width:720px"><div class="ch"><h2>Filings Q&A gold-set evaluation</h2></div><table>${rows.map(([k, v]) => `<tr><td style="width:220px;color:var(--ink-3)">${esc(k)}</td><td>${v}</td></tr>`).join('')}${bfq}</table></div>`);
   }
 
   async function sources(root) {

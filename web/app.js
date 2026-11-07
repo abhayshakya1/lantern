@@ -39,6 +39,7 @@ window.Lantern = window.Lantern || {};
       }
       return;
     }
+    if (target === 'filings') return L.filings.render(root);
     if (target === 'sources') return L.placeholders.sources(root);
     if (L.placeholders.PAGES[target]) return L.placeholders.page(root, target);
     location.hash = '#monitor';

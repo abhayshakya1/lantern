@@ -1,4 +1,5 @@
 // Browser smoke test for the monitor screen. Run: LANTERN_URL=http://127.0.0.1:8787 node smoke.mjs
+import fs from 'node:fs';
 import puppeteer from 'puppeteer-core';
 
 const url = process.env.LANTERN_URL || 'http://127.0.0.1:8787';
@@ -38,6 +39,25 @@ try {
   if (/\b(null|NaN|undefined)\b/.test(text)) fail('main shows null, NaN or undefined');
   if (!/Brier/.test(text)) fail('calibration footer missing');
   if (!/watch/i.test(text)) fail('watch indicators not marked');
+  // Filings Q&A page: corpus table, a prepared question answered from the cache or abstained, history rail
+  const prepared = JSON.parse(fs.readFileSync(new URL('../data/filings/prepared_questions.json', import.meta.url), 'utf8'));
+  await page.goto(url + '/#filings', { waitUntil: 'networkidle0', timeout: 60000 });
+  await wait(300);
+  const rows = await page.$$eval('#corpus-table tbody tr', (els) => els.length).catch(() => 0);
+  if (rows < 1) fail('corpus table missing');
+  const form = await page.$('#ask-form');
+  if (!form) fail('ask form missing');
+  else {
+    await page.type('#ask-input', prepared[0]);
+    await page.click('#ask-form button[type="submit"]');
+    for (let i = 0; i < 40; i++) { await wait(250); if (await page.$('#answer .evidence, #answer .abstain, #answer .offline')) break; }
+    const answerText = await page.$eval('#answer', (el) => el.textContent).catch(() => '');
+    const hasEvidence = await page.$('#answer .evidence');
+    if (!hasEvidence && !/do not answer this|offline/.test(answerText)) fail('answer card shows neither evidence nor the abstention or offline sentence');
+    if (/\b(null|NaN|undefined)\b/.test(answerText)) fail('answer shows null, NaN or undefined');
+    const items = await page.$$eval('#history li', (els) => els.length).catch(() => 0);
+    if (items < 1) fail('history rail empty');
+  }
   if (errors.length) fail('console errors: ' + errors.join(' | '));
 } finally {
   await browser.close();

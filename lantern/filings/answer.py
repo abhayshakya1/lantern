@@ -176,3 +176,17 @@ def ask(
     else:
         a = Answer(question, False, ABSTAIN, [], data.get("confidence"), _context(hits), model, PROMPT_SHA, latency, "api", asked_at)
     return log(a, ids, raw)
+
+
+def pre_answer(store: Store, retriever: Retriever, questions: list[str], client=None, *, now: datetime | None = None) -> dict:
+    """The morning run: answer the prepared questions and cache every answer and abstention; an offline result is never cached."""
+    counts = {"answered": 0, "abstained": 0, "offline": 0}
+    for q in questions:
+        a = ask(store, retriever, q, client, now=now)
+        if a.source == "offline":
+            counts["offline"] += 1
+            continue
+        if a.source != "cache":
+            store.cache_put(cache_key(q), a.to_dict(), now or datetime.now(UTC))
+        counts["answered" if a.answerable else "abstained"] += 1
+    return counts

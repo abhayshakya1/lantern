@@ -59,3 +59,17 @@ def test_refusal_stop_reason_is_an_abstention(tmp_store, retriever):
     fake = FakeClaude(None, stop_reason="refusal")
     a = answer.ask(tmp_store, retriever, "What final dividend did ACME recommend?", client=fake)
     assert a.text == config.ABSTAIN and tmp_store.questions(1)[0]["source"] == "refusal"
+
+
+def test_pre_answer_caches_answers_and_abstentions_but_not_offline(tmp_store, retriever):
+    import anthropic
+
+    cid = _dividend_chunk(retriever)
+    fake = FakeClaude({"answerable": True, "answer": "ACME recommended 42 cents per share. It follows a 7% profit rise.",
+                       "evidence": [{"chunk_id": cid, "quote": "The Board recommends a final dividend of 42 cents per share."}], "confidence": "high"})
+    counts = answer.pre_answer(tmp_store, retriever, ["What final dividend did ACME recommend?", "What final dividend did ACME recommend?"], client=fake)
+    assert counts == {"answered": 2, "abstained": 0, "offline": 0} and len(fake.calls) == 1  # the second is a cache hit
+    assert tmp_store.cache_get(answer.cache_key("what final dividend did acme recommend"))["answerable"] is True
+    dead = FakeClaude(None, raise_exc=anthropic.APIConnectionError(request=None))
+    counts = answer.pre_answer(tmp_store, retriever, ["How many employees does BETA have?"], client=dead)
+    assert counts["offline"] == 1 and tmp_store.cache_get(answer.cache_key("How many employees does BETA have?")) is None

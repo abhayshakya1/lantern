@@ -15,7 +15,7 @@ The laptop runs on a phone hotspot. The venue wifi is the backup, not the other 
    scripts/demo_morning.sh --port 8787     # reads FRED_API_KEY from ~/lantern/.env
    ```
 
-   It pulls every feed, re-runs the backtest and the model, prints the status table and the badge, and serves. A feed that fails prints an `error` row and does not stop the others. Expect about three minutes.
+   It pulls every feed, re-runs the backtest and the model, pre-answers the prepared Filings Q&A questions into the cache, prints the status table and the badge, and serves. A feed that fails prints an `error` row and does not stop the others. Expect about three minutes.
 
 2. **Read the status table.** Every row `ok`, badge `Live data · pulled HH:MM SGT`. One row `error` is survivable: the previous pull of that feed serves and the badge says `· 1 feed missing`. Six rows `error` means no connection; see the fallback below.
 
@@ -24,6 +24,8 @@ The laptop runs on a phone hotspot. The venue wifi is the backup, not the other 
 4. **Walk the modules once** so the browser cache is warm and the fonts are loaded before the room.
 
 ## The cached fallback
+
+Filings Q&A: the prepared questions answer from the morning cache with their evidence even with no connection; an ad-hoc question from the room shows the "answer service is offline" state with the nearest passages, never a made-up answer.
 
 If the pull fails entirely, nothing on screen changes except the badge. The store keeps the last good pull; the model and the serve steps run on it. The badge reads `Cached data · pulled DD Mon` when the last good pull was on an earlier day, or `Live data · pulled HH:MM SGT · n feeds missing` when it was earlier today and only some feeds failed. The pitch says so in one line ("these numbers were pulled yesterday morning; the pull re-runs in a minute on any connection") and moves on. Do not retry pulls in the room: `lantern pull` is idempotent and safe, but it takes three minutes and the screen is already right.
 

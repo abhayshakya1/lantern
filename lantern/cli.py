@@ -1,6 +1,7 @@
 """lantern pull | model | backtest | status | serve"""
 
 import argparse
+import json
 import os
 import sys
 from pathlib import Path
@@ -48,6 +49,23 @@ def _filings(args, store: Store) -> int:
             print(f"{m['ticker']:10} {m['pages']:5} pages {m['pages_without_text']:4} without text {per_file.get(m['file'], 0):6} chunks  {m['sha256'][:12] or 'missing'}")
         print(f"index: {meta['n_chunks']} chunks from {meta['n_files']} files, model {meta['embed_model']}, built {meta['built_at']}")
         return 0
+    from lantern.filings import answer
+
+    retriever = retrieve.open_index(config.FILINGS_INDEX)
+    if args.fcmd == "ask":
+        a = answer.ask(store, retriever, args.question)
+        print(a.text)
+        for e in a.evidence:
+            print(f'  "{e.quote}"  — {e.ticker}, {e.filing}, page {e.page}')
+        if not a.evidence and a.context:
+            print("  nearest passages:", "; ".join(f"{c['ticker']} p.{c['page']}" for c in a.context[:3]))
+        print(f"  [{a.source}, {a.latency_ms} ms]")
+        return 0
+    if args.fcmd == "pre-answer":
+        questions = json.loads((config.FILINGS_DIR / "prepared_questions.json").read_text())
+        counts = answer.pre_answer(store, retriever, questions)
+        print(f"pre-answered {len(questions)} questions: {counts['answered']} answered, {counts['abstained']} abstained, {counts['offline']} offline")
+        return 0 if counts["offline"] == 0 else 1
     return 2
 
 
@@ -64,6 +82,8 @@ def main(argv: list[str] | None = None) -> int:
     filings = sub.add_parser("filings", help="filings Q&A corpus and answers")
     fsub = filings.add_subparsers(dest="fcmd", required=True)
     fsub.add_parser("build", help="ingest the PDFs in the manifest, chunk and embed them")
+    fsub.add_parser("ask", help="answer one question from the corpus").add_argument("question")
+    fsub.add_parser("pre-answer", help="answer the prepared questions and cache them for the room")
     serve.add_argument("--port", type=int, default=8787)
     serve.add_argument("--host", default="127.0.0.1")
     args = parser.parse_args(argv)

@@ -127,3 +127,11 @@ class Retriever:
             fused[i] = sum(1.0 / (config.RRF_K + r) for r in (bm25_rank.get(i), dense_rank.get(i)) if r)
         top = sorted(fused, key=lambda i: (-fused[i], i))[:k]
         return [Hit(self.chunks[i], float(fused[i]), bm25_rank.get(i), dense_rank.get(i)) for i in top]
+
+
+def open_index(index_dir: Path = config.FILINGS_INDEX) -> Retriever:
+    """A Retriever whose query embedder matches the model the index was built with (hash fallback indexes query with the hash)."""
+    meta = json.loads((Path(index_dir) / "meta.json").read_text())
+    model = meta.get("embed_model", config.EMBED_MODEL)
+    embedder = HashEmbedder(int(model.split("-")[1])) if model.startswith("hash-") else FastEmbedder(model)
+    return Retriever(index_dir, embedder)

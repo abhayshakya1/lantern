@@ -5,5 +5,6 @@ cd "$(dirname "$0")/.."
 lantern pull || echo "pull had errors: the previous cache serves (see the badge)"
 lantern backtest || echo "backtest had errors: the previous calibration serves"
 lantern model || echo "model run failed: the previous run serves"
+lantern filings pre-answer || echo "pre-answer had errors: cached answers from the previous run serve"
 lantern status
 exec lantern serve "$@"

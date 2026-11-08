@@ -49,10 +49,10 @@ def generate_json(tok, model, user: str) -> dict:
     msgs = [{"role": "system", "content": ANSWER_SYSTEM},
             {"role": "user", "content": user + "\n\nReply with only a JSON object: "
              '{"answerable": bool, "answer": str, "evidence": [{"chunk_id": str, "quote": str}], "confidence": "high"|"medium"|"low"}'}]
-    ids = tok.apply_chat_template(msgs, add_generation_prompt=True, return_tensors="pt").to(model.device)
+    enc = tok.apply_chat_template(msgs, add_generation_prompt=True, return_tensors="pt", return_dict=True).to(model.device)
     with torch.no_grad():
-        out = model.generate(ids, max_new_tokens=MAX_NEW_TOKENS, do_sample=False, pad_token_id=tok.eos_token_id)
-    text = tok.decode(out[0][ids.shape[1]:], skip_special_tokens=True)
+        out = model.generate(**enc, max_new_tokens=MAX_NEW_TOKENS, do_sample=False, pad_token_id=tok.eos_token_id)
+    text = tok.decode(out[0][enc["input_ids"].shape[1]:], skip_special_tokens=True)
     m = re.search(r"\{.*\}", text, re.S)
     if not m:
         return {}

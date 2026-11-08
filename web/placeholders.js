@@ -12,6 +12,19 @@ window.Lantern = window.Lantern || {};
     const [title, text] = PAGES[key];
     root.innerHTML = `<div class="page"><h1>${esc(title)}</h1><p>${esc(text)}</p></div>`;
     if (key === 'modelrisk') evalResults(root);
+    if (key === 'modelrisk') challengerCoverage(root);
+  }
+
+  async function challengerCoverage(root) {
+    const r = await fetch('/api/challenger').catch(() => null);
+    if (!r || !r.ok) return;
+    const d = await r.json();
+    const b = d.backtest;
+    if (!b) return;
+    const champ = b.champion_coverage == null ? '—' : Math.round(b.champion_coverage * 100) + '%';
+    root.insertAdjacentHTML('beforeend', `<div class="page"><h2>Fan coverage, champion vs challenger</h2>
+      <p class="src">Walk-forward ${esc(String(b.horizon_months))}-month ${esc(b.band)} coverage over ${esc(String(b.n))} months (target ${Math.round((b.target || 0.8) * 100)}%):
+      champion (conditional history) ${champ} · ${esc(b.model)} ${Math.round(b.coverage * 100)}%.</p></div>`);
   }
 
   const fmt = (x, d = 2) => (x == null ? '—' : typeof x === 'number' ? x.toFixed(d) : String(x));

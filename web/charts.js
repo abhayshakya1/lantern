@@ -23,14 +23,14 @@ window.Lantern = window.Lantern || {};
   const fmtPct = (x, d = 0) => (x >= 0 ? '+' : '−') + Math.abs(x * 100).toFixed(d) + '%';
 
   // Price against fair value with a forecast fan and three scenario paths.
-  function lineFan(svg, chart, selected) {
+  function lineFan(svg, chart, selected, challenger) {
     clear(svg);
     const W = 880, H = 300, mL = 44, mR = 150, mT = 14, mB = 30;
     svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
     const N = chart.months.length - 1;
     const x = (i) => mL + (i * (W - mL - mR)) / N;
     const all = [].concat(chart.price, chart.fair_value, chart.fv_band.low, chart.fv_band.high, chart.fan.p10, chart.fan.p90,
-      chart.scenarios.derating.path, chart.scenarios.meltup.path).filter((v) => v != null);
+      chart.scenarios.derating.path, chart.scenarios.meltup.path, challenger && challenger.fan ? challenger.fan.p10.concat(challenger.fan.p90) : []).filter((v) => v != null);
     const lo = Math.min(...all), hi = Math.max(...all);
     const pad = (hi - lo) * 0.08;
     const yMin = lo - pad, yMax = hi + pad;
@@ -58,6 +58,18 @@ window.Lantern = window.Lantern || {};
       ' ' + loArr.map((v, i) => 'L' + x(todayIdx + loArr.length - 1 - i) + ' ' + y(loArr[loArr.length - 1 - i])).join(' ') + ' Z';
     svg.appendChild(el('path', { d: band(chart.fan.p90, chart.fan.p10), fill: COLORS.accent, 'fill-opacity': 0.08 }));
     svg.appendChild(el('path', { d: band(chart.fan.p75, chart.fan.p25), fill: COLORS.accent, 'fill-opacity': 0.14 }));
+
+    // challenger overlay: TimesFM zero-shot p10-p90, dashed grey, never the headline
+    if (challenger && challenger.fan) {
+      const g = el('g', { id: 'challenger-band' });
+      for (const key of ['p10', 'p50', 'p90']) {
+        g.appendChild(el('path', { d: path(challenger.fan[key], todayIdx), fill: 'none', stroke: COLORS.quiet,
+          'stroke-width': key === 'p50' ? 1.4 : 1, 'stroke-dasharray': '2 3', 'stroke-linejoin': 'round' }));
+      }
+      g.appendChild(el('text', { x: mL + 6, y: mT + 10, 'font-family': 'IBM Plex Sans, sans-serif', 'font-size': 11, fill: COLORS.quiet },
+        `Dashed grey: TimesFM 2.5 zero-shot p10–p90, ${challenger.context_months || '?'}-month context (challenger)`));
+      svg.appendChild(g);
+    }
 
     // scenario paths
     const sc = chart.scenarios;

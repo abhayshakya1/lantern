@@ -22,6 +22,9 @@ dependencies = [
   "anthropic",
 ]
 
+[project.optional-dependencies]
+challenger = ["timesfm[torch]"]  # Apache-2.0 2.5 weights; the 3.0 checkpoint is non-commercial
+
 [project.scripts]
 lantern = "lantern.cli:main"
 

@@ -36,7 +36,9 @@ def main() -> int:
                       target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"])
     ds = load_dataset("json", data_files=args.train, split="train").shuffle(seed=7)
 
-    cfg = SFTConfig(
+    import dataclasses
+
+    wanted = dict(
         output_dir=args.out,
         num_train_epochs=args.epochs,
         per_device_train_batch_size=1,
@@ -48,11 +50,17 @@ def main() -> int:
         save_strategy="epoch",
         bf16=True,
         max_length=args.max_len,
+        max_seq_length=args.max_len,
         packing=False,
         optim="paged_adamw_8bit",
         gradient_checkpointing=True,
         report_to=[],
     )
+    accepted = {f.name for f in dataclasses.fields(SFTConfig)}
+    dropped = sorted(set(wanted) - accepted)
+    cfg = SFTConfig(**{k: v for k, v in wanted.items() if k in accepted})  # trl versions disagree on fields
+    if dropped:
+        print(f"SFTConfig fields not in this trl, left at defaults: {dropped}")
     trainer = SFTTrainer(model=model, args=cfg, train_dataset=ds, peft_config=lora, processing_class=tok)
     trainer.train()
     trainer.save_model(args.out)

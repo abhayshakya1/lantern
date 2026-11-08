@@ -224,3 +224,17 @@ def test_publish_invalidates_the_cached_pdf(tmp_store, run_fixture, monkeypatch,
     client = TestClient(api.create_app(tmp_store))
     assert client.post(f"/api/research/note/{nid}/publish").status_code == 200
     assert not pdf.exists()  # the byline prints the status, so a Draft-labelled PDF must not survive publishing
+
+
+def test_challenger_endpoint_404_when_never_run(tmp_store):
+    client = TestClient(api.create_app(tmp_store))
+    r = client.get("/api/challenger")
+    assert r.status_code == 404 and "error" in r.json()
+
+
+def test_challenger_endpoint_serves_both_metas(tmp_store):
+    tmp_store.set_meta("challenger", {"fan": {"p10": [1], "p50": [1], "p90": [1]}, "model": "TimesFM 2.5 (x), zero-shot"})
+    tmp_store.set_meta("challenger_backtest", {"n": 100, "coverage": 0.8, "champion_coverage": 0.85, "band": "p10-p90"})
+    client = TestClient(api.create_app(tmp_store))
+    body = client.get("/api/challenger").json()
+    assert body["challenger"]["model"].startswith("TimesFM") and body["backtest"]["n"] == 100

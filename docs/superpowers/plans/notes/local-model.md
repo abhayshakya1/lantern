@@ -17,7 +17,15 @@ ever matter for a citable figure.
 | Qwen2.5-3B  | 29/40 | 0.34 | 0.17 / 0.40 / 0.00 | 7.5 |
 | Qwen2.5-7B  | 38/40 | 0.26 | 0.04 / 0.00 / 0.00 | 3.2 |
 | Qwen2.5-14B | 16/40 | 0.62 | 0.58 / 0.60 / 0.00 | 13.7 |
+| **Qwen2.5-7B + FinSafeQA QLoRA** | 26/40 | 0.31 (recall 0.80) | **0.33 / 0.40 / 0.00** | 10.8 |
 | claude-opus-5-5 (production, paper judge) | 12/40 | 0.83 | 0.83 / 0.80 / 1.00 | — |
+
+Fine-tune read: the 7B went from answering 2 questions to 14, and from 0.04 to 0.33 easy-tier
+judge-correct — a clear lift from Abhay's own data, with a cost: abstention recall slipped from 1.00
+to 0.80 (it now answers 2 of the 10 unanswerable probes with verbatim-but-non-responsive quotes) and
+medium-tier refusal consistency (H-Ref) fell to 0.67. Zero-shot 14B still beats fine-tuned 7B; the
+queued 14B fine-tune is the interesting row. If the recall slip persists there, raise the abstention
+share of the training mix above 25% before any production talk.
 
 Reading: abstention recall is 1.0 everywhere (nobody answers the unanswerable probes wrong — the
 verbatim-quote gate does its job), and quality scales hard with size. The 7B abstains on nearly

@@ -45,7 +45,7 @@ try {
     await wait(400);
     if (!(await page.$('#challenger-band'))) fail('challenger band missing from the main chart');
     const mainSvgText = await page.$eval('#main-chart', (el) => el.textContent).catch(() => '');
-    if (!/TimesFM/.test(mainSvgText)) fail('challenger legend missing');
+    if (!/TimesFM/.test(mainSvgText) || !/month context/.test(mainSvgText)) fail('challenger legend or its context length missing');
   }
   // Filings Q&A page: corpus table, a prepared question answered from the cache or abstained, history rail
   const prepared = JSON.parse(fs.readFileSync(new URL('../data/filings/prepared_questions.json', import.meta.url), 'utf8'));

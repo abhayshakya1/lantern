@@ -63,6 +63,7 @@ def run_challenger(store, forecaster) -> dict:
         "model": getattr(forecaster, "name", "timesfm"),
         "context_months": len(price),
         "horizon_months": HORIZON,
+        "champion_as_of": run["as_of"],
         "run_at": datetime.now(UTC).isoformat(),
     }
     store.set_meta("challenger", meta)

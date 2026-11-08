@@ -136,9 +136,16 @@ def main(argv: list[str] | None = None) -> int:
         print(f"probability {t['value']:.0%} ({t['status']}), fair-value gap {gap_text}, run {run['model']['run_at']}")
         return 0
     if args.cmd == "challenger":
+        if store.latest_run() is None:  # fail before loading a 200M model
+            print("no model run to challenge; run `lantern model` first")
+            return 1
         from lantern import challenger
 
-        f = challenger.TimesFMForecaster()
+        try:
+            f = challenger.TimesFMForecaster()
+        except ModuleNotFoundError:
+            print("timesfm is not installed; run `uv sync --extra challenger`")
+            return 1
         meta = challenger.run_challenger(store, f)
         print(f"challenger fan from {meta['context_months']} months, {meta['model']}")
         if args.backtest:

@@ -83,3 +83,40 @@ def test_real_timesfm_forecast_is_shaped_and_ordered():
     q = f.quantiles([ctx], 12)
     assert q.shape == (1, 12, 10)
     assert np.all(q[0, :, 1] <= q[0, :, 5] + 1e-6) and np.all(q[0, :, 5] <= q[0, :, 9] + 1e-6)
+
+
+def test_cli_challenger_without_a_run_prints_a_message_not_a_traceback(tmp_path, monkeypatch, capsys):
+    from lantern import cli, config
+
+    monkeypatch.setattr(config, "DATA_DIR", tmp_path)
+    rc = cli.main(["challenger"])
+    out = capsys.readouterr()
+    assert rc == 1 and "no model run" in out.out
+
+
+def test_challenger_meta_names_the_run_it_forecast_from(tmp_store, run_fixture):
+    run_fixture["chart"]["price"] = [100.0, 102.0]
+    tmp_store.save_run(run_fixture)
+    meta = challenger.run_challenger(tmp_store, FakeForecaster())
+    assert meta["champion_as_of"] == run_fixture["as_of"]  # the overlay must never dress an old fan on a new run
+
+
+def test_coverage_scores_the_month_twelve_ahead_not_the_context_end(tmp_store, seeded_all_series):
+    from lantern import backtest
+
+    backtest.run_backtest(tmp_store, "2010-01")
+
+    class TightFake:
+        name = "tight"
+
+        def quantiles(self, contexts, horizon):
+            out = np.zeros((len(contexts), horizon, 10))
+            for i, c in enumerate(contexts):
+                last = float(np.asarray(c)[-1])
+                out[i, :, :] = last
+                out[i, :, 1] = last - 1e-6  # a band so tight only the context-end value itself fits
+                out[i, :, 9] = last + 1e-6
+            return out
+
+    res = challenger.coverage_backtest(tmp_store, TightFake())
+    assert res["coverage"] < 0.1  # scoring vals[i] instead of vals[i+12] would make this exactly 1.0

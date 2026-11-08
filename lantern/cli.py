@@ -102,6 +102,8 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("backtest", help="refit the calibration on the stored history")
     sub.add_parser("status", help="show the last pull and the data badge")
     sub.add_parser("note", help="generate today's research note from the latest model run")
+    chal = sub.add_parser("challenger", help="TimesFM challenger fan; --backtest adds walk-forward coverage")
+    chal.add_argument("--backtest", action="store_true")
     serve = sub.add_parser("serve", help="serve the API and the front end")
     filings = sub.add_parser("filings", help="filings Q&A corpus and answers")
     fsub = filings.add_subparsers(dest="fcmd", required=True)
@@ -132,6 +134,17 @@ def main(argv: list[str] | None = None) -> int:
         gap = run["tiles"]["fv_gap"]["value"]
         gap_text = f"{gap:+.0%}" if gap is not None else "n/a"
         print(f"probability {t['value']:.0%} ({t['status']}), fair-value gap {gap_text}, run {run['model']['run_at']}")
+        return 0
+    if args.cmd == "challenger":
+        from lantern import challenger
+
+        f = challenger.TimesFMForecaster()
+        meta = challenger.run_challenger(store, f)
+        print(f"challenger fan from {meta['context_months']} months, {meta['model']}")
+        if args.backtest:
+            res = challenger.coverage_backtest(store, f)
+            champ = f"{res['champion_coverage']:.0%}" if res["champion_coverage"] is not None else "n/a"
+            print(f"walk-forward p10-p90 coverage: challenger {res['coverage']:.0%} vs champion {champ} on {res['n']} months (target {res['target']:.0%})")
         return 0
     if args.cmd == "note":
         from lantern.research import notes

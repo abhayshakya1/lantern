@@ -75,6 +75,7 @@ DATA_DIR = Path(os.environ.get("LANTERN_DATA", "./data"))
 # Filings Q&A (plan 2): corpus of SGX annual reports, local embeddings, grounded answers with abstention.
 FILINGS_DIR = Path(os.environ.get("LANTERN_FILINGS", str(DATA_DIR / "filings")))
 NOTES_DIR = DATA_DIR / "notes"  # exported note PDFs
+TIMESFM_CHECKPOINT = os.environ.get("LANTERN_TIMESFM", "google/timesfm-2.5-200m-pytorch")  # Apache-2.0 weights; 3.0 is non-commercial
 FILINGS_INDEX = FILINGS_DIR / "index"
 LLM_MODEL = "claude-opus-5-5"
 EMBED_MODEL = "BAAI/bge-small-en-v1.5"

@@ -18,7 +18,8 @@ ever matter for a citable figure.
 | Qwen2.5-7B  | 38/40 | 0.26 | 0.04 / 0.00 / 0.00 | 3.2 |
 | Qwen2.5-14B | 16/40 | 0.62 | 0.58 / 0.60 / 0.00 | 13.7 |
 | Qwen2.5-3B + FinSafeQA QLoRA | 33/40 | 0.30 (recall 1.00) | 0.21 / 0.20 / 0.00 | — |
-| **Qwen2.5-7B + FinSafeQA QLoRA** | 26/40 | 0.31 (recall 0.80) | **0.33 / 0.40 / 0.00** | 10.8 |
+| Qwen2.5-7B + FinSafeQA QLoRA | 26/40 | 0.31 (recall 0.80) | 0.33 / 0.40 / 0.00 | 10.8 |
+| Qwen2.5-14B + FinSafeQA QLoRA | 24/40 | 0.33 (recall 0.80) | 0.38 / 0.40 / 1.00* | 30.4 |
 | claude-opus-5-5 (production, paper judge) | 12/40 | 0.83 | 0.83 / 0.80 / 1.00 | — |
 
 Fine-tune read: the 7B went from answering 2 questions to 14, and from 0.04 to 0.33 easy-tier
@@ -55,3 +56,17 @@ on table-dense pages, not an embedding problem — the tuning pass after Abhay's
 target table-aware chunking (or a larger candidate pool), not a bigger encoder. Caveat: hit@gold-chunk
 is a lower bound — another chunk can carry the same fact, which is how Opus answers questions whose
 gold chunk ranks below 8.
+
+## Verdict after the full ladder (2026-11-09)
+
+*Hard-tier caveat: only one hard item is answerable (the rest are probes), so a hard llm_correct of
+1.00 or 0.00 is a single question. Second caveat: the local judge is Qwen2.5-14B judging its own
+family — treat close calls with suspicion until re-judged with the pinned DeepSeek judge.
+
+- The fine-tune transforms the 7B (0.04 → 0.33 easy) but REGRESSES the 14B on easy/medium
+  (0.58 → 0.38 / 0.60 → 0.40): style overfit to the pool's short answers, plus the recall slip to
+  0.80 at both sizes. One epoch at lr 2e-4 is too hot for a model that already knows the task.
+- Today's best on-prem answerer is therefore **zero-shot Qwen2.5-14B behind the verbatim-quote gate**
+  (0.58 / 0.60, recall 1.00): the architecture supplies the safety, the model supplies fluency.
+- If the fine-tune is pursued further: lower LR (5e-5), half an epoch, raise the abstention share
+  above 25%, and mix in longer-form answers. The pipeline reruns end to end with one tmux command.

@@ -1,0 +1,22 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Lantern</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono&display=swap">
+<style>
+  html,body{margin:0;height:100%;background:#0E1117;color:#E8EBEF;font-family:'IBM Plex Sans',sans-serif;overflow:hidden}
+  .wrap{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px}
+  h1{font-family:'Source Serif 4',serif;font-weight:600;font-size:92px;margin:0;letter-spacing:.5px;
+     opacity:0;transform:translateY(14px);animation:in 1.1s .3s cubic-bezier(.2,.6,.2,1) forwards}
+  .rule{width:0;height:2px;background:#1F5FBF;animation:rule 1s 1s cubic-bezier(.2,.6,.2,1) forwards}
+  .sub{font-size:24px;color:#9AA3AE;letter-spacing:.4px;opacity:0;animation:fade 1s 1.5s forwards}
+  .meta{position:absolute;bottom:48px;font-family:'IBM Plex Mono',monospace;font-size:15px;color:#596270;opacity:0;animation:fade 1s 2.2s forwards}
+  @keyframes in{to{opacity:1;transform:none}}
+  @keyframes fade{to{opacity:1}}
+  @keyframes rule{to{width:420px}}
+</style></head><body>
+<div class="wrap">
+  <h1>Lantern</h1>
+  <div class="rule"></div>
+  <div class="sub">AI-equity risk monitor &nbsp;·&nbsp; Filings Q&amp;A &nbsp;·&nbsp; Research desk</div>
+  <div class="meta">Live public data · every number traceable to its source · on-premise by design</div>
+</div>
+</body></html>

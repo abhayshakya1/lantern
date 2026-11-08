@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pandas as pd
 from fastapi import FastAPI
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
@@ -15,6 +15,7 @@ from lantern import config, drivers, pull
 from lantern.filings import answer as filings_answer
 from lantern.filings import corpus as filings_corpus
 from lantern.filings import retrieve as filings_retrieve
+from lantern.research import notes as research_notes
 from lantern.store import Store
 
 WEB_DIR = Path(__file__).resolve().parent.parent / "web"
@@ -26,6 +27,53 @@ def _num(v):
 
 class AskBody(BaseModel):
     question: str
+
+
+
+
+def _print_html(note: dict) -> str:
+    """The note as a standalone print page: prose rendered server-side and escaped, the chart drawn
+    by the app's own chart code from the embedded run JSON."""
+    from html import escape as e
+
+    commentary = "".join(f"<h3>{e(c['driver'])}</h3><p>{e(c['text'])}</p>" for c in note["commentary"])
+    drivers_rows = "".join(
+        f"<tr><td>{e(str(d.get('label', d.get('id'))))}</td><td>{e(str(d.get('tier', '')))}</td>"
+        f"<td class=n>{'' if d.get('z') is None else f"{d['z']:+.1f}"}</td>"
+        f"<td class=n>{'' if d.get('contribution_pts') is None else f"{d['contribution_pts']:+.1f}"}</td></tr>"
+        for d in note["drivers"])
+    triggers = "".join(f"<li>{e(str(t.get('label', t.get('id', ''))))}</li>" for t in note["triggers"])
+    sources_rows = "".join(
+        f"<tr><td>{e(s['name'])}</td><td>{e(s.get('fetched_at', ''))}</td><td class=m>{e((s.get('sha256') or '')[:12])}</td></tr>"
+        for s in note["sources"])
+    return f"""<!doctype html><html><head><meta charset="utf-8"><title>{e(note['title'])}</title>
+<style>
+body{{font:14px/1.5 Georgia,serif;color:#1a1a1a;max-width:800px;margin:2rem auto;padding:0 1rem}}
+h1{{font-size:1.6rem;margin-bottom:.2rem}} h2{{font-size:1.1rem;margin-top:1.6rem}} h3{{font-size:1rem;margin:.9rem 0 .1rem}}
+.byline{{color:#555;font-size:.85rem;margin-bottom:1.4rem}}
+table{{border-collapse:collapse;width:100%;font-size:.85rem}} td,th{{padding:.25rem .5rem;border-bottom:1px solid #ddd;text-align:left}}
+.n{{text-align:right;font-variant-numeric:tabular-nums}} .m{{font-family:monospace;font-size:.8rem}}
+@media print{{body{{margin:0 auto}}}}
+</style></head><body>
+<h1>{e(note['title'])}</h1>
+<div class="byline">{e(note['author'])} · as of {e(note['as_of'][:10])} · run {e(note['run_id'])} · {e(note['status'])}{" · template prose" if note['source'] != 'api' else ''}</div>
+<p>{e(note['lead'])}</p>
+<svg id="main" width="100%" style="display:block"></svg>
+{commentary}
+<p>{e(note['scenario_sentence'])}</p>
+<h2>Drivers</h2><table><tr><th>Driver</th><th>Tier</th><th class=n>z</th><th class=n>pts</th></tr>{drivers_rows}</table>
+<h2>Triggers</h2><ul>{triggers}</ul>
+<h2>Sources</h2><table><tr><th>Series</th><th>Pulled</th><th>sha256</th></tr>{sources_rows}</table>
+<script type="application/json" id="data">{json.dumps(note["chart"])}</script>
+<script src="/charts.js"></script>
+<script>
+const chart = JSON.parse(document.getElementById('data').textContent);
+if (chart.price && chart.fan) Lantern.charts.lineFan(document.getElementById('main'), chart, 'base');
+else document.getElementById('main').remove();
+</script>
+</body></html>"""
+
+
 
 
 def create_app(store: Store, *, retriever=None, llm_client=None) -> FastAPI:
@@ -129,6 +177,49 @@ def create_app(store: Store, *, retriever=None, llm_client=None) -> FastAPI:
         if filename not in allowed or not path.is_file():
             return JSONResponse({"error": "not a filing in the corpus"}, status_code=404)
         return FileResponse(path, media_type="application/pdf")
+
+
+    @app.get("/api/research/notes")
+    def research_feed():
+        return [{k: n.get(k) for k in ("id", "created_at", "title", "summary", "status", "run_id", "source")}
+                for n in store.list_notes()]
+
+    def _note_and_run(note_id: str):
+        n = store.get_note(note_id)
+        run = store.get_run(n["run_id"]) if n else None
+        return (n, run) if n and run else (None, None)
+
+    @app.get("/api/research/note/{note_id}")
+    def research_note(note_id: str):
+        n, run = _note_and_run(note_id)
+        if n is None:
+            return JSONResponse({"error": "no such note"}, status_code=404)
+        return research_notes.note_payload(n, run)
+
+    @app.post("/api/research/generate", status_code=201)
+    def research_generate():
+        try:
+            return research_notes.generate_note(store, llm_client)
+        except RuntimeError as exc:
+            return JSONResponse({"error": str(exc)}, status_code=409)
+
+    @app.post("/api/research/note/{note_id}/publish")
+    def research_publish(note_id: str):
+        if store.get_note(note_id) is None:
+            return JSONResponse({"error": "no such note"}, status_code=404)
+        store.set_note_status(note_id, "Published")
+        return {"ok": True}
+
+    @app.get("/api/research/ledger")
+    def research_ledger():
+        return research_notes.ledger(store)
+
+    @app.get("/research/note/{note_id}/print")
+    def research_print(note_id: str):
+        n, run = _note_and_run(note_id)
+        if n is None:
+            return JSONResponse({"error": "no such note"}, status_code=404)
+        return HTMLResponse(_print_html(research_notes.note_payload(n, run)))
 
     app.mount("/", StaticFiles(directory=str(WEB_DIR), html=True), name="web")
     return app

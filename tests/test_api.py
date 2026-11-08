@@ -109,3 +109,49 @@ def test_pdf_route_serves_only_manifest_pdfs(filings_app, tmp_path):
     assert filings_app.get("/filings/pdf/ACME-AR2025.pdf").status_code == 200
     assert filings_app.get("/filings/pdf/gold/gold_draft.jsonl").status_code == 404  # only the manifest's PDFs are served
     assert filings_app.get("/filings/pdf/manifest.json").status_code == 404
+
+
+def _research_client(tmp_store, run_fixture):
+    tmp_store.save_run(run_fixture)
+    return TestClient(api.create_app(tmp_store))
+
+
+def test_research_notes_list_is_empty_before_any_note(tmp_store):
+    client = TestClient(api.create_app(tmp_store))
+    assert client.get("/api/research/notes").json() == []
+
+
+def test_research_note_404_for_unknown_id(tmp_store, run_fixture):
+    client = _research_client(tmp_store, run_fixture)
+    r = client.get("/api/research/note/nope")
+    assert r.status_code == 404 and "error" in r.json()
+    rp = client.get("/research/note/nope/print")
+    assert rp.status_code == 404 and "error" in rp.json()
+
+
+def test_research_generate_offline_and_note_view(tmp_store, run_fixture, monkeypatch):
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    client = _research_client(tmp_store, run_fixture)
+    r = client.post("/api/research/generate")
+    assert r.status_code == 201 and r.json()["source"] == "offline-template"
+    nid = r.json()["id"]
+    feed = client.get("/api/research/notes").json()
+    assert feed[0]["id"] == nid and feed[0]["status"] == "Draft" and "title" in feed[0]
+    note = client.get(f"/api/research/note/{nid}").json()
+    assert note["author"] == "Lantern model, reviewed by Abhay" and note["chart"]["scenarios"]
+    pub = client.post(f"/api/research/note/{nid}/publish")
+    assert pub.status_code == 200 and client.get(f"/api/research/note/{nid}").json()["status"] == "Published"
+    html = client.get(f"/research/note/{nid}/print").text
+    assert note["title"] in html and "charts.js" in html
+
+
+def test_research_generate_409_without_a_run(tmp_store):
+    client = TestClient(api.create_app(tmp_store))
+    assert client.post("/api/research/generate").status_code == 409
+
+
+def test_research_ledger_endpoint(tmp_store, seeded_all_series, run_fixture):
+    backtest.run_backtest(tmp_store, "2010-01")
+    client = _research_client(tmp_store, run_fixture)
+    rows = client.get("/api/research/ledger").json()
+    assert rows and rows[-1]["kind"] == "backtest"

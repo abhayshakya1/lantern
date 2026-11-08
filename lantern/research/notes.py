@@ -202,3 +202,26 @@ def note_payload(note: dict, run: dict) -> dict:
         "chart": run["chart"],
         "sources": note.get("sources", []),
     }
+
+
+def ledger(store) -> list[dict]:
+    """The accuracy ledger: one live row per note (realised fields null until the horizon elapses),
+    then the backtest rows, newest first."""
+    rows = []
+    for n in store.list_notes():
+        run = store.get_run(n["run_id"]) or {}
+        rows.append({
+            "date": n["created_at"][:10],
+            "probability": (run.get("tiles", {}).get("probability") or {}).get("value"),
+            "horizon_months": config.HORIZON_MONTHS,
+            "realised_return": None,
+            "drawdown": None,
+            "inside_fan": None,
+            "kind": "live",
+            "note_id": n["id"],
+        })
+    df = store.load_series("backtest.ledger")
+    if df is not None and len(df):
+        back = json.loads(df.to_json(orient="records", date_format="iso"))  # json round-trip drops numpy types
+        rows += sorted(back, key=lambda r: r["date"], reverse=True)
+    return rows

@@ -69,3 +69,29 @@ def test_generate_without_a_run_raises_a_clear_error(tmp_store):
 
     with pytest.raises(RuntimeError, match="no model run"):
         notes.generate_note(tmp_store)
+
+
+def test_backtest_persists_the_ledger(tmp_store, seeded_all_series):
+    from lantern import backtest
+
+    backtest.run_backtest(tmp_store, "2010-01")
+    df = tmp_store.load_series("backtest.ledger")
+    assert df is not None and len(df) > 0 and set(df["kind"]) == {"backtest"}
+
+
+def test_ledger_composes_backtest_and_live_rows(tmp_store, seeded_all_series, run_fixture):
+    from lantern import backtest
+
+    backtest.run_backtest(tmp_store, "2010-01")
+    run_id = tmp_store.save_run(run_fixture)
+    tmp_store.save_note({"run_id": run_id, "title": "t", "summary": "s", "lead": "l", "commentary": [],
+                         "status": "Draft", "source": "api", "prompt_sha": "x", "model": "m",
+                         "created_at": "2026-11-08T07:00:00+08:00"})
+    rows = notes.ledger(tmp_store)
+    assert rows[0]["kind"] == "live" and rows[0]["probability"] == 0.07
+    assert rows[0]["realised_return"] is None and rows[0]["inside_fan"] is None
+    assert any(r["kind"] == "backtest" for r in rows)
+
+
+def test_ledger_is_empty_not_broken_without_a_backtest(tmp_store):
+    assert notes.ledger(tmp_store) == []

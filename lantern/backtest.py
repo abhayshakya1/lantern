@@ -111,6 +111,7 @@ def run_backtest(store: Store, start: str = config.CALIBRATION_START) -> Backtes
         res.analogue_2000 = {"drivers": ["valuation", "rates"], "error": str(exc)}
     out = history.reset_index().rename(columns={"index": "date"})
     store.save_series("backtest.history", out)
+    store.save_series("backtest.ledger", pd.DataFrame(ledger_rows(res)))  # the accuracy ledger's seed
     store.set_meta(
         "calibration",
         {"a": a, "b": b, "hit_rate": hit_rate, "brier": brier, "brier_base": brier_base, "in_sample": True,

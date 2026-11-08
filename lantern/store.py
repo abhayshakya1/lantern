@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS meta(key TEXT PRIMARY KEY, value TEXT);
 CREATE TABLE IF NOT EXISTS questions(id INTEGER PRIMARY KEY, asked_at TEXT, question TEXT, chunk_ids TEXT, prompt_sha TEXT,
   model TEXT, response TEXT, answer TEXT, source TEXT, latency_ms INTEGER);
 CREATE TABLE IF NOT EXISTS answer_cache(key TEXT PRIMARY KEY, answer TEXT, cached_at TEXT);
+CREATE TABLE IF NOT EXISTS notes(id TEXT PRIMARY KEY, created_at TEXT, run_id TEXT, status TEXT, payload TEXT);
 """
 
 
@@ -115,6 +116,42 @@ class Store:
     def list_runs(self) -> list[dict]:
         rows = self.db.execute("SELECT id, created_at FROM runs ORDER BY id DESC").fetchall()
         return [{"id": r[0], "created_at": r[1]} for r in rows]
+
+    def get_run(self, run_id: str) -> dict | None:
+        row = self.db.execute("SELECT payload FROM runs WHERE id=?", (run_id,)).fetchone()
+        return json.loads(row[0]) if row else None
+
+    # research notes
+    def save_note(self, note: dict) -> str:
+        now = datetime.now(UTC)
+        base = "n" + now.strftime("%Y%m%d-%H%M%S")
+        note_id, n = base, 0
+        while self.db.execute("SELECT 1 FROM notes WHERE id=?", (note_id,)).fetchone():
+            n += 1
+            note_id = f"{base}-{n}"
+        note = {**note, "id": note_id}
+        self.db.execute(
+            "INSERT INTO notes(id, created_at, run_id, status, payload) VALUES (?,?,?,?,?)",
+            (note_id, note["created_at"], note["run_id"], note["status"], json.dumps(note)),
+        )
+        self.db.commit()
+        return note_id
+
+    def get_note(self, note_id: str) -> dict | None:
+        row = self.db.execute("SELECT payload FROM notes WHERE id=?", (note_id,)).fetchone()
+        return json.loads(row[0]) if row else None
+
+    def list_notes(self) -> list[dict]:
+        rows = self.db.execute("SELECT payload FROM notes ORDER BY id DESC").fetchall()
+        return [json.loads(r[0]) for r in rows]
+
+    def set_note_status(self, note_id: str, status: str) -> None:
+        note = self.get_note(note_id)
+        if note is None:
+            return
+        note["status"] = status
+        self.db.execute("UPDATE notes SET status=?, payload=? WHERE id=?", (status, json.dumps(note), note_id))
+        self.db.commit()
 
     # meta
     def set_meta(self, key: str, value) -> None:

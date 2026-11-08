@@ -236,3 +236,23 @@ class FakeClaude:
             content=[self._ns(type="text", text=text)],
             usage=self._ns(input_tokens=1, output_tokens=1, cache_read_input_tokens=0),
         )
+
+
+@pytest.fixture
+def run_fixture():
+    """A trimmed but shape-faithful model-run payload (see pull.run_model)."""
+    return {
+        "as_of": "2026-11-08T07:00:00+08:00",
+        "model": {"version": "0.1", "run_at": "2026-11-08T07:00:00+08:00",
+                  "calibrated": ["valuation", "concentration", "leverage"]},
+        "tiles": {"probability": {"value": 0.07, "delta_1m": 0.01, "status": "calm"},
+                  "fv_gap": {"value": 0.18}},
+        "chart": {"months": ["2026-10", "2026-11"],
+                  "scenarios": {"base": {"end_return": 0.06, "prob": 0.75},
+                                "derating": {"end_return": -0.22, "prob": 0.07},
+                                "meltup": {"end_return": 0.25, "prob": 0.18}},
+                  "source_line": "Source: test"},
+        "triggers": [{"label": "Valuation +1z", "delta_pts": 2.1}],
+        "drivers": [{"id": "valuation", "label": "Valuation", "tier": "calibrated", "z": 1.2, "contribution_pts": 3.0},
+                    {"id": "capex", "label": "Capex", "tier": "watch", "z": 0.4, "contribution_pts": 0.0}],
+    }

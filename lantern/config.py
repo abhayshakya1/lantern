@@ -74,6 +74,7 @@ DATA_DIR = Path(os.environ.get("LANTERN_DATA", "./data"))
 
 # Filings Q&A (plan 2): corpus of SGX annual reports, local embeddings, grounded answers with abstention.
 FILINGS_DIR = Path(os.environ.get("LANTERN_FILINGS", str(DATA_DIR / "filings")))
+NOTES_DIR = DATA_DIR / "notes"  # exported note PDFs
 FILINGS_INDEX = FILINGS_DIR / "index"
 LLM_MODEL = "claude-opus-5-5"
 EMBED_MODEL = "BAAI/bge-small-en-v1.5"

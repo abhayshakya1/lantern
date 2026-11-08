@@ -58,6 +58,60 @@ try {
     const items = await page.$$eval('#history li', (els) => els.length).catch(() => 0);
     if (items < 1) fail('history rail empty');
   }
+  // Research desk: feed, note view with chart and sources, accuracy ledger
+  await page.goto(url + '/#research', { waitUntil: 'networkidle0', timeout: 60000 });
+  await wait(400);
+  const noteRows = await page.$$eval('#note-feed .note-row', (els) => els.length).catch(() => 0);
+  if (noteRows < 1) fail('research feed has no notes (run lantern note first)');
+  if (!(await page.$('#generate-note'))) fail('generate button missing');
+  const pdfHref = await page.$eval('#note-feed .note-row a.pdf', (el) => el.getAttribute('href')).catch(() => '');
+  if (!/\/api\/research\/note\/.+\/pdf/.test(pdfHref)) fail('feed PDF link missing');
+  await page.click('#note-feed .note-row .open').catch(() => fail('note open control missing'));
+  await wait(500);
+  const byline = await page.$eval('#note-view .byline', (el) => el.textContent).catch(() => '');
+  if (!byline.includes('Lantern model, reviewed by Abhay')) fail('note author line missing');
+  const noteView = await page.$eval('#note-view', (el) => el.textContent).catch(() => '');
+  if (!/Sources/.test(noteView) || !/[0-9a-f]{8}/.test(noteView)) fail('note sources with hashes missing');
+  if (!/Drivers/.test(noteView) || !/Triggers/.test(noteView)) fail('note driver table or triggers missing');
+  if (!(await page.$('#note-view svg'))) fail('note chart svg missing');
+  if (!(await page.$('#note-view a.export-pdf'))) fail('note export PDF link missing');
+  const ledgerRows = await page.$$eval('#ledger tbody tr', (els) => els.length).catch(() => 0);
+  if (ledgerRows < 1) fail('accuracy ledger empty');
+  const ledgerText = await page.$eval('#ledger', (el) => el.textContent).catch(() => '');
+  if (!/backtest/.test(ledgerText)) fail('ledger backtest tag missing');
+  const researchText = await page.$eval('#main', (el) => el.textContent).catch(() => '');
+  if (/\b(null|NaN|undefined)\b/.test(researchText)) fail('research shows null, NaN or undefined');
+  // LLM prose must arrive escaped: render a crafted note through the real module with fetch stubbed
+  const escVerdict = await page.evaluate(async () => {
+    const hostile = 'L <b>bold</b> <img src=x onerror=window.__pwned=1>';
+    const note = { id: 'x', title: 'T <b>t</b>', summary: 's', author: 'Lantern model, reviewed by Abhay',
+      as_of: '2026-11-08', created_at: '2026-11-08', status: 'Draft', source: 'api', run_id: 'r',
+      lead: hostile, commentary: [{ driver: 'D <i>d</i>', text: 'c <b>c</b>' }], scenario_sentence: 's',
+      drivers: [], triggers: [], tiles: {}, chart: { source_line: '' }, sources: [] };
+    const feed = [{ id: 'x', title: note.title, summary: 's', status: 'Draft', run_id: 'r', created_at: '2026-11-08' }];
+    const control = document.createElement('div');
+    control.innerHTML = 'x <b>y</b>'; // proves the detector sees unescaped HTML (no img: its onerror would fire here)
+    const detectorWorks = !!control.querySelector('b');
+    control.remove();
+    const realFetch = window.fetch;
+    window.fetch = (url) => Promise.resolve({ ok: true, json: () => Promise.resolve(String(url).includes('/note/') ? note : String(url).includes('/notes') ? feed : []) });
+    const div = document.createElement('div');
+    document.body.appendChild(div);
+    try {
+      window.Lantern.research.render(div);
+      await new Promise((r) => setTimeout(r, 400));
+    } finally { window.fetch = realFetch; }
+    const injected = !!div.querySelector('b, i, img');
+    const literal = div.textContent.includes('<b>bold</b>');
+    const pwned = !!window.__pwned;
+    div.remove();
+    return { detectorWorks, injected, literal, pwned };
+  }).catch(() => null);
+  if (!escVerdict) fail('escape check could not run');
+  else {
+    if (!escVerdict.detectorWorks) fail('escape detector is blind');
+    if (escVerdict.injected || escVerdict.pwned || !escVerdict.literal) fail('note prose is not escaped');
+  }
   if (errors.length) fail('console errors: ' + errors.join(' | '));
 } finally {
   await browser.close();

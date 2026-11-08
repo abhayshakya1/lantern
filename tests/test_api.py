@@ -109,3 +109,118 @@ def test_pdf_route_serves_only_manifest_pdfs(filings_app, tmp_path):
     assert filings_app.get("/filings/pdf/ACME-AR2025.pdf").status_code == 200
     assert filings_app.get("/filings/pdf/gold/gold_draft.jsonl").status_code == 404  # only the manifest's PDFs are served
     assert filings_app.get("/filings/pdf/manifest.json").status_code == 404
+
+
+def _research_client(tmp_store, run_fixture):
+    tmp_store.save_run(run_fixture)
+    return TestClient(api.create_app(tmp_store))
+
+
+def test_research_notes_list_is_empty_before_any_note(tmp_store):
+    client = TestClient(api.create_app(tmp_store))
+    assert client.get("/api/research/notes").json() == []
+
+
+def test_research_note_404_for_unknown_id(tmp_store, run_fixture):
+    client = _research_client(tmp_store, run_fixture)
+    r = client.get("/api/research/note/nope")
+    assert r.status_code == 404 and "error" in r.json()
+    rp = client.get("/research/note/nope/print")
+    assert rp.status_code == 404 and "error" in rp.json()
+
+
+def test_research_generate_offline_and_note_view(tmp_store, run_fixture, monkeypatch):
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    client = _research_client(tmp_store, run_fixture)
+    r = client.post("/api/research/generate")
+    assert r.status_code == 201 and r.json()["source"] == "offline-template"
+    nid = r.json()["id"]
+    feed = client.get("/api/research/notes").json()
+    assert feed[0]["id"] == nid and feed[0]["status"] == "Draft" and "title" in feed[0]
+    note = client.get(f"/api/research/note/{nid}").json()
+    assert note["author"] == "Lantern model, reviewed by Abhay" and note["chart"]["scenarios"]
+    pub = client.post(f"/api/research/note/{nid}/publish")
+    assert pub.status_code == 200 and client.get(f"/api/research/note/{nid}").json()["status"] == "Published"
+    html = client.get(f"/research/note/{nid}/print").text
+    assert note["title"] in html and "charts.js" in html
+
+
+def test_research_generate_409_without_a_run(tmp_store):
+    client = TestClient(api.create_app(tmp_store))
+    assert client.post("/api/research/generate").status_code == 409
+
+
+def test_research_ledger_endpoint(tmp_store, seeded_all_series, run_fixture):
+    backtest.run_backtest(tmp_store, "2010-01")
+    client = _research_client(tmp_store, run_fixture)
+    rows = client.get("/api/research/ledger").json()
+    assert rows and rows[-1]["kind"] == "backtest"
+
+
+def _note_id(tmp_store, run_fixture):
+    run_id = tmp_store.save_run(run_fixture)
+    return tmp_store.save_note({"run_id": run_id, "title": "t", "summary": "s", "lead": "l", "commentary": [],
+                                "status": "Draft", "source": "template", "prompt_sha": "x", "model": "m",
+                                "created_at": "2026-11-08T07:00:00+08:00"})
+
+
+def test_note_pdf_route_404s_unknown_id(tmp_store):
+    client = TestClient(api.create_app(tmp_store))
+    r = client.get("/api/research/note/nope/pdf")
+    assert r.status_code == 404 and "error" in r.json()
+
+
+def test_note_pdf_route_serves_a_cached_pdf(tmp_store, run_fixture, monkeypatch, tmp_path):
+    monkeypatch.setattr(api.config, "NOTES_DIR", tmp_path)
+    nid = _note_id(tmp_store, run_fixture)
+    (tmp_path / f"{nid}.pdf").write_bytes(b"%PDF-1.4 stub")
+    client = TestClient(api.create_app(tmp_store))
+    r = client.get(f"/api/research/note/{nid}/pdf")
+    assert r.status_code == 200 and r.headers["content-type"] == "application/pdf"
+    assert r.content.startswith(b"%PDF")
+
+
+def test_note_pdf_builder_failure_is_a_503(tmp_store, run_fixture, monkeypatch, tmp_path):
+    import subprocess
+
+    monkeypatch.setattr(api.config, "NOTES_DIR", tmp_path)
+    nid = _note_id(tmp_store, run_fixture)
+
+    def boom(*a, **k):
+        return subprocess.CompletedProcess(a, 1, stdout="", stderr="no chrome")
+
+    monkeypatch.setattr(api.subprocess, "run", boom)
+    r = client_get = TestClient(api.create_app(tmp_store)).get(f"/api/research/note/{nid}/pdf")
+    assert r.status_code == 503 and "error" in r.json()
+
+
+def test_note_pdf_hung_or_missing_builder_is_a_503_not_a_500(tmp_store, run_fixture, monkeypatch, tmp_path):
+    import subprocess
+
+    monkeypatch.setattr(api.config, "NOTES_DIR", tmp_path)
+    nid = _note_id(tmp_store, run_fixture)
+    client = TestClient(api.create_app(tmp_store), raise_server_exceptions=False)
+
+    def hang(*a, **k):
+        raise subprocess.TimeoutExpired(cmd="node", timeout=120)
+
+    monkeypatch.setattr(api.subprocess, "run", hang)
+    r = client.get(f"/api/research/note/{nid}/pdf")
+    assert r.status_code == 503 and "error" in r.json()
+
+    def no_node(*a, **k):
+        raise FileNotFoundError("node")
+
+    monkeypatch.setattr(api.subprocess, "run", no_node)
+    r = client.get(f"/api/research/note/{nid}/pdf")
+    assert r.status_code == 503 and "error" in r.json()
+
+
+def test_publish_invalidates_the_cached_pdf(tmp_store, run_fixture, monkeypatch, tmp_path):
+    monkeypatch.setattr(api.config, "NOTES_DIR", tmp_path)
+    nid = _note_id(tmp_store, run_fixture)
+    pdf = tmp_path / f"{nid}.pdf"
+    pdf.write_bytes(b"%PDF-1.4 draft byline")
+    client = TestClient(api.create_app(tmp_store))
+    assert client.post(f"/api/research/note/{nid}/publish").status_code == 200
+    assert not pdf.exists()  # the byline prints the status, so a Draft-labelled PDF must not survive publishing

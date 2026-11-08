@@ -17,7 +17,7 @@ ever matter for a citable figure.
 | Qwen2.5-3B  | 29/40 | 0.34 | 0.17 / 0.40 / 0.00 | 7.5 |
 | Qwen2.5-7B  | 38/40 | 0.26 | 0.04 / 0.00 / 0.00 | 3.2 |
 | Qwen2.5-14B | 16/40 | 0.62 | 0.58 / 0.60 / 0.00 | 13.7 |
-| Qwen2.5-3B + FinSafeQA QLoRA | 33/40 | 0.30 (recall 1.00) | 0.12 / 0.20 / 0.00 | — |
+| Qwen2.5-3B + FinSafeQA QLoRA | 33/40 | 0.30 (recall 1.00) | 0.21 / 0.20 / 0.00 | — |
 | **Qwen2.5-7B + FinSafeQA QLoRA** | 26/40 | 0.31 (recall 0.80) | **0.33 / 0.40 / 0.00** | 10.8 |
 | claude-opus-5-5 (production, paper judge) | 12/40 | 0.83 | 0.83 / 0.80 / 1.00 | — |
 

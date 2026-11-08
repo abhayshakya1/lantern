@@ -86,8 +86,11 @@ def test_real_timesfm_forecast_is_shaped_and_ordered():
 
 
 def test_cli_challenger_without_a_run_prints_a_message_not_a_traceback(tmp_path, monkeypatch, capsys):
+    import os
+
     from lantern import cli, config
 
+    monkeypatch.setattr(os, "environ", dict(os.environ))  # main() loads .env; nothing may leak into other tests
     monkeypatch.setattr(config, "DATA_DIR", tmp_path)
     rc = cli.main(["challenger"])
     out = capsys.readouterr()

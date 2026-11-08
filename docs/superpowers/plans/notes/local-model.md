@@ -39,3 +39,18 @@ fine-tune teaches. Hard-tier questions defeat every zero-shot open model.
 - 14B QLoRA: queued; starts automatically when a card frees, then benches itself.
 - Retrieval sweep (bge-small vs base vs large against the gold evidence): running on CPU.
 - Judge server stays up on 192.168.3.6:8411; `LANTERN_JUDGE_URL` points Lantern's own eval at it.
+
+## Retrieval sweep (gold evidence vs embedding model, 30 answerable rows)
+
+| Embedding | hit@8 (production TOP_K) | hit@30 | mean rank when found |
+|---|---|---|---|
+| bge-small-en-v1.5 (production) | 0.67 | 0.80 | 4.8 |
+| bge-base-en-v1.5 | 0.67 | 0.83 | 5.7 |
+| bge-large-en-v1.5 | 0.70 | 0.83 | 4.8 |
+
+Finding: swapping embeddings buys one question (0.67 → 0.70); the same nine items miss under every
+model (g002/3/6/7/9/14/18/26/29), g014 and g018 among them. The gate's misses are a chunking problem
+on table-dense pages, not an embedding problem — the tuning pass after Abhay's verification should
+target table-aware chunking (or a larger candidate pool), not a bigger encoder. Caveat: hit@gold-chunk
+is a lower bound — another chunk can carry the same fact, which is how Opus answers questions whose
+gold chunk ranks below 8.

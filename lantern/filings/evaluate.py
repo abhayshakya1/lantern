@@ -18,7 +18,7 @@ from lantern.filings.retrieve import Hit, Retriever
 from lantern.store import Store
 
 BFQ_DIR = Path(__file__).resolve().parent / "bfq"
-JUDGE_MODEL = "deepseek-ai/DeepSeek-V4-Pro"  # the judge the BharatFinQA paper pinned, through OpenRouter
+JUDGE_MODEL = "deepseek/deepseek-v4-pro-0813"  # the judge the BharatFinQA paper pinned (DeepSeek-V4-Pro), under OpenRouter's slug for the dated snapshot
 MIN_CANDIDATE_CHARS = 200
 
 GOLD_SYSTEM = """You write evaluation questions for a question-answering system over SGX annual reports. Given one passage, write one question a bank analyst would ask that this passage answers fully and unambiguously; the short answer, as a figure or phrase exactly as written; and the single sentence of the passage that answers it, copied verbatim. difficulty is easy for a figure stated outright, medium when the answer needs one step of reading, hard for a judgement the passage states."""

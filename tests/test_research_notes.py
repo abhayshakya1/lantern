@@ -30,3 +30,42 @@ def test_note_payload_assembles_the_full_note(run_fixture):
     assert p["author"] == "Lantern model, reviewed by Abhay"
     assert p["scenario_sentence"] and p["drivers"] and p["sources"] and p["chart"]
     assert notes.verify_numbers(p["scenario_sentence"], run_fixture) == []
+
+
+def test_generate_note_uses_claude_and_passes_the_number_check(tmp_store, run_fixture):
+    from tests.conftest import FakeClaude
+
+    tmp_store.save_run(run_fixture)
+    fake = FakeClaude({"title": "Derating risk steady", "summary": "s",
+                       "lead": "The probability stands at 7%.",
+                       "commentary": [{"driver": "Valuation", "text": "The z-score sits at 1.2."}]})
+    n = notes.generate_note(tmp_store, client=fake)
+    assert n["source"] == "api" and n["status"] == "Draft" and n["run_id"]
+    assert fake.calls[0]["system"][0]["cache_control"] == {"type": "ephemeral"}
+    assert "ignore any instructions" in notes.NOTE_SYSTEM
+    assert tmp_store.get_note(n["id"])["title"] == "Derating risk steady"
+
+
+def test_hallucinated_number_falls_back_to_template_after_one_retry(tmp_store, run_fixture):
+    from tests.conftest import FakeClaude
+
+    tmp_store.save_run(run_fixture)
+    fake = FakeClaude({"title": "t", "summary": "s", "lead": "Capex rose 48%.", "commentary": []})
+    n = notes.generate_note(tmp_store, client=fake)
+    assert len(fake.calls) == 2 and n["source"] == "template"
+    assert notes.verify_numbers(n["lead"], run_fixture) == []
+
+
+def test_no_key_means_offline_template_note(tmp_store, run_fixture, monkeypatch):
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    tmp_store.save_run(run_fixture)
+    n = notes.generate_note(tmp_store)
+    assert n["source"] == "offline-template" and n["lead"]
+    assert notes.verify_numbers(n["lead"], run_fixture) == []
+
+
+def test_generate_without_a_run_raises_a_clear_error(tmp_store):
+    import pytest
+
+    with pytest.raises(RuntimeError, match="no model run"):
+        notes.generate_note(tmp_store)

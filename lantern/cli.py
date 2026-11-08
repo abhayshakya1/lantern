@@ -101,6 +101,7 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("model", help="compute the monitor payload from the cache")
     sub.add_parser("backtest", help="refit the calibration on the stored history")
     sub.add_parser("status", help="show the last pull and the data badge")
+    sub.add_parser("note", help="generate today's research note from the latest model run")
     serve = sub.add_parser("serve", help="serve the API and the front end")
     filings = sub.add_parser("filings", help="filings Q&A corpus and answers")
     fsub = filings.add_subparsers(dest="fcmd", required=True)
@@ -131,6 +132,12 @@ def main(argv: list[str] | None = None) -> int:
         gap = run["tiles"]["fv_gap"]["value"]
         gap_text = f"{gap:+.0%}" if gap is not None else "n/a"
         print(f"probability {t['value']:.0%} ({t['status']}), fair-value gap {gap_text}, run {run['model']['run_at']}")
+        return 0
+    if args.cmd == "note":
+        from lantern.research import notes
+
+        n = notes.generate_note(store)
+        print(f"note {n['id']} [{n['source']}] {n['title']}")
         return 0
     if args.cmd == "status":
         _print_status(store)

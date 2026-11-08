@@ -70,3 +70,16 @@ def test_coverage_walks_forward_without_peeking(tmp_store, seeded_all_series):
     assert res["n"] > 50 and 0.0 <= res["coverage"] <= 1.0 and res["band"] == "p10-p90"
     assert res["champion_coverage"] is not None and res["model"] == "fake-timesfm"
     assert tmp_store.get_meta("challenger_backtest")["n"] == res["n"]
+
+
+import pytest
+
+
+@pytest.mark.network
+def test_real_timesfm_forecast_is_shaped_and_ordered():
+    pytest.importorskip("timesfm")
+    f = challenger.TimesFMForecaster()
+    ctx = np.sin(np.linspace(0, 20, 120)) * 10 + 100
+    q = f.quantiles([ctx], 12)
+    assert q.shape == (1, 12, 10)
+    assert np.all(q[0, :, 1] <= q[0, :, 5] + 1e-6) and np.all(q[0, :, 5] <= q[0, :, 9] + 1e-6)

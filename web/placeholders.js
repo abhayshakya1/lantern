@@ -3,7 +3,6 @@ window.Lantern = window.Lantern || {};
 (function () {
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const PAGES = {
-    research: ['Research desk', 'Publishes dated research notes written from the model\'s own numbers, with the chart, the driver table and sources embedded, exportable to PDF, and keeps the accuracy ledger that compares each past forecast with what the market then did. Arrives with the next plan.'],
     rates: ['Rates and macro', 'A rates and macro transmission engine: SORA, Fed and HIBOR scenarios through to net interest income, and policy event studies. It answers the research finding that OCBC discloses a S$1,951m parallel-down NII loss while guiding NII flat.'],
     modelrisk: ['Model risk', 'Model inventory entries, materiality ratings, validation sets and prompt logs for every model, the evidence the MAS Guidelines on AI Risk Management ask for by about October 2027. The calibration curve and the gold-set scores land here.'],
     settings: ['Settings', 'Workspace name, data directory, API keys for the FRED feed and the language model, and the demo-morning schedule.'],

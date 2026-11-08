@@ -58,6 +58,29 @@ try {
     const items = await page.$$eval('#history li', (els) => els.length).catch(() => 0);
     if (items < 1) fail('history rail empty');
   }
+  // Research desk: feed, note view with chart and sources, accuracy ledger
+  await page.goto(url + '/#research', { waitUntil: 'networkidle0', timeout: 60000 });
+  await wait(400);
+  const noteRows = await page.$$eval('#note-feed .note-row', (els) => els.length).catch(() => 0);
+  if (noteRows < 1) fail('research feed has no notes (run lantern note first)');
+  if (!(await page.$('#generate-note'))) fail('generate button missing');
+  const pdfHref = await page.$eval('#note-feed .note-row a.pdf', (el) => el.getAttribute('href')).catch(() => '');
+  if (!/\/api\/research\/note\/.+\/pdf/.test(pdfHref)) fail('feed PDF link missing');
+  await page.click('#note-feed .note-row .open').catch(() => fail('note open control missing'));
+  await wait(500);
+  const byline = await page.$eval('#note-view .byline', (el) => el.textContent).catch(() => '');
+  if (!byline.includes('Lantern model, reviewed by Abhay')) fail('note author line missing');
+  const noteView = await page.$eval('#note-view', (el) => el.textContent).catch(() => '');
+  if (!/Sources/.test(noteView) || !/[0-9a-f]{8}/.test(noteView)) fail('note sources with hashes missing');
+  if (!/Drivers/.test(noteView) || !/Triggers/.test(noteView)) fail('note driver table or triggers missing');
+  if (!(await page.$('#note-view svg'))) fail('note chart svg missing');
+  if (!(await page.$('#note-view a.export-pdf'))) fail('note export PDF link missing');
+  const ledgerRows = await page.$$eval('#ledger tbody tr', (els) => els.length).catch(() => 0);
+  if (ledgerRows < 1) fail('accuracy ledger empty');
+  const ledgerText = await page.$eval('#ledger', (el) => el.textContent).catch(() => '');
+  if (!/backtest/.test(ledgerText)) fail('ledger backtest tag missing');
+  const researchText = await page.$eval('#main', (el) => el.textContent).catch(() => '');
+  if (/\b(null|NaN|undefined)\b/.test(researchText)) fail('research shows null, NaN or undefined');
   if (errors.length) fail('console errors: ' + errors.join(' | '));
 } finally {
   await browser.close();

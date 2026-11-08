@@ -155,3 +155,40 @@ def test_research_ledger_endpoint(tmp_store, seeded_all_series, run_fixture):
     client = _research_client(tmp_store, run_fixture)
     rows = client.get("/api/research/ledger").json()
     assert rows and rows[-1]["kind"] == "backtest"
+
+
+def _note_id(tmp_store, run_fixture):
+    run_id = tmp_store.save_run(run_fixture)
+    return tmp_store.save_note({"run_id": run_id, "title": "t", "summary": "s", "lead": "l", "commentary": [],
+                                "status": "Draft", "source": "template", "prompt_sha": "x", "model": "m",
+                                "created_at": "2026-11-08T07:00:00+08:00"})
+
+
+def test_note_pdf_route_404s_unknown_id(tmp_store):
+    client = TestClient(api.create_app(tmp_store))
+    r = client.get("/api/research/note/nope/pdf")
+    assert r.status_code == 404 and "error" in r.json()
+
+
+def test_note_pdf_route_serves_a_cached_pdf(tmp_store, run_fixture, monkeypatch, tmp_path):
+    monkeypatch.setattr(api.config, "NOTES_DIR", tmp_path)
+    nid = _note_id(tmp_store, run_fixture)
+    (tmp_path / f"{nid}.pdf").write_bytes(b"%PDF-1.4 stub")
+    client = TestClient(api.create_app(tmp_store))
+    r = client.get(f"/api/research/note/{nid}/pdf")
+    assert r.status_code == 200 and r.headers["content-type"] == "application/pdf"
+    assert r.content.startswith(b"%PDF")
+
+
+def test_note_pdf_builder_failure_is_a_503(tmp_store, run_fixture, monkeypatch, tmp_path):
+    import subprocess
+
+    monkeypatch.setattr(api.config, "NOTES_DIR", tmp_path)
+    nid = _note_id(tmp_store, run_fixture)
+
+    def boom(*a, **k):
+        return subprocess.CompletedProcess(a, 1, stdout="", stderr="no chrome")
+
+    monkeypatch.setattr(api.subprocess, "run", boom)
+    r = client_get = TestClient(api.create_app(tmp_store)).get(f"/api/research/note/{nid}/pdf")
+    assert r.status_code == 503 and "error" in r.json()

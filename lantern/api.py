@@ -2,11 +2,13 @@
 
 import json
 import math
+import subprocess
+import sys
 from dataclasses import asdict
 from pathlib import Path
 
 import pandas as pd
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -213,6 +215,21 @@ def create_app(store: Store, *, retriever=None, llm_client=None) -> FastAPI:
     @app.get("/api/research/ledger")
     def research_ledger():
         return research_notes.ledger(store)
+
+
+    @app.get("/api/research/note/{note_id}/pdf")
+    def research_pdf(note_id: str, request: Request):
+        if store.get_note(note_id) is None:
+            return JSONResponse({"error": "no such note"}, status_code=404)
+        out = Path(config.NOTES_DIR) / f"{note_id}.pdf"
+        if not out.is_file():  # regenerate only when missing: the note is immutable once written
+            out.parent.mkdir(parents=True, exist_ok=True)
+            url = str(request.base_url).rstrip("/") + f"/research/note/{note_id}/print"
+            script = Path(__file__).resolve().parent.parent / "reports" / "note-pdf.mjs"
+            proc = subprocess.run(["node", str(script), url, str(out)], capture_output=True, text=True, timeout=120)
+            if proc.returncode != 0 or not out.is_file():
+                return JSONResponse({"error": "PDF export unavailable: " + (proc.stderr or "").strip()[-300:]}, status_code=503)
+        return FileResponse(out, media_type="application/pdf", filename=f"lantern-note-{note_id}.pdf")
 
     @app.get("/research/note/{note_id}/print")
     def research_print(note_id: str):

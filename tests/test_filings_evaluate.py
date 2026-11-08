@@ -50,3 +50,32 @@ def test_run_eval_scores_abstention_precision_and_gate(tmp_store, tmp_path, retr
     assert res["bfq"]["manifest"]["scored_n"] == 2 and res["bfq"]["manifest"]["judge_model"] is None  # deterministic metrics run without a judge
     assert json.loads((tmp_path / "eval" / "results.json").read_text())["n"] == 2 and (tmp_path / "eval" / "pred.jsonl").exists()
     assert tmp_store.questions(2)[0]["source"] == "api"  # the eval never reads the answer cache
+
+
+def test_local_judge_url_enables_judging_without_openrouter(tmp_store, tmp_path, retriever, monkeypatch):
+    import json as _json
+
+    monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
+    monkeypatch.setenv("LANTERN_JUDGE_URL", "http://192.168.3.6:8411/v1/chat/completions")
+    monkeypatch.setenv("LANTERN_JUDGE_MODEL", "Qwen/Qwen2.5-32B-Instruct-AWQ")
+    gold_path = tmp_path / "gold.jsonl"
+    gold_path.write_text(_json.dumps({"item_id": "g001", "question": "Anything?", "company": "ACME",
+                                      "answer": "", "unanswerable": True, "difficulty": "hard"}) + "\n")
+    monkeypatch.setattr(evaluate.config, "FILINGS_DIR", tmp_path)
+    captured = {}
+
+    def fake_run(cmd, **kw):
+        captured["cmd"] = cmd
+        out = tmp_path / "eval" / "results_bfq.json"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text('{"report": {"ok": true}}')
+        import subprocess
+
+        return subprocess.CompletedProcess(cmd, 0, stdout="", stderr="")
+
+    monkeypatch.setattr(evaluate.subprocess, "run", fake_run)
+    res = evaluate.run_eval(tmp_store, retriever, gold_path, client=None)
+    cmd = captured["cmd"]
+    assert "--judge" in cmd and cmd[cmd.index("--judge") + 1] == "Qwen/Qwen2.5-32B-Instruct-AWQ"
+    assert "--judge-url" in cmd and "192.168.3.6:8411" in cmd[cmd.index("--judge-url") + 1]
+    assert res["judge"] == "Qwen/Qwen2.5-32B-Instruct-AWQ"

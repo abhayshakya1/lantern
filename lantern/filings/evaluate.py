@@ -151,12 +151,19 @@ def run_eval(store: Store, retriever: Retriever, gold_path: Path, client=None, *
             p = {k: r[k] for k in ("item_id", "question", "company", "model", "unanswerable")}
             p["predicted_answer"] = metrics.CANONICAL_REFUSAL if r["predicted_answer"] == config.ABSTAIN else r["predicted_answer"]
             f.write(json.dumps(p) + "\n")
-    judge = judge_model if os.environ.get("OPENROUTER_API_KEY") else None
+    judge_url = os.environ.get("LANTERN_JUDGE_URL")  # a local OpenAI-compatible endpoint (e.g. vLLM on Deathstar)
+    if judge_url:
+        judge = os.environ.get("LANTERN_JUDGE_MODEL", judge_model)
+        os.environ.setdefault("OPENROUTER_API_KEY", "local")  # the harness wants a bearer token; a local server ignores it
+    else:
+        judge = judge_model if os.environ.get("OPENROUTER_API_KEY") else None
     bfq_out = out_dir / "results_bfq.json"
     cmd = [sys.executable, "bfq_score.py", "--pred", str(pred_path.resolve()), "--gold", str(Path(gold_path).resolve()),
            "--refusal", "semantic", "--gate", str(config.GOLD_GATE * 100), "--out", str(bfq_out.resolve())]
     if judge:
         cmd += ["--judge", judge, "--provider", "openrouter"]
+        if judge_url:
+            cmd += ["--judge-url", judge_url]
     proc = subprocess.run(cmd, cwd=BFQ_DIR, capture_output=True, text=True, timeout=1800)
     bfq = json.loads(bfq_out.read_text()).get("report") if proc.returncode == 0 and bfq_out.exists() else None  # the harness writes {report, items}
     scores = abstention_scores(rows)

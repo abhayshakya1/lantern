@@ -86,7 +86,9 @@ window.Lantern = window.Lantern || {};
     const chart = Object.assign({}, ch, { gap_today: t.fv_gap.value });
     const main = root.querySelector('#main-chart');
     let selected = 'base';
-    const draw = () => { C().lineFan(main, chart, selected); root.querySelector('#scenario-sentence').textContent = SCENARIO_TEXT[selected](ch.scenarios[selected], lastMonth); };
+    let challengerFan = null;
+    const draw = () => { C().lineFan(main, chart, selected, challengerFan); root.querySelector('#scenario-sentence').textContent = SCENARIO_TEXT[selected](ch.scenarios[selected], lastMonth); };
+    fetch('/api/challenger').then((r) => (r.ok ? r.json() : null)).then((d) => { if (d && d.challenger && d.challenger.fan) { challengerFan = d.challenger.fan; draw(); } }).catch(() => {});
     draw();
     root.querySelectorAll('#scenario-control button').forEach((b) => b.addEventListener('click', () => {
       selected = b.dataset.scenario;

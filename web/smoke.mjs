@@ -39,6 +39,14 @@ try {
   if (/\b(null|NaN|undefined)\b/.test(text)) fail('main shows null, NaN or undefined');
   if (!/Brier/.test(text)) fail('calibration footer missing');
   if (!/watch/i.test(text)) fail('watch indicators not marked');
+  // challenger overlay (only when a challenger run exists in the store)
+  const chal = await page.evaluate(() => fetch('/api/challenger').then((r) => (r.ok ? r.json() : null)).catch(() => null));
+  if (chal && chal.challenger && chal.challenger.fan) {
+    await wait(400);
+    if (!(await page.$('#challenger-band'))) fail('challenger band missing from the main chart');
+    const mainSvgText = await page.$eval('#main-chart', (el) => el.textContent).catch(() => '');
+    if (!/TimesFM/.test(mainSvgText)) fail('challenger legend missing');
+  }
   // Filings Q&A page: corpus table, a prepared question answered from the cache or abstained, history rail
   const prepared = JSON.parse(fs.readFileSync(new URL('../data/filings/prepared_questions.json', import.meta.url), 'utf8'));
   await page.goto(url + '/#filings', { waitUntil: 'networkidle0', timeout: 60000 });
@@ -111,6 +119,12 @@ try {
   else {
     if (!escVerdict.detectorWorks) fail('escape detector is blind');
     if (escVerdict.injected || escVerdict.pwned || !escVerdict.literal) fail('note prose is not escaped');
+  }
+  if (chal && chal.backtest) {
+    await page.goto(url + '/#modelrisk', { waitUntil: 'networkidle0', timeout: 60000 });
+    await wait(300);
+    const mr = await page.$eval('#main', (el) => el.textContent).catch(() => '');
+    if (!/Fan coverage/.test(mr) || !/TimesFM/.test(mr)) fail('model risk coverage comparison missing');
   }
   if (errors.length) fail('console errors: ' + errors.join(' | '));
 } finally {

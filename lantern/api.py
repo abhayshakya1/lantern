@@ -166,6 +166,13 @@ def create_app(store: Store, *, retriever=None, llm_client=None) -> FastAPI:
             "history": history,
         }
 
+    @app.get("/api/challenger")
+    def challenger_meta():
+        c, b = store.get_meta("challenger"), store.get_meta("challenger_backtest")
+        if c is None and b is None:
+            return JSONResponse({"error": "no challenger run yet; run lantern challenger"}, status_code=404)
+        return {"challenger": c, "backtest": b}
+
     @app.get("/api/provenance")
     def provenance():
         return store.provenance(200)

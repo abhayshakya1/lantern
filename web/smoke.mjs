@@ -81,6 +81,37 @@ try {
   if (!/backtest/.test(ledgerText)) fail('ledger backtest tag missing');
   const researchText = await page.$eval('#main', (el) => el.textContent).catch(() => '');
   if (/\b(null|NaN|undefined)\b/.test(researchText)) fail('research shows null, NaN or undefined');
+  // LLM prose must arrive escaped: render a crafted note through the real module with fetch stubbed
+  const escVerdict = await page.evaluate(async () => {
+    const hostile = 'L <b>bold</b> <img src=x onerror=window.__pwned=1>';
+    const note = { id: 'x', title: 'T <b>t</b>', summary: 's', author: 'Lantern model, reviewed by Abhay',
+      as_of: '2026-11-08', created_at: '2026-11-08', status: 'Draft', source: 'api', run_id: 'r',
+      lead: hostile, commentary: [{ driver: 'D <i>d</i>', text: 'c <b>c</b>' }], scenario_sentence: 's',
+      drivers: [], triggers: [], tiles: {}, chart: { source_line: '' }, sources: [] };
+    const feed = [{ id: 'x', title: note.title, summary: 's', status: 'Draft', run_id: 'r', created_at: '2026-11-08' }];
+    const control = document.createElement('div');
+    control.innerHTML = 'x <b>y</b>'; // proves the detector sees unescaped HTML (no img: its onerror would fire here)
+    const detectorWorks = !!control.querySelector('b');
+    control.remove();
+    const realFetch = window.fetch;
+    window.fetch = (url) => Promise.resolve({ ok: true, json: () => Promise.resolve(String(url).includes('/note/') ? note : String(url).includes('/notes') ? feed : []) });
+    const div = document.createElement('div');
+    document.body.appendChild(div);
+    try {
+      window.Lantern.research.render(div);
+      await new Promise((r) => setTimeout(r, 400));
+    } finally { window.fetch = realFetch; }
+    const injected = !!div.querySelector('b, i, img');
+    const literal = div.textContent.includes('<b>bold</b>');
+    const pwned = !!window.__pwned;
+    div.remove();
+    return { detectorWorks, injected, literal, pwned };
+  }).catch(() => null);
+  if (!escVerdict) fail('escape check could not run');
+  else {
+    if (!escVerdict.detectorWorks) fail('escape detector is blind');
+    if (escVerdict.injected || escVerdict.pwned || !escVerdict.literal) fail('note prose is not escaped');
+  }
   if (errors.length) fail('console errors: ' + errors.join(' | '));
 } finally {
   await browser.close();

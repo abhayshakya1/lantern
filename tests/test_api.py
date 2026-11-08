@@ -192,3 +192,35 @@ def test_note_pdf_builder_failure_is_a_503(tmp_store, run_fixture, monkeypatch, 
     monkeypatch.setattr(api.subprocess, "run", boom)
     r = client_get = TestClient(api.create_app(tmp_store)).get(f"/api/research/note/{nid}/pdf")
     assert r.status_code == 503 and "error" in r.json()
+
+
+def test_note_pdf_hung_or_missing_builder_is_a_503_not_a_500(tmp_store, run_fixture, monkeypatch, tmp_path):
+    import subprocess
+
+    monkeypatch.setattr(api.config, "NOTES_DIR", tmp_path)
+    nid = _note_id(tmp_store, run_fixture)
+    client = TestClient(api.create_app(tmp_store), raise_server_exceptions=False)
+
+    def hang(*a, **k):
+        raise subprocess.TimeoutExpired(cmd="node", timeout=120)
+
+    monkeypatch.setattr(api.subprocess, "run", hang)
+    r = client.get(f"/api/research/note/{nid}/pdf")
+    assert r.status_code == 503 and "error" in r.json()
+
+    def no_node(*a, **k):
+        raise FileNotFoundError("node")
+
+    monkeypatch.setattr(api.subprocess, "run", no_node)
+    r = client.get(f"/api/research/note/{nid}/pdf")
+    assert r.status_code == 503 and "error" in r.json()
+
+
+def test_publish_invalidates_the_cached_pdf(tmp_store, run_fixture, monkeypatch, tmp_path):
+    monkeypatch.setattr(api.config, "NOTES_DIR", tmp_path)
+    nid = _note_id(tmp_store, run_fixture)
+    pdf = tmp_path / f"{nid}.pdf"
+    pdf.write_bytes(b"%PDF-1.4 draft byline")
+    client = TestClient(api.create_app(tmp_store))
+    assert client.post(f"/api/research/note/{nid}/publish").status_code == 200
+    assert not pdf.exists()  # the byline prints the status, so a Draft-labelled PDF must not survive publishing

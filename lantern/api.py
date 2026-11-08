@@ -210,6 +210,7 @@ def create_app(store: Store, *, retriever=None, llm_client=None) -> FastAPI:
         if store.get_note(note_id) is None:
             return JSONResponse({"error": "no such note"}, status_code=404)
         store.set_note_status(note_id, "Published")
+        (Path(config.NOTES_DIR) / f"{note_id}.pdf").unlink(missing_ok=True)  # the PDF byline prints the status
         return {"ok": True}
 
     @app.get("/api/research/ledger")
@@ -226,9 +227,13 @@ def create_app(store: Store, *, retriever=None, llm_client=None) -> FastAPI:
             out.parent.mkdir(parents=True, exist_ok=True)
             url = str(request.base_url).rstrip("/") + f"/research/note/{note_id}/print"
             script = Path(__file__).resolve().parent.parent / "reports" / "note-pdf.mjs"
-            proc = subprocess.run(["node", str(script), url, str(out)], capture_output=True, text=True, timeout=120)
-            if proc.returncode != 0 or not out.is_file():
-                return JSONResponse({"error": "PDF export unavailable: " + (proc.stderr or "").strip()[-300:]}, status_code=503)
+            try:
+                proc = subprocess.run(["node", str(script), url, str(out)], capture_output=True, text=True, timeout=120)
+                detail = (proc.stderr or "").strip()[-300:] if proc.returncode != 0 else ""
+            except (subprocess.SubprocessError, OSError) as exc:  # a hung Chrome or missing node must not 500 the demo
+                proc, detail = None, f"{type(exc).__name__}"
+            if proc is None or proc.returncode != 0 or not out.is_file():
+                return JSONResponse({"error": f"PDF export unavailable: {detail}"}, status_code=503)
         return FileResponse(out, media_type="application/pdf", filename=f"lantern-note-{note_id}.pdf")
 
     @app.get("/research/note/{note_id}/print")

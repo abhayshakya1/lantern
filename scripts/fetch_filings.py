@@ -8,7 +8,7 @@ import requests
 
 from lantern import config
 
-UA = {"User-Agent": "Mozilla/5.0 (Macintosh) AppleWebKit/537.36 Chrome/128 Safari/537.36"}
+UA = {"User-Agent": config.SEC_USER_AGENT}  # an honest identifying string; a site that refuses it is a finding, not something to mask
 
 
 def main() -> int:

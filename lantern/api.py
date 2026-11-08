@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pandas as pd
 from fastapi import FastAPI
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
@@ -120,7 +120,15 @@ def create_app(store: Store, *, retriever=None, llm_client=None) -> FastAPI:
     def provenance():
         return store.provenance(200)
 
-    if Path(config.FILINGS_DIR).is_dir():  # the PDFs, so an evidence card can open the cited page
-        app.mount("/filings/pdf", StaticFiles(directory=str(config.FILINGS_DIR)), name="filings")
+    @app.get("/filings/pdf/{filename}")
+    def filings_pdf(filename: str):
+        # only the manifest's PDFs are served: the gold set, eval output and index also live under FILINGS_DIR
+        manifest_path = Path(config.FILINGS_DIR) / "manifest.json"
+        allowed = {m["file"] for m in filings_corpus.load_manifest(config.FILINGS_DIR)} if manifest_path.is_file() else set()
+        path = Path(config.FILINGS_DIR) / filename
+        if filename not in allowed or not path.is_file():
+            return JSONResponse({"error": "not a filing in the corpus"}, status_code=404)
+        return FileResponse(path, media_type="application/pdf")
+
     app.mount("/", StaticFiles(directory=str(WEB_DIR), html=True), name="web")
     return app

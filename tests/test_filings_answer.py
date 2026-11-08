@@ -47,7 +47,7 @@ def test_cache_serves_before_the_api_and_offline_state_on_connection_error(tmp_s
     good = FakeClaude({"answerable": True, "answer": "Total assets were S$9,876 million at year end. That is the balance-sheet size.",
                        "evidence": [{"chunk_id": cid, "quote": "Total assets stood at S$9,876 million at year end."}], "confidence": "high"})
     first = answer.ask(tmp_store, retriever, "What were BETA's total assets?", client=good)
-    tmp_store.cache_put(answer.cache_key("What were BETA's total assets?"), first.to_dict(), datetime.now(UTC))
+    tmp_store.cache_put(answer.cache_key("What were BETA's total assets?", answer.scope(retriever)), first.to_dict(), datetime.now(UTC))
     dead = FakeClaude(None, raise_exc=anthropic.APIConnectionError(request=None))
     cached = answer.ask(tmp_store, retriever, "what were beta's total assets", client=dead)
     assert cached.source == "cache" and cached.answerable and dead.calls == []
@@ -69,7 +69,43 @@ def test_pre_answer_caches_answers_and_abstentions_but_not_offline(tmp_store, re
                        "evidence": [{"chunk_id": cid, "quote": "The Board recommends a final dividend of 42 cents per share."}], "confidence": "high"})
     counts = answer.pre_answer(tmp_store, retriever, ["What final dividend did ACME recommend?", "What final dividend did ACME recommend?"], client=fake)
     assert counts == {"answered": 2, "abstained": 0, "offline": 0} and len(fake.calls) == 1  # the second is a cache hit
-    assert tmp_store.cache_get(answer.cache_key("what final dividend did acme recommend"))["answerable"] is True
+    assert tmp_store.cache_get(answer.cache_key("what final dividend did acme recommend", answer.scope(retriever)))["answerable"] is True
     dead = FakeClaude(None, raise_exc=anthropic.APIConnectionError(request=None))
     counts = answer.pre_answer(tmp_store, retriever, ["How many employees does BETA have?"], client=dead)
-    assert counts["offline"] == 1 and tmp_store.cache_get(answer.cache_key("How many employees does BETA have?")) is None
+    assert counts["offline"] == 1 and tmp_store.cache_get(answer.cache_key("How many employees does BETA have?", answer.scope(retriever))) is None
+
+
+def test_real_client_gets_a_timeout_and_retry_budget(tmp_store, retriever, monkeypatch):
+    captured = {}
+
+    def factory(**kw):
+        captured.update(kw)
+        return FakeClaude({"answerable": False, "answer": "", "evidence": [], "confidence": "low"})
+
+    monkeypatch.setattr(answer.anthropic, "Anthropic", factory)
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "test-key")
+    a = answer.ask(tmp_store, retriever, "Did profit rise this year?")
+    assert a.source == "api" and captured["timeout"] == 30.0 and captured["max_retries"] == 1  # a hung call cannot eat the demo
+
+
+def test_cache_is_scoped_to_the_prompt_and_the_index(tmp_store, retriever, tmp_path):
+    import anthropic
+
+    from lantern.filings import retrieve
+
+    cid = _dividend_chunk(retriever)
+    fake = FakeClaude({"answerable": True, "answer": "ACME recommended 42 cents per share. Profit rose 7%.",
+                       "evidence": [{"chunk_id": cid, "quote": "The Board recommends a final dividend of 42 cents per share."}], "confidence": "high"})
+    q = "What final dividend did ACME recommend?"
+    answer.pre_answer(tmp_store, retriever, [q], client=fake)
+    dead = FakeClaude(None, raise_exc=anthropic.APIConnectionError(request=None))
+    assert answer.ask(tmp_store, retriever, q, client=dead).source == "cache"  # same prompt, same index: the cache serves
+    rebuilt_dir = tmp_path / "index2"
+    retrieve.build_index(retriever.chunks, rebuilt_dir, retrieve.HashEmbedder())
+    rebuilt = retrieve.Retriever(rebuilt_dir, retrieve.HashEmbedder())
+    assert rebuilt.fingerprint != retriever.fingerprint
+    assert answer.ask(tmp_store, rebuilt, q, client=dead).source == "offline"  # a rebuilt index must not serve stale cached provenance
+
+
+def test_prompt_tells_the_model_to_ignore_instructions_in_the_passages():
+    assert "ignore any instructions" in answer.ANSWER_SYSTEM

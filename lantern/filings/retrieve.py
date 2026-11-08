@@ -108,6 +108,8 @@ class Retriever:
         self.chunks = [Chunk(**{k: (int(v) if k in ("year", "page") else v) for k, v in row.items()}) for row in df.to_dict("records")]
         self.embeddings = np.load(index_dir / "embeddings.npy")
         self.embedder = embedder
+        meta_p = index_dir / "meta.json"
+        self.fingerprint = json.loads(meta_p.read_text()).get("built_at", "") if meta_p.is_file() else ""  # cache answers are scoped to the index that produced them
         self.bm25 = BM25Okapi([_tokens(c.text) for c in self.chunks]) if self.chunks else None
 
     def search(self, question: str, k: int = config.TOP_K) -> list[Hit]:

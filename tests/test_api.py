@@ -100,3 +100,12 @@ def test_pdf_is_served_and_eval_404_before_a_run(filings_app):
 def test_ask_without_index_is_503(tmp_store, tmp_path, monkeypatch):
     monkeypatch.setattr(api.config, "FILINGS_INDEX", tmp_path / "missing")
     assert TestClient(api.create_app(tmp_store)).post("/api/filings/ask", json={"question": "x"}).status_code == 503
+
+
+def test_pdf_route_serves_only_manifest_pdfs(filings_app, tmp_path):
+    gold = api.config.FILINGS_DIR / "gold"
+    gold.mkdir(parents=True, exist_ok=True)
+    (gold / "gold_draft.jsonl").write_text('{"answer": "secret"}\n')
+    assert filings_app.get("/filings/pdf/ACME-AR2025.pdf").status_code == 200
+    assert filings_app.get("/filings/pdf/gold/gold_draft.jsonl").status_code == 404  # only the manifest's PDFs are served
+    assert filings_app.get("/filings/pdf/manifest.json").status_code == 404

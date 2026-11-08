@@ -53,16 +53,19 @@ window.Lantern = window.Lantern || {};
     const card = root.querySelector('#answer');
     btn.disabled = true; btn.textContent = 'Asking…';
     card.innerHTML = '<p class="sub">Searching the filings…</p>';
+    const abort = new AbortController();
+    const timer = setTimeout(() => abort.abort(), 60000);
     try {
-      const r = await fetch('/api/filings/ask', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question }) });
+      const r = await fetch('/api/filings/ask', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question }), signal: abort.signal });
       const a = await r.json();
       if (!r.ok) { card.innerHTML = `<p class="offline">${esc(a.error || 'The server returned an error')} (HTTP ${r.status})</p>`; return; }
       card.innerHTML = answerHtml(a);
       if (!asked.includes(question)) asked.unshift(question);
       renderHistory(root);
     } catch (e) {
-      card.innerHTML = '<p class="offline">The server could not be reached.</p>';
+      card.innerHTML = e.name === 'AbortError' ? '<p class="offline">The answer took longer than a minute; the question is logged, try again.</p>' : '<p class="offline">The server could not be reached.</p>';
     } finally {
+      clearTimeout(timer);
       btn.disabled = false; btn.textContent = 'Ask';
     }
   }

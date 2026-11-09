@@ -123,3 +123,51 @@ def test_coverage_scores_the_month_twelve_ahead_not_the_context_end(tmp_store, s
 
     res = challenger.coverage_backtest(tmp_store, TightFake())
     assert res["coverage"] < 0.1  # scoring vals[i] instead of vals[i+12] would make this exactly 1.0
+
+
+class FakeTabPFN:
+    """Records what it saw; predicts the base rate of its training labels."""
+
+    def __init__(self):
+        self.train_sizes = []
+        self._rate = 0.5
+
+    def fit(self, X, y):
+        self.train_sizes.append(len(X))
+        self._rate = float(sum(y) / max(1, len(y)))
+        return self
+
+    def predict_proba(self, X):
+        import numpy as _np
+
+        return _np.column_stack([_np.full(len(X), 1 - self._rate), _np.full(len(X), self._rate)])
+
+
+def test_probability_challenger_walks_forward_without_peeking(tmp_store, seeded_all_series):
+    from lantern import backtest
+
+    backtest.run_backtest(tmp_store, "2010-01")
+    fake = FakeTabPFN()
+    res = challenger.challenger_prob(tmp_store, clf=fake, min_train=24)
+    assert fake.train_sizes == sorted(fake.train_sizes) and fake.train_sizes[0] >= 24
+    # the 12-month label horizon must be embargoed: with it, the largest training set is exactly
+    # labelled-months - 13; without it (leaking overlapping-horizon labels) it would be labelled - 1
+    import pandas as pd
+
+    labelled = int(tmp_store.load_series("backtest.history")["label"].notna().sum())
+    assert max(fake.train_sizes) == labelled - 13
+    assert 0.0 <= res["brier_tabpfn"] <= 1.0 and 0.0 <= res["brier_champion_wf"] <= 1.0
+    assert res["n"] > 50 and res["n"] + 12 <= len(fake.train_sizes) + 12 + res["n"]  # scored months bounded
+    assert "TabPFN v2" in tmp_store.get_meta("challenger_prob")["model"]  # the pinned 2.0.x line, labelled honestly
+    # the fake predicts its training-window base rate, so it must score exactly the walk-forward base-rate Brier;
+    # the hindsight scored-window mean is kept only under an explicitly hindsight name
+    assert abs(res["brier_tabpfn"] - res["brier_base_rate_wf"]) < 1e-12
+    assert "brier_base_rate_hindsight" in res and "brier_base_rate" not in res
+    assert res["base_rate"] > 0
+
+
+def test_probability_challenger_without_history_raises(tmp_store):
+    import pytest
+
+    with pytest.raises(RuntimeError, match="history"):
+        challenger.challenger_prob(tmp_store, clf=FakeTabPFN())

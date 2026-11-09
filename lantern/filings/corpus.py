@@ -7,7 +7,7 @@ as having no text and are never chunked, so no answer can cite them), tables app
 import hashlib
 import json
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -24,6 +24,7 @@ class Page:
     no: int
     text: str
     has_text: bool
+    tables: list[str] = field(default_factory=list)  # each detected table, rendered with header-paired rows
 
 
 @dataclass(frozen=True)
@@ -42,22 +43,49 @@ def token_estimate(text: str) -> int:
     return len(text) // 4
 
 
+_DETACHED_COMMA = re.compile(r"(\d+)(?: ?,)+$")
+
+
+def _cell(c) -> str:
+    """One table cell as printed: collapse newlines, and re-attach the thousands separators that
+    table extraction detaches ("6,106" comes back as "6106\n,"). The regroup fires only on that raw
+    artifact signature, so a genuine trailing comma or a leading-zero code is never rewritten."""
+    raw = str(c) if c is not None else ""
+    t = " ".join(raw.split())
+    if "\n," in raw:
+        m = _DETACHED_COMMA.fullmatch(t)
+        if m and not m.group(1).startswith("0"):
+            return f"{int(m.group(1)):,}"
+    return t
+
+
 def ingest_pdf(path: Path) -> list[Page]:
     doc = pymupdf.open(path)
     pages = []
     for i, pg in enumerate(doc):
         raw = pg.get_text("text").strip()
-        rows = []
+        tables = []
         try:
             for table in pg.find_tables().tables:
-                for row in table.extract():
-                    cells = [str(c).strip() for c in row if c is not None and str(c).strip()]
-                    if cells:
-                        rows.append("\t".join(cells))
+                rows = []
+                data = table.extract()
+                header = [_cell(c) for c in (data[0] if data else [])]
+                body = data[1:] if data and any(header[1:]) else data
+                for row in body:
+                    cells = [_cell(c) for c in row]
+                    if not any(cells):
+                        continue
+                    if len(cells) == len(header) and any(header[1:]) and any(cells[1:]):
+                        # pair every value with its column header, so a number never loses its meaning
+                        pairs = [f"{header[j]} {cells[j]}".strip() for j in range(1, len(cells)) if cells[j]]
+                        rows.append(f"{cells[0] or header[0]}: " + "; ".join(pairs))
+                    else:
+                        rows.append("\t".join(c for c in cells if c))
+                if rows:
+                    tables.append("\n".join(rows))
         except Exception:  # ponytail: table detection is best effort; the text layer already holds the numbers
             pass
-        text = (raw + ("\n" + "\n".join(rows) if rows else "")).strip()
-        pages.append(Page(no=i + 1, text=text, has_text=len(raw) >= MIN_TEXT_CHARS))
+        pages.append(Page(no=i + 1, text=raw, has_text=len(raw) >= MIN_TEXT_CHARS, tables=tables))
     return pages
 
 
@@ -93,6 +121,16 @@ def chunk_pages(
                 cur = f"{cur} {unit}".strip()
         if cur:
             pieces.append(cur)
+        for block in page.tables:  # a table is retrieved as itself, never diluted into a prose window
+            lines, buf = block.splitlines(), ""
+            for line in lines:
+                if buf and len(buf) + 1 + len(line) > size:
+                    pieces.append(buf)
+                    buf = line
+                else:
+                    buf = f"{buf}\n{line}".strip()
+            if buf:
+                pieces.append(buf)
         for pos, text in enumerate(pieces):
             cid = hashlib.sha256(f"{file_sha}:{page.no}:{pos}".encode()).hexdigest()[:16]
             out.append(Chunk(cid, entry["ticker"], entry["company"], entry["filing"], int(entry["year"]), entry["file"], page.no, text))

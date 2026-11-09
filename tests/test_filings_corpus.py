@@ -34,3 +34,40 @@ def test_build_corpus_fills_manifest_and_ids_are_deterministic(tmp_path):
     acme = next(m for m in manifest if m["ticker"] == "ACME")
     assert acme["pages"] == 3 and acme["pages_without_text"] == 1 and len(acme["sha256"]) == 64 and acme["ingested_at"].endswith("+00:00")
     assert json.loads((tmp_path / "filings" / "manifest.json").read_text())[0]["sha256"] == manifest[0]["sha256"]
+
+
+def test_table_rows_carry_their_column_headers():
+    pages = corpus.ingest_pdf(FIXTURES / "filings" / "ACME-AR2025.pdf")
+    # a table value must never be separated from the column that gives it meaning
+    assert pages[1].tables and "Banking: 2025 4,120; 2024 3,900" in pages[1].tables[0]
+    assert "Insurance: 2025 1,010; 2024 960" in pages[1].tables[0]
+    assert "Banking:" not in pages[1].text  # the prose text stays prose; tables travel separately
+
+
+def test_each_table_becomes_its_own_chunk():
+    entry = {"ticker": "ACME", "company": "ACME Holdings", "filing": "Annual Report 2025", "year": 2025, "file": "ACME-AR2025.pdf"}
+    chunks = corpus.chunk_pages(corpus.ingest_pdf(FIXTURES / "filings" / "ACME-AR2025.pdf"), entry, "f" * 64)
+    table_chunks = [c for c in chunks if "Banking: 2025 4,120" in c.text]
+    assert len(table_chunks) == 1 and table_chunks[0].page == 2
+    assert "final dividend" not in table_chunks[0].text  # a table chunk is the table, not the page
+    prose = [c for c in chunks if "42 cents" in c.text]
+    assert prose and all("Banking:" not in c.text for c in prose)
+
+
+def test_an_oversized_table_splits_by_rows():
+    rows = "\n".join(f"Line item {i}: 2025 {i:,}; 2024 {i + 1:,}" for i in range(400, 520))
+    pages = [corpus.Page(no=3, text="prose", has_text=True, tables=[rows])]
+    entry = {"ticker": "X", "company": "X", "filing": "AR", "year": 2025, "file": "x.pdf"}
+    chunks = corpus.chunk_pages(pages, entry, "a" * 64, size_tokens=200, overlap_tokens=0)
+    table_chunks = [c for c in chunks if "Line item" in c.text]
+    assert len(table_chunks) >= 2  # split, never dropped
+    assert all(len(c.text) <= 200 * 4 * 1.5 for c in table_chunks)
+    assert all(c.text.splitlines()[0].startswith("Line item") for c in table_chunks)  # splits on row boundaries
+
+
+def test_cell_repair_fires_only_on_the_extraction_artifact():
+    assert corpus._cell("6106\n,") == "6,106"            # the real artifact: comma pushed to its own line
+    assert corpus._cell("6106000\n,\n,") == "6,106,000"
+    assert corpus._cell("2025,") == "2025,"              # a genuine trailing comma is not a mangled number
+    assert corpus._cell("2025 ,") == "2025 ,"
+    assert corpus._cell("0075\n,") == "0075 ,"           # leading zeros are codes; int() would destroy them

@@ -104,3 +104,31 @@ Judge robustness: every prediction set was scored independently by local Qwen2.5
 Qwen2.5-32B judges. Agreement is exact on 5 of 7 sets and within one question on the other two
 (base-14b 0.58 vs 0.62 easy; base-3b 0.17 vs 0.21 easy). The scores are not an artifact of one
 judge. The pinned paper judge (DeepSeek-V4-Pro) remains the citable reference if ever needed.
+## Chunking and retrieval prototype (branch lantern-chunking, 2026-11-09)
+
+Found and fixed: PyMuPDF table extraction detaches thousands separators ("6,106" → "6106\n,") on the
+real filings — every indexed table row carried mangled numbers. The branch repairs the commas,
+renders each table row self-describing with its column headers, and emits every table as its own
+chunk instead of diluting prose windows (this last fix alone cured a long-flaky ranking test).
+
+Quote-in-top-8 on the draft gold (ceiling 27/30: three old quotes were drafted from the mangled text
+and can no longer exist verbatim):
+
+| Configuration | hit@8 | notes |
+|---|---|---|
+| old chunking (baseline) | 0.70 | |
+| clean chunking | 0.70 | structural win, no retrieval delta; all 6 real misses are PROSE, ranks 10–43 |
+| + bge-reranker-base over 50 candidates | 0.73 | recovers g014/g018/g026 (the gate failures); demotes g001/g024 |
+| + bge-reranker-v2-m3 over 50 candidates | 0.77 (= 0.85 of ceiling) | recovers g002/g014/g018/g026; still demotes g001/g024 |
+
+Tuning-pass candidate (apply only after gold verification): v2-m3 reranker over 50 candidates,
+with the lexical top-3 pinned to protect easy hits. Sequencing: after this branch merges, the
+production index must be rebuilt and the prepared questions re-cached — pre-answer through the
+on-prem model (LANTERN_LLM_URL) needs no API credits; gold-draft regeneration does.
+
+Post-review measurement: 33.7% of table chunks (643 of 1,908) still carry extraction-level mangling
+beyond the repaired comma artifact — detached decimal points, comma-only cells, glued words — which
+cell-level repair cannot reconstruct confidently. Documented ceiling: table chunks are retrieval
+aids; the prose text layer holds the correctly printed numbers and is where quotes verify, so the
+mangling costs retrieval recall, never answer correctness. Escalation path if the verified gold set
+demands more: a layout-aware extractor (Docling) behind the same ingest interface.

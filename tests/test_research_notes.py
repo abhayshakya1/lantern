@@ -95,3 +95,18 @@ def test_ledger_composes_backtest_and_live_rows(tmp_store, seeded_all_series, ru
 
 def test_ledger_is_empty_not_broken_without_a_backtest(tmp_store):
     assert notes.ledger(tmp_store) == []
+
+
+def test_store_gives_each_thread_its_own_sqlite_connection(tmp_store):
+    import threading
+
+    seen = {}
+
+    def grab():
+        seen["worker"] = id(tmp_store.db)
+
+    t = threading.Thread(target=grab)
+    t.start()
+    t.join()
+    seen["main"] = id(tmp_store.db)
+    assert seen["main"] != seen["worker"]  # one shared connection across the API threadpool corrupts reads

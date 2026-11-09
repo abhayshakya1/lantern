@@ -3,7 +3,7 @@ window.Lantern = window.Lantern || {};
 (function () {
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const CONF = { high: ['calm', 'High confidence'], medium: ['elevated', 'Medium confidence'], low: ['high', 'Low confidence'] };
-  const SOURCE = { api: 'answered by the model', cache: 'answered from this morning\'s cache', none: 'nothing retrieved', offline: 'answer service offline', refusal: 'the model declined' };
+  const SOURCE = { api: 'answered by the model', local: 'answered by the on-prem model', cache: 'answered from this morning\'s cache', none: 'nothing retrieved', offline: 'answer service offline', refusal: 'the model declined' };
   const asked = [];
 
   function fmtDate(iso) {
@@ -71,7 +71,7 @@ window.Lantern = window.Lantern || {};
   }
 
   function answerHtml(a) {
-    const meta = `<p class="src">${esc(SOURCE[a.source] || a.source)}${a.latency_ms ? ` · ${a.latency_ms.toLocaleString()} ms` : ''}${a.model && a.source === 'api' ? ` · ${esc(a.model)}` : ''}</p>`;
+    const meta = `<p class="src">${esc(SOURCE[a.source] || a.source)}${a.latency_ms ? ` · ${a.latency_ms.toLocaleString()} ms` : ''}${a.model && (a.source === 'api' || a.source === 'local') ? ` · ${esc(a.model)}` : ''}</p>`;
     const context = (a.context || []).length
       ? `<p class="ctx-title">Nearest passages, shown as context, not as an answer</p><ul class="context">${a.context.slice(0, 5).map((c) => `<li><span class="mono">${esc(c.ticker)} · page ${c.page}</span> ${esc(c.text.slice(0, 300))}${c.text.length > 300 ? '…' : ''}</li>`).join('')}</ul>`
       : '';

@@ -16,6 +16,7 @@ def main() -> int:
     ap.add_argument("--out", required=True)
     ap.add_argument("--model", default="Qwen/Qwen2.5-7B-Instruct")
     ap.add_argument("--epochs", type=float, default=1.0)
+    ap.add_argument("--lr", type=float, default=2e-4)
     ap.add_argument("--max-len", type=int, default=2048)
     args = ap.parse_args()
 
@@ -43,7 +44,7 @@ def main() -> int:
         num_train_epochs=args.epochs,
         per_device_train_batch_size=1,
         gradient_accumulation_steps=16,
-        learning_rate=2e-4,
+        learning_rate=args.lr,
         lr_scheduler_type="cosine",
         warmup_ratio=0.03,
         logging_steps=20,

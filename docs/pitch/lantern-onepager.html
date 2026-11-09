@@ -1,0 +1,105 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Lantern — Evidence Brief</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono&display=swap">
+<style>
+  :root{--navy:#0E1117;--accent:#1F5FBF;--ink:#1F2933;--muted:#5B6773;--line:#D9DEE3;--tint:#F2F6FB;--good:#1A9E74}
+  *{box-sizing:border-box} html,body{margin:0;padding:0}
+  body{font-family:'IBM Plex Sans',sans-serif;color:var(--ink);font-size:9.8pt;line-height:1.5}
+  .page{padding:14mm 16mm}
+  h1{font-family:'Source Serif 4',serif;font-weight:600;font-size:23pt;margin:0;color:var(--navy)}
+  h2{font-family:'Source Serif 4',serif;font-weight:600;font-size:12.5pt;margin:7mm 0 2mm;color:var(--navy);border-bottom:1.5px solid var(--accent);padding-bottom:1mm}
+  .kicker{font-family:'IBM Plex Mono',monospace;font-size:8pt;color:var(--muted);letter-spacing:.6px;text-transform:uppercase;margin-bottom:2mm}
+  .lede{font-size:11pt;color:var(--ink);max-width:165mm;margin:2.5mm 0 0}
+  table{border-collapse:collapse;width:100%;font-size:8.8pt;margin:1.5mm 0}
+  th{text-align:left;color:var(--muted);font-weight:500;border-bottom:1px solid var(--line);padding:1.2mm 2mm}
+  td{border-bottom:1px solid var(--line);padding:1.4mm 2mm;vertical-align:top}
+  .num{font-variant-numeric:tabular-nums}
+  .tiles{display:flex;gap:4mm;margin:3mm 0}
+  .tile{flex:1;background:var(--tint);border-left:3px solid var(--accent);padding:2.5mm 3mm}
+  .tile .v{font-family:'Source Serif 4',serif;font-size:14.5pt;font-weight:600;color:var(--navy)}
+  .tile .l{font-size:7.8pt;color:var(--muted);margin-top:.5mm}
+  .fine{font-size:7.8pt;color:var(--muted)}
+  .cols{display:flex;gap:6mm}.col{flex:1;min-width:0}
+  ul{margin:1mm 0 2mm;padding-left:4.5mm}li{margin-bottom:1mm}
+  .foot{margin-top:6mm;padding-top:2mm;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:7.6pt;color:var(--muted)}
+  .pagebreak{break-before:page}
+  @page{size:A4;margin:0}
+</style></head><body>
+
+<div class="page">
+  <div class="kicker">Evidence brief · prepared by Abhay Shakya · November 2026 · confidential</div>
+  <h1>Lantern</h1>
+  <p class="lede"><strong>Research you can defend, on infrastructure you control.</strong> A working platform — not a concept — that turns public market data and primary filings into auditable research: a calibrated AI-equity risk monitor, grounded filings Q&amp;A, and a research desk that writes and scores its own notes. Built in days, demonstrated live, measurable end to end.</p>
+
+  <div class="tiles">
+    <div class="tile"><div class="v">3 modules</div><div class="l">live on real data today: monitor, filings Q&amp;A, research desk</div></div>
+    <div class="tile"><div class="v">100%</div><div class="l">abstention recall: no model ever answered an unanswerable probe</div></div>
+    <div class="tile"><div class="v">77% vs 50%</div><div class="l">forecast-band coverage, house model vs Google TimesFM, 252 months</div></div>
+    <div class="tile"><div class="v">0 cloud calls</div><div class="l">needed end to end: answering, forecasting, challenging and judging run locally</div></div>
+  </div>
+
+  <h2>What a reviewer sees</h2>
+  <ul>
+    <li><strong>Every number traces.</strong> Each figure on screen carries its source, pull time and SHA-256; raw responses are kept on disk; notes regenerate bit-for-bit from the stored model run.</li>
+    <li><strong>Honesty is enforced by architecture, not prompts.</strong> A filings answer ships only with quotes that are character-for-character verbatim in the filing, cited to the page — otherwise one fixed abstention sentence. A research-note draft that uses a number absent from the model run is rejected automatically.</li>
+    <li><strong>The models keep their own public scorecard.</strong> An accuracy ledger scores every past forecast against what the market then did; the Q&amp;A system is gated on abstention precision against a human-verified gold set; every claim below is reproducible from the repository.</li>
+  </ul>
+
+  <h2>Measured, not promised</h2>
+  <table>
+    <tr><th>Exhibit</th><th>Result</th><th>Honest caveat</th></tr>
+    <tr><td>De-rating probability calibration (2003–2026, 275 months)</td><td class="num">Hit rate 0.93 · Brier 0.064 vs 0.064 base</td><td>In-sample fit, printed on the page itself; three calibrated drivers, four labelled watch-only</td></tr>
+    <tr><td>Forecast fan, walk-forward p10–p90 coverage (252 months)</td><td class="num">House 77% vs TimesFM&nbsp;2.5 zero-shot 50% (target 80%)</td><td>Challenger runs locally; Apache-licensed weights</td></tr>
+    <tr><td>Probability challenger (TabPFN tabular foundation model)</td><td class="num">Brier 0.079 vs champion 0.077 vs base-rate 0.033: neither beats the base rate out of sample</td><td>12-month label embargo enforced by test — a naive leaky setup scored 0.026 and was caught</td></tr>
+    <tr><td>Filings Q&amp;A abstention gate</td><td class="num">Recall 1.00 all models · precision 0.83 on the machine draft</td><td>0.90 gate judged on the human-verified set (verification in progress)</td></tr>
+    <tr><td>On-prem answerer (Qwen2.5-14B behind the same verbatim gate)</td><td class="num">0.58 / 0.60 judge-correct (easy/medium) vs cloud 0.83 / 0.80</td><td>Local judge (two independent local judges agree within one question); fine-tuning on in-house data measured and documented</td></tr>
+  </table>
+  <p class="fine">All evaluation runs — scoring, judging, fine-tuning, challengers — executed on own hardware with zero external API dependency. Cloud models are an option, never a requirement.</p>
+
+  <div class="foot"><span>Lantern · evidence brief</span><span>page 1 of 2</span></div>
+</div>
+
+<div class="page pagebreak">
+  <h2>On-premise by design</h2>
+  <div class="cols">
+    <div class="col">
+      <ul>
+        <li><strong>One environment variable</strong> swaps the cloud model for an open-weight model on the bank's own GPU — identical interface, verification, logging; the answer is labelled with its true source and model.</li>
+        <li><strong>Judging is local too:</strong> the evaluation harness scores against a locally served judge, so model-risk evidence is producible inside the perimeter.</li>
+        <li>Data, documents, keys and model weights never leave the building; the demo runs from a laptop on live public data each morning.</li>
+      </ul>
+    </div>
+    <div class="col">
+      <ul>
+        <li><strong>Governance-ready:</strong> model inventory, prompt hashes, provenance, calibration disclosures and challenger comparisons map directly onto the MAS Guidelines on AI Risk Management (inventory expectations ~October 2027).</li>
+        <li><strong>Third-party diligence done:</strong> every component and data source catalogued with its license; the two items needing commercial resolution (PDF library, market-data feed) are identified with costed paths.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Scale path: the whole Singapore market</h2>
+  <ul>
+    <li>Corpus expansion from the eight demo filings to every SGX-listed issuer is <strong>in progress</strong>: issuer universe seeded from SGX's public data, a verified discovery-and-download pipeline running in batches against issuers' own investor-relations sites, with measured coverage per batch.</li>
+    <li>Production deployment replaces web harvesting with the bank's licensed SGX/market-data entitlements — the pipeline from ingest onward is identical.</li>
+    <li>Index engineering for ~700k passages is scoped with performance gates (retrieval latency budget ~1s).</li>
+  </ul>
+
+  <h2>Why this, why now</h2>
+  <div class="cols">
+    <div class="col">
+      <ul>
+        <li>Research output across Singapore banks is thin relative to the data available; no local bank publishes a calibrated valuation-risk metric on AI equities.</li>
+        <li>Lantern's answer is measurable outcomes: a number with a public track record, answers with verbatim evidence, and a note a reviewer can regenerate.</li>
+      </ul>
+    </div>
+    <div class="col">
+      <ul>
+        <li>First working version built in under two weeks on public data; every subsequent module landed with tests, independent review and a signed scorecard.</li>
+        <li>Next step: a working session with your research and model-risk teams — the platform demos live, including with the network unplugged from every cloud API.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="foot"><span>Lantern · evidence brief · model outputs are research inputs, not investment advice</span><span>page 2 of 2</span></div>
+</div>
+</body></html>

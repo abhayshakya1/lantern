@@ -130,7 +130,6 @@ class FakeTabPFN:
 
     def __init__(self):
         self.train_sizes = []
-        self.max_train_idx = []
         self._rate = 0.5
 
     def fit(self, X, y):
@@ -151,6 +150,12 @@ def test_probability_challenger_walks_forward_without_peeking(tmp_store, seeded_
     fake = FakeTabPFN()
     res = challenger.challenger_prob(tmp_store, clf=fake, min_train=24)
     assert fake.train_sizes == sorted(fake.train_sizes) and fake.train_sizes[0] >= 24
+    # the 12-month label horizon must be embargoed: with it, the largest training set is exactly
+    # labelled-months - 13; without it (leaking overlapping-horizon labels) it would be labelled - 1
+    import pandas as pd
+
+    labelled = int(tmp_store.load_series("backtest.history")["label"].notna().sum())
+    assert max(fake.train_sizes) == labelled - 13
     assert 0.0 <= res["brier_tabpfn"] <= 1.0 and 0.0 <= res["brier_champion_wf"] <= 1.0
     assert res["n"] > 50 and res["n"] + 12 <= len(fake.train_sizes) + 12 + res["n"]  # scored months bounded
     assert tmp_store.get_meta("challenger_prob")["model"].startswith("TabPFN")

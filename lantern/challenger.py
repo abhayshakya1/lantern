@@ -152,7 +152,7 @@ def challenger_prob(store, clf=None, min_train: int = 60) -> dict:
     for i in range(min_train, n_months):
         if np.isnan(labels[i]):
             continue  # the trailing months whose 12-month outcome is not known yet
-        train = [j for j in range(i) if not np.isnan(labels[j])]
+        train = [j for j in range(i - 12) if not np.isnan(labels[j])]  # 12-month embargo: a label formed after month i leaks the future
         if len(train) < min_train:
             continue
         X = np.nan_to_num(z[train], nan=0.0)
@@ -174,7 +174,7 @@ def challenger_prob(store, clf=None, min_train: int = 60) -> dict:
         "brier_champion_insample": cal.get("brier"),
         "base_rate": float(np.mean(y)),
         "brier_base_rate": float(np.mean((np.mean(y) - y) ** 2)),
-        "model": "TabPFN v2 (tabular foundation model), walk-forward",
+        "model": "TabPFN (tabular foundation model, open v1 weights), walk-forward",
         "features": len(zcols),
         "run_at": datetime.now(UTC).isoformat(),
     }

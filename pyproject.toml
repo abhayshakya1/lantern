@@ -27,7 +27,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-challenger = ["timesfm[torch]", "tabpfn"]  # Apache-2.0 2.5 weights; the 3.0 checkpoint is non-commercial
+challenger = ["timesfm[torch]", "tabpfn==2.0.9"]  # 2.0.x: HF-hosted weights under the Prior Labs license; 2.5+ needs a PriorLabs token  # Apache-2.0 2.5 weights; the 3.0 checkpoint is non-commercial
 
 [project.scripts]
 lantern = "lantern.cli:main"

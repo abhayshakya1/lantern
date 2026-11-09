@@ -1,0 +1,126 @@
+{
+ "as_of": "2026-05-02",
+ "source": "https://en.wikipedia.org/wiki/Straits_Times_Index; no changes at Sep 2026 review (FTSE Russell)",
+ "constituents": [
+  {
+   "company": "CapitaLand Ascendas REIT",
+   "stock_code": "A17U"
+  },
+  {
+   "company": "CapitaLand Integrated Commercial Trust",
+   "stock_code": "C38U"
+  },
+  {
+   "company": "CapitaLand Investment",
+   "stock_code": "9CI"
+  },
+  {
+   "company": "City Developments Limited",
+   "stock_code": "C09"
+  },
+  {
+   "company": "DBS Group Holdings",
+   "stock_code": "D05"
+  },
+  {
+   "company": "DFI Retail Group Holdings",
+   "stock_code": "D01"
+  },
+  {
+   "company": "Frasers Centrepoint Trust",
+   "stock_code": "J69U"
+  },
+  {
+   "company": "Frasers Logistics & Commercial Trust",
+   "stock_code": "BUOU"
+  },
+  {
+   "company": "Genting Singapore",
+   "stock_code": "G13"
+  },
+  {
+   "company": "Hongkong Land Holdings",
+   "stock_code": "H78"
+  },
+  {
+   "company": "Jardine Matheson Holdings",
+   "stock_code": "J36"
+  },
+  {
+   "company": "Keppel Ltd",
+   "stock_code": "BN4"
+  },
+  {
+   "company": "Keppel DC REIT",
+   "stock_code": "AJBU"
+  },
+  {
+   "company": "Mapletree Industrial Trust",
+   "stock_code": "ME8U"
+  },
+  {
+   "company": "Mapletree Logistics Trust",
+   "stock_code": "M44U"
+  },
+  {
+   "company": "Mapletree Pan Asia Commercial Trust",
+   "stock_code": "N2IU"
+  },
+  {
+   "company": "Oversea-Chinese Banking Corporation",
+   "stock_code": "O39"
+  },
+  {
+   "company": "SATS",
+   "stock_code": "S58"
+  },
+  {
+   "company": "Seatrium",
+   "stock_code": "5E2"
+  },
+  {
+   "company": "Sembcorp Industries",
+   "stock_code": "U96"
+  },
+  {
+   "company": "Singapore Airlines",
+   "stock_code": "C6L"
+  },
+  {
+   "company": "Singapore Exchange",
+   "stock_code": "S68"
+  },
+  {
+   "company": "Singapore Telecommunications",
+   "stock_code": "Z74"
+  },
+  {
+   "company": "Singapore Technologies Engineering",
+   "stock_code": "S63"
+  },
+  {
+   "company": "Thai Beverage",
+   "stock_code": "Y92"
+  },
+  {
+   "company": "United Overseas Bank",
+   "stock_code": "U11"
+  },
+  {
+   "company": "UOL Group",
+   "stock_code": "U14"
+  },
+  {
+   "company": "Venture Corporation",
+   "stock_code": "V03"
+  },
+  {
+   "company": "Wilmar International",
+   "stock_code": "F34"
+  },
+  {
+   "company": "Yangzijiang Shipbuilding",
+   "stock_code": "BS6"
+  }
+ ]
+}

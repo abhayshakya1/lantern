@@ -914,5 +914,141 @@
   "pages": 160,
   "sha256": "92eae925346fa3507a4007eb1ef883dd56cd932aa101095f72392ef2b9618cac",
   "bytes": 1552238
+ },
+ {
+  "company": "Teho International Inc Ltd",
+  "stock_code": "5OQ",
+  "url": "",
+  "year": null,
+  "note": "failed: listedcompany.com WAF 202 to honest UA",
+  "status": "no-url"
+ },
+ {
+  "company": "The Trendlines Group Ltd",
+  "stock_code": "42T",
+  "url": "https://s3.eu-west-2.amazonaws.com/trendlines.media/wp-content/uploads/2026/03/Trendlines_AR2025-2.pdf",
+  "year": 2025,
+  "note": "company media bucket; verified by fetcher (agent curl lacked CA store)",
+  "status": "fetch-failed: SSLError"
+ },
+ {
+  "company": "Totm Technologies Ltd",
+  "stock_code": "42F",
+  "url": "",
+  "year": null,
+  "note": "failed: listedcompany.com host did not resolve",
+  "status": "no-url"
+ },
+ {
+  "company": "Trek 2000 International Ltd",
+  "stock_code": "5AB",
+  "url": "",
+  "year": null,
+  "note": "failed: own IR page has no PDF links; SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "Tritech Group Ltd",
+  "stock_code": "5G9",
+  "url": "https://www.tritech.com.sg/documents/Tritech%20Group%20Limited%20-%20Annual%20Report%20FY2026.pdf",
+  "year": 2026,
+  "note": "tritech.com.sg, HEAD verified",
+  "status": "ok",
+  "file": "tritech-group-ltd.pdf",
+  "pages": 131,
+  "sha256": "360acc4822cc44f56a8e4ad097287c67fe2cb9d197c21bde47738f83fac273f7",
+  "bytes": 7308484
+ },
+ {
+  "company": "Union Gas Hldgs Ltd",
+  "stock_code": "1F2",
+  "url": "",
+  "year": null,
+  "note": "failed: own site WAF 202 to honest UA",
+  "status": "no-url"
+ },
+ {
+  "company": "Unusual Ltd",
+  "stock_code": "1D1",
+  "url": "",
+  "year": null,
+  "note": "failed: own site 403 to honest UA",
+  "status": "no-url"
+ },
+ {
+  "company": "Vcplus Ltd",
+  "stock_code": "43E",
+  "url": "https://www.vcplus.sg/wp-content/uploads/2025/04/VCPlus-Annual-Report-FY2024.pdf",
+  "year": 2024,
+  "note": "vcplus.sg; FY2025 on SGX only",
+  "status": "ok",
+  "file": "vcplus-ltd.pdf",
+  "pages": 116,
+  "sha256": "13b8bd1ce8c2694376f627aae73a6dcd0ff7ccd53507f9c413e9f02a0ed38b72",
+  "bytes": 942464
+ },
+ {
+  "company": "Versalink Hldgs Ltd",
+  "stock_code": "40N",
+  "url": "",
+  "year": null,
+  "note": "failed: own IR page links SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "Wong Fong Industries Ltd",
+  "stock_code": "1A1",
+  "url": "",
+  "year": null,
+  "note": "failed: own-site PDF 403 to honest UA (wongfongindustries.com .../Wong-Fong-Annual-Report-FY2025-1.pdf)",
+  "status": "no-url"
+ },
+ {
+  "company": "Y Ventures Group Ltd",
+  "stock_code": "1F1",
+  "url": "",
+  "year": null,
+  "note": "failed: own IR page links SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "Ying Li International Real Estate Ltd",
+  "stock_code": "5DM",
+  "url": "https://www.yingligj.com/frontend/web/misc/ar2025.pdf",
+  "year": 2025,
+  "note": "yingligj.com/investor-relation, HEAD verified",
+  "status": "ok",
+  "file": "ying-li-international-real-estate-ltd.pdf",
+  "pages": 203,
+  "sha256": "2f3a306a99c3efb28d92a91067a5aa382f90488843f6817dacac8646f6d1ba6b",
+  "bytes": 9720068
+ },
+ {
+  "company": "Zhongxin Fruit And Juice Ltd",
+  "stock_code": "5EG",
+  "url": "",
+  "year": null,
+  "note": "failed: no own site found; SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "Zico Hldgs Inc",
+  "stock_code": "40W",
+  "url": "",
+  "year": null,
+  "note": "failed: own site bot-check (not worked around); SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "Zixin Group Hldgs Ltd",
+  "stock_code": "42W",
+  "url": "https://www.zixingroup.com.sg/frontend/web/misc/ZGHL-Annual-Report-FY2026.pdf",
+  "year": 2026,
+  "note": "zixingroup.com.sg/investor-relation, HEAD verified",
+  "status": "ok",
+  "file": "zixin-group-hldgs-ltd.pdf",
+  "pages": 182,
+  "sha256": "be26a759a5761e893bd9b34c07b52b6b9c652b830b07bee118c9eb4c3e82b0fa",
+  "bytes": 9842022
  }
 ]

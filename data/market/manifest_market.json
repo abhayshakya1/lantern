@@ -242,5 +242,61 @@
   "year": null,
   "note": "listedcompany.com WAF-gated; browser gap-fill",
   "status": "no-url"
+ },
+ {
+  "company": "Hiap Tong Corp Ltd",
+  "stock_code": "5PO",
+  "url": "https://www.hiaptong.com/_files/ugd/07ff3d_f716b21559044046a482bc7dca19aff1.pdf",
+  "year": 2026,
+  "note": "hiaptong.com, verified"
+ },
+ {
+  "company": "Hosen Group Ltd",
+  "stock_code": "5EV",
+  "url": "https://www.hosengroup.com/wp-content/uploads/2026/04/Hosen-Annual-Report-2025.pdf",
+  "year": 2025,
+  "note": "hosengroup.com, verified"
+ },
+ {
+  "company": "Huationg Global Ltd",
+  "stock_code": "41B",
+  "url": "",
+  "year": 2025,
+  "note": "listedcompany.com WAF-gated; browser gap-fill"
+ },
+ {
+  "company": "Hyphens Pharma International Ltd",
+  "stock_code": "1J5",
+  "url": "",
+  "year": 2025,
+  "note": "own site has cover notice only; full AR SGX-only"
+ },
+ {
+  "company": "Icp Ltd",
+  "stock_code": "5I4",
+  "url": "",
+  "year": null,
+  "note": "SGX-only; browser gap-fill"
+ },
+ {
+  "company": "Indofood Agri Resources Ltd",
+  "stock_code": "5JS",
+  "url": "",
+  "year": 2025,
+  "note": "listedcompany-hosted IR WAF-gated; browser gap-fill"
+ },
+ {
+  "company": "Ips Securex Hldgs Ltd",
+  "stock_code": "42N",
+  "url": "https://www.ips-securex.com/sites/default/files/2026-10/SAR26030100_IPS_Securex_AR%28archive%29_0.pdf",
+  "year": 2026,
+  "note": "ips-securex.com, verified"
+ },
+ {
+  "company": "Isec Healthcare Ltd",
+  "stock_code": "40T",
+  "url": "https://www.isechealthcare.com/wp-content/uploads/2026/04/ISEC_Annual-Report-2025-1.pdf",
+  "year": 2025,
+  "note": "isechealthcare.com, verified"
  }
 ]

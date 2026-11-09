@@ -132,3 +132,15 @@ cell-level repair cannot reconstruct confidently. Documented ceiling: table chun
 aids; the prose text layer holds the correctly printed numbers and is where quotes verify, so the
 mangling costs retrieval recall, never answer correctness. Escalation path if the verified gold set
 demands more: a layout-aware extractor (Docling) behind the same ingest interface.
+
+## Gold draft regenerated against the new index (2026-11-09, on-prem drafter)
+
+The old draft's quotes were drawn from the pre-fix chunks, so the gold set was regenerated with the
+on-prem model (no API credits; the old Opus draft is kept at gold/gold_draft_opus_old_index.jsonl).
+40 rows, 30 answerable across all eight companies, every quote verbatim in the current chunks by
+construction. Prepared questions re-promoted and re-cached on-prem (14 answered / 6 abstained).
+
+Clean-baseline retrieval on the fresh draft: quote-in-top8 0.67; with the v2-m3 reranker 0.70 (+1
+question — far smaller than its effect on the old draft's table-dense misses). Honest status: the
+reranker is a measured candidate for the tuning pass, not a guaranteed win; the pass gets designed
+against the VERIFIED gold set once Abhay has been through the draft.

@@ -26,6 +26,8 @@ def main() -> int:
     ap.add_argument("--k", type=int, default=8)
     ap.add_argument("--rerank", default="", help="cross-encoder model (e.g. BAAI/bge-reranker-base) over --pool candidates")
     ap.add_argument("--pool", type=int, default=50)
+    ap.add_argument("--hf-embed", default="", help="transformers embedding model id (replaces the fastembed default)")
+    ap.add_argument("--pooling", default="cls", choices=["cls", "mean"], help="pooling for --hf-embed")
     args = ap.parse_args()
     reranker = None
     if args.rerank:
@@ -33,8 +35,41 @@ def main() -> int:
 
         reranker = TextCrossEncoder(model_name=args.rerank)
 
+    class HFEmbedder:
+        """Any transformers encoder as an Embedder: batched, pooled, L2-normalised. Experiment-only."""
+
+        def __init__(self, model_id: str, pooling: str):
+            import torch
+            from transformers import AutoModel, AutoTokenizer
+
+            self.torch = torch
+            self.name = model_id
+            self.pooling = pooling
+            self.tok = AutoTokenizer.from_pretrained(model_id)
+            self.model = AutoModel.from_pretrained(model_id, torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32)
+            self.device = "cuda" if torch.cuda.is_available() else "cpu"
+            self.model.to(self.device).eval()
+
+        def embed(self, texts):
+            import numpy as np
+
+            if not texts:
+                return np.zeros((0, 0), dtype=np.float32)
+            out = []
+            with self.torch.no_grad():
+                for i in range(0, len(texts), 32):
+                    enc = self.tok(texts[i:i + 32], padding=True, truncation=True, max_length=512, return_tensors="pt").to(self.device)
+                    h = self.model(**enc).last_hidden_state
+                    if self.pooling == "cls":
+                        v = h[:, 0]
+                    else:
+                        m = enc["attention_mask"].unsqueeze(-1)
+                        v = (h * m).sum(1) / m.sum(1).clamp(min=1)
+                    out.append(self.torch.nn.functional.normalize(v, dim=-1).float().cpu().numpy())
+            return np.concatenate(out)
+
     chunks, manifest = corpus.build_corpus(Path(args.filings))
-    emb = retrieve.FastEmbedder()
+    emb = HFEmbedder(args.hf_embed, args.pooling) if args.hf_embed else retrieve.FastEmbedder()
     with tempfile.TemporaryDirectory() as tmp:
         retrieve.build_index(chunks, Path(tmp), emb, manifest)
         r = retrieve.Retriever(Path(tmp), emb)

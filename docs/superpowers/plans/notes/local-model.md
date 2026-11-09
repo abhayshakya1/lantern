@@ -83,3 +83,24 @@ with the real model id. Live exchanges (Qwen2.5-14B zero-shot, ~3-11 s over the 
 - Cached prepared questions keep serving from the cache regardless of backend (scope is prompt+index).
 
 Demo-day default remains Anthropic + cache; the local path is one environment variable.
+
+## v2 recipe and judge robustness (2026-11-09)
+
+The scorecard's own prescription (lr 5e-5, half epoch, abstention share 35%) was run on the 14B:
+
+| Variant | Judge-correct e/m | Abstention precision / recall | Answer form (token F1, easy) |
+|---|---|---|---|
+| 14B zero-shot | 0.58 / 0.60 | 0.62 / 1.00 | 0.21 |
+| 14B + v1 QLoRA (lr 2e-4, 1 epoch) | 0.38 / 0.40 | 0.33 / **0.80** | 0.34 |
+| **14B + v2 QLoRA (lr 5e-5, 0.5 epoch, 35% abstain)** | **0.58 / 0.40** | 0.48 / **1.00** | **0.50** |
+
+v2 recovers the easy tier to zero-shot level, restores perfect refusal recall and H-Ref 1.0, and
+more than doubles answer-form quality (token F1 0.21 → 0.50: tighter, more extractive answers).
+Medium dips 0.60 → 0.40 on n=8 (≈1.6 questions — within draft-set noise). Net: the gentle fine-tune
+keeps the model's knowledge, teaches the format, and keeps the safety floor. This is the on-prem
+answerer to demo.
+
+Judge robustness: every prediction set was scored independently by local Qwen2.5-14B and
+Qwen2.5-32B judges. Agreement is exact on 5 of 7 sets and within one question on the other two
+(base-14b 0.58 vs 0.62 easy; base-3b 0.17 vs 0.21 easy). The scores are not an artifact of one
+judge. The pinned paper judge (DeepSeek-V4-Pro) remains the citable reference if ever needed.

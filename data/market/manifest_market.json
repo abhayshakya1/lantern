@@ -698,5 +698,221 @@
   "year": null,
   "note": "failed: own site unreachable; SGX only",
   "status": "no-url"
+ },
+ {
+  "company": "Nam Cheong Ltd",
+  "stock_code": "1MZ",
+  "url": "",
+  "year": null,
+  "note": "failed: no own-site AR; SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "Natural Cool Hldgs Ltd",
+  "stock_code": "5IF",
+  "url": "",
+  "year": null,
+  "note": "failed: no own-site AR; SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "New Wave Hldgs Ltd",
+  "stock_code": "5FX",
+  "url": "https://www.newwave.com.sg/_files/ugd/80e9fe_56c4beaebb6f4e1fbe82121d843e620c.pdf",
+  "year": 2026,
+  "note": "newwave.com.sg/investor-relations; cover text 'ANNUAL REPORT 2026' checked",
+  "status": "ok",
+  "file": "new-wave-hldgs-ltd.pdf",
+  "pages": 112,
+  "sha256": "31ef6d4641e4929290d43bb54804969585bd7c62b87dbab8873315585fb89ad9",
+  "bytes": 558538
+ },
+ {
+  "company": "Ocean Sky International Ltd",
+  "stock_code": "1B6",
+  "url": "",
+  "year": null,
+  "note": "failed: no own-site AR; SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "Okp Hldgs Ltd",
+  "stock_code": "5CF",
+  "url": "",
+  "year": null,
+  "note": "failed: listedcompany.com WAF 202 to honest UA",
+  "status": "no-url"
+ },
+ {
+  "company": "Old Chang Kee Ltd",
+  "stock_code": "5ML",
+  "url": "",
+  "year": null,
+  "note": "failed: listedcompany.com WAF 202 to honest UA",
+  "status": "no-url"
+ },
+ {
+  "company": "Olive Tree Estates Ltd",
+  "stock_code": "1H2",
+  "url": "",
+  "year": null,
+  "note": "failed: own site 403 to honest UA",
+  "status": "no-url"
+ },
+ {
+  "company": "Polaris Ltd",
+  "stock_code": "5BI",
+  "url": "",
+  "year": null,
+  "note": "failed: own site unreachable; SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "Pollux Properties Ltd",
+  "stock_code": "5AE",
+  "url": "https://pollux.com.sg/wp-content/uploads/2025/04/Pollux-Properties-AR2024-SGX.pdf",
+  "year": 2024,
+  "note": "pollux.com.sg, HEAD verified; FY2025 on SGX only",
+  "status": "ok",
+  "file": "pollux-properties-ltd.pdf",
+  "pages": 142,
+  "sha256": "b21dc08d0ad95f063e876bdb6cda54f983b0a067a5d58ab19a76ec6b3b88ae0b",
+  "bytes": 6966410
+ },
+ {
+  "company": "Prospera Global Ltd",
+  "stock_code": "5HH",
+  "url": "",
+  "year": null,
+  "note": "failed: no own site found; SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "Rich Capital Hldgs Ltd",
+  "stock_code": "5G4",
+  "url": "https://www.richcapital.com.sg/download/Full%2007%20AR%202026%20RCH.pdf",
+  "year": 2026,
+  "note": "richcapital.com.sg/reports.php, HEAD verified",
+  "status": "ok",
+  "file": "rich-capital-hldgs-ltd.pdf",
+  "pages": 111,
+  "sha256": "ad250599cf33b763ed658341bbe52704db2060237c7a2dfe848b61ba904f4699",
+  "bytes": 431517
+ },
+ {
+  "company": "Sakae Hldgs Ltd",
+  "stock_code": "5DO",
+  "url": "",
+  "year": null,
+  "note": "failed: own IR page has no PDF links; SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "Secura Group Ltd",
+  "stock_code": "43B",
+  "url": "https://securagroup.com.sg/wp-content/uploads/2026/04/01.-Annual-Report-FY2025.pdf",
+  "year": 2025,
+  "note": "securagroup.com.sg, HEAD verified",
+  "status": "ok",
+  "file": "secura-group-ltd.pdf",
+  "pages": 196,
+  "sha256": "1e806431d8fd3be10c1541698e338736bbf37778ad85822cd72310b9adbaa1e2",
+  "bytes": 15179908
+ },
+ {
+  "company": "Sevens Atelier Ltd",
+  "stock_code": "5EW",
+  "url": "",
+  "year": null,
+  "note": "failed: own site links FY2025 via SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "Shopper360 Ltd",
+  "stock_code": "1F0",
+  "url": "",
+  "year": null,
+  "note": "failed: own site parked; not found off-SGX",
+  "status": "no-url"
+ },
+ {
+  "company": "Sing Hldgs Ltd",
+  "stock_code": "5IC",
+  "url": "https://singholdings.com/wp-content/uploads/2026/04/Annual-Report-2025.pdf",
+  "year": 2025,
+  "note": "singholdings.com, HEAD verified",
+  "status": "ok",
+  "file": "sing-hldgs-ltd.pdf",
+  "pages": 118,
+  "sha256": "a6192f3d556dce29554fdf8ee89e26344ca281668ae263dba545122f627acca4",
+  "bytes": 2611678
+ },
+ {
+  "company": "Sitra Hldgs (International) Ltd",
+  "stock_code": "5LE",
+  "url": "",
+  "year": null,
+  "note": "failed: no own-site AR; SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "Slb Development Ltd",
+  "stock_code": "1J0",
+  "url": "",
+  "year": null,
+  "note": "failed: IR subdomain 404; SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "Soon Lian Hldgs Ltd",
+  "stock_code": "5MD",
+  "url": "",
+  "year": null,
+  "note": "failed: own site unresponsive; SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "Soup Hldgs Ltd",
+  "stock_code": "5KI",
+  "url": "",
+  "year": null,
+  "note": "failed: own site 403 to honest UA",
+  "status": "no-url"
+ },
+ {
+  "company": "Spackman Entertainment Group Ltd",
+  "stock_code": "40E",
+  "url": "",
+  "year": null,
+  "note": "failed: no AR link on own site; SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "Sunpower Group Ltd",
+  "stock_code": "5GD",
+  "url": "",
+  "year": null,
+  "note": "failed: listedcompany.com WAF 202 to honest UA",
+  "status": "no-url"
+ },
+ {
+  "company": "Taka Jewellery Hldgs Ltd",
+  "stock_code": "42L",
+  "url": "",
+  "year": null,
+  "note": "failed: own site 502; SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "Talkmed Group Ltd",
+  "stock_code": "5G3",
+  "url": "https://www.talkmed.com.sg/wp-content/uploads/2025/04/TALKMED_GROUP_ANNUAL_REPORT_2024.pdf",
+  "year": 2024,
+  "note": "talkmed.com.sg, HEAD verified; privatisation offer 2025, no FY2025 AR",
+  "status": "ok",
+  "file": "talkmed-group-ltd.pdf",
+  "pages": 160,
+  "sha256": "92eae925346fa3507a4007eb1ef883dd56cd932aa101095f72392ef2b9618cac",
+  "bytes": 1552238
  }
 ]

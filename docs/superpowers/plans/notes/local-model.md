@@ -83,3 +83,25 @@ with the real model id. Live exchanges (Qwen2.5-14B zero-shot, ~3-11 s over the 
 - Cached prepared questions keep serving from the cache regardless of backend (scope is prompt+index).
 
 Demo-day default remains Anthropic + cache; the local path is one environment variable.
+
+## Chunking and retrieval prototype (branch lantern-chunking, 2026-11-09)
+
+Found and fixed: PyMuPDF table extraction detaches thousands separators ("6,106" → "6106\n,") on the
+real filings — every indexed table row carried mangled numbers. The branch repairs the commas,
+renders each table row self-describing with its column headers, and emits every table as its own
+chunk instead of diluting prose windows (this last fix alone cured a long-flaky ranking test).
+
+Quote-in-top-8 on the draft gold (ceiling 27/30: three old quotes were drafted from the mangled text
+and can no longer exist verbatim):
+
+| Configuration | hit@8 | notes |
+|---|---|---|
+| old chunking (baseline) | 0.70 | |
+| clean chunking | 0.70 | structural win, no retrieval delta; all 6 real misses are PROSE, ranks 10–43 |
+| + bge-reranker-base over 50 candidates | 0.73 | recovers g014/g018/g026 (the gate failures); demotes g001/g024 |
+| + bge-reranker-v2-m3 over 50 candidates | 0.77 (= 0.85 of ceiling) | recovers g002/g014/g018/g026; still demotes g001/g024 |
+
+Tuning-pass candidate (apply only after gold verification): v2-m3 reranker over 50 candidates,
+with the lexical top-3 pinned to protect easy hits. Sequencing: after this branch merges, the
+production index must be rebuilt and the prepared questions re-cached — pre-answer through the
+on-prem model (LANTERN_LLM_URL) needs no API credits; gold-draft regeneration does.

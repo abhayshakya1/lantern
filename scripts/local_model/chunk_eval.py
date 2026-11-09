@@ -24,7 +24,14 @@ def main() -> int:
     ap.add_argument("--gold", required=True)
     ap.add_argument("--tag", default="run")
     ap.add_argument("--k", type=int, default=8)
+    ap.add_argument("--rerank", default="", help="cross-encoder model (e.g. BAAI/bge-reranker-base) over --pool candidates")
+    ap.add_argument("--pool", type=int, default=50)
     args = ap.parse_args()
+    reranker = None
+    if args.rerank:
+        from fastembed.rerank.cross_encoder import TextCrossEncoder
+
+        reranker = TextCrossEncoder(model_name=args.rerank)
 
     chunks, manifest = corpus.build_corpus(Path(args.filings))
     emb = retrieve.FastEmbedder()
@@ -36,7 +43,13 @@ def main() -> int:
         hits, misses = 0, []
         for g in gold:
             quote = _norm(g["evidence"]["quote"])
-            texts = [_norm(h.chunk.text) for h in r.search(g["question"], k=args.k)]
+            if reranker:
+                cands = r.search(g["question"], k=args.pool)
+                scores = list(reranker.rerank(g["question"], [h.chunk.text for h in cands]))
+                order = sorted(range(len(cands)), key=lambda i: -scores[i])[: args.k]
+                texts = [_norm(cands[i].chunk.text) for i in order]
+            else:
+                texts = [_norm(h.chunk.text) for h in r.search(g["question"], k=args.k)]
             if any(quote in t for t in texts):
                 hits += 1
             else:

@@ -69,9 +69,15 @@ def _filings(args, store: Store) -> int:
     from lantern.filings import evaluate
 
     if args.fcmd == "gold-draft":
-        import anthropic
+        if os.environ.get("LANTERN_LLM_URL"):  # the on-prem model drafts when configured, same as answering
+            from lantern.filings.local_llm import LocalChat
 
-        rows = evaluate.draft_gold(retriever, anthropic.Anthropic())
+            client = LocalChat()
+        else:
+            import anthropic
+
+            client = anthropic.Anthropic()
+        rows = evaluate.draft_gold(retriever, client)
         gold_dir = config.FILINGS_DIR / "gold"
         gold_dir.mkdir(parents=True, exist_ok=True)
         (gold_dir / "gold_draft.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows))

@@ -79,3 +79,28 @@ def test_local_judge_url_enables_judging_without_openrouter(tmp_store, tmp_path,
     assert "--judge" in cmd and cmd[cmd.index("--judge") + 1] == "Qwen/Qwen2.5-32B-Instruct-AWQ"
     assert "--judge-url" in cmd and "192.168.3.6:8411" in cmd[cmd.index("--judge-url") + 1]
     assert res["judge"] == "Qwen/Qwen2.5-32B-Instruct-AWQ"
+
+
+def test_gold_draft_cli_uses_the_local_endpoint_when_configured(tmp_path, monkeypatch, capsys):
+    import os
+
+    from lantern import cli, config
+    from lantern.filings import local_llm
+
+    monkeypatch.setattr(os, "environ", dict(os.environ))
+    monkeypatch.setenv("LANTERN_LLM_URL", "http://gpu:8411/v1/chat/completions")
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    seen = {}
+
+    def fake_draft(retriever, client, **kw):
+        seen["client"] = client
+        return []
+
+    monkeypatch.setattr("lantern.filings.evaluate.draft_gold", fake_draft)
+    monkeypatch.setattr("lantern.filings.retrieve.open_index", lambda p: object())
+    monkeypatch.setattr(config, "FILINGS_DIR", tmp_path)
+    monkeypatch.setattr(config, "FILINGS_INDEX", tmp_path / "index")
+    (tmp_path / "index").mkdir(parents=True)
+    (tmp_path / "index" / "meta.json").write_text("{}")
+    rc = cli.main(["filings", "gold-draft"])
+    assert rc == 0 and isinstance(seen["client"], local_llm.LocalChat)

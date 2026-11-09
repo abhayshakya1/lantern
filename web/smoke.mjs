@@ -66,6 +66,27 @@ try {
     const items = await page.$$eval('#history li', (els) => els.length).catch(() => 0);
     if (items < 1) fail('history rail empty');
   }
+  // a local-source answer must name the on-prem model (fetch stubbed through the real form path)
+  const localLabel = await page.evaluate(async () => {
+    const answer = { question: 'q', answerable: true, text: 'A grounded answer.', confidence: 'high',
+      evidence: [{ chunk_id: 'c', quote: 'Twenty characters of quoted text.', ticker: 'DBS', company: 'DBS',
+        filing: 'Annual Report 2025', year: 2025, file: 'DBS-AR2025.pdf', page: 14, pdf_url: '/filings/pdf/DBS-AR2025.pdf#page=14' }],
+      context: [], model: 'Qwen/Qwen2.5-14B-Instruct', latency_ms: 4200, source: 'local', asked_at: '2026-11-09' };
+    const realFetch = window.fetch;
+    window.fetch = (url, opts) => String(url).includes('/api/filings/ask')
+      ? Promise.resolve({ ok: true, json: () => Promise.resolve(answer) })
+      : realFetch(url, opts);
+    try {
+      const input = document.querySelector('#ask-input');
+      input.value = 'stubbed local question';
+      document.querySelector('#ask-form button[type="submit"]').click();
+      await new Promise((r) => setTimeout(r, 600));
+      return document.querySelector('#answer').textContent;
+    } finally { window.fetch = realFetch; }
+  }).catch(() => '');
+  if (!/on-prem model/.test(localLabel)) fail('local source label missing');
+  if (!/Qwen\/Qwen2.5-14B-Instruct/.test(localLabel)) fail('on-prem model id not named on a local answer');
+
   // Research desk: feed, note view with chart and sources, accuracy ledger
   await page.goto(url + '/#research', { waitUntil: 'networkidle0', timeout: 60000 });
   await wait(400);

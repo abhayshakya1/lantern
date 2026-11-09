@@ -34,6 +34,6 @@ class LocalChat:
                                               "max_tokens": max_tokens, "messages": flat}, timeout=TIMEOUT)
             r.raise_for_status()
             text = r.json()["choices"][0]["message"]["content"]
-        except (requests.RequestException, KeyError, ValueError) as exc:
+        except (requests.RequestException, LookupError, ValueError, TypeError) as exc:  # a half-dead endpoint degrades like a dead one
             raise anthropic.APIConnectionError(request=None) from exc
         return SimpleNamespace(stop_reason="end_turn", content=[SimpleNamespace(type="text", text=text)])

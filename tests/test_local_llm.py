@@ -54,3 +54,21 @@ def test_transport_errors_become_the_exception_ask_already_catches(monkeypatch):
     with pytest.raises(anthropic.APIConnectionError):
         client.messages.create(model="m", max_tokens=10, system=[{"type": "text", "text": "s"}],
                                messages=[{"role": "user", "content": "u"}])
+
+
+@pytest.mark.parametrize("body", [{"choices": []}, "just a string", {"choices": [{"message": {}}]}])
+def test_malformed_but_alive_endpoint_degrades_like_a_dead_one(monkeypatch, body):
+    class _Weird:
+        status_code = 200
+
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return body
+
+    monkeypatch.setattr(local_llm.requests, "post", lambda *a, **k: _Weird())
+    client = local_llm.LocalChat(url="http://gpu:8411/v1/chat/completions", model="m")
+    with pytest.raises(anthropic.APIConnectionError):
+        client.messages.create(model="m", max_tokens=10, system=[{"type": "text", "text": "s"}],
+                               messages=[{"role": "user", "content": "u"}])

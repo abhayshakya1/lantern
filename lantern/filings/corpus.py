@@ -7,7 +7,7 @@ as having no text and are never chunked, so no answer can cite them), tables app
 import hashlib
 import json
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -24,6 +24,7 @@ class Page:
     no: int
     text: str
     has_text: bool
+    tables: list[str] = field(default_factory=list)  # each detected table, rendered with header-paired rows
 
 
 @dataclass(frozen=True)
@@ -58,9 +59,10 @@ def ingest_pdf(path: Path) -> list[Page]:
     pages = []
     for i, pg in enumerate(doc):
         raw = pg.get_text("text").strip()
-        rows = []
+        tables = []
         try:
             for table in pg.find_tables().tables:
+                rows = []
                 data = table.extract()
                 header = [_cell(c) for c in (data[0] if data else [])]
                 body = data[1:] if data and any(header[1:]) else data
@@ -74,10 +76,11 @@ def ingest_pdf(path: Path) -> list[Page]:
                         rows.append(f"{cells[0] or header[0]}: " + "; ".join(pairs))
                     else:
                         rows.append("\t".join(c for c in cells if c))
+                if rows:
+                    tables.append("\n".join(rows))
         except Exception:  # ponytail: table detection is best effort; the text layer already holds the numbers
             pass
-        text = (raw + ("\n" + "\n".join(rows) if rows else "")).strip()
-        pages.append(Page(no=i + 1, text=text, has_text=len(raw) >= MIN_TEXT_CHARS))
+        pages.append(Page(no=i + 1, text=raw, has_text=len(raw) >= MIN_TEXT_CHARS, tables=tables))
     return pages
 
 
@@ -113,6 +116,16 @@ def chunk_pages(
                 cur = f"{cur} {unit}".strip()
         if cur:
             pieces.append(cur)
+        for block in page.tables:  # a table is retrieved as itself, never diluted into a prose window
+            lines, buf = block.splitlines(), ""
+            for line in lines:
+                if buf and len(buf) + 1 + len(line) > size:
+                    pieces.append(buf)
+                    buf = line
+                else:
+                    buf = f"{buf}\n{line}".strip()
+            if buf:
+                pieces.append(buf)
         for pos, text in enumerate(pieces):
             cid = hashlib.sha256(f"{file_sha}:{page.no}:{pos}".encode()).hexdigest()[:16]
             out.append(Chunk(cid, entry["ticker"], entry["company"], entry["filing"], int(entry["year"]), entry["file"], page.no, text))

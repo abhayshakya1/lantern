@@ -1,0 +1,246 @@
+[
+ {
+  "company": "Acesian Partners Ltd",
+  "stock_code": "5FW",
+  "url": "https://www.acesian.com/wp-content/uploads/2026/04/Acesian-Annual-Report-2025.pdf",
+  "year": 2025,
+  "note": "acesian.com, verified",
+  "status": "ok",
+  "file": "acesian-partners-ltd.pdf",
+  "pages": 123,
+  "sha256": "9fd38c77cd4d83598489f90c1c3dedf110721b39f8516e79bab146256e8e313c",
+  "bytes": 1955881
+ },
+ {
+  "company": "Acrometa Group Ltd",
+  "stock_code": "43F",
+  "url": "",
+  "year": 2025,
+  "note": "ShareInvestor host bot-gated; browser gap-fill",
+  "status": "no-url"
+ },
+ {
+  "company": "Advancer Global Ltd",
+  "stock_code": "43Q",
+  "url": "",
+  "year": 2025,
+  "note": "ShareInvestor host bot-gated; browser gap-fill",
+  "status": "no-url"
+ },
+ {
+  "company": "Adventus Hldgs Ltd",
+  "stock_code": "5EF",
+  "url": "https://www.adventusholdings.com/_files/ugd/c14331_ed9c6c5b9b1144c9896f6b1e65abe3bc.pdf",
+  "year": 2023,
+  "note": "own site latest is AR2023; FY2025 SGX-only",
+  "status": "ok",
+  "file": "adventus-hldgs-ltd.pdf",
+  "pages": 145,
+  "sha256": "70d8898fa78c35a111a865606e990e070499fc73e0a0b02d0dc6e698f8f82242",
+  "bytes": 1642652
+ },
+ {
+  "company": "Alset International Ltd",
+  "stock_code": "40V",
+  "url": "https://www.alsetinternational.com/_files/ugd/36794b_7345903ba59d4ad490eb1324844d2afb.pdf",
+  "year": 2025,
+  "note": "alsetinternational.com, verified",
+  "status": "ok",
+  "file": "alset-international-ltd.pdf",
+  "pages": 168,
+  "sha256": "3bd2cbb7c20e0dcd7aadcb961af72574db1b2e47bc921165898552ebf95a71e4",
+  "bytes": 2364068
+ },
+ {
+  "company": "Annica Hldgs Ltd",
+  "stock_code": "5AL",
+  "url": "",
+  "year": null,
+  "note": "SGX-only; browser gap-fill",
+  "status": "no-url"
+ },
+ {
+  "company": "Aoxin Q & M Dental Grp Ltd",
+  "stock_code": "1D4",
+  "url": "https://www.aoxinqm.com.sg/AnnualReport2025.pdf",
+  "year": 2025,
+  "note": "aoxinqm.com.sg, verified",
+  "status": "ok",
+  "file": "aoxin-q-m-dental-grp-ltd.pdf",
+  "pages": 118,
+  "sha256": "2890ce9b8dc826b8ec9ba829436b258ae39bea14aab5c361373284357d6b6fb2",
+  "bytes": 2151045
+ },
+ {
+  "company": "Ap Oil International Ltd",
+  "stock_code": "5AU",
+  "url": "https://www.apoil.com.sg/UploadedImg/files/FY2025%20Annual%20Report.pdf",
+  "year": 2025,
+  "note": "apoil.com.sg, verified",
+  "status": "ok",
+  "file": "ap-oil-international-ltd.pdf",
+  "pages": 164,
+  "sha256": "59f722b07db96b6ea588d3ee25c976a72b21aeb4a58f10ff6db7e3a79cab4e85",
+  "bytes": 2265062
+ },
+ {
+  "company": "Capital World Ltd",
+  "stock_code": "1D5",
+  "url": "https://www.capitalworldlimited.com/wp-content/uploads/2025/10/Annual-Report-2025.pdf",
+  "year": 2025,
+  "note": "capitalworldlimited.com, verified",
+  "status": "ok",
+  "file": "capital-world-ltd.pdf",
+  "pages": 124,
+  "sha256": "acebd0be5d76413ad914e0fa5e7ee7e0b5e531e14255ed83d7809ce9bb968368",
+  "bytes": 1348718
+ },
+ {
+  "company": "Cfm Hldgs Ltd",
+  "stock_code": "5EB",
+  "url": "https://cfmholdings.com/wp-content/uploads/2026/10/FY2026-Annual-Report.pdf",
+  "year": 2026,
+  "note": "cfmholdings.com, verified",
+  "status": "name-mismatch"
+ },
+ {
+  "company": "Chasen Hldgs Ltd",
+  "stock_code": "5NV",
+  "url": "https://www.chasen.com.sg/images-information/18/chasen-annual-report-2026.pdf",
+  "year": 2026,
+  "note": "chasen.com.sg, verified",
+  "status": "ok",
+  "file": "chasen-hldgs-ltd.pdf",
+  "pages": 157,
+  "sha256": "ed9d8c37f087e6d564e7646060b671ec39b422f63f1ab74c1b6ee55e09db0d82",
+  "bytes": 5132153
+ },
+ {
+  "company": "Choo Chiang Hldgs Ltd",
+  "stock_code": "42E",
+  "url": "https://www.choochiang.com/wp/wp-content/uploads/2026/04/CCH-AR-FY2025.pdf",
+  "year": 2025,
+  "note": "choochiang.com, verified",
+  "status": "ok",
+  "file": "choo-chiang-hldgs-ltd.pdf",
+  "pages": 141,
+  "sha256": "d394630af75b49c20f359808405091c9c4946fb22abc20d50a0b0b8981964a97",
+  "bytes": 3674838
+ },
+ {
+  "company": "Clearbridge Health Ltd",
+  "stock_code": "1H3",
+  "url": "https://clearbridgehealth.com/wp-content/uploads/2025/04/CLEARBRIDGE-HEALTH-LIMITED-ANNUAL-REPORT-2024.pdf",
+  "year": 2024,
+  "note": "own site latest FY2024; FY2025 SGX-only",
+  "status": "ok",
+  "file": "clearbridge-health-ltd.pdf",
+  "pages": 202,
+  "sha256": "ac32b1c1b2fd7082fc14ff1c5ae3b9d3b10171f24f788eead335bde0b97bbc3c",
+  "bytes": 3987382
+ },
+ {
+  "company": "Edition Ltd",
+  "stock_code": "5HG",
+  "url": "https://cdn.prod.website-files.com/5ec4a27931d6711c6e48b328/6a5041f54031267e077a43da_Edition-Annual%20Report%20FY2025.pdf",
+  "year": 2025,
+  "note": "edn.sg site CDN, verified",
+  "status": "ok",
+  "file": "edition-ltd.pdf",
+  "pages": 201,
+  "sha256": "e4839c64fc8cdea7ae84cc290d71f9f23738bbfacd983332795f179cf00cf47e",
+  "bytes": 3680252
+ },
+ {
+  "company": "Eindec Corp Ltd",
+  "stock_code": "42Z",
+  "url": "https://www.eindec.com.sg/wp-content/uploads/2026/04/Eindec_Annual_Report_FY2025.pdf",
+  "year": 2025,
+  "note": "eindec.com.sg, verified",
+  "status": "ok",
+  "file": "eindec-corp-ltd.pdf",
+  "pages": 147,
+  "sha256": "5209c774b690362f989bf7fae451a29e0807d90bd9122fc83b4a10a8765dcd48",
+  "bytes": 12678816
+ },
+ {
+  "company": "Es Group (Hldgs) Ltd",
+  "stock_code": "5RC",
+  "url": "",
+  "year": null,
+  "note": "site 403s honest UA, cert mismatch; browser gap-fill",
+  "status": "no-url"
+ },
+ {
+  "company": "Asia Vets Hldgs Ltd",
+  "stock_code": "5RE",
+  "url": "https://asiavets.com/wp-content/uploads/Asia_Vets_Holdings_Annual-Report-2025.pdf",
+  "year": 2025,
+  "note": "asiavets.com, verified",
+  "status": "name-mismatch"
+ },
+ {
+  "company": "Asia-Pacific Strategic Inv Ltd",
+  "stock_code": "5RA",
+  "url": "",
+  "year": null,
+  "note": "no working site; SGX-only; browser gap-fill",
+  "status": "no-url"
+ },
+ {
+  "company": "Asiatic Group (Hldgs) Ltd",
+  "stock_code": "5CR",
+  "url": "https://www.asiatic.com.sg/images/annual-report/Asiatic_AR%20FY2026.pdf",
+  "year": 2026,
+  "note": "asiatic.com.sg, verified",
+  "status": "ok",
+  "file": "asiatic-group-hldgs-ltd.pdf",
+  "pages": 141,
+  "sha256": "4dfee03e34cfbfab3286dbb56298eddfb03f59fdc3857d581f6df11f47ac99b6",
+  "bytes": 1918923
+ },
+ {
+  "company": "Aspen (Group) Hldgs Ltd",
+  "stock_code": "1F3",
+  "url": "",
+  "year": null,
+  "note": "listedcompany.com WAF-gated; browser gap-fill",
+  "status": "no-url"
+ },
+ {
+  "company": "Astaka Hldgs Ltd",
+  "stock_code": "42S",
+  "url": "https://astaka.com.my/wp-content/uploads/2025/09/Astaka_AR-2024_SGX_compressed.pdf",
+  "year": 2024,
+  "note": "own site latest FY2024; FY2025 SGX-only",
+  "status": "ok",
+  "file": "astaka-hldgs-ltd.pdf",
+  "pages": 215,
+  "sha256": "949b19a715f798db67faf35c7b5d1957e7759129f5f5db4cb8e17e617240c0bd",
+  "bytes": 5742254
+ },
+ {
+  "company": "Audience Analytics Ltd",
+  "stock_code": "1AZ",
+  "url": "",
+  "year": null,
+  "note": "AR only as ZIP on own site; handle in fetch later or gap-fill",
+  "status": "no-url"
+ },
+ {
+  "company": "Autagco Ltd",
+  "stock_code": "1D3",
+  "url": "",
+  "year": null,
+  "note": "SGX-only; browser gap-fill",
+  "status": "no-url"
+ },
+ {
+  "company": "Avi-Tech Hldgs Ltd",
+  "stock_code": "1R6",
+  "url": "",
+  "year": null,
+  "note": "listedcompany.com WAF-gated; browser gap-fill",
+  "status": "no-url"
+ }
+]

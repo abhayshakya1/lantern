@@ -390,5 +390,85 @@
   "year": 2026,
   "note": "own site links SGX only; browser gap-fill",
   "status": "no-url"
+ },
+ {
+  "company": "Hc Surgical Specialists Ltd",
+  "stock_code": "1B1",
+  "url": "https://www.hcsurgicalspecialists.com/files/140926-HC-Surgical-Annual-Report-2026-SGX.pdf",
+  "year": 2026,
+  "note": "hcsurgicalspecialists.com, verified",
+  "status": "ok",
+  "file": "hc-surgical-specialists-ltd.pdf",
+  "pages": 170,
+  "sha256": "94572c2b81b4e556875b0baffee870ae5e746cd8ca5f5295fdffa2089252b914",
+  "bytes": 6150625
+ },
+ {
+  "company": "Healthbank Hldgs Ltd",
+  "stock_code": "40B",
+  "url": "",
+  "year": null,
+  "note": "no company site; SGX-only",
+  "status": "no-url"
+ },
+ {
+  "company": "Heatec Jietong Hldgs Ltd",
+  "stock_code": "5OR",
+  "url": "",
+  "year": null,
+  "note": "no IR section; SGX-only",
+  "status": "no-url"
+ },
+ {
+  "company": "Heeton Hldgs Ltd",
+  "stock_code": "5DP",
+  "url": "https://www.heeton.com/wp-content/uploads/AR2025.pdf",
+  "year": 2025,
+  "note": "heeton.com, verified",
+  "status": "ok",
+  "file": "heeton-hldgs-ltd.pdf",
+  "pages": 147,
+  "sha256": "613a535511577bed9276b702ea091a59a916c529248b442aa17cac114537a3f9",
+  "bytes": 1252250
+ },
+ {
+  "company": "Hengyang Petrochemical Logistics Ltd",
+  "stock_code": "5PD",
+  "url": "",
+  "year": null,
+  "note": "FY2025 AR possibly delayed; older ones SGX-only",
+  "status": "no-url"
+ },
+ {
+  "company": "Hgh Hldgs Ltd",
+  "stock_code": "5GZ",
+  "url": "https://www.hghholdings.com.sg/wp-content/uploads/2026/04/03-HGH_Annual-Report-2025.pdf",
+  "year": 2025,
+  "note": "hghholdings.com.sg, verified",
+  "status": "name-mismatch"
+ },
+ {
+  "company": "Hiap Hoe Ltd",
+  "stock_code": "5JK",
+  "url": "https://www.hiaphoe.com/wp-content/uploads/2026/04/Annual-Report-2025.pdf",
+  "year": 2025,
+  "note": "hiaphoe.com, verified",
+  "status": "ok",
+  "file": "hiap-hoe-ltd.pdf",
+  "pages": 196,
+  "sha256": "7425faa721ca5a806d6b2dec5719450ec6233331a2dc95fc09f2a1adf9d1c8d0",
+  "bytes": 19226947
+ },
+ {
+  "company": "Hiap Seng Industries Ltd",
+  "stock_code": "1L2",
+  "url": "https://www.hiapseng.com/financial_report_2026/HSEL_Annual_Report_FY2026.pdf",
+  "year": 2026,
+  "note": "hiapseng.com, verified",
+  "status": "ok",
+  "file": "hiap-seng-industries-ltd.pdf",
+  "pages": 136,
+  "sha256": "a50f38b12016b6be9b4b28a26246b638d04dc083bff0a94d1429cde70d84358c",
+  "bytes": 3324983
  }
 ]

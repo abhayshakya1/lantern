@@ -115,3 +115,68 @@ def coverage_backtest(store, forecaster, horizon: int = HORIZON, min_context: in
     }
     store.set_meta("challenger_backtest", res)
     return res
+
+
+def challenger_prob(store, clf=None, min_train: int = 60) -> dict:
+    """The probability challenger: TabPFN predicting the 12-month drawdown label walk-forward from
+    the seven driver z-scores, scored by Brier against our own logistic refit on the same window
+    each month. Strictly no peeking: month i is predicted from months [0, i) only."""
+    import pandas as pd
+
+    from lantern import drivers, model
+
+    bhist = store.load_series("backtest.history")
+    if bhist is None or not len(bhist):
+        raise RuntimeError("no backtest history; run `lantern backtest` first")
+    readings = drivers.monthly_readings(store, config.CALIBRATION_START)
+    zdf = drivers.zscores(readings)
+    bhist = bhist.copy()
+    bhist["date"] = pd.to_datetime(bhist["date"])
+    zdf = zdf.reindex(pd.DatetimeIndex(bhist["date"]))  # align month-for-month with the labels
+    if clf is None:
+        try:
+            from tabpfn import TabPFNClassifier
+        except ModuleNotFoundError as exc:
+            raise RuntimeError("tabpfn is not installed; run `uv sync --extra challenger`") from exc
+        clf = TabPFNClassifier()
+
+    zcols = list(zdf.columns)
+    z = zdf.to_numpy(dtype=float)
+    labels = bhist["label"].to_numpy(dtype=float)
+    comp = bhist["composite"].to_numpy(dtype=float)
+    n_months = len(labels)
+
+    import numpy as np
+
+    preds_t, preds_c, truth = [], [], []
+    for i in range(min_train, n_months):
+        if np.isnan(labels[i]):
+            continue  # the trailing months whose 12-month outcome is not known yet
+        train = [j for j in range(i) if not np.isnan(labels[j])]
+        if len(train) < min_train:
+            continue
+        X = np.nan_to_num(z[train], nan=0.0)
+        y = labels[train].astype(int)
+        clf.fit(X, y)
+        preds_t.append(float(clf.predict_proba(np.nan_to_num(z[[i]], nan=0.0))[0, 1]))
+        a, b = model.fit_logistic(pd.Series(comp[train]), pd.Series(y))
+        preds_c.append(model.probability(float(comp[i]), a, b))
+        truth.append(labels[i])
+
+    if not preds_t:
+        raise RuntimeError("not enough labelled history for a walk-forward")
+    t, c, y = np.array(preds_t), np.array(preds_c), np.array(truth)
+    cal = store.get_meta("calibration") or {}
+    res = {
+        "n": len(y),
+        "brier_tabpfn": float(np.mean((t - y) ** 2)),
+        "brier_champion_wf": float(np.mean((c - y) ** 2)),
+        "brier_champion_insample": cal.get("brier"),
+        "base_rate": float(np.mean(y)),
+        "brier_base_rate": float(np.mean((np.mean(y) - y) ** 2)),
+        "model": "TabPFN v2 (tabular foundation model), walk-forward",
+        "features": len(zcols),
+        "run_at": datetime.now(UTC).isoformat(),
+    }
+    store.set_meta("challenger_prob", res)
+    return res

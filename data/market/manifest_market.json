@@ -1055,28 +1055,37 @@
   "company": "CapitaLand Ascendas REIT",
   "stock_code": "A17U",
   "url": "",
-  "year": null,
+  "year": 2025,
   "sti": true,
-  "note": "failed: listedcompany IR WAF 202; browser gap-fill",
-  "status": "no-url"
+  "note": "SGX ANNC30 announcement; saved from user's browser",
+  "browser_glob": "CLAR*AR 2025*.pdf",
+  "sgx_url": "https://links.sgx.com/FileOpen/CLAR%20-%20AR%202025.ashx?App=Announcement&FileID=881419",
+  "name_token": "ascendas",
+  "status": "awaiting-browser-save"
  },
  {
   "company": "CapitaLand Integrated Commercial Trust",
   "stock_code": "C38U",
   "url": "",
-  "year": null,
+  "year": 2025,
   "sti": true,
-  "note": "failed: IR WAF 202; browser gap-fill",
-  "status": "no-url"
+  "note": "SGX ANNC30 announcement; saved from user's browser",
+  "browser_glob": "*CICT AR 2025*.pdf",
+  "sgx_url": "https://links.sgx.com/FileOpen/2_CICT%20AR%202025_Final.ashx?App=Announcement&FileID=878885",
+  "name_token": "integrated",
+  "status": "awaiting-browser-save"
  },
  {
   "company": "City Developments Limited",
   "stock_code": "C09",
   "url": "",
-  "year": null,
+  "year": 2025,
   "sti": true,
-  "note": "failed: ir.cdl.com.sg 403; browser gap-fill",
-  "status": "no-url"
+  "note": "SGX ANNC30 announcement; saved from user's browser",
+  "browser_glob": "*City Developments*Annual Report 2025*.pdf",
+  "sgx_url": "https://links.sgx.com/FileOpen/1-City%20Developments%20Limited%20-%20Annual%20Report%202025_Final.ashx?App=Announcement&FileID=881134",
+  "name_token": "developments",
+  "status": "awaiting-browser-save"
  },
  {
   "company": "DFI Retail Group Holdings",
@@ -1095,28 +1104,37 @@
   "company": "Frasers Centrepoint Trust",
   "stock_code": "J69U",
   "url": "",
-  "year": null,
+  "year": 2025,
   "sti": true,
-  "note": "failed: IR WAF 202; browser gap-fill",
-  "status": "no-url"
+  "note": "SGX ANNC30 announcement; saved from user's browser",
+  "browser_glob": "FCT AR 2025*.pdf",
+  "sgx_url": "https://links.sgx.com/FileOpen/FCT%20AR%202025.ashx?App=Announcement&FileID=870392",
+  "name_token": "centrepoint",
+  "status": "awaiting-browser-save"
  },
  {
   "company": "Frasers Logistics & Commercial Trust",
   "stock_code": "BUOU",
   "url": "",
-  "year": null,
+  "year": 2025,
   "sti": true,
-  "note": "failed: IR WAF 202; browser gap-fill",
-  "status": "no-url"
+  "note": "SGX ANNC30 announcement; saved from user's browser",
+  "browser_glob": "FLCT*Annual Report 2025*.pdf",
+  "sgx_url": "https://links.sgx.com/FileOpen/FLCT%20-%20Annual%20Report%202025.ashx?App=Announcement&FileID=870400",
+  "name_token": "logistics",
+  "status": "awaiting-browser-save"
  },
  {
   "company": "Genting Singapore",
   "stock_code": "G13",
   "url": "",
-  "year": null,
+  "year": 2025,
   "sti": true,
-  "note": "failed: listedcompany WAF 202; browser gap-fill",
-  "status": "no-url"
+  "note": "SGX ANNC30 announcement; saved from user's browser",
+  "browser_glob": "Annual Report 2025*.pdf",
+  "sgx_url": "https://links.sgx.com/FileOpen/Annual%20Report%202025.ashx?App=Announcement&FileID=880160",
+  "name_token": "genting",
+  "status": "awaiting-browser-save"
  },
  {
   "company": "Hongkong Land Holdings",
@@ -1161,55 +1179,73 @@
   "company": "Mapletree Industrial Trust",
   "stock_code": "ME8U",
   "url": "",
-  "year": null,
+  "year": 2026,
   "sti": true,
-  "note": "failed: trust site 405 to honest UA; browser gap-fill",
-  "status": "no-url"
+  "note": "SGX ANNC30 announcement; saved from user's browser",
+  "browser_glob": "*MIT_AR2026*.pdf",
+  "sgx_url": "https://links.sgx.com/FileOpen/20260622_MIT_AR2026.ashx?App=Announcement&FileID=893762",
+  "name_token": "industrial",
+  "status": "awaiting-browser-save"
  },
  {
   "company": "Mapletree Logistics Trust",
   "stock_code": "M44U",
   "url": "",
-  "year": null,
+  "year": 2026,
   "sti": true,
-  "note": "failed: trust site 405 to honest UA; browser gap-fill",
-  "status": "no-url"
+  "note": "SGX ANNC30 announcement; saved from user's browser",
+  "browser_glob": "*MLT*Annual Report*25*26*.pdf",
+  "sgx_url": "https://links.sgx.com/FileOpen/20260619-MLT-Annual%20Report%202025-26.ashx?App=Announcement&FileID=893649",
+  "name_token": "logistics",
+  "status": "awaiting-browser-save"
  },
  {
   "company": "Mapletree Pan Asia Commercial Trust",
   "stock_code": "N2IU",
   "url": "",
-  "year": null,
+  "year": 2026,
   "sti": true,
-  "note": "failed: trust site 405 to honest UA; browser gap-fill",
-  "status": "no-url"
+  "note": "SGX ANNC30 announcement; saved from user's browser",
+  "browser_glob": "*MPACT*Annual Report*.pdf",
+  "sgx_url": "https://links.sgx.com/FileOpen/20260630-MPACT_Annual%20Report%202025_26.ashx?App=Announcement&FileID=894759",
+  "name_token": "commercial",
+  "status": "awaiting-browser-save"
  },
  {
   "company": "SATS",
   "stock_code": "S58",
   "url": "",
-  "year": null,
+  "year": 2026,
   "sti": true,
-  "note": "failed: FY2026 AR URL not found on sats.com.sg; browser gap-fill",
-  "status": "no-url"
+  "note": "SGX ANNC30 announcement; saved from user's browser",
+  "browser_glob": "SATS_Annual_Report_FY2026*.pdf",
+  "sgx_url": "https://links.sgx.com/FileOpen/SATS_Annual_Report_FY2026.ashx?App=Announcement&FileID=895114",
+  "name_token": "sats",
+  "status": "awaiting-browser-save"
  },
  {
   "company": "Seatrium",
   "stock_code": "5E2",
   "url": "",
-  "year": null,
+  "year": 2025,
   "sti": true,
-  "note": "failed: IR WAF 202; browser gap-fill",
-  "status": "no-url"
+  "note": "SGX ANNC30 announcement; saved from user's browser",
+  "browser_glob": "Seatrium_AGM*2026*AR*.pdf",
+  "sgx_url": "https://links.sgx.com/FileOpen/Seatrium_AGM%202026_AR.ashx?App=Announcement&FileID=880042",
+  "name_token": "seatrium",
+  "status": "awaiting-browser-save"
  },
  {
   "company": "Singapore Airlines",
   "stock_code": "C6L",
   "url": "",
-  "year": null,
+  "year": 2026,
   "sti": true,
-  "note": "failed: singaporeair.com WAF deny to honest UA; browser gap-fill",
-  "status": "no-url"
+  "note": "SGX ANNC30 announcement; saved from user's browser",
+  "browser_glob": "Annual Report FY2025-26*.pdf",
+  "sgx_url": "https://links.sgx.com/FileOpen/Annual%20Report%20FY2025-26.ashx?App=Announcement&FileID=894198",
+  "name_token": "airlines",
+  "status": "awaiting-browser-save"
  },
  {
   "company": "Singapore Technologies Engineering",
@@ -1229,10 +1265,13 @@
   "company": "Thai Beverage",
   "stock_code": "Y92",
   "url": "",
-  "year": null,
+  "year": 2025,
   "sti": true,
-  "note": "failed: IR page JS/age-gated, only excerpt PDFs on own site; browser gap-fill",
-  "status": "no-url"
+  "note": "SGX ANNC30 announcement; saved from user's browser",
+  "browser_glob": "THBEV_Annual_Report_2025_EN*.pdf",
+  "sgx_url": "https://links.sgx.com/FileOpen/THBEV_Annual_Report_2025_EN.ashx?App=Announcement&FileID=871645",
+  "name_token": "beverage",
+  "status": "awaiting-browser-save"
  },
  {
   "company": "UOL Group",
@@ -1251,10 +1290,13 @@
   "company": "Venture Corporation",
   "stock_code": "V03",
   "url": "",
-  "year": null,
+  "year": 2025,
   "sti": true,
-  "note": "failed: listedcompany WAF 202; browser gap-fill",
-  "status": "no-url"
+  "note": "SGX ANNC30 announcement; saved from user's browser",
+  "browser_glob": "VCL_Annual_Report_2025*.pdf",
+  "sgx_url": "https://links.sgx.com/FileOpen/VCL_Annual_Report_2025.ashx?App=Announcement&FileID=881699",
+  "name_token": "venture",
+  "status": "awaiting-browser-save"
  },
  {
   "company": "Wilmar International",

@@ -40,7 +40,18 @@ def _slug(name: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")[:60]
 
 
-def main() -> int:
+def _fetch(url: str) -> bytes:
+    r = requests.get(url, headers=UA, timeout=180, stream=True)
+    r.raise_for_status()
+    data = b""
+    for chunk in r.iter_content(1 << 20):
+        data += chunk
+        if len(data) > MAX_MB << 20:
+            raise ValueError("too large")
+    return data
+
+
+def main(import_dir: Path = Path.home() / "Downloads") -> int:
     manifest_path = MARKET / "manifest_market.json"
     rows = json.loads(manifest_path.read_text())
     (MARKET / "pdfs").mkdir(parents=True, exist_ok=True)
@@ -49,25 +60,28 @@ def main() -> int:
         if row.get("status") == "ok":
             skipped += 1
             continue
+        dest = MARKET / "pdfs" / f"{_slug(row['company'])}.pdf"
         url = row.get("url") or ""
-        if not url:
+        if row.get("browser_glob"):
+            # SGX-only reports: the user saves the attachment from their own browser; never scripted
+            found = sorted(import_dir.glob(row["browser_glob"]))
+            if not found:
+                row["status"] = "awaiting-browser-save"
+                continue
+            data = found[0].read_bytes()
+            row["source"] = "sgx-browser"
+        elif not url:
             row["status"] = "no-url"
             continue
-        dest = MARKET / "pdfs" / f"{_slug(row['company'])}.pdf"
-        try:
-            r = requests.get(url, headers=UA, timeout=180, stream=True)
-            r.raise_for_status()
-            data = b""
-            for chunk in r.iter_content(1 << 20):
-                data += chunk
-                if len(data) > MAX_MB << 20:
-                    raise ValueError("too large")
-        except Exception as exc:
-            row["status"] = f"fetch-failed: {type(exc).__name__}"
-            bad += 1
-            print(f"{row['company'][:40]:42} {row['status']}")
-            time.sleep(THROTTLE_S)
-            continue
+        else:
+            try:
+                data = _fetch(url)
+            except Exception as exc:
+                row["status"] = f"fetch-failed: {type(exc).__name__}"
+                bad += 1
+                print(f"{row['company'][:40]:42} {row['status']}")
+                time.sleep(THROTTLE_S)
+                continue
         if not data.startswith(b"%PDF"):
             row["status"] = "not-a-pdf"
             bad += 1

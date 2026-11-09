@@ -70,3 +70,16 @@ family — treat close calls with suspicion until re-judged with the pinned Deep
   (0.58 / 0.60, recall 1.00): the architecture supplies the safety, the model supplies fluency.
 - If the fine-tune is pursued further: lower LR (5e-5), half an epoch, raise the abstention share
   above 25%, and mix in longer-form answers. The pipeline reruns end to end with one tmux command.
+
+## The on-prem swap, live (2026-11-09)
+
+`LANTERN_LLM_URL` now routes Filings Q&A to the Deathstar endpoint behind the unchanged interface:
+same prompt, verbatim gate, abstention sentence, cache and logging; answers are labelled `local`
+with the real model id. Live exchanges (Qwen2.5-14B zero-shot, ~3-11 s over the LAN):
+
+- "Since when has Rajat Verma been CEO of DBS Bank India?" → "...since March 2025", quote verified,
+  DBS AR2025 p.94 — `[local, 10229 ms]`.
+- Two fresh harder questions → the exact abstention sentence with nearest passages — honest, no cloud.
+- Cached prepared questions keep serving from the cache regardless of backend (scope is prompt+index).
+
+Demo-day default remains Anthropic + cache; the local path is one environment variable.

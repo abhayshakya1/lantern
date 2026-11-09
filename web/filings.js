@@ -3,7 +3,7 @@ window.Lantern = window.Lantern || {};
 (function () {
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const CONF = { high: ['calm', 'High confidence'], medium: ['elevated', 'Medium confidence'], low: ['high', 'Low confidence'] };
-  const SOURCE = { api: 'answered by the model', cache: 'answered from this morning\'s cache', none: 'nothing retrieved', offline: 'answer service offline', refusal: 'the model declined' };
+  const SOURCE = { api: 'answered by the model', local: 'answered by the on-prem model', cache: 'answered from this morning\'s cache', none: 'nothing retrieved', offline: 'answer service offline', refusal: 'the model declined' };
   const asked = [];
 
   function fmtDate(iso) {

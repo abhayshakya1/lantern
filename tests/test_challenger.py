@@ -158,7 +158,11 @@ def test_probability_challenger_walks_forward_without_peeking(tmp_store, seeded_
     assert max(fake.train_sizes) == labelled - 13
     assert 0.0 <= res["brier_tabpfn"] <= 1.0 and 0.0 <= res["brier_champion_wf"] <= 1.0
     assert res["n"] > 50 and res["n"] + 12 <= len(fake.train_sizes) + 12 + res["n"]  # scored months bounded
-    assert tmp_store.get_meta("challenger_prob")["model"].startswith("TabPFN")
+    assert "TabPFN v2" in tmp_store.get_meta("challenger_prob")["model"]  # the pinned 2.0.x line, labelled honestly
+    # the fake predicts its training-window base rate, so it must score exactly the walk-forward base-rate Brier;
+    # the hindsight scored-window mean is kept only under an explicitly hindsight name
+    assert abs(res["brier_tabpfn"] - res["brier_base_rate_wf"]) < 1e-12
+    assert "brier_base_rate_hindsight" in res and "brier_base_rate" not in res
     assert res["base_rate"] > 0
 
 

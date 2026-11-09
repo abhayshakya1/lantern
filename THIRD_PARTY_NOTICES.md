@@ -17,6 +17,7 @@ a deployment review should start from.
 | Model | License |
 |---|---|
 | google/timesfm-2.5-200m-pytorch (challenger fan) | Apache-2.0 |
+| Prior Labs TabPFN 2.0.x (probability challenger, `tabpfn==2.0.9`) | Prior Labs License (Apache-2.0-based with an attribution clause); weights from Hugging Face. Versions 2.5+ require a Prior Labs account token and accepted license — check terms before upgrading |
 | Qwen/Qwen2.5-3B / 7B / 14B / 32B Instruct (on-prem answerer and judges) | Apache-2.0 |
 | BAAI/bge-small-en-v1.5 (embeddings) | MIT |
 | claude-opus-5-5 (optional cloud answerer) | Anthropic commercial terms; API key required |

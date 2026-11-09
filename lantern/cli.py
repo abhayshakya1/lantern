@@ -151,9 +151,14 @@ def main(argv: list[str] | None = None) -> int:
             except RuntimeError as exc:
                 print(exc)
                 return 1
+            ins = res.get("brier_champion_insample")
             print(f"probability challenger on {res['n']} months: TabPFN walk-forward Brier {res['brier_tabpfn']:.4f} "
                   f"vs champion walk-forward {res['brier_champion_wf']:.4f} "
-                  f"(in-sample {res['brier_champion_insample']}, base rate Brier {res['brier_base_rate']:.4f})")
+                  f"vs walk-forward base rate {res['brier_base_rate_wf']:.4f} "
+                  f"(champion in-sample {ins:.4f})" if ins is not None else
+                  f"probability challenger on {res['n']} months: TabPFN walk-forward Brier {res['brier_tabpfn']:.4f} "
+                  f"vs champion walk-forward {res['brier_champion_wf']:.4f} "
+                  f"vs walk-forward base rate {res['brier_base_rate_wf']:.4f}")
             return 0
         if store.latest_run() is None:  # fail before loading a 200M model
             print("no model run to challenge; run `lantern model` first")

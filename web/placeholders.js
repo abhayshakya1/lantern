@@ -23,7 +23,7 @@ window.Lantern = window.Lantern || {};
     if (!b) return;
     const champ = b.champion_coverage == null ? '—' : Math.round(b.champion_coverage * 100) + '%';
     const pr = d.prob;
-    const probLine = pr ? `<p class="src">Probability challenger: ${esc(pr.model)} Brier ${Number(pr.brier_tabpfn).toFixed(3)} vs champion walk-forward ${Number(pr.brier_champion_wf).toFixed(3)} on ${esc(String(pr.n))} months (base rate ${Number(pr.brier_base_rate).toFixed(3)}).</p>` : '';
+    const probLine = pr ? `<p class="src">Probability challenger: ${esc(pr.model)} Brier ${Number(pr.brier_tabpfn).toFixed(3)} vs champion walk-forward ${Number(pr.brier_champion_wf).toFixed(3)} vs walk-forward base-rate Brier ${Number(pr.brier_base_rate_wf).toFixed(3)} on ${esc(String(pr.n))} months.</p>` : '';
     root.insertAdjacentHTML('beforeend', `<div class="page"><h2>Fan coverage, champion vs challenger</h2>
       <p class="src">Walk-forward ${esc(String(b.horizon_months))}-month ${esc(b.band)} coverage over ${esc(String(b.n))} months (target ${Math.round((b.target || 0.8) * 100)}%):
       champion (conditional history) ${champ} · ${esc(b.model)} ${Math.round(b.coverage * 100)}%.</p>${probLine}</div>`);

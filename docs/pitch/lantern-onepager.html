@@ -50,7 +50,7 @@
     <tr><th>Exhibit</th><th>Result</th><th>Honest caveat</th></tr>
     <tr><td>De-rating probability calibration (2003–2026, 275 months)</td><td class="num">Hit rate 0.93 · Brier 0.064 vs 0.064 base</td><td>In-sample fit, printed on the page itself; three calibrated drivers, four labelled watch-only</td></tr>
     <tr><td>Forecast fan, walk-forward p10–p90 coverage (252 months)</td><td class="num">House 77% vs TimesFM&nbsp;2.5 zero-shot 50% (target 80%)</td><td>Challenger runs locally; Apache-licensed weights</td></tr>
-    <tr><td>Probability challenger (TabPFN tabular foundation model)</td><td class="num">Brier 0.079 vs champion 0.077 vs base-rate 0.033: neither beats the base rate out of sample</td><td>12-month label embargo enforced by test — a naive leaky setup scored 0.026 and was caught</td></tr>
+    <tr><td>Probability challenger (TabPFN tabular foundation model)</td><td class="num">Brier 0.079 vs champion 0.077 vs walk-forward base rate 0.040: neither beats it out of sample</td><td>Only 7 drawdown months scored, so the model gap is noise; a naive leaky setup scored 0.026 and was caught by test</td></tr>
     <tr><td>Filings Q&amp;A abstention gate</td><td class="num">Recall 1.00 all models · precision 0.83 on the machine draft</td><td>0.90 gate judged on the human-verified set (verification in progress)</td></tr>
     <tr><td>On-prem answerer (Qwen2.5-14B behind the same verbatim gate)</td><td class="num">0.58 / 0.60 judge-correct (easy/medium) vs cloud 0.83 / 0.80</td><td>Local judge (two independent local judges agree within one question); fine-tuning on in-house data measured and documented</td></tr>
   </table>

@@ -48,10 +48,15 @@ _DETACHED_COMMA = re.compile(r"(\d+)(?: ?,)+$")
 
 def _cell(c) -> str:
     """One table cell as printed: collapse newlines, and re-attach the thousands separators that
-    table extraction detaches ("6,106" comes back as "6106\n,")."""
-    t = " ".join(str(c).split()) if c is not None else ""
-    m = _DETACHED_COMMA.fullmatch(t)
-    return f"{int(m.group(1)):,}" if m else t
+    table extraction detaches ("6,106" comes back as "6106\n,"). The regroup fires only on that raw
+    artifact signature, so a genuine trailing comma or a leading-zero code is never rewritten."""
+    raw = str(c) if c is not None else ""
+    t = " ".join(raw.split())
+    if "\n," in raw:
+        m = _DETACHED_COMMA.fullmatch(t)
+        if m and not m.group(1).startswith("0"):
+            return f"{int(m.group(1)):,}"
+    return t
 
 
 def ingest_pdf(path: Path) -> list[Page]:

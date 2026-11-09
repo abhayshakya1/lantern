@@ -105,3 +105,10 @@ Tuning-pass candidate (apply only after gold verification): v2-m3 reranker over 
 with the lexical top-3 pinned to protect easy hits. Sequencing: after this branch merges, the
 production index must be rebuilt and the prepared questions re-cached — pre-answer through the
 on-prem model (LANTERN_LLM_URL) needs no API credits; gold-draft regeneration does.
+
+Post-review measurement: 33.7% of table chunks (643 of 1,908) still carry extraction-level mangling
+beyond the repaired comma artifact — detached decimal points, comma-only cells, glued words — which
+cell-level repair cannot reconstruct confidently. Documented ceiling: table chunks are retrieval
+aids; the prose text layer holds the correctly printed numbers and is where quotes verify, so the
+mangling costs retrieval recall, never answer correctness. Escalation path if the verified gold set
+demands more: a layout-aware extractor (Docling) behind the same ingest interface.

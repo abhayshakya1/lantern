@@ -63,3 +63,11 @@ def test_an_oversized_table_splits_by_rows():
     assert len(table_chunks) >= 2  # split, never dropped
     assert all(len(c.text) <= 200 * 4 * 1.5 for c in table_chunks)
     assert all(c.text.splitlines()[0].startswith("Line item") for c in table_chunks)  # splits on row boundaries
+
+
+def test_cell_repair_fires_only_on_the_extraction_artifact():
+    assert corpus._cell("6106\n,") == "6,106"            # the real artifact: comma pushed to its own line
+    assert corpus._cell("6106000\n,\n,") == "6,106,000"
+    assert corpus._cell("2025,") == "2025,"              # a genuine trailing comma is not a mangled number
+    assert corpus._cell("2025 ,") == "2025 ,"
+    assert corpus._cell("0075\n,") == "0075 ,"           # leading zeros are codes; int() would destroy them

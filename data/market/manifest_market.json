@@ -1050,5 +1050,236 @@
   "pages": 182,
   "sha256": "be26a759a5761e893bd9b34c07b52b6b9c652b830b07bee118c9eb4c3e82b0fa",
   "bytes": 9842022
+ },
+ {
+  "company": "CapitaLand Ascendas REIT",
+  "stock_code": "A17U",
+  "url": "",
+  "year": null,
+  "sti": true,
+  "note": "failed: listedcompany IR WAF 202; browser gap-fill",
+  "status": "no-url"
+ },
+ {
+  "company": "CapitaLand Integrated Commercial Trust",
+  "stock_code": "C38U",
+  "url": "",
+  "year": null,
+  "sti": true,
+  "note": "failed: IR WAF 202; browser gap-fill",
+  "status": "no-url"
+ },
+ {
+  "company": "City Developments Limited",
+  "stock_code": "C09",
+  "url": "",
+  "year": null,
+  "sti": true,
+  "note": "failed: ir.cdl.com.sg 403; browser gap-fill",
+  "status": "no-url"
+ },
+ {
+  "company": "DFI Retail Group Holdings",
+  "stock_code": "D01",
+  "url": "https://www.dfiretailgroup.com/media/uxvlpqlo/ar2025.pdf",
+  "year": 2025,
+  "sti": true,
+  "note": "dfiretailgroup.com, HEAD verified",
+  "status": "ok",
+  "file": "dfi-retail-group-holdings.pdf",
+  "pages": 236,
+  "sha256": "b80351dbf1bc161ab7b5b06a00cba0e98c3264180dab9d22e6988b52714a7097",
+  "bytes": 18767150
+ },
+ {
+  "company": "Frasers Centrepoint Trust",
+  "stock_code": "J69U",
+  "url": "",
+  "year": null,
+  "sti": true,
+  "note": "failed: IR WAF 202; browser gap-fill",
+  "status": "no-url"
+ },
+ {
+  "company": "Frasers Logistics & Commercial Trust",
+  "stock_code": "BUOU",
+  "url": "",
+  "year": null,
+  "sti": true,
+  "note": "failed: IR WAF 202; browser gap-fill",
+  "status": "no-url"
+ },
+ {
+  "company": "Genting Singapore",
+  "stock_code": "G13",
+  "url": "",
+  "year": null,
+  "sti": true,
+  "note": "failed: listedcompany WAF 202; browser gap-fill",
+  "status": "no-url"
+ },
+ {
+  "company": "Hongkong Land Holdings",
+  "stock_code": "H78",
+  "url": "https://webfile.hkland.com/assets/financial-reports-and-results/2026/en/ar2025.pdf",
+  "year": 2025,
+  "sti": true,
+  "note": "webfile.hkland.com, HEAD verified",
+  "status": "ok",
+  "file": "hongkong-land-holdings.pdf",
+  "pages": 134,
+  "sha256": "c1dd56bfe5a2ef1466906e7b229819401386122563704ec962f01020bbc58591",
+  "bytes": 15004665
+ },
+ {
+  "company": "Jardine Matheson Holdings",
+  "stock_code": "J36",
+  "url": "https://content.bsx.com/CompanyDocuments/130/2026-04-07%20-%20Annual%20Report%202025.pdf",
+  "year": 2025,
+  "sti": true,
+  "note": "Bermuda Stock Exchange filing copy (company's own AR site WAF-gated)",
+  "status": "ok",
+  "file": "jardine-matheson-holdings.pdf",
+  "pages": 198,
+  "sha256": "7319393f160a85648372b068122ab4cadfb153839859bda58ad4605364b4113e",
+  "bytes": 8484142
+ },
+ {
+  "company": "Keppel DC REIT",
+  "stock_code": "AJBU",
+  "url": "https://www.keppeldcreit.com/en/file/investor-relations/publications/annual-report/kdcr-ar2025.pdf",
+  "year": 2025,
+  "sti": true,
+  "note": "keppeldcreit.com, HEAD verified",
+  "status": "ok",
+  "file": "keppel-dc-reit.pdf",
+  "pages": 200,
+  "sha256": "445a8e655891d458559a6f4d91e6d3c9828d58c7d83ef9050468608fcd6ec7e3",
+  "bytes": 18033923
+ },
+ {
+  "company": "Mapletree Industrial Trust",
+  "stock_code": "ME8U",
+  "url": "",
+  "year": null,
+  "sti": true,
+  "note": "failed: trust site 405 to honest UA; browser gap-fill",
+  "status": "no-url"
+ },
+ {
+  "company": "Mapletree Logistics Trust",
+  "stock_code": "M44U",
+  "url": "",
+  "year": null,
+  "sti": true,
+  "note": "failed: trust site 405 to honest UA; browser gap-fill",
+  "status": "no-url"
+ },
+ {
+  "company": "Mapletree Pan Asia Commercial Trust",
+  "stock_code": "N2IU",
+  "url": "",
+  "year": null,
+  "sti": true,
+  "note": "failed: trust site 405 to honest UA; browser gap-fill",
+  "status": "no-url"
+ },
+ {
+  "company": "SATS",
+  "stock_code": "S58",
+  "url": "",
+  "year": null,
+  "sti": true,
+  "note": "failed: FY2026 AR URL not found on sats.com.sg; browser gap-fill",
+  "status": "no-url"
+ },
+ {
+  "company": "Seatrium",
+  "stock_code": "5E2",
+  "url": "",
+  "year": null,
+  "sti": true,
+  "note": "failed: IR WAF 202; browser gap-fill",
+  "status": "no-url"
+ },
+ {
+  "company": "Singapore Airlines",
+  "stock_code": "C6L",
+  "url": "",
+  "year": null,
+  "sti": true,
+  "note": "failed: singaporeair.com WAF deny to honest UA; browser gap-fill",
+  "status": "no-url"
+ },
+ {
+  "company": "Singapore Technologies Engineering",
+  "stock_code": "S63",
+  "url": "https://www.stengg.com/getmedia/e7fbfe6a-b8b1-4ebb-b9e8-0962e4b08b46/ST-Engineering-Annual-Report-2025.pdf",
+  "year": 2025,
+  "sti": true,
+  "note": "stengg.com, HEAD verified",
+  "name_token": "engineering",
+  "status": "ok",
+  "file": "singapore-technologies-engineering.pdf",
+  "pages": 261,
+  "sha256": "fe09b3174b85007e0d8beba4a7a03e109a07ed1eb9f0de9bcdc4a9e9966b99f2",
+  "bytes": 19882302
+ },
+ {
+  "company": "Thai Beverage",
+  "stock_code": "Y92",
+  "url": "",
+  "year": null,
+  "sti": true,
+  "note": "failed: IR page JS/age-gated, only excerpt PDFs on own site; browser gap-fill",
+  "status": "no-url"
+ },
+ {
+  "company": "UOL Group",
+  "stock_code": "U14",
+  "url": "https://www.uol.com.sg/wp-content/uploads/uol-reports/files/UOL-Annual-Report-2025.pdf",
+  "year": 2025,
+  "sti": true,
+  "note": "uol.com.sg, HEAD verified (p.69 corrigendum filed on SGX)",
+  "status": "ok",
+  "file": "uol-group.pdf",
+  "pages": 232,
+  "sha256": "2b7c349f845e45bb13d3d1cc95e41ec954d4cd2a781eeab185a3da8da423ddc3",
+  "bytes": 11291243
+ },
+ {
+  "company": "Venture Corporation",
+  "stock_code": "V03",
+  "url": "",
+  "year": null,
+  "sti": true,
+  "note": "failed: listedcompany WAF 202; browser gap-fill",
+  "status": "no-url"
+ },
+ {
+  "company": "Wilmar International",
+  "stock_code": "F34",
+  "url": "https://www.wilmar-international.com/annualreport2025/documents/Wilmar-AR25-Full.pdf",
+  "year": 2025,
+  "sti": true,
+  "note": "wilmar-international.com, HEAD verified",
+  "status": "ok",
+  "file": "wilmar-international.pdf",
+  "pages": 120,
+  "sha256": "294377d4b75eebb066e74596190cd05dd255bd6c6e506be1a9c0714469737c09",
+  "bytes": 11097872
+ },
+ {
+  "company": "Yangzijiang Shipbuilding",
+  "stock_code": "BS6",
+  "url": "https://www.yzjship.com/Upload/ueditor/files/2026-04-16/ANNUALREPORT2025-800a197145c944b6b1f93e7185339d06.pdf",
+  "year": 2025,
+  "sti": true,
+  "note": "yzjship.com investor page, HEAD verified",
+  "status": "ok",
+  "file": "yangzijiang-shipbuilding.pdf",
+  "pages": 178,
+  "sha256": "0f57b9600d3938929c58edc1a0dba2b18aff948c218e77ff7b62e833503497c0",
+  "bytes": 3530263
  }
 ]

@@ -32,6 +32,10 @@ def _name_token(company: str) -> str:
     return max(words or [""], key=len)
 
 
+def _row_token(row: dict) -> str:
+    return row.get("name_token") or _name_token(row["company"])
+
+
 def _slug(name: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")[:60]
 
@@ -73,7 +77,7 @@ def main() -> int:
             dest.write_bytes(data)
             doc = pymupdf.open(dest)
             head = " ".join(doc[i].get_text() for i in range(min(5, len(doc)))).lower()
-            token = _name_token(row["company"])
+            token = _row_token(row)
             if token and token not in head:
                 row["status"] = "name-mismatch"  # kept on disk for manual review, not counted ok
                 bad += 1

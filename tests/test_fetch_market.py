@@ -13,3 +13,9 @@ def test_name_token_skips_sgx_abbreviations():
     assert fm._name_token("Hgh Hldgs Ltd") == "hgh"
     assert fm._name_token("Micro-Mechanics (Hldgs) Ltd") == "mechanics"
     assert fm._name_token("Koh Brothers Eco Engineering Ltd") == "engineering"
+
+
+def test_row_name_token_override():
+    # a report may only print its brand ("ST Engineering"), so a manifest row can name the token
+    assert fm._row_token({"company": "Singapore Technologies Engineering", "name_token": "engineering"}) == "engineering"
+    assert fm._row_token({"company": "Jep Hldgs Ltd"}) == "jep"

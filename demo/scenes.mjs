@@ -134,6 +134,26 @@ export const scenes = [
     },
   },
   {
+    id: '09b-onprem',
+    url: '/#filings',
+    narration:
+      'Everything so far could run on a cloud model. Now the same pipeline with no cloud at all: this question is being answered live by an open-weight model running on the bank\u2019s own GPU server, behind the identical interface, with the identical verbatim-quote verification. The answer declares its true source \u2014 the on-premise model, by name. Data, documents and models never leave the building.',
+    run: async (page, h) => {
+      await h.pause(1000);
+      await h.click('#ask-input');
+      await h.type('#ask-input', 'Since when has Rajat Verma been Chief Executive Officer of DBS Bank India?');
+      await h.click('#ask-form button[type="submit"]');
+      await page.waitForSelector('#answer .evidence, #answer .abstain, #answer .offline', { timeout: 60000 }).catch(() => {});
+      await h.pause(800);
+      await h.zoom('#answer', 1.4);
+      await h.pause(6000);
+      await h.unzoom();
+      await h.zoom('#answer .src', 1.6);
+      await h.pause(4500);
+      await h.unzoom();
+    },
+  },
+  {
     id: '10-research',
     url: '/#research',
     narration:
@@ -169,7 +189,7 @@ export const scenes = [
     id: '12-modelrisk',
     url: '/#modelrisk',
     narration:
-      'Model risk is a first-class page, built for the governance review a bank will run. The question-answering system is scored against a gold set with a hard gate on abstention precision, and the forecast fan is benchmarked against the TimesFM challenger over two hundred and fifty-two months of walk-forward history — the house fan held seventy-seven per cent coverage against the challenger’s fifty.',
+      'Model risk is a first-class page, built for the governance review a bank will run. The question-answering system is scored against a gold set with a hard gate on abstention precision, and the forecast fan is benchmarked against the TimesFM challenger over two hundred and fifty-two months of walk-forward history — the house fan held seventy-seven per cent coverage against the challenger’s fifty. Behind this page sits a full open-model scorecard: three model sizes fine-tuned on in-house research data and scored by a locally served judge, so even the evaluation needs no outside API.',
     run: async (page, h) => {
       await h.pause(2500);
       await h.zoom('#main table', 1.35);
@@ -195,7 +215,7 @@ export const scenes = [
     id: '14-outro',
     card: 'outro.html',
     narration:
-      'Lantern runs end to end on a single machine today, and is designed to deploy on-premise — data, models and keys never leave the building. Thank you for watching.',
+      'Lantern runs end to end on infrastructure you control: the answers, the forecasts, the challenger and even the judge are local models — the cloud is an option, never a dependency. Thank you for watching.',
     run: async (page, h) => { await h.pause(8000); },
   },
 ];

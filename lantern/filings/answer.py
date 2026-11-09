@@ -148,10 +148,17 @@ def ask(
     if not hits:
         return log(Answer(question, False, ABSTAIN, source="none", asked_at=asked_at, model=model), ids, "no hits")
 
+    source_api = "api"
     if client is None:
-        if not os.environ.get("ANTHROPIC_API_KEY"):
+        if os.environ.get("LANTERN_LLM_URL"):  # the on-prem answerer wins over the cloud when configured
+            from lantern.filings.local_llm import LocalChat
+
+            client = LocalChat()
+            model, source_api = client.model, "local"
+        elif not os.environ.get("ANTHROPIC_API_KEY"):
             return log(Answer(question, False, OFFLINE, context=_context(hits), source="offline", asked_at=asked_at, model=model), ids, "no ANTHROPIC_API_KEY")
-        client = anthropic.Anthropic(timeout=30.0, max_retries=1)  # a hung call must not eat the demo
+        else:
+            client = anthropic.Anthropic(timeout=30.0, max_retries=1)  # a hung call must not eat the demo
 
     t0 = time.monotonic()
     try:
@@ -178,9 +185,9 @@ def ask(
         data = {"answerable": False, "answer": "", "evidence": [], "confidence": "low"}
     evidence = verify_quotes(data.get("evidence") or [], hits)
     if data.get("answerable") and evidence:
-        a = Answer(question, True, str(data.get("answer", "")).strip(), evidence, data.get("confidence"), [], model, PROMPT_SHA, latency, "api", asked_at)
+        a = Answer(question, True, str(data.get("answer", "")).strip(), evidence, data.get("confidence"), [], model, PROMPT_SHA, latency, source_api, asked_at)
     else:
-        a = Answer(question, False, ABSTAIN, [], data.get("confidence"), _context(hits), model, PROMPT_SHA, latency, "api", asked_at)
+        a = Answer(question, False, ABSTAIN, [], data.get("confidence"), _context(hits), model, PROMPT_SHA, latency, source_api, asked_at)
     return log(a, ids, raw)
 
 

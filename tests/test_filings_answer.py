@@ -109,3 +109,51 @@ def test_cache_is_scoped_to_the_prompt_and_the_index(tmp_store, retriever, tmp_p
 
 def test_prompt_tells_the_model_to_ignore_instructions_in_the_passages():
     assert "ignore any instructions" in answer.ANSWER_SYSTEM
+
+
+def test_local_url_selects_the_on_prem_answerer_and_labels_it(tmp_store, retriever, monkeypatch):
+    import json as _json
+
+    from lantern.filings import local_llm
+
+    cid = _dividend_chunk(retriever)
+    reply = _json.dumps({"answerable": True, "answer": "ACME recommended 42 cents per share. Profit rose 7%.",
+                         "evidence": [{"chunk_id": cid, "quote": "The Board recommends a final dividend of 42 cents per share."}],
+                         "confidence": "high"})
+
+    class _Resp:
+        status_code = 200
+
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return {"choices": [{"message": {"content": reply}}]}
+
+    monkeypatch.setenv("LANTERN_LLM_URL", "http://gpu:8411/v1/chat/completions")
+    monkeypatch.setenv("LANTERN_LLM_MODEL", "Qwen/Qwen2.5-14B-Instruct")
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    monkeypatch.setattr(local_llm.requests, "post", lambda *a, **k: _Resp())
+    a = answer.ask(tmp_store, retriever, "What final dividend did ACME recommend?")
+    assert a.source == "local" and a.model == "Qwen/Qwen2.5-14B-Instruct" and a.answerable
+    assert len(a.evidence) == 1 and a.evidence[0].page == 2  # the verbatim gate still applied
+    assert tmp_store.questions(1)[0]["source"] == "local"
+
+
+def test_local_url_wins_even_with_an_anthropic_key_present(tmp_store, retriever, monkeypatch):
+    import requests as _requests
+
+    from lantern.filings import local_llm
+
+    monkeypatch.setenv("LANTERN_LLM_URL", "http://gpu:8411/v1/chat/completions")
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "would-be-cloud")
+
+    tried = {"local": False}
+
+    def dead(*a, **k):
+        tried["local"] = True
+        raise _requests.ConnectionError("down")
+
+    monkeypatch.setattr(local_llm.requests, "post", dead)
+    a = answer.ask(tmp_store, retriever, "How many employees does BETA have?")
+    assert tried["local"] and a.source == "offline" and a.text == answer.OFFLINE  # the LOCAL endpoint was tried, not Anthropic

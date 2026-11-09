@@ -23,6 +23,15 @@ MAX_MB = 120
 THROTTLE_S = 2.0
 
 
+_ABBREV = {"hldgs", "hldg", "ltd", "inc", "intl", "grp", "corp", "bhd", "tbk"}
+
+
+def _name_token(company: str) -> str:
+    """Longest word of the issuer name that a real report would print (not SGX abbreviations)."""
+    words = [w for w in re.findall(r"[a-z]{3,}", company.lower()) if w not in _ABBREV]
+    return max(words or [""], key=len)
+
+
 def _slug(name: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")[:60]
 
@@ -64,7 +73,7 @@ def main() -> int:
             dest.write_bytes(data)
             doc = pymupdf.open(dest)
             head = " ".join(doc[i].get_text() for i in range(min(5, len(doc)))).lower()
-            token = max(re.findall(r"[a-z]{4,}", row["company"].lower()) or [""], key=len)
+            token = _name_token(row["company"])
             if token and token not in head:
                 row["status"] = "name-mismatch"  # kept on disk for manual review, not counted ok
                 bad += 1

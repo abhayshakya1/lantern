@@ -101,7 +101,11 @@
   "url": "https://cfmholdings.com/wp-content/uploads/2026/10/FY2026-Annual-Report.pdf",
   "year": 2026,
   "note": "cfmholdings.com, verified",
-  "status": "name-mismatch"
+  "status": "ok",
+  "file": "cfm-hldgs-ltd.pdf",
+  "pages": 172,
+  "sha256": "513cdfc338efb60dcefb40bf1bde482851b7041e30c145095d4dfe318533470a",
+  "bytes": 3556192
  },
  {
   "company": "Chasen Hldgs Ltd",
@@ -177,7 +181,11 @@
   "url": "https://asiavets.com/wp-content/uploads/Asia_Vets_Holdings_Annual-Report-2025.pdf",
   "year": 2025,
   "note": "asiavets.com, verified",
-  "status": "name-mismatch"
+  "status": "ok",
+  "file": "asia-vets-hldgs-ltd.pdf",
+  "pages": 144,
+  "sha256": "c783d098683404c535a04e657bd45b0bdbb621c0c43c678a5d10f3227d75e7c9",
+  "bytes": 9072889
  },
  {
   "company": "Asia-Pacific Strategic Inv Ltd",
@@ -445,7 +453,11 @@
   "url": "https://www.hghholdings.com.sg/wp-content/uploads/2026/04/03-HGH_Annual-Report-2025.pdf",
   "year": 2025,
   "note": "hghholdings.com.sg, verified",
-  "status": "name-mismatch"
+  "status": "ok",
+  "file": "hgh-hldgs-ltd.pdf",
+  "pages": 116,
+  "sha256": "4b7a7c8a8452fbc2d956e98e50bf8e2057892f513587d2afa5779dbd56bf8a63",
+  "bytes": 1807418
  },
  {
   "company": "Hiap Hoe Ltd",
@@ -470,5 +482,221 @@
   "pages": 136,
   "sha256": "a50f38b12016b6be9b4b28a26246b638d04dc083bff0a94d1429cde70d84358c",
   "bytes": 3324983
+ },
+ {
+  "company": "Ix Biopharma Ltd",
+  "stock_code": "42C",
+  "url": "https://www.ixbiopharma.com/wp-content/uploads/2026/09/iX-Biopharma-Annual-Report-FY2026.ashx_.pdf",
+  "year": 2026,
+  "note": "ixbiopharma.com, HEAD verified",
+  "status": "ok",
+  "file": "ix-biopharma-ltd.pdf",
+  "pages": 108,
+  "sha256": "c095177a8c68c40e3476110ad14c4f960db62a4d2a18734b3235920a935e8d1b",
+  "bytes": 14744609
+ },
+ {
+  "company": "Japan Foods Hldg Ltd",
+  "stock_code": "5OI",
+  "url": "",
+  "year": null,
+  "note": "failed: jfh.com.sg IR page 403 to honest UA",
+  "status": "no-url"
+ },
+ {
+  "company": "Jason Marine Group Ltd",
+  "stock_code": "5PF",
+  "url": "https://www.jason.com.sg/_files/ugd/62c19f_44c28819f6074b51add6a9ff90fd3dab.pdf",
+  "year": 2026,
+  "note": "jason.com.sg/annual-reports, HEAD verified",
+  "status": "ok",
+  "file": "jason-marine-group-ltd.pdf",
+  "pages": 194,
+  "sha256": "b10b221f860f62184d13e802938551b6bab4385c2c17227abc5dde588f87e46b",
+  "bytes": 7995106
+ },
+ {
+  "company": "Jawala Inc",
+  "stock_code": "1J7",
+  "url": "https://jawalainc.com/wp-content/uploads/2026/07/Jawala-AR25-High-Resolution.pdf",
+  "year": 2025,
+  "note": "jawalainc.com, HEAD verified, ~74MB; front pages image-only (69/161 pages carry text) - needs OCR, not ingested",
+  "status": "name-mismatch"
+ },
+ {
+  "company": "Jep Hldgs Ltd",
+  "stock_code": "1J4",
+  "url": "https://www.jep-holdings.com/jep_IR/jep.listedcompany.com/download/annual_report/JEP_AR_2025.pdf",
+  "year": 2025,
+  "note": "jep-holdings.com IR mirror, HEAD verified",
+  "status": "ok",
+  "file": "jep-hldgs-ltd.pdf",
+  "pages": 173,
+  "sha256": "f3e0caabe2f53136eca6a30a5f54c4c7b950bab5ab5a121340cb2b2c1e97b599",
+  "bytes": 5672513
+ },
+ {
+  "company": "Jumbo Group Ltd",
+  "stock_code": "42R",
+  "url": "",
+  "year": null,
+  "note": "failed: listedcompany.com WAF 202 to honest UA",
+  "status": "no-url"
+ },
+ {
+  "company": "Katrina Group Ltd",
+  "stock_code": "1A0",
+  "url": "https://katrinagroup.com/annual-report/KGL-Annual-Report-FY2025.pdf",
+  "year": 2025,
+  "note": "katrinagroup.com, HEAD verified",
+  "status": "ok",
+  "file": "katrina-group-ltd.pdf",
+  "pages": 180,
+  "sha256": "c9b265ab0d4a3a378ce3967736ebf8495eb741e5b11d5ae2e0d8ba40ca0c7a51",
+  "bytes": 5156852
+ },
+ {
+  "company": "Kim Heng Ltd",
+  "stock_code": "5G2",
+  "url": "",
+  "year": null,
+  "note": "failed: listedcompany.com WAF to honest UA",
+  "status": "no-url"
+ },
+ {
+  "company": "Kimly Ltd",
+  "stock_code": "1D0",
+  "url": "",
+  "year": null,
+  "note": "failed: own site lists FY2018-2021 only; newer on SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "Kingsmen Creatives Ltd",
+  "stock_code": "5MZ",
+  "url": "",
+  "year": null,
+  "note": "failed: listedcompany.com WAF 202 to honest UA",
+  "status": "no-url"
+ },
+ {
+  "company": "Koh Brothers Eco Engineering Ltd",
+  "stock_code": "5HV",
+  "url": "",
+  "year": null,
+  "note": "failed: kbeco.com.sg unreachable; SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "Kop Ltd",
+  "stock_code": "5I1",
+  "url": "https://koplimited.com/wp-content/uploads/2026/01/fy2024-annual-report.pdf",
+  "year": 2024,
+  "note": "koplimited.com, HEAD verified; newer AR on SGX only",
+  "status": "ok",
+  "file": "kop-ltd.pdf",
+  "pages": 152,
+  "sha256": "e92ea51beb2a35f21062d7e8ce6f2e2fe576f455b17dc0c8c8d037ec9e951edc",
+  "bytes": 1559910
+ },
+ {
+  "company": "Koyo International Ltd",
+  "stock_code": "5OC",
+  "url": "",
+  "year": null,
+  "note": "failed: own site 403 to honest UA",
+  "status": "no-url"
+ },
+ {
+  "company": "Lhn Ltd",
+  "stock_code": "41O",
+  "url": "",
+  "year": null,
+  "note": "failed: lhngroup.com 403 to honest UA",
+  "status": "no-url"
+ },
+ {
+  "company": "Ly Corp Ltd",
+  "stock_code": "1H8",
+  "url": "",
+  "year": null,
+  "note": "failed: no own IR site found; SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "Marco Polo Marine Ltd",
+  "stock_code": "5LY",
+  "url": "",
+  "year": null,
+  "note": "failed: listedcompany.com WAF 202 to honest UA",
+  "status": "no-url"
+ },
+ {
+  "company": "Mary Chia Hldgs Ltd",
+  "stock_code": "5OX",
+  "url": "",
+  "year": null,
+  "note": "failed: own site unreachable; SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "Megachem Ltd",
+  "stock_code": "5DS",
+  "url": "",
+  "year": null,
+  "note": "failed: IR site WAF 202 to honest UA",
+  "status": "no-url"
+ },
+ {
+  "company": "Mencast Hldgs Ltd",
+  "stock_code": "5NF",
+  "url": "",
+  "year": null,
+  "note": "failed: IR site WAF 202 to honest UA",
+  "status": "no-url"
+ },
+ {
+  "company": "Meta Health Ltd",
+  "stock_code": "5DX",
+  "url": "",
+  "year": null,
+  "note": "failed: own site unreachable; SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "Micro-Mechanics (Hldgs) Ltd",
+  "stock_code": "5DD",
+  "url": "",
+  "year": null,
+  "note": "failed: listedcompany.com WAF 202 to honest UA",
+  "status": "no-url"
+ },
+ {
+  "company": "Mm2 Asia Ltd",
+  "stock_code": "1B0",
+  "url": "https://mm2asia.com/announcement/mm2%20Asia%20FY2024%20Annual%20Report.pdf",
+  "year": 2024,
+  "note": "mm2asia.com, HEAD verified; FY2025 not on own site",
+  "status": "ok",
+  "file": "mm2-asia-ltd.pdf",
+  "pages": 184,
+  "sha256": "7650a01f22f0c7b1f311af5318c6cfe0f052e334efb22ec6b62b9b87c875d317",
+  "bytes": 3545461
+ },
+ {
+  "company": "Mooreast Hldgs Ltd",
+  "stock_code": "1V3",
+  "url": "",
+  "year": null,
+  "note": "failed: own IR page is a placeholder; SGX only",
+  "status": "no-url"
+ },
+ {
+  "company": "Msm International Ltd",
+  "stock_code": "5QR",
+  "url": "",
+  "year": null,
+  "note": "failed: own site unreachable; SGX only",
+  "status": "no-url"
  }
 ]

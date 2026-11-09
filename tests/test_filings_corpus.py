@@ -34,3 +34,10 @@ def test_build_corpus_fills_manifest_and_ids_are_deterministic(tmp_path):
     acme = next(m for m in manifest if m["ticker"] == "ACME")
     assert acme["pages"] == 3 and acme["pages_without_text"] == 1 and len(acme["sha256"]) == 64 and acme["ingested_at"].endswith("+00:00")
     assert json.loads((tmp_path / "filings" / "manifest.json").read_text())[0]["sha256"] == manifest[0]["sha256"]
+
+
+def test_table_rows_carry_their_column_headers():
+    pages = corpus.ingest_pdf(FIXTURES / "filings" / "ACME-AR2025.pdf")
+    # a table value must never be separated from the column that gives it meaning
+    assert "Banking: 2025 4,120; 2024 3,900" in pages[1].text
+    assert "Insurance: 2025 1,010; 2024 960" in pages[1].text

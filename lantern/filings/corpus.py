@@ -42,6 +42,17 @@ def token_estimate(text: str) -> int:
     return len(text) // 4
 
 
+_DETACHED_COMMA = re.compile(r"(\d+)(?: ?,)+$")
+
+
+def _cell(c) -> str:
+    """One table cell as printed: collapse newlines, and re-attach the thousands separators that
+    table extraction detaches ("6,106" comes back as "6106\n,")."""
+    t = " ".join(str(c).split()) if c is not None else ""
+    m = _DETACHED_COMMA.fullmatch(t)
+    return f"{int(m.group(1)):,}" if m else t
+
+
 def ingest_pdf(path: Path) -> list[Page]:
     doc = pymupdf.open(path)
     pages = []
@@ -50,10 +61,19 @@ def ingest_pdf(path: Path) -> list[Page]:
         rows = []
         try:
             for table in pg.find_tables().tables:
-                for row in table.extract():
-                    cells = [str(c).strip() for c in row if c is not None and str(c).strip()]
-                    if cells:
-                        rows.append("\t".join(cells))
+                data = table.extract()
+                header = [_cell(c) for c in (data[0] if data else [])]
+                body = data[1:] if data and any(header[1:]) else data
+                for row in body:
+                    cells = [_cell(c) for c in row]
+                    if not any(cells):
+                        continue
+                    if len(cells) == len(header) and any(header[1:]) and any(cells[1:]):
+                        # pair every value with its column header, so a number never loses its meaning
+                        pairs = [f"{header[j]} {cells[j]}".strip() for j in range(1, len(cells)) if cells[j]]
+                        rows.append(f"{cells[0] or header[0]}: " + "; ".join(pairs))
+                    else:
+                        rows.append("\t".join(c for c in cells if c))
         except Exception:  # ponytail: table detection is best effort; the text layer already holds the numbers
             pass
         text = (raw + ("\n" + "\n".join(rows) if rows else "")).strip()

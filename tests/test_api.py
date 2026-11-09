@@ -238,3 +238,11 @@ def test_challenger_endpoint_serves_both_metas(tmp_store):
     client = TestClient(api.create_app(tmp_store))
     body = client.get("/api/challenger").json()
     assert body["challenger"]["model"].startswith("TimesFM") and body["backtest"]["n"] == 100
+
+
+def test_challenger_endpoint_carries_the_probability_meta(tmp_store):
+    tmp_store.set_meta("challenger", {"fan": None, "model": "TimesFM"})
+    tmp_store.set_meta("challenger_prob", {"n": 100, "brier_tabpfn": 0.07, "brier_champion_wf": 0.06, "model": "TabPFN v2"})
+    client = TestClient(api.create_app(tmp_store))
+    body = client.get("/api/challenger").json()
+    assert body["prob"]["brier_tabpfn"] == 0.07 and body["challenger"]["model"] == "TimesFM"

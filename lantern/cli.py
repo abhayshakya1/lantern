@@ -110,6 +110,7 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("note", help="generate today's research note from the latest model run")
     chal = sub.add_parser("challenger", help="TimesFM challenger fan; --backtest adds walk-forward coverage")
     chal.add_argument("--backtest", action="store_true")
+    chal.add_argument("--prob", action="store_true", help="TabPFN walk-forward probability comparison")
     serve = sub.add_parser("serve", help="serve the API and the front end")
     filings = sub.add_parser("filings", help="filings Q&A corpus and answers")
     fsub = filings.add_subparsers(dest="fcmd", required=True)
@@ -142,10 +143,21 @@ def main(argv: list[str] | None = None) -> int:
         print(f"probability {t['value']:.0%} ({t['status']}), fair-value gap {gap_text}, run {run['model']['run_at']}")
         return 0
     if args.cmd == "challenger":
+        from lantern import challenger
+
+        if args.prob:
+            try:
+                res = challenger.challenger_prob(store)
+            except RuntimeError as exc:
+                print(exc)
+                return 1
+            print(f"probability challenger on {res['n']} months: TabPFN walk-forward Brier {res['brier_tabpfn']:.4f} "
+                  f"vs champion walk-forward {res['brier_champion_wf']:.4f} "
+                  f"(in-sample {res['brier_champion_insample']}, base rate Brier {res['brier_base_rate']:.4f})")
+            return 0
         if store.latest_run() is None:  # fail before loading a 200M model
             print("no model run to challenge; run `lantern model` first")
             return 1
-        from lantern import challenger
 
         try:
             f = challenger.TimesFMForecaster()

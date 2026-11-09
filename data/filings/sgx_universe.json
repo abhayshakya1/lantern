@@ -1,0 +1,1502 @@
+[
+ {
+  "company": "3Cnergy Ltd",
+  "stock_code": "502",
+  "isin": "SG0502000029",
+  "sgti_year": 2021
+ },
+ {
+  "company": "9R Ltd",
+  "stock_code": "1Y1",
+  "isin": "SGXE45420721",
+  "sgti_year": 2024
+ },
+ {
+  "company": "Abr Holdings Ltd",
+  "stock_code": "533",
+  "isin": "SG0533000253",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Abundance International Ltd",
+  "stock_code": "541",
+  "isin": "SG1I02877971",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Accrelist Ltd",
+  "stock_code": "5RJ",
+  "isin": "SG2C00960329",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Acesian Partners Ltd",
+  "stock_code": "5FW",
+  "isin": "SG1Q66923448",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Acrometa Group Ltd",
+  "stock_code": "43F",
+  "isin": "SG1CH1000006",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Advancer Global Ltd",
+  "stock_code": "43Q",
+  "isin": "SG1CJ7000006",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Adventus Hldgs Ltd",
+  "stock_code": "5EF",
+  "isin": "SG1P24916816",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Agv Group Limited",
+  "stock_code": "1A4",
+  "isin": "SG1DB3000005",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Alliance Mineral Assets",
+  "stock_code": "40F",
+  "isin": "AU0000XINEV7",
+  "sgti_year": 2018
+ },
+ {
+  "company": "Alset International Ltd",
+  "stock_code": "40V",
+  "isin": "SG1AE2000006",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Amos Group Ltd",
+  "stock_code": "49B",
+  "isin": "SGXE89972934",
+  "sgti_year": 2024
+ },
+ {
+  "company": "Annica Hldgs Ltd",
+  "stock_code": "5AL",
+  "isin": "SG1J70891671",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Aoxin Q & M Dental Grp Ltd",
+  "stock_code": "1D4",
+  "isin": "SG1DF9000000",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Ap Oil International Ltd",
+  "stock_code": "5AU",
+  "isin": "SG1K10892752",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Asia Vets Hldgs Ltd",
+  "stock_code": "5RE",
+  "isin": "SG2B95959500",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Asia-Pacific Strategic Inv Ltd",
+  "stock_code": "5RA",
+  "isin": "SG2B89959318",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Asiamedic Ltd",
+  "stock_code": "505",
+  "isin": "SG0505000059",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Asian Healthcare Specialists Limited",
+  "stock_code": "1J3",
+  "isin": "SG1ED9000003",
+  "sgti_year": 2022
+ },
+ {
+  "company": "Asian Micro Holdings Ltd",
+  "stock_code": "585",
+  "isin": "SG1H05873721",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Asiatic Group (Hldgs) Ltd",
+  "stock_code": "5CR",
+  "isin": "SG1N86910089",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Asiatravel.Com Hldgs ",
+  "stock_code": "5AM",
+  "isin": "SG1J72891703",
+  "sgti_year": 2018
+ },
+ {
+  "company": "Asj Hldgs Ltd",
+  "stock_code": "538",
+  "isin": "SG1D97850250",
+  "sgti_year": 2014
+ },
+ {
+  "company": "Aspen (Group) Hldgs Ltd",
+  "stock_code": "1F3",
+  "isin": "SG1DI2000001",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Astaka Hldgs Ltd",
+  "stock_code": "42S",
+  "isin": "SG1CB5000005",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Asti Holdings Limited",
+  "stock_code": "575",
+  "isin": "SG1G77872271",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Attilan Group",
+  "stock_code": "5ET",
+  "isin": "SG1P94920060",
+  "sgti_year": 2017
+ },
+ {
+  "company": "Audience Analytics Ltd",
+  "stock_code": "1AZ",
+  "isin": "SGXE74394474",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Ausgroup Limited",
+  "stock_code": "5GJ",
+  "isin": "SG1R38924838",
+  "sgti_year": 2022
+ },
+ {
+  "company": "Autagco Ltd",
+  "stock_code": "1D3",
+  "isin": "SG1DF7000002",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Avi-Tech Hldgs Ltd",
+  "stock_code": "1R6",
+  "isin": "SGXE48832328",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Axington Inc",
+  "stock_code": "42U",
+  "isin": "MYA012218006",
+  "sgti_year": 2020
+ },
+ {
+  "company": "Blackgold Natural Resources Ltd",
+  "stock_code": "41H",
+  "isin": "SG1AH0000001",
+  "sgti_year": 2020
+ },
+ {
+  "company": "Breadtalk Group ",
+  "stock_code": "5DA",
+  "isin": "SG1O02910816",
+  "sgti_year": 2018
+ },
+ {
+  "company": "Bright Orient (Holding) Ltd.",
+  "stock_code": "5DT",
+  "isin": "BMG1367H1007",
+  "sgti_year": 2013
+ },
+ {
+  "company": "Brooke Asia Ltd (Formerly Latitude Tree International Group Ltd)",
+  "stock_code": "5OY",
+  "isin": "SG1Y54946807",
+  "sgti_year": 2015
+ },
+ {
+  "company": "Capallianz Holdings Limited",
+  "stock_code": "594",
+  "isin": "SG1H44875935",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Capital World Ltd",
+  "stock_code": "1D5",
+  "isin": "KYG8763X1189",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Cedar Strategic Hldgs Ltd",
+  "stock_code": "530",
+  "isin": "SG1D96849865",
+  "sgti_year": 2015
+ },
+ {
+  "company": "Cfm Hldgs Ltd",
+  "stock_code": "5EB",
+  "isin": "SG1P02915996",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Challenger Technologies Ltd",
+  "stock_code": "573",
+  "isin": "SG1O97915910",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Charisma Energy Services Ltd",
+  "stock_code": "5QT",
+  "isin": "SG2B54957198",
+  "sgti_year": 2020
+ },
+ {
+  "company": "Chasen Hldgs Ltd",
+  "stock_code": "5NV",
+  "isin": "SG1X55941717",
+  "sgti_year": 2025
+ },
+ {
+  "company": "China Environment Ltd",
+  "stock_code": "5OU",
+  "isin": "SG1Y42946521",
+  "sgti_year": 2016
+ },
+ {
+  "company": "China Fashion Holdings Limited",
+  "stock_code": "5FK",
+  "isin": "SG1Q47922220",
+  "sgti_year": 2011
+ },
+ {
+  "company": "China Medical (Intl) Group Ltd",
+  "stock_code": "5IB",
+  "isin": "SGXE87511171",
+  "sgti_year": 2019
+ },
+ {
+  "company": "China Yongsheng Ltd",
+  "stock_code": "5KK",
+  "isin": "SG1V05936116",
+  "sgti_year": 2016
+ },
+ {
+  "company": "Chinese Global Investors Group",
+  "stock_code": "5CJ",
+  "isin": "SG1N00908623",
+  "sgti_year": 2018
+ },
+ {
+  "company": "Choo Chiang Hldgs Ltd",
+  "stock_code": "42E",
+  "isin": "SG1BE5000001",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Citicode Ltd",
+  "stock_code": "5FH",
+  "isin": "SG1Q38922098",
+  "sgti_year": 2020
+ },
+ {
+  "company": "Cityneon Hldgs ",
+  "stock_code": "5HJ",
+  "isin": "SG1S61928069",
+  "sgti_year": 2018
+ },
+ {
+  "company": "Clearbridge Health Ltd",
+  "stock_code": "1H3",
+  "isin": "SG1EB6000000",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Cna Group Ltd",
+  "stock_code": "5GC",
+  "isin": "SG1Q82923885",
+  "sgti_year": 2015
+ },
+ {
+  "company": "Colex Holdings Limited",
+  "stock_code": "567",
+  "isin": "SG1G56870536",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Cph Ltd",
+  "stock_code": "539",
+  "isin": "SG1G40868794",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Cse Global Ltd",
+  "stock_code": "544",
+  "isin": "SG1G47869290",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Disa Ltd",
+  "stock_code": "532",
+  "isin": "SG0532000247",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Dmx Technologies Group Ltd",
+  "stock_code": "5CH",
+  "isin": "BMG278221087",
+  "sgti_year": 2015
+ },
+ {
+  "company": "Ecowise Holdings Limited",
+  "stock_code": "5CT",
+  "isin": "SG1N88910129",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Edition Ltd",
+  "stock_code": "5HG",
+  "isin": "SG1S42927578",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Eindec Corp Ltd",
+  "stock_code": "42Z",
+  "isin": "SG1CE9000005",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Elektromotive Group Limited",
+  "stock_code": "5KX",
+  "isin": "SG1V58937227",
+  "sgti_year": 2013
+ },
+ {
+  "company": "Elite Ksb Hldgs Ltd",
+  "stock_code": "550",
+  "isin": "SG1P05916231",
+  "sgti_year": 2014
+ },
+ {
+  "company": "Emerging Towns & Cities Singapore Ltd.",
+  "stock_code": "1C0",
+  "isin": "SG1DD5000009",
+  "sgti_year": 2020
+ },
+ {
+  "company": "Ems Energy Ltd",
+  "stock_code": "42O",
+  "isin": "SG1CA0000002",
+  "sgti_year": 2016
+ },
+ {
+  "company": "Epicentre Holdings Ltd",
+  "stock_code": "5MQ",
+  "isin": "SG1W52939285",
+  "sgti_year": 2020
+ },
+ {
+  "company": "Es Group (Hldgs) Ltd",
+  "stock_code": "5RC",
+  "isin": "SG2B91959363",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Eurosports Global Ltd",
+  "stock_code": "5G1",
+  "isin": "SG2G55000001",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Ezion Holding Ltd",
+  "stock_code": "5ME",
+  "isin": "SG1W38939029",
+  "sgti_year": 2020
+ },
+ {
+  "company": "Ezra Hldgs",
+  "stock_code": "5DN",
+  "isin": "SG1O34912152",
+  "sgti_year": 2017
+ },
+ {
+  "company": "Falcon Energy Group Ltd",
+  "stock_code": "5FL",
+  "isin": "SG1Q49922319",
+  "sgti_year": 2020
+ },
+ {
+  "company": "Figtree Hldgs Ltd",
+  "stock_code": "5F4",
+  "isin": "SG2G36998349",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Food Junction Holdings Limited",
+  "stock_code": "529",
+  "isin": "SG1L83897430",
+  "sgti_year": 2013
+ },
+ {
+  "company": "Fuji Offset Plates Manufacturing ",
+  "stock_code": "508",
+  "isin": "SG0508000080",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Fujian Zhenyun Plas Ind Co Ltd",
+  "stock_code": "5KT",
+  "isin": "CNE1000007L2",
+  "sgti_year": 2014
+ },
+ {
+  "company": "Gallant Venture Ltd",
+  "stock_code": "5IG",
+  "isin": "SG1T37930313",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Gccp Resources Ltd",
+  "stock_code": "41T",
+  "isin": "KYG377411080",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Giken Sakata (S) Ltd",
+  "stock_code": "542",
+  "isin": "SG0542000328",
+  "sgti_year": 2014
+ },
+ {
+  "company": "Gke Corporation Ltd",
+  "stock_code": "595",
+  "isin": "SG1N09908665",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Global Dragon Ltd",
+  "stock_code": "586",
+  "isin": "SG1H06873795",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Goodland Group Ltd",
+  "stock_code": "5PC",
+  "isin": "SG1Y75948873",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Gs Hldgs Ltd",
+  "stock_code": "43A",
+  "isin": "SG1CF0000001",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Gss Energy Ltd",
+  "stock_code": "41F",
+  "isin": "SG1AG6000007",
+  "sgti_year": 2025
+ },
+ {
+  "company": "H2G Green Ltd",
+  "stock_code": "5AI",
+  "isin": "SG1I98885227",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Hafary Holdings Limited",
+  "stock_code": "5PP",
+  "isin": "SG1Z19951446",
+  "sgti_year": 2013
+ },
+ {
+  "company": "Hc Surgical Specialists Ltd",
+  "stock_code": "1B1",
+  "isin": "SG1DC2000004",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Health Management International Ltd",
+  "stock_code": "588",
+  "isin": "SG1H18874567",
+  "sgti_year": 2019
+ },
+ {
+  "company": "Healthbank Hldgs Ltd",
+  "stock_code": "40B",
+  "isin": "SG1AA4000002",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Healthway Medical Corp Ltd",
+  "stock_code": "5NG",
+  "isin": "SG1X09940682",
+  "sgti_year": 2023
+ },
+ {
+  "company": "Heatec Jietong Hldgs Ltd",
+  "stock_code": "5OR",
+  "isin": "SG1Y31945526",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Heeton Hldgs Ltd",
+  "stock_code": "5DP",
+  "isin": "SG1O44912994",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Hengyang Petrochemical Logistics Ltd",
+  "stock_code": "5PD",
+  "isin": "SG1Y78948920",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Hgh Hldgs Ltd",
+  "stock_code": "5GZ",
+  "isin": "SG1S12926576",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Hiap Hoe Ltd",
+  "stock_code": "5JK",
+  "isin": "SG1U37933462",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Hiap Seng Engineering Ltd",
+  "stock_code": "510",
+  "isin": "SG1G69871497",
+  "sgti_year": 2020
+ },
+ {
+  "company": "Hiap Seng Industries Ltd",
+  "stock_code": "1L2",
+  "isin": "SGXE37533077",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Hiap Tong Corp Ltd",
+  "stock_code": "5PO",
+  "isin": "SG1Z16951381",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Hosen Group Ltd",
+  "stock_code": "5EV",
+  "isin": "SG1Q03920366",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Huationg Global Ltd",
+  "stock_code": "41B",
+  "isin": "SG1AF2000003",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Hup Soon Global Corp Ltd",
+  "stock_code": "5JY",
+  "isin": "SG1U69934651",
+  "sgti_year": 2012
+ },
+ {
+  "company": "Hyphens Pharma International Ltd",
+  "stock_code": "1J5",
+  "isin": "SG1EE4000006",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Icp Ltd",
+  "stock_code": "5I4",
+  "isin": "SG2G87000003",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Imperium Crown Limited",
+  "stock_code": "5HT",
+  "isin": "SG1S82928544",
+  "sgti_year": 2023
+ },
+ {
+  "company": "Indofood Agri Resources Ltd",
+  "stock_code": "5JS",
+  "isin": "SG1U47933908",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Innovalues Ltd",
+  "stock_code": "591",
+  "isin": "SG1J57890407",
+  "sgti_year": 2016
+ },
+ {
+  "company": "International Press Softcom",
+  "stock_code": "571",
+  "isin": "SG1G93873220",
+  "sgti_year": 2020
+ },
+ {
+  "company": "Interra Resources Ltd",
+  "stock_code": "5GI",
+  "isin": "SG1R37924805",
+  "sgti_year": 2024
+ },
+ {
+  "company": "Ips Securex Hldgs Ltd",
+  "stock_code": "42N",
+  "isin": "SG1BJ0000005",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Isec Healthcare Ltd",
+  "stock_code": "40T",
+  "isin": "SG1AD9000001",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Ix Biopharma Ltd",
+  "stock_code": "42C",
+  "isin": "SG1BD9000009",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Japan Foods Hldg Ltd",
+  "stock_code": "5OI",
+  "isin": "SG1X84942272",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Jason Hldgs Ltd",
+  "stock_code": "5I3",
+  "isin": "SG2G86000004",
+  "sgti_year": 2016
+ },
+ {
+  "company": "Jason Marine Group Ltd",
+  "stock_code": "5PF",
+  "isin": "SG1Y80949072",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Jawala Inc",
+  "stock_code": "1J7",
+  "isin": "MYA013922002",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Jep Hldgs",
+  "stock_code": "5FA",
+  "isin": "SG1Q14921304",
+  "sgti_year": 2018
+ },
+ {
+  "company": "Jep Hldgs Ltd",
+  "stock_code": "1J4",
+  "isin": "SG1EE3000007",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Jubilee Industries Holding Ltd",
+  "stock_code": "5OS",
+  "isin": "SG1Y33945565",
+  "sgti_year": 2019
+ },
+ {
+  "company": "Jumbo Group Ltd",
+  "stock_code": "42R",
+  "isin": "SG1CA7000005",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Katrina Group Ltd",
+  "stock_code": "1A0",
+  "isin": "SG1DA5000005",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Kim Heng Ltd",
+  "stock_code": "5G2",
+  "isin": "SG2G57000009",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Kimly Ltd",
+  "stock_code": "1D0",
+  "isin": "SG1DF1000008",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Kinergy Ltd",
+  "stock_code": "5JT",
+  "isin": "SG1U56934110",
+  "sgti_year": 2012
+ },
+ {
+  "company": "King Wan Corporation Limited",
+  "stock_code": "554",
+  "isin": "SG1J32888328",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Kingsmen Creatives Ltd",
+  "stock_code": "5MZ",
+  "isin": "SG1W76939881",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Klw Holdings Ltd",
+  "stock_code": "504",
+  "isin": "SG1G23864448",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Koh Brothers Eco Engineering Ltd",
+  "stock_code": "5HV",
+  "isin": "SG1S95928879",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Kop Ltd",
+  "stock_code": "5I1",
+  "isin": "SG2G85000005",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Koyo International Ltd",
+  "stock_code": "5OC",
+  "isin": "SG1X69942156",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Ks Energy Ltd",
+  "stock_code": "578",
+  "isin": "SG1G91873040",
+  "sgti_year": 2020
+ },
+ {
+  "company": "Lasseters International Holdings Ltd",
+  "stock_code": "5EL",
+  "isin": "SG1P64918631",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Lee Metal Group ",
+  "stock_code": "593",
+  "isin": "SG1I42881876",
+  "sgti_year": 2018
+ },
+ {
+  "company": "Lereno Bio-Chem Ltd",
+  "stock_code": "42H",
+  "isin": "SGXE61141383",
+  "sgti_year": 2019
+ },
+ {
+  "company": "Lhn Ltd",
+  "stock_code": "41O",
+  "isin": "SG1AH9000002",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Lorenzo International Ltd",
+  "stock_code": "5IE",
+  "isin": "SG1T35930281",
+  "sgti_year": 2020
+ },
+ {
+  "company": "Ly Corp Ltd",
+  "stock_code": "1H8",
+  "isin": "SG1EC1000003",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Magnus Energy Group Ltd",
+  "stock_code": "41S",
+  "isin": "SG1AI2000007",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Marco Polo Marine Ltd",
+  "stock_code": "5LY",
+  "isin": "SG1W14938268",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Mary Chia Hldgs Ltd",
+  "stock_code": "5OX",
+  "isin": "SG1Y51946677",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Mc Payment Limited",
+  "stock_code": "5NK",
+  "isin": "SG1X21941023",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Medi-Flex Ltd",
+  "stock_code": "5FF",
+  "isin": "SG1Q30921981",
+  "sgti_year": 2014
+ },
+ {
+  "company": "Medtecs International Corp Ltd",
+  "stock_code": "546",
+  "isin": "BMG5958R1043",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Megachem Ltd",
+  "stock_code": "5DS",
+  "isin": "SG1O60914015",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Memories Group Limited",
+  "stock_code": "1H4",
+  "isin": "SG1EB7000009",
+  "sgti_year": 2022
+ },
+ {
+  "company": "Memstar Technology Ltd",
+  "stock_code": "5MS",
+  "isin": "SG1W58939412",
+  "sgti_year": 2016
+ },
+ {
+  "company": "Mencast Hldgs Ltd",
+  "stock_code": "5NF",
+  "isin": "SG1X07940643",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Mercurius Cap Investment Ltd",
+  "stock_code": "5RF",
+  "isin": "SG2B96959558",
+  "sgti_year": 2023
+ },
+ {
+  "company": "Meta Health Ltd",
+  "stock_code": "5DX",
+  "isin": "SG1O81915033",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Mfs Technology Ltd",
+  "stock_code": "5BM",
+  "isin": "SG1M06899645",
+  "sgti_year": 2016
+ },
+ {
+  "company": "Micro-Mechanics (Hldgs) Ltd",
+  "stock_code": "5DD",
+  "isin": "SG1O09910991",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Midas Hldgs ",
+  "stock_code": "5EN",
+  "isin": "SG1P73919000",
+  "sgti_year": 2018
+ },
+ {
+  "company": "Mm2 Asia Ltd",
+  "stock_code": "1B0",
+  "isin": "SG1DC0000006",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Mooreast Hldgs Ltd",
+  "stock_code": "1V3",
+  "isin": "SGXE69578966",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Moya Asia Limited",
+  "stock_code": "5BT",
+  "isin": "SG1M34902643",
+  "sgti_year": 2013
+ },
+ {
+  "company": "Ms Holdings Limited",
+  "stock_code": "40U",
+  "isin": "SG1AE1000007",
+  "sgti_year": 2022
+ },
+ {
+  "company": "Msm International Ltd",
+  "stock_code": "5QR",
+  "isin": "SG2B09957087",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Nam Cheong Ltd",
+  "stock_code": "1MZ",
+  "isin": "BMG6361R3014",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Natural Cool Hldgs Ltd",
+  "stock_code": "5IF",
+  "isin": "SG1T36930298",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Nauticawt Limited",
+  "stock_code": "42D",
+  "isin": "SG1BE2000004",
+  "sgti_year": 2020
+ },
+ {
+  "company": "Net Pacific Financial Hldgs Ltd",
+  "stock_code": "5QY",
+  "isin": "SG2B83959223",
+  "sgti_year": 2024
+ },
+ {
+  "company": "New Wave Hldgs Ltd",
+  "stock_code": "5FX",
+  "isin": "SG1Q78923675",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Nico Steel Holdings Ltd",
+  "stock_code": "5GF",
+  "isin": "SG1R29924672",
+  "sgti_year": 2020
+ },
+ {
+  "company": "No Signboard Holdings Ltd",
+  "stock_code": "1G6",
+  "isin": "SG1EA9000009",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Nobel Design Hldgs",
+  "stock_code": "547",
+  "isin": "SG1D350018406",
+  "sgti_year": 2017
+ },
+ {
+  "company": "Noel Gifts International Ltd",
+  "stock_code": "543",
+  "isin": "SG0543000335",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Ntegrator International Ltd.",
+  "stock_code": "5HC",
+  "isin": "SG1S32927257",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Ocean Sky International Ltd",
+  "stock_code": "1B6",
+  "isin": "SG1DD2000002",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Oceanus Group Limited",
+  "stock_code": "579",
+  "isin": "SG1M80907371",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Oel (Holdings) Limited",
+  "stock_code": "584",
+  "isin": "SG0584008601",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Okp Hldgs Ltd",
+  "stock_code": "5CF",
+  "isin": "SG1M55904841",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Old Chang Kee Ltd",
+  "stock_code": "5ML",
+  "isin": "SG1W49939232",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Olive Tree Estates Ltd",
+  "stock_code": "1H2",
+  "isin": "SG1EB5000001",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Oriental Group Ltd",
+  "stock_code": "5FI",
+  "isin": "SG1Q39922105",
+  "sgti_year": 2016
+ },
+ {
+  "company": "Pacific Star Development Limited",
+  "stock_code": "1C5",
+  "isin": "SG1DE5000007",
+  "sgti_year": 2023
+ },
+ {
+  "company": "Pavillon Holdings Ltd",
+  "stock_code": "596",
+  "isin": "SG1I46882631",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Perennial Real Estate Holding Ltd",
+  "stock_code": "40S",
+  "isin": "SG1AD8000002",
+  "sgti_year": 2020
+ },
+ {
+  "company": "Plato Capital Ltd",
+  "stock_code": "5PI",
+  "isin": "SGXE26599816",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Polaris Ltd",
+  "stock_code": "5BI",
+  "isin": "SG1L96897898",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Pollux Properties Ltd",
+  "stock_code": "5AE",
+  "isin": "SG1I77884290",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Progen Holdings Ltd",
+  "stock_code": "583",
+  "isin": "SG1F48858053",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Prospera Global Ltd",
+  "stock_code": "5HH",
+  "isin": "SG1S49927944",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Qt Vascular Ltd.",
+  "stock_code": "5I0",
+  "isin": "SG2G82000008",
+  "sgti_year": 2022
+ },
+ {
+  "company": "Re&S Hldgs Ltd",
+  "stock_code": "1G1",
+  "isin": "SG1EA3000005",
+  "sgti_year": 2024
+ },
+ {
+  "company": "Reenova Investment Holding Ltd",
+  "stock_code": "5EC",
+  "isin": "SG1P04916067",
+  "sgti_year": 2020
+ },
+ {
+  "company": "Renewable Energy Asia Group Ltd",
+  "stock_code": "5DW",
+  "isin": "BMG7499U1099",
+  "sgti_year": 2015
+ },
+ {
+  "company": "Resources Prima Group",
+  "stock_code": "5MM",
+  "isin": "SG1W50939246",
+  "sgti_year": 2017
+ },
+ {
+  "company": "Rich Capital Hldgs Ltd",
+  "stock_code": "5G4",
+  "isin": "SG2G63000001",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Rokko Hldgs Ltd",
+  "stock_code": "5LU",
+  "isin": "SG1W02938031",
+  "sgti_year": 2012
+ },
+ {
+  "company": "Sakae Hldgs Ltd",
+  "stock_code": "5DO",
+  "isin": "SG1O42912715",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Samurai 2K Aerosol Ltd",
+  "stock_code": "1C3",
+  "isin": "SG1DE0000002",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Sanli Environmental Limited",
+  "stock_code": "1E3",
+  "isin": "SG1DG8000009",
+  "sgti_year": 2022
+ },
+ {
+  "company": "Santak Holdings Ltd",
+  "stock_code": "580",
+  "isin": "SG1J68891147",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Sbi Offshore Ltd",
+  "stock_code": "5PL",
+  "isin": "SG1Y97950360",
+  "sgti_year": 2020
+ },
+ {
+  "company": "Second Chance Properties Ltd",
+  "stock_code": "528",
+  "isin": "SG1D93474618",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Secura Group Ltd",
+  "stock_code": "43B",
+  "isin": "SG1CF2000009",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Select Group Ltd",
+  "stock_code": "5FQ",
+  "isin": "SG1Q53922437",
+  "sgti_year": 2016
+ },
+ {
+  "company": "Sen Yue Holdings Ltd",
+  "stock_code": "5BS",
+  "isin": "SG1M25902545",
+  "sgti_year": 2020
+ },
+ {
+  "company": "Serrano",
+  "stock_code": "40R",
+  "isin": "SG1AD7000003",
+  "sgti_year": 2017
+ },
+ {
+  "company": "Sevens Atelier Ltd",
+  "stock_code": "5EW",
+  "isin": "SG1Q04920423",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Shopper360 Ltd",
+  "stock_code": "1F0",
+  "isin": "SG1DH4000001",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Shs Holdings Ltd",
+  "stock_code": "566",
+  "isin": "SG1G33866144",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Silverlake Axis Ltd",
+  "stock_code": "5CP",
+  "isin": "SGXE58461943",
+  "sgti_year": 2024
+ },
+ {
+  "company": "Sing Hldgs Ltd",
+  "stock_code": "5IC",
+  "isin": "SG1T28930090",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Singapore Medical Group Limited",
+  "stock_code": "5OT",
+  "isin": "SG1Y37945678",
+  "sgti_year": 2022
+ },
+ {
+  "company": "Singapore O&G Ltd.",
+  "stock_code": "1D8",
+  "isin": "SG1DG2000005",
+  "sgti_year": 2022
+ },
+ {
+  "company": "Singhaiyi Group Ltd",
+  "stock_code": "5H0",
+  "isin": "SG2G73000009",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Sinocloud Group Limited",
+  "stock_code": "5EK",
+  "isin": "BMG8191N1048",
+  "sgti_year": 2022
+ },
+ {
+  "company": "Sinwa Ltd",
+  "stock_code": "5CN",
+  "isin": "SG1N21908982",
+  "sgti_year": 2019
+ },
+ {
+  "company": "Sitra Hldgs (International) Ltd",
+  "stock_code": "5LE",
+  "isin": "SG1V70937494",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Sk Jewellery Group Ltd",
+  "stock_code": "42G",
+  "isin": "SG1BG2000009",
+  "sgti_year": 2020
+ },
+ {
+  "company": "Slb Development Ltd",
+  "stock_code": "1J0",
+  "isin": "SG1ED7000005",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Soon Lian Hldgs Ltd",
+  "stock_code": "5MD",
+  "isin": "SG1W36938981",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Soup Hldgs Ltd",
+  "stock_code": "5KI",
+  "isin": "SG1U97935860",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Spackman Entertainment Group Ltd",
+  "stock_code": "40E",
+  "isin": "SG1AB0000004",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Spindex Industries Ltd",
+  "stock_code": "564",
+  "isin": "SG1G32866137",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Starburst Holdings Limited",
+  "stock_code": "40D",
+  "isin": "SG1AA7000009",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Sunpower Group Ltd",
+  "stock_code": "5GD",
+  "isin": "BMG8585U1027",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Sunrise Shares Holdings Ltd",
+  "stock_code": "581",
+  "isin": "SG0581008505",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Tai Sin Electric Ltd",
+  "stock_code": "500",
+  "isin": "SG1F88861140",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Taka Jewellery Hldgs Ltd",
+  "stock_code": "42L",
+  "isin": "SG1BI4000003",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Talkmed Group Ltd",
+  "stock_code": "5G3",
+  "isin": "SG2G61000003",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Technics Oil & Gas Ltd",
+  "stock_code": "5CQ",
+  "isin": "SG1N85910015",
+  "sgti_year": 2016
+ },
+ {
+  "company": "Teckwah Industrial Corporation Ltd",
+  "stock_code": "561",
+  "isin": "SG0561000464",
+  "sgti_year": 2020
+ },
+ {
+  "company": "Teho International Inc Ltd",
+  "stock_code": "5OQ",
+  "isin": "SG1Y15944495",
+  "sgti_year": 2025
+ },
+ {
+  "company": "The Trendlines Group Ltd",
+  "stock_code": "42T",
+  "isin": "IL0011328858",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Totm Technologies Ltd",
+  "stock_code": "42F",
+  "isin": "SG1BF8000005",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Transit-Mixed Concrete Ltd",
+  "stock_code": "570",
+  "isin": "SG1F41856716",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Trek 2000 International Ltd",
+  "stock_code": "5AB",
+  "isin": "SG1I59882965",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Tritech Group Ltd",
+  "stock_code": "5G9",
+  "isin": "SG2G71000001",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Tsh Corporation Limited",
+  "stock_code": "574",
+  "isin": "SGXE89604008",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Tung Lok Restaurants (2000) Ltd",
+  "stock_code": "540",
+  "isin": "SG1J65890803",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Ug Healthcare Corporation Ltd",
+  "stock_code": "41A",
+  "isin": "SG1AF1000004",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Ums Holdings Limited",
+  "stock_code": "558",
+  "isin": "SG1J94892465",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Union Gas Hldgs Ltd",
+  "stock_code": "1F2",
+  "isin": "SG1DI1000002",
+  "sgti_year": 2025
+ },
+ {
+  "company": "United Global Ltd",
+  "stock_code": "43P",
+  "isin": "SG1CJ6000007",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Unusual Ltd",
+  "stock_code": "1D1",
+  "isin": "SG1DF5000004",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Vallianz Holding Ltd",
+  "stock_code": "545",
+  "isin": "SG1J89892363",
+  "sgti_year": 2019
+ },
+ {
+  "company": "Vashion Group Ltd",
+  "stock_code": "1F4",
+  "isin": "SG1DI5000008",
+  "sgti_year": 2019
+ },
+ {
+  "company": "Vcplus Ltd",
+  "stock_code": "43E",
+  "isin": "SG1CG7000002",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Versalink Hldgs Ltd",
+  "stock_code": "40N",
+  "isin": "SG1AC9000003",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Vicplas International Ltd",
+  "stock_code": "569",
+  "isin": "SG1G57870584",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Viking Offshore And Marine Ltd",
+  "stock_code": "557",
+  "isin": "SG1J35888424",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Wilton Resources Corp Limited",
+  "stock_code": "5F7",
+  "isin": "SG2G45999965",
+  "sgti_year": 2023
+ },
+ {
+  "company": "Wong Fong Industries Ltd",
+  "stock_code": "1A1",
+  "isin": "SG1DA6000004",
+  "sgti_year": 2025
+ },
+ {
+  "company": "World Class Global Ltd",
+  "stock_code": "1E6",
+  "isin": "SG1DH0000005",
+  "sgti_year": 2021
+ },
+ {
+  "company": "Y Ventures Group Ltd",
+  "stock_code": "1F1",
+  "isin": "SG1DH7000008",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Ying Li International Real Estate Ltd",
+  "stock_code": "5DM",
+  "isin": "SG1O24911883",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Zhongxin Fruit And Juice Ltd",
+  "stock_code": "5EG",
+  "isin": "SG1P25916898",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Zico Hldgs Inc",
+  "stock_code": "40W",
+  "isin": "MYA007968003",
+  "sgti_year": 2025
+ },
+ {
+  "company": "Zixin Group Hldgs Ltd",
+  "stock_code": "42W",
+  "isin": "SG1CE1000003",
+  "sgti_year": 2025
+ }
+]

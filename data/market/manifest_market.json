@@ -298,5 +298,61 @@
   "url": "https://www.isechealthcare.com/wp-content/uploads/2026/04/ISEC_Annual-Report-2025-1.pdf",
   "year": 2025,
   "note": "isechealthcare.com, verified"
+ },
+ {
+  "company": "Eurosports Global Ltd",
+  "stock_code": "5G1",
+  "url": "",
+  "year": 2026,
+  "note": "listedcompany WAF-gated; browser gap-fill"
+ },
+ {
+  "company": "Figtree Hldgs Ltd",
+  "stock_code": "5F4",
+  "url": "",
+  "year": 2025,
+  "note": "no IR content on own site; SGX-only"
+ },
+ {
+  "company": "Gallant Venture Ltd",
+  "stock_code": "5IG",
+  "url": "",
+  "year": 2025,
+  "note": "listedcompany WAF-gated; browser gap-fill"
+ },
+ {
+  "company": "Gccp Resources Ltd",
+  "stock_code": "41T",
+  "url": "",
+  "year": null,
+  "note": "own site latest FY2021; current AR SGX-only"
+ },
+ {
+  "company": "Goodland Group Ltd",
+  "stock_code": "5PC",
+  "url": "",
+  "year": 2025,
+  "note": "SGX + WAF-gated IR; browser gap-fill"
+ },
+ {
+  "company": "Gs Hldgs Ltd",
+  "stock_code": "43A",
+  "url": "",
+  "year": null,
+  "note": "no working site; SGX-only"
+ },
+ {
+  "company": "Gss Energy Ltd",
+  "stock_code": "41F",
+  "url": "https://gssenergy.com.sg/wp-content/uploads/2026/04/Annual-Report_FY2025_1.pdf",
+  "year": 2025,
+  "note": "gssenergy.com.sg, verified"
+ },
+ {
+  "company": "H2G Green Ltd",
+  "stock_code": "5AI",
+  "url": "",
+  "year": 2026,
+  "note": "own site links SGX only; browser gap-fill"
  }
 ]

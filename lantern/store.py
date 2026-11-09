@@ -2,6 +2,7 @@
 
 import json
 import sqlite3
+import threading
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -24,8 +25,19 @@ class Store:
         self.root = Path(root)
         (self.root / "raw").mkdir(parents=True, exist_ok=True)
         (self.root / "series").mkdir(exist_ok=True)
-        self.db = sqlite3.connect(self.root / "lantern.db", check_same_thread=False)
+        self._db_path = self.root / "lantern.db"
+        self._local = threading.local()
         self.db.executescript(_SCHEMA)
+
+    @property
+    def db(self) -> sqlite3.Connection:
+        """One connection per thread: a single connection shared across the API threadpool
+        intermittently corrupts reads (seen live as a UTF-8 decode error on a healthy table)."""
+        conn = getattr(self._local, "conn", None)
+        if conn is None:
+            conn = sqlite3.connect(self._db_path)
+            self._local.conn = conn
+        return conn
 
     # provenance
     def record_fetch(

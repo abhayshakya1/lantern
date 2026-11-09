@@ -144,3 +144,20 @@ Clean-baseline retrieval on the fresh draft: quote-in-top8 0.67; with the v2-m3 
 question — far smaller than its effect on the old draft's table-dense misses). Honest status: the
 reranker is a measured candidate for the tuning pass, not a guaranteed win; the pass gets designed
 against the VERIFIED gold set once Abhay has been through the draft.
+
+## Finance embeddings vs the general embedder (2026-11-09, Deathstar)
+
+Same index (7,267 chunks), same 30 answerable questions, quote-in-top8:
+
+| Embedder | Score |
+|---|---|
+| bge-small-en-v1.5 (current) | 0.67 |
+| FinLang finance-embeddings-investopedia | 0.57 |
+| FinModernBERT | 0.67 |
+| bge-m3 | 0.63 |
+| FinLang + v2-m3 reranker | 0.70 |
+
+Verdict: no finance embedder beats the general one on SGX annual reports; the misses are the same
+table-dense questions for every model, which points to extraction (chunk quality), not embeddings.
+bge-small stays. The reranker's +1 is the same as on bge-small, so it remains the only candidate
+for the tuning pass.

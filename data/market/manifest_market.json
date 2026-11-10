@@ -1393,5 +1393,354 @@
   "pages": 178,
   "sha256": "0f57b9600d3938929c58edc1a0dba2b18aff948c218e77ff7b62e833503497c0",
   "bytes": 3530263
+ },
+ {
+  "company": "Acrophyte Hospitality Trust",
+  "stock_code": "XZL",
+  "url": "https://cdn.sanity.io/files/rgu3ktoj/production/1632e8bf6ad4851c2b8615c7d19a1d9c70c93e76.pdf",
+  "year": 2025,
+  "note": "linked as ACRO-HT Annual Report FY2025 on acrophytetrust.com publications (Sanity CDN)",
+  "name_token": "acrophyte",
+  "batch": "trusts-2026-11-10",
+  "status": "ok",
+  "file": "acrophyte-hospitality-trust.pdf",
+  "pages": 178,
+  "sha256": "985eff6e491bd6777bbeedc98d1d4560c596c3631b96126a43eae9d2f830c9ec",
+  "bytes": 6035742
+ },
+ {
+  "company": "AIMS APAC REIT",
+  "stock_code": "O5RU",
+  "url": "",
+  "year": null,
+  "note": "FAILED: investor.aimsapacreit.com HTTP 202 WAF challenge; FY2026 AR not found off SGX",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "Alpha Integrated REIT",
+  "stock_code": "M1GU",
+  "url": "",
+  "year": null,
+  "note": "FAILED: investor.ai-reit.com HTTP 202 WAF challenge",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "Asian Pay Television Trust",
+  "stock_code": "S7OU",
+  "url": "",
+  "year": null,
+  "note": "FAILED: investor.aptt.sg HTTP 202 WAF challenge",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "BHG Retail REIT",
+  "stock_code": "BMGU",
+  "url": "",
+  "year": null,
+  "note": "FAILED: bhgreit.listedcompany.com HTTP 202 WAF challenge; only chapter PDFs",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "CapitaLand Ascott Trust",
+  "stock_code": "HMN",
+  "url": "",
+  "year": null,
+  "note": "FAILED: HTTP 202 WAF challenge. Candidate: https://investor.capitalandascotttrust.com/misc/agm2026/CLAS-FY2025-AR.pdf",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "CapitaLand China Trust",
+  "stock_code": "AU8U",
+  "url": "",
+  "year": null,
+  "note": "FAILED: investor.clct.com.sg HTML flipbook, HTTP 202 WAF challenge",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "CapitaLand India Trust",
+  "stock_code": "CY6U",
+  "url": "",
+  "year": 2025,
+  "note": "FAILED: investor.clint.com.sg HTTP 202 WAF challenge; no direct PDF off SGX",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "CDL Hospitality Trusts",
+  "stock_code": "J85",
+  "url": "",
+  "year": 2025,
+  "note": "FAILED: HTTP 202 WAF challenge. Candidate: https://investor.cdlht.com/newsroom/20260325_073112_J85_GJH8WE7ZD5RBUP3T.1.pdf",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "Centurion Accommodation REIT",
+  "stock_code": "8C8U",
+  "url": "",
+  "year": 2025,
+  "note": "FAILED: investor.careit.com.sg HTTP 202 WAF challenge; no direct PDF off SGX",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "Daiwa House Logistics Trust",
+  "stock_code": "DHLU",
+  "url": "",
+  "year": 2025,
+  "note": "FAILED: HTTP 202 WAF challenge. Candidate: https://investor.daiwahouse-logisticstrust.com/misc/agm2026/DHLT-AR2025.pdf",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "Digital Core REIT",
+  "stock_code": "DCRU",
+  "url": "",
+  "year": 2025,
+  "note": "FAILED: IR host HTTP 202 WAF challenge; no direct PDF off SGX",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "Elite UK REIT",
+  "stock_code": "MXNU",
+  "url": "",
+  "year": 2025,
+  "note": "FAILED: HTTP 202 WAF challenge. Candidate: https://investor.eliteukreit.com/newsroom/20260325_070816_MXNU_714GTQTLJ3NYKLBL.1.pdf",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "ESR REIT",
+  "stock_code": "9A4U",
+  "url": "",
+  "year": 2025,
+  "note": "FAILED: AR2025 is page-by-page HTML on esr-reit.listedcompany.com (HTTP 202 WAF challenge); no PDF",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "Far East Hospitality Trust",
+  "stock_code": "Q5T",
+  "url": "",
+  "year": 2025,
+  "note": "FAILED: HTTP 202 WAF challenge (listedcompany.com). Candidate: https://feht.listedcompany.com/misc/agm2026/FEHT-AR2025.pdf",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "First REIT",
+  "stock_code": "AW9U",
+  "url": "",
+  "year": 2025,
+  "note": "FAILED: HTTP 202 WAF challenge (listedcompany.com). Candidate: https://firstreit.listedcompany.com/newsroom/20260401_070223_AW9U_V8ZYLJV6UA0ODE6T.1.pdf",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "First Ship Lease Trust",
+  "stock_code": "D8DU",
+  "url": "",
+  "year": 2025,
+  "note": "FAILED: HTTP 202 WAF challenge (listedcompany.com). Candidate: https://fsltrust.listedcompany.com/newsroom/20260407_211638_D8DU_N06087VRD2MDQHC9.1.pdf",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "Hutchison Port Holdings Trust",
+  "stock_code": "NS8U",
+  "url": "",
+  "year": 2025,
+  "note": "FAILED: hphtrust.com HTTP 202 WAF challenge. Candidate: https://www.hphtrust.com/misc/ar2025/HPHT_AR2025_low-res.pdf",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "IREIT Global",
+  "stock_code": "UD1U",
+  "url": "",
+  "year": 2025,
+  "note": "FAILED: HTTP 202 WAF challenge. Candidate: https://investor.ireitglobal.com/newsroom/20260326_073047_UD1U_TAAV8JQHHQQHBTQR.1.pdf",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "Keppel Infrastructure Trust",
+  "stock_code": "A7RU",
+  "url": "https://www.kepinfratrust.com/file/agm2026-fy-2025-/keppel-infrastructure-trust-ar2025.pdf",
+  "year": 2025,
+  "note": "kepinfratrust.com annual reports page",
+  "batch": "trusts-2026-11-10",
+  "status": "ok",
+  "file": "keppel-infrastructure-trust.pdf",
+  "pages": 240,
+  "sha256": "6b0c2834e7a1ab9eea682389c4800648c5a95c5db60401e81c71caa0ae455b09",
+  "bytes": 20289565
+ },
+ {
+  "company": "Keppel REIT",
+  "stock_code": "K71U",
+  "url": "https://wpcms.keppel.com/wm/cms-site/kpl/file/media/2026/Mar/25-mar-kreit/keppel-reit-ar25.pdf",
+  "year": 2025,
+  "note": "Keppel-hosted, linked from keppelreit.com",
+  "batch": "trusts-2026-11-10",
+  "status": "ok",
+  "file": "keppel-reit.pdf",
+  "pages": 228,
+  "sha256": "bceed2b1a729026bbe6a84eda4bd95d39a12beb0ad5d297d62cb55fd349fd28f",
+  "bytes": 20206477
+ },
+ {
+  "company": "KORE US REIT",
+  "stock_code": "CMOU",
+  "url": "https://www.koreusreit.com/file/downloads/2026/kore-us-reit-annual-report-2025.pdf",
+  "year": 2025,
+  "note": "koreusreit.com IR",
+  "batch": "trusts-2026-11-10",
+  "status": "ok",
+  "file": "kore-us-reit.pdf",
+  "pages": 163,
+  "sha256": "c7a38008e717030d54a17be0eb807cd7bcaa946e20c345c2e2d3b859ed4cbadf",
+  "bytes": 20676630
+ },
+ {
+  "company": "Lendlease Global Commercial REIT",
+  "stock_code": "JYEU",
+  "url": "https://www.lendleaseglobalcommercialreit.com/siteassets/publications/annual-reports/annual-report-fy2026.pdf",
+  "year": 2026,
+  "note": "Investor Centre publications page, FY ends 30 Jun",
+  "batch": "trusts-2026-11-10",
+  "status": "ok",
+  "file": "lendlease-global-commercial-reit.pdf",
+  "pages": 192,
+  "sha256": "096b7a22feb8a585730f5ac8852cb9aeb1cfd599e8ec0fa6a789a00ffc4300a4",
+  "bytes": 13048816
+ },
+ {
+  "company": "Manulife US REIT",
+  "stock_code": "BTOU",
+  "url": "",
+  "year": 2025,
+  "note": "FAILED: only HTML flipbook, HTTP 403 to honest UA",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "NetLink NBN Trust",
+  "stock_code": "CJLU",
+  "url": "",
+  "year": 2026,
+  "note": "FAILED: Incapsula bot challenge. Candidate: https://www.netlinknbn.com/misc/agm2026/NetLink-NBN-Trust-Annual-Report-2026.pdf",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "NTT DC REIT",
+  "stock_code": "NTDU",
+  "url": "",
+  "year": 2026,
+  "note": "FAILED: AR only on SGX",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "OUE REIT",
+  "stock_code": "TS0U",
+  "url": "",
+  "year": 2025,
+  "note": "FAILED: HTTP 202 WAF challenge. Candidate: https://investor.ouereit.com/misc/OUE_REIT_Annual_Report_2025.pdf",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "Parkway Life REIT",
+  "stock_code": "C2PU",
+  "url": "",
+  "year": 2025,
+  "note": "FAILED: HTTP 202 WAF challenge. Candidate: https://plifereit.listedcompany.com/newsroom/20260331_073816_C2PU_6QQ0IEGMJ5B1TON1.1.pdf",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "Prime US REIT",
+  "stock_code": "OXMU",
+  "url": "https://www.primeusreit.com/misc/ar2025.pdf",
+  "year": 2025,
+  "note": "own site, FY Dec 2025",
+  "batch": "trusts-2026-11-10",
+  "status": "ok",
+  "file": "prime-us-reit.pdf",
+  "pages": 192,
+  "sha256": "68f4fe58b8e2ebab9235e4e901a9f69538171581eea2cf5b8e0a1c365163e5d7",
+  "bytes": 19600004
+ },
+ {
+  "company": "Sasseur REIT",
+  "stock_code": "CRPU",
+  "url": "",
+  "year": 2025,
+  "note": "FAILED: HTTP 202 WAF challenge. Candidate: https://investor.sasseurreit.com/newsroom/20260401_071154_CRPU_XCFZZI7M4XT71SRY.1.pdf",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "Starhill Global REIT",
+  "stock_code": "P40U",
+  "url": "",
+  "year": 2026,
+  "note": "FAILED: starhillglobalreit.listedcompany.com HTTP 202 WAF challenge",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "Stoneweg Europe Stapled Trust",
+  "stock_code": "SET",
+  "url": "",
+  "year": 2025,
+  "note": "FAILED: cromwell.listedcompany.com HTTP 202 WAF challenge",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "Suntec REIT",
+  "stock_code": "T82U",
+  "url": "",
+  "year": 2025,
+  "note": "FAILED: suntecreit.listedcompany.com HTTP 202 WAF challenge",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "United Hampshire US REIT",
+  "stock_code": "ODBU",
+  "url": "",
+  "year": 2025,
+  "note": "FAILED: HTTP 202 WAF challenge. Candidate: https://investor.uhreit.com/misc/ar2025.pdf",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "Landmark REIT",
+  "stock_code": "D5IU",
+  "url": "",
+  "year": 2025,
+  "note": "FAILED: HTTP 202 WAF challenge. Candidate: https://ir.landmarkreit.com/misc/agm2026/LandmarkREIT_AR2025.pdf",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
+ },
+ {
+  "company": "UI Boustead REIT",
+  "stock_code": "UIBU",
+  "url": "",
+  "year": null,
+  "note": "No AR yet: listed 12 Mar 2026",
+  "batch": "trusts-2026-11-10",
+  "status": "no-url"
  }
 ]

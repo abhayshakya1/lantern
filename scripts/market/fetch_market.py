@@ -40,6 +40,12 @@ def _slug(name: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")[:60]
 
 
+def _unwrap(data: bytes) -> bytes:
+    """An SGX newsfeed file (served by some issuers' own CMS) is a short text header before the PDF."""
+    i = data.find(b"%PDF", 0, 1024)
+    return data[i:] if i > 0 else data
+
+
 def _fetch(url: str) -> bytes:
     r = requests.get(url, headers=UA, timeout=180, stream=True)
     r.raise_for_status()
@@ -75,7 +81,7 @@ def main(import_dir: Path = Path.home() / "Downloads") -> int:
             continue
         else:
             try:
-                data = _fetch(url)
+                data = _unwrap(_fetch(url))
             except Exception as exc:
                 row["status"] = f"fetch-failed: {type(exc).__name__}"
                 bad += 1

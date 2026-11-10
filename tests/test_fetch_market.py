@@ -29,6 +29,14 @@ def _pdf_bytes(text: str) -> bytes:
     return doc.tobytes()
 
 
+def test_pdf_behind_newsfeed_envelope_is_unwrapped():
+    # Keppel's CMS serves the SGX newsfeed file: a short text header, then the real PDF
+    pdf = _pdf_bytes("Keppel REIT Annual Report 2025")
+    assert fm._unwrap(b"@@@@@SGXNEWSFEED0006 ...K71U.1.pdf   20206476" + pdf) == pdf
+    assert fm._unwrap(pdf) == pdf
+    assert fm._unwrap(b"<html>no pdf here</html>") == b"<html>no pdf here</html>"
+
+
 def test_name_found_after_image_only_cover_pages(tmp_path, monkeypatch):
     # ThaiBev's report opens with four image-only pages; its name first prints on page 6
     import pymupdf

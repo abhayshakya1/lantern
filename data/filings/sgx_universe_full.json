@@ -1,0 +1,4934 @@
+{
+ "source": "https://api.sgx.com/securities/v1.1?excludetypes=bonds",
+ "pulled_at": "2026-11-10T18:12:30.024176+00:00",
+ "issuers": [
+  {
+   "company": "17LIVE GROUP",
+   "stock_code": "LVR",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "8Telecom",
+   "stock_code": "AZG",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": "20190905"
+  },
+  {
+   "company": "9R",
+   "stock_code": "1Y1",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "A-Smart",
+   "stock_code": "BQC",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "A-Sonic Aero",
+   "stock_code": "BTJ",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "ABR",
+   "stock_code": "533",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261102"
+  },
+  {
+   "company": "Abundance Intl",
+   "stock_code": "541",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261104"
+  },
+  {
+   "company": "Abundante",
+   "stock_code": "570",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261029"
+  },
+  {
+   "company": "Accrelist Ltd",
+   "stock_code": "QZG",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Acesian Partners",
+   "stock_code": "5FW",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261030"
+  },
+  {
+   "company": "Acma",
+   "stock_code": "AYV",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261103"
+  },
+  {
+   "company": "Acro HTrust USD",
+   "stock_code": "XZL",
+   "type": "businesstrusts",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "AcroMeta",
+   "stock_code": "43F",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Addvalue Tech",
+   "stock_code": "A31",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Advanced",
+   "stock_code": "BLZ",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261007"
+  },
+  {
+   "company": "AdvancedSystems",
+   "stock_code": "WJ9",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261103"
+  },
+  {
+   "company": "Advancer Global",
+   "stock_code": "43Q",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261027"
+  },
+  {
+   "company": "Adventus",
+   "stock_code": "5EF",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261103"
+  },
+  {
+   "company": "Aedge Group",
+   "stock_code": "XVG",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "AEM SGD",
+   "stock_code": "AWX",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "AEM USD",
+   "stock_code": "XWA",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20260514"
+  },
+  {
+   "company": "AIMS APAC Reit",
+   "stock_code": "O5RU",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "AJJ Medtech",
+   "stock_code": "584",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Alita Resources",
+   "stock_code": "40F",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": true,
+   "last_trade": "20190808"
+  },
+  {
+   "company": "All-Link A&S",
+   "stock_code": "ALK",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Alliance HC",
+   "stock_code": "MIJ",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261102"
+  },
+  {
+   "company": "Alpha Integrated REIT",
+   "stock_code": "M1GU",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "AlphaDX",
+   "stock_code": "VVL",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": true,
+   "last_trade": "20220304"
+  },
+  {
+   "company": "Alset",
+   "stock_code": "40V",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Ambiq Micro",
+   "stock_code": "AMQ",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Amcorp Global",
+   "stock_code": "S9B",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261030"
+  },
+  {
+   "company": "AMOS Group",
+   "stock_code": "49B",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": "20241209"
+  },
+  {
+   "company": "Amplefield Ltd",
+   "stock_code": "AOF",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "AMTD IDEA OV",
+   "stock_code": "HKB",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20260825"
+  },
+  {
+   "company": "AnAn Intl",
+   "stock_code": "Y35",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Anchun Intl",
+   "stock_code": "BTX",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "AnnAik",
+   "stock_code": "A52",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "AnnicaHoldings",
+   "stock_code": "JFQ",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Aoxin Q & M",
+   "stock_code": "1D4",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "AP Oil",
+   "stock_code": "5AU",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261030"
+  },
+  {
+   "company": "AP Strategic",
+   "stock_code": "5RA",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": true,
+   "last_trade": "20250910"
+  },
+  {
+   "company": "APAC Realty",
+   "stock_code": "CLN",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Ascent Bridge",
+   "stock_code": "AWG",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261104"
+  },
+  {
+   "company": "Asia Enterprises",
+   "stock_code": "A55",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Asia Vets",
+   "stock_code": "5RE",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261014"
+  },
+  {
+   "company": "AsiaMedic",
+   "stock_code": "505",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261102"
+  },
+  {
+   "company": "Asian Micro",
+   "stock_code": "585",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Asian Pay Tv Tr",
+   "stock_code": "S7OU",
+   "type": "businesstrusts",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "AsiaPhos",
+   "stock_code": "5WV",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Asiatic",
+   "stock_code": "5CR",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "ASL Marine",
+   "stock_code": "A04",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Aspen",
+   "stock_code": "1F3",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Aspial Corp",
+   "stock_code": "A30",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Aspial Lifestyle",
+   "stock_code": "5UF",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Assurance HC",
+   "stock_code": "RCU",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Astaka Hldgs",
+   "stock_code": "9SY",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261104"
+  },
+  {
+   "company": "ASTI",
+   "stock_code": "575",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Atlantic Nav",
+   "stock_code": "5UL",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Attika Group",
+   "stock_code": "53W",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261022"
+  },
+  {
+   "company": "Audience",
+   "stock_code": "1AZ",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "AusGroup",
+   "stock_code": "5GJ",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": "20221104"
+  },
+  {
+   "company": "Autagco Ltd",
+   "stock_code": "WNH",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "AvePoint",
+   "stock_code": "AVP",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Azeus",
+   "stock_code": "BBW",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Aztech Gbl",
+   "stock_code": "8AZ",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "B Wilshire Ltd",
+   "stock_code": "9QX",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "B&M Hldg",
+   "stock_code": "CJN",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20260925"
+  },
+  {
+   "company": "BACUI TECH",
+   "stock_code": "YYB",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261022"
+  },
+  {
+   "company": "Baker Technology",
+   "stock_code": "BTP",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261104"
+  },
+  {
+   "company": "Banyan Tree",
+   "stock_code": "B58",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "BBR",
+   "stock_code": "KJ5",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261104"
+  },
+  {
+   "company": "Beng Kuang",
+   "stock_code": "BEZ",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "BH Global",
+   "stock_code": "BQN",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "BHG Retail Reit",
+   "stock_code": "BMGU",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "BlackGoldNatural",
+   "stock_code": "41H",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": true,
+   "last_trade": "20230613"
+  },
+  {
+   "company": "Boldtek",
+   "stock_code": "5VI",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": true,
+   "last_trade": "20230112"
+  },
+  {
+   "company": "Bonvests",
+   "stock_code": "B28",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Boustead",
+   "stock_code": "F9D",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "BRC Asia",
+   "stock_code": "BEC",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Bromat",
+   "stock_code": "9I7",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Brook Crompton",
+   "stock_code": "AWC",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Bukit Sembawang",
+   "stock_code": "B61",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Bumitama Agri",
+   "stock_code": "P8Z",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Bund Center",
+   "stock_code": "BTE",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Camsing Hc",
+   "stock_code": "BAC",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261102"
+  },
+  {
+   "company": "Capital World",
+   "stock_code": "1D5",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "CapitaLandInvest",
+   "stock_code": "9CI",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "CapLand Ascendas REIT",
+   "stock_code": "A17U",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "CapLand Ascott T",
+   "stock_code": "HMN",
+   "type": "businesstrusts",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "CapLand China T",
+   "stock_code": "AU8U",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "CapLand India T",
+   "stock_code": "CY6U",
+   "type": "businesstrusts",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "CapLand IntCom T",
+   "stock_code": "C38U",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Captii",
+   "stock_code": "AWV",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261016"
+  },
+  {
+   "company": "Casa",
+   "stock_code": "C04",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261104"
+  },
+  {
+   "company": "CDL HTrust",
+   "stock_code": "J85",
+   "type": "businesstrusts",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "CDW",
+   "stock_code": "BXE",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Cent Accom REIT",
+   "stock_code": "8C8U",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Centurion",
+   "stock_code": "OU8",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "CFM",
+   "stock_code": "5EB",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261104"
+  },
+  {
+   "company": "CH Offshore",
+   "stock_code": "C13",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Chasen",
+   "stock_code": "5NV",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Chemical Ind",
+   "stock_code": "C05",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "China Aviation",
+   "stock_code": "G92",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "China EnvRes",
+   "stock_code": "UIX",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261104"
+  },
+  {
+   "company": "China Everbright",
+   "stock_code": "U9E",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "China Fishery",
+   "stock_code": "B0Z",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": "20151125"
+  },
+  {
+   "company": "China Intl",
+   "stock_code": "BEH",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "China Mining",
+   "stock_code": "BHD",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "China Yuanbang",
+   "stock_code": "BCD",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": "20241007"
+  },
+  {
+   "company": "ChinaKundaTech",
+   "stock_code": "GU5",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "ChinaSunsine",
+   "stock_code": "QES",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Choo Chiang",
+   "stock_code": "42E",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Chuan Hup",
+   "stock_code": "C33",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "CityDev",
+   "stock_code": "C09",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Civmec",
+   "stock_code": "P9D",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Clearbridge",
+   "stock_code": "1H3",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "CMS",
+   "stock_code": "8A8",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "CNMC Goldmine",
+   "stock_code": "5TP",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Coliwoo Hldgs",
+   "stock_code": "W8W",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Comba",
+   "stock_code": "STC",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20260924"
+  },
+  {
+   "company": "Combine Will",
+   "stock_code": "N0Z",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "ComfortDelGro",
+   "stock_code": "C52",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "CONCORD NE",
+   "stock_code": "SEG",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Coolan Group",
+   "stock_code": "BMT",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": "20211102"
+  },
+  {
+   "company": "Cordlife",
+   "stock_code": "P8A",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261030"
+  },
+  {
+   "company": "Cortina",
+   "stock_code": "C41",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261102"
+  },
+  {
+   "company": "COSCO SHP SG",
+   "stock_code": "F83",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Courage Inv",
+   "stock_code": "CIN",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Creative",
+   "stock_code": "C76",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "CreditBureauAsia",
+   "stock_code": "TCU",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "CSC",
+   "stock_code": "C06",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "CSE Global",
+   "stock_code": "544",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Daiwa Hse Log Tr",
+   "stock_code": "DHLU",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Darco Water Tech",
+   "stock_code": "BLR",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Dasin Retail Tr",
+   "stock_code": "CEDU",
+   "type": "businesstrusts",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": null
+  },
+  {
+   "company": "Datapulse Tech",
+   "stock_code": "BKW",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261104"
+  },
+  {
+   "company": "DBS",
+   "stock_code": "D05",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Debao Property",
+   "stock_code": "BTF",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": "20210111"
+  },
+  {
+   "company": "Del Monte Pac",
+   "stock_code": "D03",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Delfi",
+   "stock_code": "P34",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Deluge",
+   "stock_code": "9DC",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Dezign Format",
+   "stock_code": "UZF",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261021"
+  },
+  {
+   "company": "DFIRG USD",
+   "stock_code": "D01",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "DigiCore Reit USD",
+   "stock_code": "DCRU",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Digilife Tech",
+   "stock_code": "BAI",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "DISA",
+   "stock_code": "532",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Duty Free Intl",
+   "stock_code": "5SO",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "DX-Tech Hldg",
+   "stock_code": "1R6",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "EC World Reit",
+   "stock_code": "BWCU",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": null
+  },
+  {
+   "company": "EcoWise",
+   "stock_code": "5CT",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Edition",
+   "stock_code": "5HG",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261027"
+  },
+  {
+   "company": "EFH Ltd",
+   "stock_code": "8YY",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "EGP ENERGY CORP",
+   "stock_code": "EGX",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Eindec",
+   "stock_code": "42Z",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "EliteUKREIT GBP",
+   "stock_code": "MXNU",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "EliteUKREIT GBP A",
+   "stock_code": "V8VU",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "EliteUKREIT SGD",
+   "stock_code": "MENU",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Ellipsiz",
+   "stock_code": "BIX",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Emperador Inc.",
+   "stock_code": "EMI",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261102"
+  },
+  {
+   "company": "Eneco Energy",
+   "stock_code": "R14",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "EnGro",
+   "stock_code": "S44",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Envictus",
+   "stock_code": "BQD",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Enviro-Hub",
+   "stock_code": "L23",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "ES",
+   "stock_code": "5RC",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261028"
+  },
+  {
+   "company": "ESR REIT",
+   "stock_code": "9A4U",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "ETC Singapore",
+   "stock_code": "1C0",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "EuroSports Gbl",
+   "stock_code": "5G1",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Ever Glory",
+   "stock_code": "ZKX",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "EVO",
+   "stock_code": "1H2",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20260512"
+  },
+  {
+   "company": "Ezra",
+   "stock_code": "5DN",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": "20170315"
+  },
+  {
+   "company": "F & N",
+   "stock_code": "F99",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Far East",
+   "stock_code": "5TJ",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261023"
+  },
+  {
+   "company": "Far East HTrust",
+   "stock_code": "Q5T",
+   "type": "businesstrusts",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Far East Orchard",
+   "stock_code": "O10",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Federal Int",
+   "stock_code": "BDU",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Figtree",
+   "stock_code": "5F4",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261023"
+  },
+  {
+   "company": "First Reit",
+   "stock_code": "AW9U",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "First Resources",
+   "stock_code": "EB5",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "First Sponsor",
+   "stock_code": "ADN",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261021"
+  },
+  {
+   "company": "FJ Benjamin",
+   "stock_code": "F10",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Food Empire",
+   "stock_code": "F03",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "FoodInnovators",
+   "stock_code": "KYB",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261005"
+  },
+  {
+   "company": "FortressMinerals",
+   "stock_code": "OAJ",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "FoundationHealth",
+   "stock_code": "FHH",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Frasers Cpt Tr",
+   "stock_code": "J69U",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Frasers L&C Tr",
+   "stock_code": "BUOU",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Frasers Property",
+   "stock_code": "TQ5",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Frencken",
+   "stock_code": "E28",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "FSL Trust",
+   "stock_code": "D8DU",
+   "type": "businesstrusts",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Fu Yu",
+   "stock_code": "F13",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Fuji Offset",
+   "stock_code": "508",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261019"
+  },
+  {
+   "company": "Fuxing China",
+   "stock_code": "AWK",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261103"
+  },
+  {
+   "company": "G Invacom",
+   "stock_code": "QS9",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Gallant Venture",
+   "stock_code": "5IG",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "GCCP",
+   "stock_code": "41T",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "GDS Global",
+   "stock_code": "5VP",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Genting Sing",
+   "stock_code": "G13",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Geo Energy Res",
+   "stock_code": "RE4",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "GHY Culture",
+   "stock_code": "XJB",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "GKE",
+   "stock_code": "595",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Global Inv",
+   "stock_code": "B73",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Global Testing",
+   "stock_code": "AYN",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Golden Agri-Res",
+   "stock_code": "E5H",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Goodland",
+   "stock_code": "5PC",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Goodwill",
+   "stock_code": "GEH",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261103"
+  },
+  {
+   "company": "GP Industries",
+   "stock_code": "G20",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Grand Banks",
+   "stock_code": "G50",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261102"
+  },
+  {
+   "company": "GRC",
+   "stock_code": "S3N",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Great Eastern",
+   "stock_code": "G07",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Green Build",
+   "stock_code": "Y06",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "GRP",
+   "stock_code": "BLU",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261022"
+  },
+  {
+   "company": "GSH",
+   "stock_code": "BDX",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "GSS Energy",
+   "stock_code": "41F",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "GuocoLand",
+   "stock_code": "F17",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "H2G Green",
+   "stock_code": "5AI",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Hafary",
+   "stock_code": "5VS",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Halcyon Agri",
+   "stock_code": "5VJ",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": "20230421"
+  },
+  {
+   "company": "Happiness",
+   "stock_code": "594",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Haw Par",
+   "stock_code": "H02",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "HC Surgical",
+   "stock_code": "1B1",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "HealthBank",
+   "stock_code": "40B",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Heatec Jietong",
+   "stock_code": "5OR",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261023"
+  },
+  {
+   "company": "Heeton",
+   "stock_code": "5DP",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261026"
+  },
+  {
+   "company": "Helens",
+   "stock_code": "HLS",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20260820"
+  },
+  {
+   "company": "Hengyang Petro",
+   "stock_code": "5PD",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": true,
+   "last_trade": "20250821"
+  },
+  {
+   "company": "Heptamax",
+   "stock_code": "8A1",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "HG Metal",
+   "stock_code": "BTG",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "HGH",
+   "stock_code": "5GZ",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Hiap Hoe",
+   "stock_code": "5JK",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Hiap Seng Ind",
+   "stock_code": "1L2",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Hiap Tong",
+   "stock_code": "5PO",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261022"
+  },
+  {
+   "company": "HL Global Ent",
+   "stock_code": "AVX",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261030"
+  },
+  {
+   "company": "Ho Bee Land",
+   "stock_code": "H13",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Hock Lian Seng",
+   "stock_code": "J2T",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Hoe Leong",
+   "stock_code": "H20",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "HomesToLife Ltd",
+   "stock_code": "RVS",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": ""
+  },
+  {
+   "company": "Hong Fok",
+   "stock_code": "H30",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Hong Lai Huat",
+   "stock_code": "CTO",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Hong Leong Asia",
+   "stock_code": "H22",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Hong Leong Fin",
+   "stock_code": "S41",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "HongkongLand USD",
+   "stock_code": "H78",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Hor Kew",
+   "stock_code": "BBP",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Hosen",
+   "stock_code": "5EV",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Hotel Grand",
+   "stock_code": "H18",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Hotel Royal",
+   "stock_code": "H12",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Hotung Inv",
+   "stock_code": "BLS",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "HPH Trust SGD",
+   "stock_code": "P7VU",
+   "type": "businesstrusts",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "HPH Trust USD",
+   "stock_code": "NS8U",
+   "type": "businesstrusts",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "HPL",
+   "stock_code": "H15",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "HRnetGroup",
+   "stock_code": "CHZ",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "HS Optimus",
+   "stock_code": "504",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Huationg Global",
+   "stock_code": "41B",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Hyflux",
+   "stock_code": "600",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": "20180518"
+  },
+  {
+   "company": "Hyphens Pharma",
+   "stock_code": "1J5",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "IFAST",
+   "stock_code": "AIY",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "IFS Capital",
+   "stock_code": "I49",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "IHH",
+   "stock_code": "Q0F",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Incredible",
+   "stock_code": "RDR",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": true,
+   "last_trade": "20220906"
+  },
+  {
+   "company": "Indofood Agri",
+   "stock_code": "5JS",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Infinity Dev",
+   "stock_code": "ZBA",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Info-Tech",
+   "stock_code": "ITS",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "InnoTek",
+   "stock_code": "M14",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Interra Resource",
+   "stock_code": "5GI",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": "20250131"
+  },
+  {
+   "company": "Intl Cement",
+   "stock_code": "KUO",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Intraco",
+   "stock_code": "I06",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "IPC Corp",
+   "stock_code": "AZA",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261104"
+  },
+  {
+   "company": "IPS Securex",
+   "stock_code": "42N",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "IREIT Global EUR",
+   "stock_code": "8U7U",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "IREIT Global SGD",
+   "stock_code": "UD1U",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "ISDN",
+   "stock_code": "I07",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "ISEC",
+   "stock_code": "40T",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261020"
+  },
+  {
+   "company": "ISOTeam",
+   "stock_code": "5WF",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "iWOW Tech",
+   "stock_code": "NXR",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "IX Biopharma",
+   "stock_code": "42C",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Jadason",
+   "stock_code": "J03",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Japan Foods",
+   "stock_code": "5OI",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Jason Marine",
+   "stock_code": "5PF",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20260911"
+  },
+  {
+   "company": "Jawala",
+   "stock_code": "1J7",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261026"
+  },
+  {
+   "company": "JB Foods",
+   "stock_code": "BEW",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "JEP",
+   "stock_code": "1J4",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Jiutian Chemical",
+   "stock_code": "C8R",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "JMH USD",
+   "stock_code": "J36",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "JMSEA",
+   "stock_code": "C07",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Joyas Intl",
+   "stock_code": "E9L",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261103"
+  },
+  {
+   "company": "Jubilee",
+   "stock_code": "NHD",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261104"
+  },
+  {
+   "company": "Jumbo",
+   "stock_code": "42R",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "JustCo",
+   "stock_code": "JCO",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Karin Tech",
+   "stock_code": "K29",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261102"
+  },
+  {
+   "company": "Katrina",
+   "stock_code": "1A0",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Kencana Agri",
+   "stock_code": "BNE",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Keong Hong",
+   "stock_code": "5TT",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Kep Infra Tr",
+   "stock_code": "A7RU",
+   "type": "businesstrusts",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Keppel",
+   "stock_code": "BN4",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Keppel DC Reit",
+   "stock_code": "AJBU",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Keppel Reit",
+   "stock_code": "K71U",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Khen Energy",
+   "stock_code": "YSV",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261103"
+  },
+  {
+   "company": "Khong Guan",
+   "stock_code": "K03",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261103"
+  },
+  {
+   "company": "Kim Heng",
+   "stock_code": "5G2",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261103"
+  },
+  {
+   "company": "Kimly",
+   "stock_code": "1D0",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "KIN",
+   "stock_code": "KIN",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261103"
+  },
+  {
+   "company": "King Wan",
+   "stock_code": "554",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "KingsmenCreative",
+   "stock_code": "5MZ",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Koda",
+   "stock_code": "BJZ",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261103"
+  },
+  {
+   "company": "Koh Bros",
+   "stock_code": "K75",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Koh Eco",
+   "stock_code": "5HV",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "KOP",
+   "stock_code": "5I1",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261021"
+  },
+  {
+   "company": "KOREReitUSD",
+   "stock_code": "CMOU",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Kori",
+   "stock_code": "5VC",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261019"
+  },
+  {
+   "company": "Koyo Intl",
+   "stock_code": "5OC",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "KSH",
+   "stock_code": "ER0",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "KTMG",
+   "stock_code": "XCF",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261028"
+  },
+  {
+   "company": "Landmark REIT",
+   "stock_code": "D5IU",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Le Tree Holdings",
+   "stock_code": "E6R",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Leader Env",
+   "stock_code": "LS9",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Lendlease Reit",
+   "stock_code": "JYEU",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Leong Guan Hldgs",
+   "stock_code": "LGH",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Ley Choon",
+   "stock_code": "Q0X",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "LHN",
+   "stock_code": "41O",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "LHT",
+   "stock_code": "BEI",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Lincotrade",
+   "stock_code": "BFT",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Lion Asiapac",
+   "stock_code": "BAZ",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Livingstone",
+   "stock_code": "PRH",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "LMS Compliance",
+   "stock_code": "LMS",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Lonza",
+   "stock_code": "O6Z",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20111021"
+  },
+  {
+   "company": "Lorenzo Intl",
+   "stock_code": "5IE",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": "20181129"
+  },
+  {
+   "company": "LS 2 Holdings",
+   "stock_code": "ENV",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Lum Chang",
+   "stock_code": "L19",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Lum Chang Creat",
+   "stock_code": "LCC",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Luminor",
+   "stock_code": "5UA",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261022"
+  },
+  {
+   "company": "Luxking",
+   "stock_code": "BKK",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261103"
+  },
+  {
+   "company": "LY Corp",
+   "stock_code": "1H8",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261021"
+  },
+  {
+   "company": "ManulifeReit USD",
+   "stock_code": "BTOU",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Mapletree Ind Tr",
+   "stock_code": "ME8U",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Mapletree Log Tr",
+   "stock_code": "M44U",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Mapletree PanAsia Com Tr",
+   "stock_code": "N2IU",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "MarcoPolo Marine",
+   "stock_code": "5LY",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Maruwa Yen1k",
+   "stock_code": "M12",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": ""
+  },
+  {
+   "company": "Mary Chia",
+   "stock_code": "5OX",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "MDR Limited",
+   "stock_code": "Y3D",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "MediLifestyle",
+   "stock_code": "Z4D",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Medinex",
+   "stock_code": "OTX",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Medtecs Intl",
+   "stock_code": "546",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "MegaChem",
+   "stock_code": "5DS",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261005"
+  },
+  {
+   "company": "MeGroup",
+   "stock_code": "SJY",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261028"
+  },
+  {
+   "company": "Memiontec Hldgs",
+   "stock_code": "TWL",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Mencast",
+   "stock_code": "5NF",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Mercurius",
+   "stock_code": "5RF",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": true,
+   "last_trade": "20230623"
+  },
+  {
+   "company": "Mermaid Maritime",
+   "stock_code": "DU4",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Meta Health",
+   "stock_code": "5DX",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "METAOPTICS LTD",
+   "stock_code": "9MT",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Metasurface",
+   "stock_code": "MET",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Metech Intl",
+   "stock_code": "V3M",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261104"
+  },
+  {
+   "company": "Metis Energy",
+   "stock_code": "L02",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Metro",
+   "stock_code": "M01",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Metrocon",
+   "stock_code": "WYO",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Mewah Intl",
+   "stock_code": "MV4",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "MFG Integration",
+   "stock_code": "M11",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261103"
+  },
+  {
+   "company": "Mi Material",
+   "stock_code": "MIM",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Micro-Mechanics",
+   "stock_code": "5DD",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "MindChamps",
+   "stock_code": "CNE",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Miyoshi",
+   "stock_code": "M03",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "MM2 Asia",
+   "stock_code": "1B0",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": "20251110"
+  },
+  {
+   "company": "MoneyMax Fin",
+   "stock_code": "5WJ",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Mooreast",
+   "stock_code": "1V3",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "MSC",
+   "stock_code": "NPW",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "MSMIntl",
+   "stock_code": "51O",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20260925"
+  },
+  {
+   "company": "MTQ",
+   "stock_code": "M05",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Multi-Chem",
+   "stock_code": "AWZ",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Mun Siong Engg",
+   "stock_code": "MF6",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261023"
+  },
+  {
+   "company": "MYP",
+   "stock_code": "F86",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Nam Lee Metal",
+   "stock_code": "G0I",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "NamCheong",
+   "stock_code": "1MZ",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Nanofilm",
+   "stock_code": "MZH",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Nanyang NewDev",
+   "stock_code": "M15",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": true,
+   "last_trade": "20250715"
+  },
+  {
+   "company": "Natural Cool",
+   "stock_code": "5IF",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261103"
+  },
+  {
+   "company": "NeraTel",
+   "stock_code": "N01",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Net Pac Hldgs",
+   "stock_code": "5QY",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20260930"
+  },
+  {
+   "company": "NetLink NBN Tr",
+   "stock_code": "CJLU",
+   "type": "businesstrusts",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "New Toyo",
+   "stock_code": "N08",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "New Wave",
+   "stock_code": "5FX",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "NIO Inc. USD OV",
+   "stock_code": "NIO",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Nippecraft",
+   "stock_code": "N32",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Noel Gifts Intl",
+   "stock_code": "543",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Nomura Yen1k",
+   "stock_code": "N33",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "19941007"
+  },
+  {
+   "company": "NoonTalk Media",
+   "stock_code": "SEJ",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261103"
+  },
+  {
+   "company": "Nordic",
+   "stock_code": "MR7",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "NSL",
+   "stock_code": "N02",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "NTT DC REIT USD",
+   "stock_code": "NTDU",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "NutryFarm",
+   "stock_code": "AZT",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": "20220404"
+  },
+  {
+   "company": "OCBC Bank",
+   "stock_code": "O39",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Ocean Sky Intl",
+   "stock_code": "1B6",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261102"
+  },
+  {
+   "company": "OceanScape Intl",
+   "stock_code": "V2Y",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": true,
+   "last_trade": "20250924"
+  },
+  {
+   "company": "Oceanus",
+   "stock_code": "579",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "OCTOPUS",
+   "stock_code": "43A",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261102"
+  },
+  {
+   "company": "Oiltek",
+   "stock_code": "HQU",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "OIO",
+   "stock_code": "KUX",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261014"
+  },
+  {
+   "company": "OKP",
+   "stock_code": "5CF",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Olam Group",
+   "stock_code": "VC2",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Old Chang Kee",
+   "stock_code": "5ML",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "OneApex",
+   "stock_code": "5SY",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261026"
+  },
+  {
+   "company": "Ossia Intl",
+   "stock_code": "O08",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "OTS Holdings",
+   "stock_code": "OTS",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261030"
+  },
+  {
+   "company": "OUE",
+   "stock_code": "LJ3",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "OUE Healthcare",
+   "stock_code": "5WA",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "OUEREIT",
+   "stock_code": "TS0U",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Ouhua Energy",
+   "stock_code": "AJ2",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261104"
+  },
+  {
+   "company": "Overseas Edu",
+   "stock_code": "RQ1",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Oxley",
+   "stock_code": "5UX",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "OxPay Financial",
+   "stock_code": "TVV",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261029"
+  },
+  {
+   "company": "Pacific Andes",
+   "stock_code": "P11",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": "20151125"
+  },
+  {
+   "company": "Pacific Century",
+   "stock_code": "P15",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "PacificRadiance",
+   "stock_code": "RXS",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Pan Hong",
+   "stock_code": "P36",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261102"
+  },
+  {
+   "company": "PanUnited",
+   "stock_code": "P52",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Parkson Retail",
+   "stock_code": "O9E",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "ParkwayLife Reit",
+   "stock_code": "C2PU",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Pasture Holdings",
+   "stock_code": "UUK",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20260723"
+  },
+  {
+   "company": "Pavillon",
+   "stock_code": "596",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261102"
+  },
+  {
+   "company": "PC Partner",
+   "stock_code": "PCT",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Penguin Intl",
+   "stock_code": "BTM",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Pharmesis Intl",
+   "stock_code": "BFK",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "PNE Industries",
+   "stock_code": "BDA",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Polaris",
+   "stock_code": "5BI",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20260811"
+  },
+  {
+   "company": "Polaris E&M",
+   "stock_code": "9VW",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261015"
+  },
+  {
+   "company": "Pollux Prop",
+   "stock_code": "5AE",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Powermatic Data",
+   "stock_code": "BCY",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Prime US ReitUSD",
+   "stock_code": "OXMU",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Progen",
+   "stock_code": "583",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261104"
+  },
+  {
+   "company": "PropNex",
+   "stock_code": "OYY",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "ProsperaGlobal",
+   "stock_code": "5HH",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "ProsperCap",
+   "stock_code": "PPC",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261030"
+  },
+  {
+   "company": "Prudential USD",
+   "stock_code": "K6S",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261022"
+  },
+  {
+   "company": "PSC Corporation",
+   "stock_code": "DM0",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Q&M Dental",
+   "stock_code": "QC7",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "QAF",
+   "stock_code": "Q01",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Qian Hu",
+   "stock_code": "BCV",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261102"
+  },
+  {
+   "company": "Quantum Health",
+   "stock_code": "V8Y",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261026"
+  },
+  {
+   "company": "Raffles Edu",
+   "stock_code": "NR7",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Raffles Infrastructure",
+   "stock_code": "LUY",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": "20230630"
+  },
+  {
+   "company": "Raffles Medical",
+   "stock_code": "BSL",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Reclaims Global",
+   "stock_code": "NEX",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Regal Intl",
+   "stock_code": "UV1",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": "20210329"
+  },
+  {
+   "company": "Renaissance United",
+   "stock_code": "I11",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "ResourcesGbl",
+   "stock_code": "V7R",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261103"
+  },
+  {
+   "company": "Rex Intl",
+   "stock_code": "5WH",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "RH PetroGas",
+   "stock_code": "T13",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "RichCapital",
+   "stock_code": "1U8",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20260930"
+  },
+  {
+   "company": "Riverstone",
+   "stock_code": "AP4",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Sakae",
+   "stock_code": "5DO",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Salt Investments",
+   "stock_code": "FQ7",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "SAM Holdings",
+   "stock_code": "9G2",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "SamuderaShipping",
+   "stock_code": "S56",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Samurai 2K",
+   "stock_code": "Y8E",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Sanli Env",
+   "stock_code": "1E3",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Santak",
+   "stock_code": "580",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261005"
+  },
+  {
+   "company": "Sapphire",
+   "stock_code": "BRD",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Sarine Tech",
+   "stock_code": "U77",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Sasseur Reit",
+   "stock_code": "CRPU",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "SATS",
+   "stock_code": "S58",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "SBS Transit",
+   "stock_code": "S61",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "SDAI",
+   "stock_code": "5TI",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": true,
+   "last_trade": "20210707"
+  },
+  {
+   "company": "Seatrium Ltd",
+   "stock_code": "5E2",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Secura",
+   "stock_code": "43B",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261104"
+  },
+  {
+   "company": "Sembcorp Ind",
+   "stock_code": "U96",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Serial Achieva",
+   "stock_code": "XHV",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261012"
+  },
+  {
+   "company": "Serial System",
+   "stock_code": "S69",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Sevens Atelier",
+   "stock_code": "5EW",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261030"
+  },
+  {
+   "company": "SGX",
+   "stock_code": "S68",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Shanaya",
+   "stock_code": "SES",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261006"
+  },
+  {
+   "company": "Shanghai Turbo",
+   "stock_code": "AWM",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20260821"
+  },
+  {
+   "company": "Shangri-La HKD",
+   "stock_code": "S07",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Sheffield Green",
+   "stock_code": "SGR",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Shen Yao",
+   "stock_code": "A78",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": true,
+   "last_trade": "20230320"
+  },
+  {
+   "company": "Sheng Siong",
+   "stock_code": "OV8",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "ShengrongHldg",
+   "stock_code": "P74",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Shenshan",
+   "stock_code": "BKV",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261027"
+  },
+  {
+   "company": "Shopper360",
+   "stock_code": "1F0",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261030"
+  },
+  {
+   "company": "SHS",
+   "stock_code": "566",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261104"
+  },
+  {
+   "company": "SIA",
+   "stock_code": "C6L",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "SIA Engineering",
+   "stock_code": "S59",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "SIIC Environment",
+   "stock_code": "BHK",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Sim Leisure",
+   "stock_code": "URR",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261026"
+  },
+  {
+   "company": "Sin Heng Mach",
+   "stock_code": "BKA",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Sing Inv & Fin",
+   "stock_code": "S35",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Sing Paincare",
+   "stock_code": "FRQ",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "SingaporeKitchen",
+   "stock_code": "5WG",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": true,
+   "last_trade": "20210729"
+  },
+  {
+   "company": "SingaporeLandGrp",
+   "stock_code": "U06",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "SingHoldings",
+   "stock_code": "5IC",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "SingPost",
+   "stock_code": "S08",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "SingShipping",
+   "stock_code": "S19",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Singtel",
+   "stock_code": "Z74",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Singtel 10",
+   "stock_code": "Z77",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Sino Grandness",
+   "stock_code": "T4B",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": "20201124"
+  },
+  {
+   "company": "SinoCloud Grp",
+   "stock_code": "LYY",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": true,
+   "last_trade": "20250328"
+  },
+  {
+   "company": "Sinostar Pec",
+   "stock_code": "C9Q",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Sitra",
+   "stock_code": "5LE",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261102"
+  },
+  {
+   "company": "Skylink",
+   "stock_code": "XZB",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "SoilbuildConstr",
+   "stock_code": "ZQM",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Soon Hock",
+   "stock_code": "SHE",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Soon Lian",
+   "stock_code": "5MD",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261028"
+  },
+  {
+   "company": "Soup Holdings",
+   "stock_code": "5KI",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Southern Arch",
+   "stock_code": "A33",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261102"
+  },
+  {
+   "company": "Southern Pkg",
+   "stock_code": "BQP",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261022"
+  },
+  {
+   "company": "SouthernAlliance",
+   "stock_code": "QNS",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Spura Finance",
+   "stock_code": "S23",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Sri Trang Agro",
+   "stock_code": "NC2",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Sri Trang Gloves",
+   "stock_code": "STG",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20260826"
+  },
+  {
+   "company": "ST Engineering",
+   "stock_code": "S63",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "ST Group Food",
+   "stock_code": "DRX",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261028"
+  },
+  {
+   "company": "Stamford Land",
+   "stock_code": "H07",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Stamford Tyres",
+   "stock_code": "S29",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "StarhillGbl Reit",
+   "stock_code": "P40U",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "StarHub",
+   "stock_code": "CC3",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Stoneweg EUTrust EUR",
+   "stock_code": "SET",
+   "type": "businesstrusts",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Stoneweg EUTrust SGD",
+   "stock_code": "SEB",
+   "type": "businesstrusts",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Straco",
+   "stock_code": "S85",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Straits Trading",
+   "stock_code": "S20",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "SunMoonFood",
+   "stock_code": "AAJ",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Sunpower",
+   "stock_code": "5GD",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Sunright",
+   "stock_code": "S71",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Sunrise Shares",
+   "stock_code": "581",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261030"
+  },
+  {
+   "company": "Suntar Eco-City",
+   "stock_code": "BKZ",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261020"
+  },
+  {
+   "company": "Suntec Reit",
+   "stock_code": "T82U",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "SUTL Enterprise",
+   "stock_code": "BHU",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "TA",
+   "stock_code": "PA3",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261103"
+  },
+  {
+   "company": "Tai Sin Electric",
+   "stock_code": "500",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Taka Jewellery",
+   "stock_code": "42L",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "TAP",
+   "stock_code": "TAP",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Tat Seng Pkg",
+   "stock_code": "T12",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261027"
+  },
+  {
+   "company": "TC Auto",
+   "stock_code": "VI2",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "TCIL HK$",
+   "stock_code": "T15",
+   "type": "stocks",
+   "board": "GLOBAL_QUOTE",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Teho Intl",
+   "stock_code": "5OQ",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261030"
+  },
+  {
+   "company": "TeleChoice Intl",
+   "stock_code": "T41",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "ThaiBev",
+   "stock_code": "Y92",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Thakral",
+   "stock_code": "AWI",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "The Place Hldg",
+   "stock_code": "E27",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "TheHourGlass",
+   "stock_code": "AGS",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Thomson Medical",
+   "stock_code": "A50",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "TIH",
+   "stock_code": "T55",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Tiong Seng",
+   "stock_code": "BFI",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Tiong Woon",
+   "stock_code": "BQM",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "TJ DaRenTang USD",
+   "stock_code": "T14",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Toku Ltd",
+   "stock_code": "TKU",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Top Glove",
+   "stock_code": "BVA",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Tosei",
+   "stock_code": "S2D",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20130726"
+  },
+  {
+   "company": "Totm Tech",
+   "stock_code": "42F",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Travelite",
+   "stock_code": "BCZ",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Trek 2000 Intl",
+   "stock_code": "5AB",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Trendlines",
+   "stock_code": "42T",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "TrickleStar",
+   "stock_code": "CYW",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Tritech",
+   "stock_code": "5G9",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Triyards",
+   "stock_code": "RC5",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": "20170831"
+  },
+  {
+   "company": "TSH",
+   "stock_code": "KUH",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "TSH Resources",
+   "stock_code": "TSH",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Tuan Sing",
+   "stock_code": "T24",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Tung Lok Rest",
+   "stock_code": "540",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Tye Soon",
+   "stock_code": "BFU",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261023"
+  },
+  {
+   "company": "UGHealthcare",
+   "stock_code": "8K7",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "UIBREIT",
+   "stock_code": "UIBU",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "ULTRAGREEN AI SGD",
+   "stock_code": "UGS",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "ULTRAGREEN AI USD",
+   "stock_code": "ULG",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "UMS",
+   "stock_code": "558",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Uni-Asia Grp",
+   "stock_code": "CHJ",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Union Gas",
+   "stock_code": "1F2",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "UnionSteel",
+   "stock_code": "ZB9",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261021"
+  },
+  {
+   "company": "United Food",
+   "stock_code": "AZR",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": "20210907"
+  },
+  {
+   "company": "Universal Res",
+   "stock_code": "BGO",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": "20170210"
+  },
+  {
+   "company": "UnUsUaL",
+   "stock_code": "1D1",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "UOA",
+   "stock_code": "EH5",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "UOB",
+   "stock_code": "U11",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "UOB Kay Hian",
+   "stock_code": "U10",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "UOI",
+   "stock_code": "U13",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "UOL",
+   "stock_code": "U14",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "UpHealth Group",
+   "stock_code": "GRQ",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20260921"
+  },
+  {
+   "company": "USP Group",
+   "stock_code": "BRS",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": true,
+   "last_trade": "20240221"
+  },
+  {
+   "company": "UtdHampshReitUSD",
+   "stock_code": "ODBU",
+   "type": "reits",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": null
+  },
+  {
+   "company": "Vallianz",
+   "stock_code": "WPC",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "ValueMax",
+   "stock_code": "T6I",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Valuetronics",
+   "stock_code": "BN2",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "VCPlus",
+   "stock_code": "43E",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261104"
+  },
+  {
+   "company": "Venture",
+   "stock_code": "V03",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Versalink",
+   "stock_code": "40N",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Vibrant Group",
+   "stock_code": "BIP",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "VibroPower",
+   "stock_code": "BJD",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "VICOM Ltd",
+   "stock_code": "WJP",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Vicplas Intl",
+   "stock_code": "569",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Vins Holdings",
+   "stock_code": "VIN",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Vividthree",
+   "stock_code": "OMK",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261023"
+  },
+  {
+   "company": "Wee Hur",
+   "stock_code": "E3B",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Willas-Array",
+   "stock_code": "BDR",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20260910"
+  },
+  {
+   "company": "Wilmar Intl",
+   "stock_code": "F34",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Wilton Resources",
+   "stock_code": "5F7",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Wing Tai",
+   "stock_code": "W05",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "WinkingStudios",
+   "stock_code": "WKS",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Wong Fong Ind",
+   "stock_code": "1A1",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "World Precision",
+   "stock_code": "B49",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261104"
+  },
+  {
+   "company": "XMH Hldgs",
+   "stock_code": "9PQ",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Y Ventures",
+   "stock_code": "1F1",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "Yamada Green Res",
+   "stock_code": "BJV",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Yanlord Land",
+   "stock_code": "Z25",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Yeo Hiap Seng",
+   "stock_code": "Y03",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261105"
+  },
+  {
+   "company": "YHI Intl",
+   "stock_code": "BPF",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261030"
+  },
+  {
+   "company": "Ying Li Intl",
+   "stock_code": "5DM",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "YKGI",
+   "stock_code": "YK9",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20260917"
+  },
+  {
+   "company": "Yoma Strategic",
+   "stock_code": "Z59",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Yongmao",
+   "stock_code": "BKX",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20260923"
+  },
+  {
+   "company": "Yunnan Energy",
+   "stock_code": "T43",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261030"
+  },
+  {
+   "company": "YZJ Fin Hldg",
+   "stock_code": "YF8",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "YZJ Maritime",
+   "stock_code": "8YZ",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "YZJ Shipbldg CNY",
+   "stock_code": "SO7",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20251022"
+  },
+  {
+   "company": "YZJ Shipbldg SGD",
+   "stock_code": "BS6",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Zheneng Jinjiang",
+   "stock_code": "BWM",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Zhongmin Baihui",
+   "stock_code": "5SR",
+   "type": "stocks",
+   "board": "MAINBOARD",
+   "suspended": false,
+   "last_trade": "20261103"
+  },
+  {
+   "company": "Zhongxin Fruit",
+   "stock_code": "5EG",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "ZICO Hldgs",
+   "stock_code": "40W",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  },
+  {
+   "company": "Zixin",
+   "stock_code": "42W",
+   "type": "stocks",
+   "board": "CATALIST",
+   "suspended": false,
+   "last_trade": "20261106"
+  }
+ ]
+}

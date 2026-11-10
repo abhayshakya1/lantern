@@ -90,7 +90,7 @@ def main(import_dir: Path = Path.home() / "Downloads") -> int:
 
             dest.write_bytes(data)
             doc = pymupdf.open(dest)
-            head = " ".join(doc[i].get_text() for i in range(min(5, len(doc)))).lower()
+            head = " ".join(doc[i].get_text() for i in range(min(10, len(doc)))).lower()  # covers are often image-only
             token = _row_token(row)
             if token and token not in head:
                 row["status"] = "name-mismatch"  # kept on disk for manual review, not counted ok

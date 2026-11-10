@@ -1061,7 +1061,12 @@
   "browser_glob": "CLAR*AR 2025*.pdf",
   "sgx_url": "https://links.sgx.com/FileOpen/CLAR%20-%20AR%202025.ashx?App=Announcement&FileID=881419",
   "name_token": "ascendas",
-  "status": "awaiting-browser-save"
+  "status": "ok",
+  "source": "sgx-browser",
+  "file": "capitaland-ascendas-reit.pdf",
+  "pages": 212,
+  "sha256": "ce8a2d768a39ca61fbbe218ec1c1f071204fc601c1ac53b4e8e17449d1bd2eb6",
+  "bytes": 8112648
  },
  {
   "company": "CapitaLand Integrated Commercial Trust",
@@ -1073,7 +1078,12 @@
   "browser_glob": "*CICT AR 2025*.pdf",
   "sgx_url": "https://links.sgx.com/FileOpen/2_CICT%20AR%202025_Final.ashx?App=Announcement&FileID=878885",
   "name_token": "integrated",
-  "status": "awaiting-browser-save"
+  "status": "ok",
+  "source": "sgx-browser",
+  "file": "capitaland-integrated-commercial-trust.pdf",
+  "pages": 199,
+  "sha256": "03b4ffd55c33cce440cdf5ed27143f61473a8f874d97b41d5e1d6c01217e7ad0",
+  "bytes": 6910482
  },
  {
   "company": "City Developments Limited",
@@ -1085,7 +1095,12 @@
   "browser_glob": "*City Developments*Annual Report 2025*.pdf",
   "sgx_url": "https://links.sgx.com/FileOpen/1-City%20Developments%20Limited%20-%20Annual%20Report%202025_Final.ashx?App=Announcement&FileID=881134",
   "name_token": "developments",
-  "status": "awaiting-browser-save"
+  "status": "ok",
+  "source": "sgx-browser",
+  "file": "city-developments-limited.pdf",
+  "pages": 137,
+  "sha256": "d655ca401b34f60cacf245ba5c8536ec030d18e027921aa656eab2b5f7d31052",
+  "bytes": 5263107
  },
  {
   "company": "DFI Retail Group Holdings",
@@ -1110,7 +1125,12 @@
   "browser_glob": "FCT AR 2025*.pdf",
   "sgx_url": "https://links.sgx.com/FileOpen/FCT%20AR%202025.ashx?App=Announcement&FileID=870392",
   "name_token": "centrepoint",
-  "status": "awaiting-browser-save"
+  "status": "ok",
+  "source": "sgx-browser",
+  "file": "frasers-centrepoint-trust.pdf",
+  "pages": 222,
+  "sha256": "96f2e95f248251726ff8acacdb74d7d2e5126f755a9e6f5a218f798fa3e41710",
+  "bytes": 6150884
  },
  {
   "company": "Frasers Logistics & Commercial Trust",
@@ -1122,7 +1142,12 @@
   "browser_glob": "FLCT*Annual Report 2025*.pdf",
   "sgx_url": "https://links.sgx.com/FileOpen/FLCT%20-%20Annual%20Report%202025.ashx?App=Announcement&FileID=870400",
   "name_token": "logistics",
-  "status": "awaiting-browser-save"
+  "status": "ok",
+  "source": "sgx-browser",
+  "file": "frasers-logistics-commercial-trust.pdf",
+  "pages": 222,
+  "sha256": "fcecc810467481903191071f3ec77a542c61d70bc8aefab70ac8c90ac158d0d2",
+  "bytes": 7885562
  },
  {
   "company": "Genting Singapore",
@@ -1134,7 +1159,12 @@
   "browser_glob": "Annual Report 2025*.pdf",
   "sgx_url": "https://links.sgx.com/FileOpen/Annual%20Report%202025.ashx?App=Announcement&FileID=880160",
   "name_token": "genting",
-  "status": "awaiting-browser-save"
+  "status": "ok",
+  "source": "sgx-browser",
+  "file": "genting-singapore.pdf",
+  "pages": 71,
+  "sha256": "fe6856502967711f79b73d0c01f5a3b10dfd772900495c73f9d166ee5b32622c",
+  "bytes": 10242018
  },
  {
   "company": "Hongkong Land Holdings",
@@ -1185,7 +1215,12 @@
   "browser_glob": "*MIT_AR2026*.pdf",
   "sgx_url": "https://links.sgx.com/FileOpen/20260622_MIT_AR2026.ashx?App=Announcement&FileID=893762",
   "name_token": "industrial",
-  "status": "awaiting-browser-save"
+  "status": "ok",
+  "source": "sgx-browser",
+  "file": "mapletree-industrial-trust.pdf",
+  "pages": 201,
+  "sha256": "9e9b84f291194e13c37a1dc6e312678ff68f885fb8c8053ebfd9faa1645422ad",
+  "bytes": 7378686
  },
  {
   "company": "Mapletree Logistics Trust",
@@ -1197,7 +1232,12 @@
   "browser_glob": "*MLT*Annual Report*25*26*.pdf",
   "sgx_url": "https://links.sgx.com/FileOpen/20260619-MLT-Annual%20Report%202025-26.ashx?App=Announcement&FileID=893649",
   "name_token": "logistics",
-  "status": "awaiting-browser-save"
+  "status": "ok",
+  "source": "sgx-browser",
+  "file": "mapletree-logistics-trust.pdf",
+  "pages": 240,
+  "sha256": "31f6509b426b7070840a24c27a9da909011861cc194f14e47e537a575941972e",
+  "bytes": 10184851
  },
  {
   "company": "Mapletree Pan Asia Commercial Trust",
@@ -1209,7 +1249,12 @@
   "browser_glob": "*MPACT*Annual Report*.pdf",
   "sgx_url": "https://links.sgx.com/FileOpen/20260630-MPACT_Annual%20Report%202025_26.ashx?App=Announcement&FileID=894759",
   "name_token": "commercial",
-  "status": "awaiting-browser-save"
+  "status": "ok",
+  "source": "sgx-browser",
+  "file": "mapletree-pan-asia-commercial-trust.pdf",
+  "pages": 200,
+  "sha256": "24d53a5e60627b3981b178e6491d6566314694da283d9afc218b0010b92abb36",
+  "bytes": 7771285
  },
  {
   "company": "SATS",
@@ -1221,7 +1266,12 @@
   "browser_glob": "SATS_Annual_Report_FY2026*.pdf",
   "sgx_url": "https://links.sgx.com/FileOpen/SATS_Annual_Report_FY2026.ashx?App=Announcement&FileID=895114",
   "name_token": "sats",
-  "status": "awaiting-browser-save"
+  "status": "ok",
+  "source": "sgx-browser",
+  "file": "sats.pdf",
+  "pages": 121,
+  "sha256": "412a3ee69a69f3ddacb9dabfb09f39fe0125e927e97e00dc160478d03c4c1e1e",
+  "bytes": 12907524
  },
  {
   "company": "Seatrium",
@@ -1233,7 +1283,12 @@
   "browser_glob": "Seatrium_AGM*2026*AR*.pdf",
   "sgx_url": "https://links.sgx.com/FileOpen/Seatrium_AGM%202026_AR.ashx?App=Announcement&FileID=880042",
   "name_token": "seatrium",
-  "status": "awaiting-browser-save"
+  "status": "ok",
+  "source": "sgx-browser",
+  "file": "seatrium.pdf",
+  "pages": 243,
+  "sha256": "f67d82103c4ead6dd5a16b49941f43ede6bc19bd8dbd8b3ea957e5580fd3a6c4",
+  "bytes": 19810962
  },
  {
   "company": "Singapore Airlines",
@@ -1245,7 +1300,12 @@
   "browser_glob": "Annual Report FY2025-26*.pdf",
   "sgx_url": "https://links.sgx.com/FileOpen/Annual%20Report%20FY2025-26.ashx?App=Announcement&FileID=894198",
   "name_token": "airlines",
-  "status": "awaiting-browser-save"
+  "status": "ok",
+  "source": "sgx-browser",
+  "file": "singapore-airlines.pdf",
+  "pages": 244,
+  "sha256": "d000dbf5d9a3f3d90a3ac86e2ca754deafe4513ef4f714a215cd819129de63fa",
+  "bytes": 10111322
  },
  {
   "company": "Singapore Technologies Engineering",
@@ -1271,7 +1331,12 @@
   "browser_glob": "THBEV_Annual_Report_2025_EN*.pdf",
   "sgx_url": "https://links.sgx.com/FileOpen/THBEV_Annual_Report_2025_EN.ashx?App=Announcement&FileID=871645",
   "name_token": "beverage",
-  "status": "awaiting-browser-save"
+  "status": "ok",
+  "source": "sgx-browser",
+  "file": "thai-beverage.pdf",
+  "pages": 394,
+  "sha256": "833fa6b92c2375a596252ce616f716571bd124c9eb73fedfcc833b8ef82532ba",
+  "bytes": 10923602
  },
  {
   "company": "UOL Group",
@@ -1296,7 +1361,12 @@
   "browser_glob": "VCL_Annual_Report_2025*.pdf",
   "sgx_url": "https://links.sgx.com/FileOpen/VCL_Annual_Report_2025.ashx?App=Announcement&FileID=881699",
   "name_token": "venture",
-  "status": "awaiting-browser-save"
+  "status": "ok",
+  "source": "sgx-browser",
+  "file": "venture-corporation.pdf",
+  "pages": 196,
+  "sha256": "eaebb6f4192ceb478c819b991eb18a3c34e43bf573388b9098b5e48b73b26a97",
+  "bytes": 8502570
  },
  {
   "company": "Wilmar International",

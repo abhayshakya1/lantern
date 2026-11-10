@@ -29,6 +29,24 @@ def _pdf_bytes(text: str) -> bytes:
     return doc.tobytes()
 
 
+def test_name_found_after_image_only_cover_pages(tmp_path, monkeypatch):
+    # ThaiBev's report opens with four image-only pages; its name first prints on page 6
+    import pymupdf
+    monkeypatch.setattr(fm, "MARKET", tmp_path / "market")
+    (tmp_path / "market").mkdir()
+    inbox = tmp_path / "Downloads"
+    inbox.mkdir()
+    doc = pymupdf.open()
+    for _ in range(5):
+        doc.new_page()
+    doc.new_page().insert_text((72, 72), "Thai Beverage Public Company Limited")
+    (inbox / "THBEV_AR.pdf").write_bytes(doc.tobytes())
+    rows = [{"company": "Thai Beverage", "stock_code": "Y92", "url": "", "browser_glob": "THBEV_AR*.pdf"}]
+    (tmp_path / "market" / "manifest_market.json").write_text(json.dumps(rows))
+    fm.main(import_dir=inbox)
+    assert json.loads((tmp_path / "market" / "manifest_market.json").read_text())[0]["status"] == "ok"
+
+
 def test_browser_saved_file_is_imported_and_verified(tmp_path, monkeypatch):
     monkeypatch.setattr(fm, "MARKET", tmp_path / "market")
     (tmp_path / "market").mkdir()

@@ -1451,7 +1451,14 @@
   "year": null,
   "note": "FAILED: HTTP 202 WAF challenge. Candidate: https://investor.capitalandascotttrust.com/misc/agm2026/CLAS-FY2025-AR.pdf",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "CLAS-FY2025-AR*.pdf",
+  "name_token": "ascott",
+  "source": "sgx-browser",
+  "file": "capitaland-ascott-trust.pdf",
+  "pages": 297,
+  "sha256": "8219e237745d9dc16649d5cd8bad4430f7dc72b0c7f15010d575e507d71ae698",
+  "bytes": 14368998
  },
  {
   "company": "CapitaLand China Trust",
@@ -1478,7 +1485,13 @@
   "year": 2025,
   "note": "FAILED: HTTP 202 WAF challenge. Candidate: https://investor.cdlht.com/newsroom/20260325_073112_J85_GJH8WE7ZD5RBUP3T.1.pdf",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "*J85_GJH8WE7ZD5RBUP3T*.pdf",
+  "source": "sgx-browser",
+  "file": "cdl-hospitality-trusts.pdf",
+  "pages": 324,
+  "sha256": "ec64533508fe7e354f1554b0c5fa016aec332a13f930ad95507cd22ba7264776",
+  "bytes": 9240325
  },
  {
   "company": "Centurion Accommodation REIT",
@@ -1496,7 +1509,14 @@
   "year": 2025,
   "note": "FAILED: HTTP 202 WAF challenge. Candidate: https://investor.daiwahouse-logisticstrust.com/misc/agm2026/DHLT-AR2025.pdf",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "DHLT-AR2025*.pdf",
+  "name_token": "daiwa",
+  "source": "sgx-browser",
+  "file": "daiwa-house-logistics-trust.pdf",
+  "pages": 216,
+  "sha256": "c9ff3a4077e51f4178a290803b8bba35354163eac6a6d105c99688594eb9bea0",
+  "bytes": 10468132
  },
  {
   "company": "Digital Core REIT",
@@ -1514,7 +1534,14 @@
   "year": 2025,
   "note": "FAILED: HTTP 202 WAF challenge. Candidate: https://investor.eliteukreit.com/newsroom/20260325_070816_MXNU_714GTQTLJ3NYKLBL.1.pdf",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "*MXNU_714GTQTLJ3NYKLBL*.pdf",
+  "name_token": "elite",
+  "source": "sgx-browser",
+  "file": "elite-uk-reit.pdf",
+  "pages": 192,
+  "sha256": "f57db2f56a2627ba0e30641c1683ea4003bc21130cb792e288b6e3fb1d814e3d",
+  "bytes": 8649552
  },
  {
   "company": "ESR REIT",
@@ -1532,7 +1559,13 @@
   "year": 2025,
   "note": "FAILED: HTTP 202 WAF challenge (listedcompany.com). Candidate: https://feht.listedcompany.com/misc/agm2026/FEHT-AR2025.pdf",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "FEHT-AR2025*.pdf",
+  "source": "sgx-browser",
+  "file": "far-east-hospitality-trust.pdf",
+  "pages": 251,
+  "sha256": "d0178a356ac7a31ce0b46c348a1b9fc15a977921e285ffbf627eee9cbfbce071",
+  "bytes": 5308200
  },
  {
   "company": "First REIT",
@@ -1541,7 +1574,14 @@
   "year": 2025,
   "note": "FAILED: HTTP 202 WAF challenge (listedcompany.com). Candidate: https://firstreit.listedcompany.com/newsroom/20260401_070223_AW9U_V8ZYLJV6UA0ODE6T.1.pdf",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "*AW9U_V8ZYLJV6UA0ODE6T*.pdf",
+  "name_token": "first reit",
+  "source": "sgx-browser",
+  "file": "first-reit.pdf",
+  "pages": 208,
+  "sha256": "f31baa57f473633be127d11ab891fc2ed841051bcbc3fe5fc73d13aa4a24533c",
+  "bytes": 4585619
  },
  {
   "company": "First Ship Lease Trust",
@@ -1550,7 +1590,14 @@
   "year": 2025,
   "note": "FAILED: HTTP 202 WAF challenge (listedcompany.com). Candidate: https://fsltrust.listedcompany.com/newsroom/20260407_211638_D8DU_N06087VRD2MDQHC9.1.pdf",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "*D8DU_N06087VRD2MDQHC9*.pdf",
+  "name_token": "ship lease",
+  "source": "sgx-browser",
+  "file": "first-ship-lease-trust.pdf",
+  "pages": 115,
+  "sha256": "b5e088c46c9af557ff8f0e707969e64b2084717ccd703668cd4973052d95bd46",
+  "bytes": 5518911
  },
  {
   "company": "Hutchison Port Holdings Trust",
@@ -1559,7 +1606,14 @@
   "year": 2025,
   "note": "FAILED: hphtrust.com HTTP 202 WAF challenge. Candidate: https://www.hphtrust.com/misc/ar2025/HPHT_AR2025_low-res.pdf",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "HPHT_AR2025_low-res*.pdf",
+  "name_token": "hutchison",
+  "source": "sgx-browser",
+  "file": "hutchison-port-holdings-trust.pdf",
+  "pages": 205,
+  "sha256": "1c8b6079870e6fcf3a831c7ac19919dba2fa698e9966f640ab39b72739d532a5",
+  "bytes": 8622675
  },
  {
   "company": "IREIT Global",
@@ -1568,7 +1622,14 @@
   "year": 2025,
   "note": "FAILED: HTTP 202 WAF challenge. Candidate: https://investor.ireitglobal.com/newsroom/20260326_073047_UD1U_TAAV8JQHHQQHBTQR.1.pdf",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "*UD1U_TAAV8JQHHQQHBTQR*.pdf",
+  "name_token": "ireit",
+  "source": "sgx-browser",
+  "file": "ireit-global.pdf",
+  "pages": 236,
+  "sha256": "b91c6928dd8dc7653b2f702e178bf28f8e4e6849ebaf8ce7cc80f0b0c464f515",
+  "bytes": 9980226
  },
  {
   "company": "Keppel Infrastructure Trust",
@@ -1638,7 +1699,14 @@
   "year": 2026,
   "note": "FAILED: Incapsula bot challenge. Candidate: https://www.netlinknbn.com/misc/agm2026/NetLink-NBN-Trust-Annual-Report-2026.pdf",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "NetLink-NBN-Trust-Annual-Report-2026*.pdf",
+  "name_token": "netlink",
+  "source": "sgx-browser",
+  "file": "netlink-nbn-trust.pdf",
+  "pages": 230,
+  "sha256": "7cd8855068e75819fafe689046bf21740d3526b602f16a0a6a8bfe127e519a29",
+  "bytes": 9754073
  },
  {
   "company": "NTT DC REIT",
@@ -1656,7 +1724,14 @@
   "year": 2025,
   "note": "FAILED: HTTP 202 WAF challenge. Candidate: https://investor.ouereit.com/misc/OUE_REIT_Annual_Report_2025.pdf",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "OUE_REIT_Annual_Report_2025*.pdf",
+  "name_token": "oue",
+  "source": "sgx-browser",
+  "file": "oue-reit.pdf",
+  "pages": 182,
+  "sha256": "7af0584b30521a2bb098c92a7916e0248ecb6d3ba72072e3c2ad643e7d10b726",
+  "bytes": 5961257
  },
  {
   "company": "Parkway Life REIT",
@@ -1665,7 +1740,14 @@
   "year": 2025,
   "note": "FAILED: HTTP 202 WAF challenge. Candidate: https://plifereit.listedcompany.com/newsroom/20260331_073816_C2PU_6QQ0IEGMJ5B1TON1.1.pdf",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "*C2PU_6QQ0IEGMJ5B1TON1*.pdf",
+  "name_token": "parkway",
+  "source": "sgx-browser",
+  "file": "parkway-life-reit.pdf",
+  "pages": 244,
+  "sha256": "9212ca4845a461445973452246e594ef1e20900d5277096d954630ed9a5588ed",
+  "bytes": 10897020
  },
  {
   "company": "Prime US REIT",
@@ -1687,7 +1769,14 @@
   "year": 2025,
   "note": "FAILED: HTTP 202 WAF challenge. Candidate: https://investor.sasseurreit.com/newsroom/20260401_071154_CRPU_XCFZZI7M4XT71SRY.1.pdf",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "*CRPU_XCFZZI7M4XT71SRY*.pdf",
+  "name_token": "sasseur",
+  "source": "sgx-browser",
+  "file": "sasseur-reit.pdf",
+  "pages": 212,
+  "sha256": "8474370010b34fbf1ad1d771aca1df49b398aad2c57b37c1b0921e6f5c0b4491",
+  "bytes": 13549141
  },
  {
   "company": "Starhill Global REIT",
@@ -1723,7 +1812,14 @@
   "year": 2025,
   "note": "FAILED: HTTP 202 WAF challenge. Candidate: https://investor.uhreit.com/misc/ar2025.pdf",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "ar2025*.pdf",
+  "name_token": "hampshire",
+  "source": "sgx-browser",
+  "file": "united-hampshire-us-reit.pdf",
+  "pages": 220,
+  "sha256": "e83f89a5fdf57f89ccf52cf2cd8cd59fe3ae5d07fa68cc7a50b1d1cc58140863",
+  "bytes": 16381576
  },
  {
   "company": "Landmark REIT",
@@ -1732,7 +1828,14 @@
   "year": 2025,
   "note": "FAILED: HTTP 202 WAF challenge. Candidate: https://ir.landmarkreit.com/misc/agm2026/LandmarkREIT_AR2025.pdf",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "LandmarkREIT_AR2025*.pdf",
+  "name_token": "landmark",
+  "source": "sgx-browser",
+  "file": "landmark-reit.pdf",
+  "pages": 169,
+  "sha256": "f63ca2f36796591c500ccbfb9bd3294ff7a54ba4e15246242cd8adcf5bb8ad95",
+  "bytes": 6047361
  },
  {
   "company": "UI Boustead REIT",

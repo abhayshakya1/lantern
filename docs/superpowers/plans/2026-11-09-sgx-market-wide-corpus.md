@@ -43,3 +43,16 @@ the demo eight — the latest annual report per issuer.
 
 Phase 1 (universe seed) committed. Tracks and phases above run across sessions; each batch commits
 its manifest increment so progress is durable and resumable.
+
+2026-11-10:
+- **Track 1 (issuer IR sites):** discovery over all 133 seed rows complete. 49 verified, plus the
+  14 below, for 63 verified reports. Coverage falls in small caps (21–25% per batch) because many
+  publish only on SGX or sit behind a WAF. Trendlines (TLS failure) and Jawala (image-only, needs
+  OCR) are recorded failures.
+- **Track 2 (browser gap-fill):** done for the STI. The 14 constituents missing from track 1 were
+  located on SGX ANNC30 and saved by the user. `fetch_market.py` imports them through
+  `browser_glob`, applying the same PDF and name checks.
+- **STI in Filings Q&A:** all 30 constituents are in `data/filings/manifest.json`; the 22 new ones
+  are hard links to `data/market/pdfs`. The 8-company index is kept at `data/filings/index_demo8`,
+  because the 40-question gold gate was drafted against it.
+- The PDFs are mirrored to Deathstar at `data/market/pdfs`.

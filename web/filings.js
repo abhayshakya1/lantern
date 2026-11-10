@@ -14,11 +14,11 @@ window.Lantern = window.Lantern || {};
   function render(root) {
     root.innerHTML = `
       <div class="head"><div><h1>Filings Q&amp;A</h1>
-        <p>Answers come only from the eight annual reports in the corpus, each with the verbatim passage, the filing and the page. When the filings do not answer, the page says so.</p></div></div>
+        <p>Answers come only from the annual reports in the corpus (all 30 Straits Times Index companies), each with the verbatim passage, the filing and the page. When the filings do not answer, the page says so.</p></div></div>
       <section class="grid filings">
         <div>
           <form id="ask-form" class="card ask" autocomplete="off">
-            <input id="ask-input" type="text" maxlength="500" placeholder="Ask about any of the eight filings, for example: What was OCBC's net profit for 2025?">
+            <input id="ask-input" type="text" maxlength="500" placeholder="Ask about any filing in the corpus, for example: What was OCBC's net profit for 2025?">
             <button type="submit">Ask</button>
           </form>
           <div id="answer" class="card answer"><p class="sub">Ask a question to see the answer, its evidence and the page it comes from.</p></div>

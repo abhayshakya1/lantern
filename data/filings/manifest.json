@@ -9,7 +9,10 @@
     "sha256": "d10f4fc11fd5845c2e5e6c1ffbeccf0c66f33e1b71c02ae0b402f0ba104382ff",
     "pages": 276,
     "pages_without_text": 4,
-    "ingested_at": "2026-11-10T03:57:51.441225+00:00"
+    "ingested_at": "2026-11-10T03:57:51.441225+00:00",
+    "aliases": [
+      "OCBC Bank"
+    ]
   },
   {
     "ticker": "DBS",
@@ -33,7 +36,10 @@
     "sha256": "ac6461b1773f239d969919d9b7da09c90f440b3e0df532672edd2e5c0f87c680",
     "pages": 248,
     "pages_without_text": 4,
-    "ingested_at": "2026-11-10T03:57:51.441225+00:00"
+    "ingested_at": "2026-11-10T03:57:51.441225+00:00",
+    "aliases": [
+      "United Overseas Bank"
+    ]
   },
   {
     "ticker": "Singtel",
@@ -57,7 +63,10 @@
     "sha256": "a62d58cdc87ae007799646f2fd6a49b6ab2aab1ec2d2dd0dc729f82dc3ae620f",
     "pages": 238,
     "pages_without_text": 4,
-    "ingested_at": "2026-11-10T03:57:51.441225+00:00"
+    "ingested_at": "2026-11-10T03:57:51.441225+00:00",
+    "aliases": [
+      "Singapore Exchange"
+    ]
   },
   {
     "ticker": "Keppel",
@@ -107,7 +116,10 @@
     "sha256": "ce8a2d768a39ca61fbbe218ec1c1f071204fc601c1ac53b4e8e17449d1bd2eb6",
     "pages": 212,
     "pages_without_text": 2,
-    "ingested_at": "2026-11-10T03:57:51.441225+00:00"
+    "ingested_at": "2026-11-10T03:57:51.441225+00:00",
+    "aliases": [
+      "CapitaLand Ascendas"
+    ]
   },
   {
     "ticker": "CICT",
@@ -135,7 +147,10 @@
     "sha256": "d655ca401b34f60cacf245ba5c8536ec030d18e027921aa656eab2b5f7d31052",
     "pages": 137,
     "pages_without_text": 0,
-    "ingested_at": "2026-11-10T03:57:51.441225+00:00"
+    "ingested_at": "2026-11-10T03:57:51.441225+00:00",
+    "aliases": [
+      "City Developments"
+    ]
   },
   {
     "ticker": "DFI",
@@ -205,7 +220,11 @@
     "sha256": "c1dd56bfe5a2ef1466906e7b229819401386122563704ec962f01020bbc58591",
     "pages": 134,
     "pages_without_text": 0,
-    "ingested_at": "2026-11-10T03:57:51.441225+00:00"
+    "ingested_at": "2026-11-10T03:57:51.441225+00:00",
+    "aliases": [
+      "Hongkong Land",
+      "Hong Kong Land"
+    ]
   },
   {
     "ticker": "Jardine",
@@ -219,7 +238,10 @@
     "sha256": "7319393f160a85648372b068122ab4cadfb153839859bda58ad4605364b4113e",
     "pages": 198,
     "pages_without_text": 1,
-    "ingested_at": "2026-11-10T03:57:51.441225+00:00"
+    "ingested_at": "2026-11-10T03:57:51.441225+00:00",
+    "aliases": [
+      "Jardine Matheson"
+    ]
   },
   {
     "ticker": "KDCREIT",
@@ -233,7 +255,10 @@
     "sha256": "445a8e655891d458559a6f4d91e6d3c9828d58c7d83ef9050468608fcd6ec7e3",
     "pages": 200,
     "pages_without_text": 1,
-    "ingested_at": "2026-11-10T03:57:51.441225+00:00"
+    "ingested_at": "2026-11-10T03:57:51.441225+00:00",
+    "aliases": [
+      "Keppel DC REIT"
+    ]
   },
   {
     "ticker": "MIT",
@@ -317,7 +342,10 @@
     "sha256": "d000dbf5d9a3f3d90a3ac86e2ca754deafe4513ef4f714a215cd819129de63fa",
     "pages": 244,
     "pages_without_text": 1,
-    "ingested_at": "2026-11-10T03:57:51.441225+00:00"
+    "ingested_at": "2026-11-10T03:57:51.441225+00:00",
+    "aliases": [
+      "Singapore Airlines"
+    ]
   },
   {
     "ticker": "STEngg",
@@ -331,7 +359,10 @@
     "sha256": "fe09b3174b85007e0d8beba4a7a03e109a07ed1eb9f0de9bcdc4a9e9966b99f2",
     "pages": 261,
     "pages_without_text": 1,
-    "ingested_at": "2026-11-10T03:57:51.441225+00:00"
+    "ingested_at": "2026-11-10T03:57:51.441225+00:00",
+    "aliases": [
+      "ST Engineering"
+    ]
   },
   {
     "ticker": "ThaiBev",
@@ -345,7 +376,10 @@
     "sha256": "833fa6b92c2375a596252ce616f716571bd124c9eb73fedfcc833b8ef82532ba",
     "pages": 394,
     "pages_without_text": 9,
-    "ingested_at": "2026-11-10T03:57:51.441225+00:00"
+    "ingested_at": "2026-11-10T03:57:51.441225+00:00",
+    "aliases": [
+      "ThaiBev"
+    ]
   },
   {
     "ticker": "UOL",
@@ -401,6 +435,9 @@
     "sha256": "0f57b9600d3938929c58edc1a0dba2b18aff948c218e77ff7b62e833503497c0",
     "pages": 178,
     "pages_without_text": 0,
-    "ingested_at": "2026-11-10T03:57:51.441225+00:00"
+    "ingested_at": "2026-11-10T03:57:51.441225+00:00",
+    "aliases": [
+      "Yangzijiang"
+    ]
   }
 ]

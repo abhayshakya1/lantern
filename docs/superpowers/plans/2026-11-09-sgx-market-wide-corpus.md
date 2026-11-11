@@ -56,3 +56,10 @@ its manifest increment so progress is durable and resumable.
   are hard links to `data/market/pdfs`. The 8-company index is kept at `data/filings/index_demo8`,
   because the 40-question gold gate was drafted against it.
 - The PDFs are mirrored to Deathstar at `data/market/pdfs`.
+- **REITs and business trusts (2026-11-11):** 35 of the 36 trusts are verified and in Filings Q&A,
+  65 filings in total. The one missing is UI Boustead REIT: it listed in March 2026 and has not yet
+  published an annual report. 14 of the 35 came through the browser route, because the rest of
+  `*.listedcompany.com` and several IR sites return a WAF challenge (HTTP 202). The market corpus
+  is now 98 verified reports out of 169 rows. The index is built on Deathstar GPU 4
+  (`LANTERN_EMBED_CUDA=1`, venv `embed-gpu`). PDF table extraction runs on the CPU and dominates the
+  build time.

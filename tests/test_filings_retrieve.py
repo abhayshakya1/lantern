@@ -81,6 +81,18 @@ def test_ticker_inside_another_word_is_not_a_mention(retriever):
     assert hits[0].chunk.ticker == "ACME"
 
 
+def test_fast_embedder_uses_cuda_only_when_asked(monkeypatch):
+    # Deathstar's GPU builds the index; the laptop and every default path stay on CPU
+    import fastembed
+    seen = []
+    monkeypatch.setattr(fastembed, "TextEmbedding", lambda **kw: seen.append(kw))
+    monkeypatch.delenv("LANTERN_EMBED_CUDA", raising=False)
+    retrieve.FastEmbedder()
+    monkeypatch.setenv("LANTERN_EMBED_CUDA", "1")
+    retrieve.FastEmbedder()
+    assert "providers" not in seen[0] and seen[1]["providers"] == ["CUDAExecutionProvider"]
+
+
 def test_empty_index_returns_no_hits(tmp_path):
     retrieve.build_index([], tmp_path / "index", retrieve.HashEmbedder())
     assert retrieve.Retriever(tmp_path / "index", retrieve.HashEmbedder()).search("anything") == []

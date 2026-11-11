@@ -1415,7 +1415,15 @@
   "year": null,
   "note": "FAILED: investor.aimsapacreit.com HTTP 202 WAF challenge; FY2026 AR not found off SGX",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "Attachment 1*.pdf",
+  "name_token": "aims",
+  "source_url": "sgx-announcement",
+  "source": "sgx-browser",
+  "file": "aims-apac-reit.pdf",
+  "pages": 259,
+  "sha256": "b0a4ddfcdb598a99705fbef45347fbd25a85ef4b961e29ad24c4dfafc5cb6f02",
+  "bytes": 4589039
  },
  {
   "company": "Alpha Integrated REIT",
@@ -1424,7 +1432,15 @@
   "year": null,
   "note": "FAILED: investor.ai-reit.com HTTP 202 WAF challenge",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "AI-REIT Annual Report 2025*.pdf",
+  "name_token": "alpha",
+  "source_url": "sgx-announcement",
+  "source": "sgx-browser",
+  "file": "alpha-integrated-reit.pdf",
+  "pages": 172,
+  "sha256": "3d46542d9d8dfff69bed43834e605e7c67b69a0cbafadcaea419747a55bdca87",
+  "bytes": 15210265
  },
  {
   "company": "Asian Pay Television Trust",
@@ -1433,7 +1449,15 @@
   "year": null,
   "note": "FAILED: investor.aptt.sg HTTP 202 WAF challenge",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "APTTAnnualReport2025*.pdf",
+  "name_token": "asian pay",
+  "source_url": "sgx-announcement",
+  "source": "sgx-browser",
+  "file": "asian-pay-television-trust.pdf",
+  "pages": 164,
+  "sha256": "cff13d5aaa370fb82a2c12b5f914bde3942a1f3973332b97b8a1398137dbcc3e",
+  "bytes": 3575466
  },
  {
   "company": "BHG Retail REIT",
@@ -1442,7 +1466,15 @@
   "year": null,
   "note": "FAILED: bhgreit.listedcompany.com HTTP 202 WAF challenge; only chapter PDFs",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "BHG REIT-Annual Report 2025*.pdf",
+  "name_token": "bhg",
+  "source_url": "sgx-announcement",
+  "source": "sgx-browser",
+  "file": "bhg-retail-reit.pdf",
+  "pages": 208,
+  "sha256": "51a52700b0a37a5dfa831c8ce564560cc370cd28db2cc7f5fda1b4852fe20b4e",
+  "bytes": 12874493
  },
  {
   "company": "CapitaLand Ascott Trust",
@@ -1467,7 +1499,15 @@
   "year": null,
   "note": "FAILED: investor.clct.com.sg HTML flipbook, HTTP 202 WAF challenge",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "*CapitaLand China Trust Annual Report 2025*.pdf",
+  "name_token": "china trust",
+  "source_url": "sgx-announcement",
+  "source": "sgx-browser",
+  "file": "capitaland-china-trust.pdf",
+  "pages": 180,
+  "sha256": "227cda1cac7bc44c603dc7687aabbacded036b9f7aae2bbfeb3e197da6eda6e2",
+  "bytes": 10195993
  },
  {
   "company": "CapitaLand India Trust",
@@ -1476,7 +1516,15 @@
   "year": 2025,
   "note": "FAILED: investor.clint.com.sg HTTP 202 WAF challenge; no direct PDF off SGX",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "CLINT Annual Report 2025*.pdf",
+  "name_token": "india trust",
+  "source_url": "sgx-announcement",
+  "source": "sgx-browser",
+  "file": "capitaland-india-trust.pdf",
+  "pages": 216,
+  "sha256": "a4162e1942faf829cf3faa419b3524ad23c95bea27926c3e3a18b5494c52fe82",
+  "bytes": 14517914
  },
  {
   "company": "CDL Hospitality Trusts",
@@ -1500,7 +1548,15 @@
   "year": 2025,
   "note": "FAILED: investor.careit.com.sg HTTP 202 WAF challenge; no direct PDF off SGX",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "CAREIT Annual Report 2025*.pdf",
+  "name_token": "centurion",
+  "source_url": "sgx-announcement",
+  "source": "sgx-browser",
+  "file": "centurion-accommodation-reit.pdf",
+  "pages": 83,
+  "sha256": "7e73c0e272e4134af164d2d76bfc544f66bdf979394b3da9469e905b313e1fbd",
+  "bytes": 21548721
  },
  {
   "company": "Daiwa House Logistics Trust",
@@ -1525,7 +1581,15 @@
   "year": 2025,
   "note": "FAILED: IR host HTTP 202 WAF challenge; no direct PDF off SGX",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "*Digital Core REIT - Annual Report 2025*.pdf",
+  "name_token": "digital core",
+  "source_url": "sgx-announcement",
+  "source": "sgx-browser",
+  "file": "digital-core-reit.pdf",
+  "pages": 220,
+  "sha256": "a466e46491f4be4f5ae7271b831b08c159f1b46742d27c9596d957b0c0f093d1",
+  "bytes": 8966681
  },
  {
   "company": "Elite UK REIT",
@@ -1550,7 +1614,15 @@
   "year": 2025,
   "note": "FAILED: AR2025 is page-by-page HTML on esr-reit.listedcompany.com (HTTP 202 WAF challenge); no PDF",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "ESR-REIT AR 2025*.pdf",
+  "name_token": "esr",
+  "source_url": "sgx-announcement",
+  "source": "sgx-browser",
+  "file": "esr-reit.pdf",
+  "pages": 244,
+  "sha256": "638f8d635d2ebc15d6171a95f04e4d7194273e80fe5b5db5d3671f7a755c811b",
+  "bytes": 18418859
  },
  {
   "company": "Far East Hospitality Trust",
@@ -1690,7 +1762,15 @@
   "year": 2025,
   "note": "FAILED: only HTML flipbook, HTTP 403 to honest UA",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "Manulife US REIT_Annual Report 2025*.pdf",
+  "name_token": "manulife",
+  "source_url": "sgx-announcement",
+  "source": "sgx-browser",
+  "file": "manulife-us-reit.pdf",
+  "pages": 152,
+  "sha256": "7af50029f3ae0000ec7eaded5a83f89925ae75ce6129a75652a6cfb018b3e389",
+  "bytes": 9129230
  },
  {
   "company": "NetLink NBN Trust",
@@ -1715,7 +1795,15 @@
   "year": 2026,
   "note": "FAILED: AR only on SGX",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "*NTT DC REIT AR 2025-26.pdf",
+  "name_token": "ntt",
+  "source_url": "sgx-announcement",
+  "source": "sgx-browser",
+  "file": "ntt-dc-reit.pdf",
+  "pages": 164,
+  "sha256": "82d67bc9b5220afbabb3632aa702ca8f9a1a37656aac53236361c87d630d019d",
+  "bytes": 8702920
  },
  {
   "company": "OUE REIT",
@@ -1785,7 +1873,15 @@
   "year": 2026,
   "note": "FAILED: starhillglobalreit.listedcompany.com HTTP 202 WAF challenge",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "FY2526 Annual Report*.pdf",
+  "name_token": "starhill",
+  "source_url": "sgx-announcement",
+  "source": "sgx-browser",
+  "file": "starhill-global-reit.pdf",
+  "pages": 200,
+  "sha256": "f51991859c0d4db87fff81da6a126bf90a9b9ff8e90ef63c11daf02b318d41eb",
+  "bytes": 8358780
  },
  {
   "company": "Stoneweg Europe Stapled Trust",
@@ -1794,7 +1890,15 @@
   "year": 2025,
   "note": "FAILED: cromwell.listedcompany.com HTTP 202 WAF challenge",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "SERT AR 2025*.pdf",
+  "name_token": "stoneweg",
+  "source_url": "sgx-announcement",
+  "source": "sgx-browser",
+  "file": "stoneweg-europe-stapled-trust.pdf",
+  "pages": 404,
+  "sha256": "1fea522561d77d548dbaa69d915444299970c0d537a1bd01bd5848710ce3f29e",
+  "bytes": 16758055
  },
  {
   "company": "Suntec REIT",
@@ -1803,7 +1907,15 @@
   "year": 2025,
   "note": "FAILED: suntecreit.listedcompany.com HTTP 202 WAF challenge",
   "batch": "trusts-2026-11-10",
-  "status": "no-url"
+  "status": "ok",
+  "browser_glob": "Suntec REIT Annual Report 2025.pdf",
+  "name_token": "suntec",
+  "source_url": "sgx-announcement",
+  "source": "sgx-browser",
+  "file": "suntec-reit.pdf",
+  "pages": 199,
+  "sha256": "0a87d5d3698e0897b0a6788d623f39751382a4b08b11293078071a01e54e2735",
+  "bytes": 12573617
  },
  {
   "company": "United Hampshire US REIT",

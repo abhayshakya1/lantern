@@ -58,8 +58,11 @@ class FastEmbedder:
     def __init__(self, model: str = config.EMBED_MODEL):
         from fastembed import TextEmbedding
 
+        import os
+
         self.name = model
-        self.model = TextEmbedding(model_name=model)
+        gpu = {"providers": ["CUDAExecutionProvider"]} if os.environ.get("LANTERN_EMBED_CUDA") == "1" else {}
+        self.model = TextEmbedding(model_name=model, **gpu)
 
     def embed(self, texts: list[str]) -> np.ndarray:
         if not texts:

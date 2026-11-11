@@ -439,5 +439,603 @@
     "aliases": [
       "Yangzijiang"
     ]
+  },
+  {
+    "ticker": "AcroHT",
+    "company": "Acrophyte Hospitality Trust",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "AcroHT-AR2025.pdf",
+    "url": "https://cdn.sanity.io/files/rgu3ktoj/production/1632e8bf6ad4851c2b8615c7d19a1d9c70c93e76.pdf",
+    "source": "issuer-site",
+    "stock_code": "XZL",
+    "aliases": [
+      "Acrophyte"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "AAREIT",
+    "company": "AIMS APAC REIT",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "AAREIT-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "O5RU",
+    "aliases": [
+      "AIMS APAC"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "AIREIT",
+    "company": "Alpha Integrated REIT",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "AIREIT-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "M1GU",
+    "aliases": [
+      "Alpha Integrated"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "APTT",
+    "company": "Asian Pay Television Trust",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "APTT-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "S7OU",
+    "aliases": [
+      "Asian Pay TV",
+      "Asian Pay Television"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "BHG",
+    "company": "BHG Retail REIT",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "BHG-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "BMGU",
+    "aliases": [
+      "BHG Retail"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "CLAS",
+    "company": "CapitaLand Ascott Trust",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "CLAS-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "HMN",
+    "aliases": [
+      "CapitaLand Ascott",
+      "Ascott Trust"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "CLCT",
+    "company": "CapitaLand China Trust",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "CLCT-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "AU8U",
+    "aliases": [
+      "CapitaLand China"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "CLINT",
+    "company": "CapitaLand India Trust",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "CLINT-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "CY6U",
+    "aliases": [
+      "CapitaLand India"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "CDLHT",
+    "company": "CDL Hospitality Trusts",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "CDLHT-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "J85",
+    "aliases": [
+      "CDL Hospitality"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "CAREIT",
+    "company": "Centurion Accommodation REIT",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "CAREIT-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "8C8U",
+    "aliases": [
+      "Centurion"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "DHLT",
+    "company": "Daiwa House Logistics Trust",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "DHLT-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "DHLU",
+    "aliases": [
+      "Daiwa House"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "DCREIT",
+    "company": "Digital Core REIT",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "DCREIT-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "DCRU",
+    "aliases": [
+      "Digital Core"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "EliteUK",
+    "company": "Elite UK REIT",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "EliteUK-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "MXNU",
+    "aliases": [
+      "Elite UK"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "ESRREIT",
+    "company": "ESR REIT",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "ESRREIT-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "9A4U",
+    "aliases": [
+      "ESR REIT",
+      "ESR-REIT"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "FEHT",
+    "company": "Far East Hospitality Trust",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "FEHT-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "Q5T",
+    "aliases": [
+      "Far East Hospitality"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "FirstREIT",
+    "company": "First REIT",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "FirstREIT-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "AW9U",
+    "aliases": [
+      "First REIT"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "FSLT",
+    "company": "First Ship Lease Trust",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "FSLT-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "D8DU",
+    "aliases": [
+      "First Ship Lease"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "HPHT",
+    "company": "Hutchison Port Holdings Trust",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "HPHT-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "NS8U",
+    "aliases": [
+      "Hutchison Port"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "IREIT",
+    "company": "IREIT Global",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "IREIT-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "UD1U",
+    "aliases": [
+      "IREIT Global"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "KIT",
+    "company": "Keppel Infrastructure Trust",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "KIT-AR2025.pdf",
+    "url": "https://www.kepinfratrust.com/file/agm2026-fy-2025-/keppel-infrastructure-trust-ar2025.pdf",
+    "source": "issuer-site",
+    "stock_code": "A7RU",
+    "aliases": [
+      "Keppel Infrastructure"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "KREIT",
+    "company": "Keppel REIT",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "KREIT-AR2025.pdf",
+    "url": "https://wpcms.keppel.com/wm/cms-site/kpl/file/media/2026/Mar/25-mar-kreit/keppel-reit-ar25.pdf",
+    "source": "issuer-site",
+    "stock_code": "K71U",
+    "aliases": [
+      "Keppel REIT"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "KORE",
+    "company": "KORE US REIT",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "KORE-AR2025.pdf",
+    "url": "https://www.koreusreit.com/file/downloads/2026/kore-us-reit-annual-report-2025.pdf",
+    "source": "issuer-site",
+    "stock_code": "CMOU",
+    "aliases": [
+      "KORE US REIT"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "LREIT",
+    "company": "Lendlease Global Commercial REIT",
+    "filing": "Annual Report FY2025/26",
+    "year": 2026,
+    "file": "LREIT-ARFY2026.pdf",
+    "url": "https://www.lendleaseglobalcommercialreit.com/siteassets/publications/annual-reports/annual-report-fy2026.pdf",
+    "source": "issuer-site",
+    "stock_code": "JYEU",
+    "aliases": [
+      "Lendlease"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "MUST",
+    "company": "Manulife US REIT",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "MUST-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "BTOU",
+    "aliases": [
+      "Manulife US"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "NetLink",
+    "company": "NetLink NBN Trust",
+    "filing": "Annual Report FY2025/26",
+    "year": 2026,
+    "file": "NetLink-ARFY2026.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "CJLU",
+    "aliases": [
+      "NetLink NBN"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "NTTDC",
+    "company": "NTT DC REIT",
+    "filing": "Annual Report FY2025/26",
+    "year": 2026,
+    "file": "NTTDC-ARFY2026.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "NTDU",
+    "aliases": [
+      "NTT DC REIT"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "OUEREIT",
+    "company": "OUE REIT",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "OUEREIT-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "TS0U",
+    "aliases": [
+      "OUE REIT"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "PLife",
+    "company": "Parkway Life REIT",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "PLife-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "C2PU",
+    "aliases": [
+      "Parkway Life"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "PRIME",
+    "company": "Prime US REIT",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "PRIME-AR2025.pdf",
+    "url": "https://www.primeusreit.com/misc/ar2025.pdf",
+    "source": "issuer-site",
+    "stock_code": "OXMU",
+    "aliases": [
+      "Prime US REIT"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "Sasseur",
+    "company": "Sasseur REIT",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "Sasseur-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "CRPU",
+    "aliases": [
+      "Sasseur REIT"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "Starhill",
+    "company": "Starhill Global REIT",
+    "filing": "Annual Report FY2025/26",
+    "year": 2026,
+    "file": "Starhill-ARFY2026.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "P40U",
+    "aliases": [
+      "Starhill Global"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "SERT",
+    "company": "Stoneweg Europe Stapled Trust",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "SERT-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "SET",
+    "aliases": [
+      "Stoneweg"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "Suntec",
+    "company": "Suntec REIT",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "Suntec-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "T82U",
+    "aliases": [
+      "Suntec REIT"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "UHREIT",
+    "company": "United Hampshire US REIT",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "UHREIT-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "ODBU",
+    "aliases": [
+      "United Hampshire"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
+  },
+  {
+    "ticker": "Landmark",
+    "company": "Landmark REIT",
+    "filing": "Annual Report 2025",
+    "year": 2025,
+    "file": "Landmark-AR2025.pdf",
+    "url": "",
+    "source": "sgx-browser",
+    "stock_code": "D5IU",
+    "aliases": [
+      "Landmark REIT"
+    ],
+    "sha256": "",
+    "pages": 0,
+    "pages_without_text": 0,
+    "ingested_at": ""
   }
 ]

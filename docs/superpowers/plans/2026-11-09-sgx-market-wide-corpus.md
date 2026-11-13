@@ -63,3 +63,11 @@ its manifest increment so progress is durable and resumable.
   is now 98 verified reports out of 169 rows. The index is built on Deathstar GPU 4
   (`LANTERN_EMBED_CUDA=1`, venv `embed-gpu`). PDF table extraction runs on the CPU and dominates the
   build time.
+- **Embedder A/B (2026-11-13):** bge-base-en-v1.5 re-embedded the same 51,071 chunks on Deathstar
+  GPU 3 (200s, batch 32 — the shared 11GB cards had ~2.7GB free) and scored identically to
+  bge-small on the gold set: hit@8 22/30, wrong-company top-1 7/30, missing the same questions.
+  The embedder is not the bottleneck; bge-small stays. This matches FinMTEB (EMNLP 2025,
+  arXiv:2502.10990): dense-model ranking matters less on finance text, where lexical signal is
+  strong — Lantern's hybrid BM25 + dense fusion already leans on that. A finance fine-tune is a
+  post-pitch item at most; FinMTEB's top model (Fin-E5) is a 7B GPU embedder, unusable in the
+  on-prem laptop story.
